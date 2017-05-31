@@ -38,4 +38,6 @@ export class LinkList<T> implements IList<T> {
         if (this._length === 0) return null;
 
     }
+
+    
 }
