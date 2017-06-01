@@ -35,5 +35,10 @@ export interface IList<T> {
      */
     DeleteElement(index: number): boolean;
 
+    /**
+     * Clear all elements, returns the result: true means suces
+     */
+    ClearAll(): boolean;
+
     //readonly [index: number]: T;
 }

@@ -14,8 +14,9 @@ export class SequenceList<T> implements IList<T> {
         return this._data.length === 0;
     }
 
-    public ClearList() {
-
+    public ClearAll(): boolean {
+        this._data = [];
+        return true;
     }
 
     public GetElement(index: number): T | null {

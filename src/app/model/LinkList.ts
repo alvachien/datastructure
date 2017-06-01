@@ -30,14 +30,29 @@ export class LinkList<T> implements IList<T> {
     public Length(): number {
         return this._length;
     }
+
     public IsEmpty(): boolean {
         return this._length === 0;
     }
 
     public GetElement(index: number): T | null {
-        if (this._length === 0) return null;
+        if (this._length === 0 
+            || this._head === null
+            || index < 0 
+            || index >= this._length)
+            return null;
+        
+        let cur = this._head;
+        for(let i = 0; i < index; i ++) {
+            if (cur !== null) {
+                cur = cur.Next;
+            }            
+        }
 
+        return cur === null? null : cur.Data;
     }
 
-    
+    public InsertElement(index: number, elem: T): boolean {
+        
+    }    
 }
