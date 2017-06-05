@@ -61,12 +61,18 @@ export class LinkList<T> implements IList<T> {
         if (elem === null) return false;
 
         let cur: LinkListNode<T> = this._head;
-        for(let i = 0; i < index; i++) {
-
+        let i:number = 0;
+        while(cur != null && i < index) {
+            cur = cur.Next;
         }
-        while(cur !== null) {
 
-        }
+        let nnode: LinkListNode<T> = new LinkListNode<T>();
+        nnode.Data = elem;
+        nnode.Next = cur.Next;
+        cur.Next = nnode;
+        this._length++;
+
+        return true;
     }   
 
     public AppendElement(elem: T) : number {
@@ -85,6 +91,29 @@ export class LinkList<T> implements IList<T> {
     } 
 
     public DeleteElement(index: number): boolean {
-        return false;
+        if (index < 0 || index > this._length) return false;
+
+        let cur: LinkListNode<T> = this._head;
+        if (index === 0) {
+            this._head = cur.Next;
+            this._length --;
+            return true;
+        }
+
+        let i:number = 0;
+        while(cur != null && i < index - 1) {
+            cur = cur.Next;
+        }
+
+        cur.Next = cur.Next.Next;
+        this._length--;
+
+        return true;
+    }
+
+    public ClearAll(): boolean {
+        this._head = null;
+        this._length = 0;
+        return true;
     }
 }
