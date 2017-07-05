@@ -30,3 +30,12 @@ export interface ITree<T> {
      */
     InsertChild(par: ITreeNode<T>, data: T): boolean;
 }
+
+
+export interface IBinaryTreeNode<T> {
+
+}
+
+export interface IBinaryTree<T> {
+
+}
