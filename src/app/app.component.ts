@@ -5,8 +5,8 @@ const changeDetectionKey = 'mdDemoChangeDetection';
 @Component({
   selector: 'home',
   template: `
-    <p>Welcome to the development demos for Angular Material!</p>
-    <p>Open the sidenav to select a demo.</p>
+    <p>Welcome to the Demo of Data Structure which written totally in TypeScript!</p>
+    <p>Open the sidenav to choose a demo.</p>
   `
 })
 export class Home { }
@@ -95,8 +95,7 @@ export class AppComponent {
 
   toggleChangeDetection() {
     try {
-      this.changeDetectionStrategy = this.changeDetectionStrategy === 'Default' ?
-        'OnPush' : 'Default';
+      this.changeDetectionStrategy = this.changeDetectionStrategy === 'Default' ? 'OnPush' : 'Default';
       window.localStorage.setItem(changeDetectionKey, this.changeDetectionStrategy);
       window.location.reload();
     } catch (error) {

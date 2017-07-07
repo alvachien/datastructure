@@ -15,6 +15,7 @@ import {
   MdCheckboxModule,
   MdChipsModule,
   MdCoreModule,
+  MdTableModule,
   MdDatepickerModule,
   MdDialogModule,
   MdExpansionModule,
@@ -24,6 +25,7 @@ import {
   MdListModule,
   MdMenuModule,
   MdNativeDateModule,
+  MdPaginatorModule,
   MdProgressBarModule,
   MdProgressSpinnerModule,
   MdRadioModule,
@@ -33,17 +35,17 @@ import {
   MdSliderModule,
   MdSlideToggleModule,
   MdSnackBarModule,
+  MdSortModule,
   MdTabsModule,
   MdToolbarModule,
   MdTooltipModule,
   OverlayContainer,
   StyleModule
 } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk';
 import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
+import { ExpansionDemoComponent } from './expansion-demo/expansion-demo.component';
 
-/**
- * NgModule that includes all Material modules that are required to serve the demo-app.
- */
 @NgModule({
   exports: [
     MdAutocompleteModule,
@@ -52,6 +54,7 @@ import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
     MdCardModule,
     MdCheckboxModule,
     MdChipsModule,
+    MdTableModule,
     MdDatepickerModule,
     MdDialogModule,
     MdExpansionModule,
@@ -61,6 +64,7 @@ import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
     MdListModule,
     MdMenuModule,
     MdCoreModule,
+    MdPaginatorModule,
     MdProgressBarModule,
     MdProgressSpinnerModule,
     MdRadioModule,
@@ -70,21 +74,24 @@ import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
     MdSlideToggleModule,
     MdSliderModule,
     MdSnackBarModule,
+    MdSortModule,
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
     MdNativeDateModule,
+    CdkTableModule,
     StyleModule
   ]
 })
-export class DemoMaterialModule {}
+export class DSMaterialModule { }
 
 @NgModule({
   declarations: [
     Home,
     DemoAppOnPush,
     AppComponent,
-    KmpDemoComponent
+    KmpDemoComponent,
+    ExpansionDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -93,10 +100,10 @@ export class DemoMaterialModule {}
     HttpModule,
     ReactiveFormsModule,
     RouterModule.forRoot(MY_APP_ROUTES),
-    DemoMaterialModule,
+    DSMaterialModule,
   ],
   providers: [
-    // {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
+    { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     // PeopleDatabase    
   ],
   entryComponents: [
@@ -110,10 +117,10 @@ export class DemoMaterialModule {}
   ]
   //bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(private _appRef: ApplicationRef) { }
 
   ngDoBootstrap() {
     this._appRef.bootstrap(AppComponent);
-  }  
+  }
 }
