@@ -36,6 +36,6 @@ export interface IBinaryTreeNode<T> {
 
 }
 
-export interface IBinaryTree<T> {
+export interface IBinaryTree<T> extends ITree<T> {
 
 }
