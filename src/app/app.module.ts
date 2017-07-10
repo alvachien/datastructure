@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent, DemoAppOnPush, Home } from './app.component';
+import { PeopleDatabase } from './table-demo/people-database';
 import { MY_APP_ROUTES } from './app.routes';
 import {
   FullscreenOverlayContainer,
@@ -43,10 +44,13 @@ import {
   StyleModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk';
+import { TableHeaderDemo } from './table-demo/table-header-demo';
 import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
 import { ExpansionDemoComponent } from './expansion-demo/expansion-demo.component';
 import { BaselineDemoComponent } from './baseline-demo/baseline-demo.component';
 import { TableDemoComponent } from './table-demo/table-demo.component';
+import { ContentElementDialog, DialogDemoComponent, IFrameDialog, JazzDialog } from './dialog-demo/dialog-demo.component';
+import { StyleDemoComponent } from './style-demo/style-demo.component';
 
 @NgModule({
   exports: [
@@ -95,7 +99,13 @@ export class DSMaterialModule { }
     KmpDemoComponent,
     ExpansionDemoComponent,
     BaselineDemoComponent,
-    TableDemoComponent
+    TableDemoComponent,
+    TableHeaderDemo,
+    JazzDialog,
+    ContentElementDialog,
+    IFrameDialog,
+    DialogDemoComponent,
+    StyleDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -108,13 +118,13 @@ export class DSMaterialModule { }
   ],
   providers: [
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    // PeopleDatabase    
+    PeopleDatabase
   ],
   entryComponents: [
     AppComponent,
-    // JazzDialog,
-    // ContentElementDialog,
-    // IFrameDialog,
+    JazzDialog,
+    ContentElementDialog,
+    IFrameDialog,
     // RotiniPanel,
     // ScienceJoke,
     // SpagettiPanel,

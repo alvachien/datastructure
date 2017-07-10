@@ -37,8 +37,7 @@ export class AppComponent {
     { name: 'KMP Demo', route: 'kmp-demo' },
     { name: 'Autocomplete', route: 'autocomplete' },
     { name: 'Chips', route: 'chips' },
-    { name: 'Datepicker', route: 'datepicker' },
-    { name: 'Dialog', route: 'dialog' },
+    { name: 'Datepicker', route: 'datepicker' },    
     { name: 'Gestures', route: 'gestures' },
     { name: 'Grid List', route: 'grid-list' },
     { name: 'Icon', route: 'icon' },
@@ -64,6 +63,7 @@ export class AppComponent {
     { name: 'Baseline', route: 'baseline' },
     { name: 'Expansion Panel', route: 'expansion' },
     { name: 'Table', route: 'table' },
+    { name: 'Dialog', route: 'dialog' },
 
   ];
 
