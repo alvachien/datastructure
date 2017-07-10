@@ -45,6 +45,8 @@ import {
 import { CdkTableModule } from '@angular/cdk';
 import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
 import { ExpansionDemoComponent } from './expansion-demo/expansion-demo.component';
+import { BaselineDemoComponent } from './baseline-demo/baseline-demo.component';
+import { TableDemoComponent } from './table-demo/table-demo.component';
 
 @NgModule({
   exports: [
@@ -91,7 +93,9 @@ export class DSMaterialModule { }
     DemoAppOnPush,
     AppComponent,
     KmpDemoComponent,
-    ExpansionDemoComponent
+    ExpansionDemoComponent,
+    BaselineDemoComponent,
+    TableDemoComponent
   ],
   imports: [
     BrowserModule,
