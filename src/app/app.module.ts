@@ -51,6 +51,13 @@ import { BaselineDemoComponent } from './baseline-demo/baseline-demo.component';
 import { TableDemoComponent } from './table-demo/table-demo.component';
 import { ContentElementDialog, DialogDemoComponent, IFrameDialog, JazzDialog } from './dialog-demo/dialog-demo.component';
 import { StyleDemoComponent } from './style-demo/style-demo.component';
+import { TypographyDemoComponent } from './typography-demo/typography-demo.component';
+import { AutocompleteDemoComponent } from './autocomplete-demo/autocomplete-demo.component';
+import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
+import { LiveannouncerDemoComponent } from './liveannouncer-demo/liveannouncer-demo.component';
+import { OverlayDemoComponent, RotiniPanel, SpagettiPanel } from './overlay-demo/overlay-demo.component';
+import { PortalDemoComponent, ScienceJoke } from './portal-demo/portal-demo.component';
+import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 
 @NgModule({
   exports: [
@@ -105,7 +112,17 @@ export class DSMaterialModule { }
     ContentElementDialog,
     IFrameDialog,
     DialogDemoComponent,
-    StyleDemoComponent
+    StyleDemoComponent,
+    TypographyDemoComponent,
+    AutocompleteDemoComponent,
+    DatepickerDemoComponent,
+    LiveannouncerDemoComponent,
+    OverlayDemoComponent,
+    PortalDemoComponent,
+    TooltipDemoComponent,
+    RotiniPanel,
+    ScienceJoke,
+    SpagettiPanel,
   ],
   imports: [
     BrowserModule,
@@ -125,9 +142,9 @@ export class DSMaterialModule { }
     JazzDialog,
     ContentElementDialog,
     IFrameDialog,
-    // RotiniPanel,
-    // ScienceJoke,
-    // SpagettiPanel,
+    RotiniPanel,
+    ScienceJoke,
+    SpagettiPanel,
   ]
   //bootstrap: [AppComponent]
 })
