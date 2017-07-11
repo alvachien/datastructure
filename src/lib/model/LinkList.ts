@@ -3,7 +3,7 @@ import { IList } from './IList';
 
 export class LinkListNode<T> {
     private _data: T;
-    private _next:LinkListNode<T> = null;
+    private _next: LinkListNode<T> = null;
 
     constructore() {
         this._next = null;
