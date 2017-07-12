@@ -13,8 +13,23 @@ Interface **IList** defines the generic operations supported by List.
 
 Class **SequenceList** implements the Sequence List.
 
+Class **LinkList** implements the Link List.
+
+Class **StaticLinkList** implements the static link list.
+
+## STACK AND QUEUE
+Interface **IStack** and **IQueue** defines the generic operations for Stack and Queue respectively.
+
+Class **SequenceStack** implements the Sequence Stack.
+
+Class **LinkStack** implements the Link Stack.
+
 ## TREE
 Interface **ITree** defines the generic operations and attributes supported by Tree.
+
+Interface **IBinaryTree** define the generic operations and attributes for Binary Tree.
+
+Class **BinaryTree** implements the Binary Tree.
 
 TBD.
 

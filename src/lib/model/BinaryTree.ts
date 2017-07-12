@@ -23,6 +23,7 @@ export class BinaryTreeNode<T> {
     set Left(left: BinaryTreeNode<T>) {
         this._left = left;
     }
+
     get Right(): BinaryTreeNode<T> {
         return this._right;
     }
@@ -31,20 +32,14 @@ export class BinaryTreeNode<T> {
     }
 }
 
-export class BinaryTree<T> implements IBinaryTree<T> {
+export class BinaryTree<T> {
     private _root: BinaryTreeNode<T> = null;
 
-    constructor() {        
-    }
-
-    get Root(): BinaryTreeNode<T> {
+    get Root() : BinaryTreeNode<T> {
         return this._root;
     }
     set Root(root: BinaryTreeNode<T>) {
         this._root = root;
     }
-
-    public IsEmpty() : boolean  {
-        
-    }
+    
 }
