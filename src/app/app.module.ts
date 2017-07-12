@@ -58,6 +58,7 @@ import { LiveannouncerDemoComponent } from './liveannouncer-demo/liveannouncer-d
 import { OverlayDemoComponent, RotiniPanel, SpagettiPanel } from './overlay-demo/overlay-demo.component';
 import { PortalDemoComponent, ScienceJoke } from './portal-demo/portal-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
+import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
 
 @NgModule({
   exports: [
@@ -123,6 +124,7 @@ export class DSMaterialModule { }
     RotiniPanel,
     ScienceJoke,
     SpagettiPanel,
+    BinarytreeDemoComponent,
   ],
   imports: [
     BrowserModule,

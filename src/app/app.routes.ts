@@ -13,6 +13,7 @@ import { LiveannouncerDemoComponent } from './liveannouncer-demo/liveannouncer-d
 import { OverlayDemoComponent } from './overlay-demo/overlay-demo.component';
 import { PortalDemoComponent } from './portal-demo/portal-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
+import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
 
 export const MY_APP_ROUTES: Routes = [
   { path: '', component: Home },
@@ -29,5 +30,6 @@ export const MY_APP_ROUTES: Routes = [
   { path: 'overlay', component: OverlayDemoComponent },
   { path: 'portal', component: PortalDemoComponent },
   { path: 'tooltip', component: TooltipDemoComponent },
+  { path: 'binarytree-demo', component: BinarytreeDemoComponent }, 
 ];
 

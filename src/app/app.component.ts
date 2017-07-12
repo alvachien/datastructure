@@ -35,6 +35,7 @@ export class AppComponent {
   changeDetectionStrategy: string;
   navItems = [
     { name: 'KMP Demo', route: 'kmp-demo' },
+    { name: 'Binary Tree Demo', route: 'binarytree-demo' },
     { name: 'Chips', route: 'chips' },
     { name: 'Gestures', route: 'gestures' },
     { name: 'Grid List', route: 'grid-list' },

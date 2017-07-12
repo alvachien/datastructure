@@ -36,6 +36,36 @@ export interface IBinaryTreeNode<T> {
 
 }
 
-export interface IBinaryTree<T> extends ITree<T> {
+export interface IBinaryTree<T> {
+    /**
+     * Inorder traversal: Inorder travere the whole tree
+     * Returns an array of the element
+     */
+    InorderTraversal(): Array<IBinaryTreeNode<T>>;
 
+    /**
+     * Preorder traversal: Inorder travere the whole tree
+     * Returns an array of the element
+     */
+    PreorderTraversal(): Array<IBinaryTreeNode<T>>;
+
+    /**
+     * Postorder traversal: Inorder travere the whole tree
+     * Returns an array of the element
+     */
+    PostorderTraversal(): Array<IBinaryTreeNode<T>>;
+
+    /**
+     * InsertNode: Insert an node to the binary tree
+     * @param parNode, the parent node. If it is null, it means add it as the root node.
+     * Return false if the insertion is failed.
+     */
+    InsertNode(parNode: IBinaryTreeNode<T>, data: T): boolean;
+
+    /**
+     * FindNode: Find the node
+     * @param elem, the element with specified data
+     * Return the node if found
+     */
+    FindNode(elem: T): IBinaryTreeNode<T> | null;
 }

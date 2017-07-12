@@ -6,7 +6,9 @@ Written by TypeScript.
 # CONTENT
 The project was created using angular-cli, which can be started directly as HTTP server and show the examples as the testing purpose.
 
-Folder model (src\app\model) contains the files, and it has been exported via index.ts directly.
+Folder lib (src\lib) contains two sub folders, and it has been exported via index.ts directly.
+
+Folder app (src\app) contains an example application which used to demonstrate the demos, it is a web app using Angular Material.
 
 ## LIST
 Interface **IList** defines the generic operations supported by List.
@@ -36,7 +38,9 @@ TBD.
 ## GRAPH
 TBD.
 
-## SORTING ALGORITHM
+## ALGORITHM
+The algorithm **KMP** which offer the functionality to search source string from the target string.
+
 TBD.
 
 # AUTHOR
