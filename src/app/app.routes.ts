@@ -14,6 +14,7 @@ import { OverlayDemoComponent } from './overlay-demo/overlay-demo.component';
 import { PortalDemoComponent } from './portal-demo/portal-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
+import { SortalgorithmDemoComponent } from './sortalgorithm-demo/sortalgorithm-demo.component';
 
 export const MY_APP_ROUTES: Routes = [
   { path: '', component: Home },
@@ -31,5 +32,6 @@ export const MY_APP_ROUTES: Routes = [
   { path: 'portal', component: PortalDemoComponent },
   { path: 'tooltip', component: TooltipDemoComponent },
   { path: 'binarytree-demo', component: BinarytreeDemoComponent }, 
+  { path: 'sortalg-demo', component: SortalgorithmDemoComponent }, 
 ];
 

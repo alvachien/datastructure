@@ -59,6 +59,7 @@ import { OverlayDemoComponent, RotiniPanel, SpagettiPanel } from './overlay-demo
 import { PortalDemoComponent, ScienceJoke } from './portal-demo/portal-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
+import { SortalgorithmDemoComponent } from './sortalgorithm-demo/sortalgorithm-demo.component';
 
 @NgModule({
   exports: [
@@ -125,6 +126,7 @@ export class DSMaterialModule { }
     ScienceJoke,
     SpagettiPanel,
     BinarytreeDemoComponent,
+    SortalgorithmDemoComponent,
   ],
   imports: [
     BrowserModule,

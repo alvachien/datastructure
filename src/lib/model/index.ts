@@ -17,6 +17,11 @@ export * from './IQueue';
 export * from './ITree';
 export * from './BinaryTree';
 export * from './BinaryThreadTree';
+export * from './HuffmanTree';
+
+// Graph
+export * from './IGraph';
+export * from './Graph';
 
 // Algorithm
 export * from './Algorithm';

@@ -36,6 +36,7 @@ export class AppComponent {
   navItems = [
     { name: 'KMP Demo', route: 'kmp-demo' },
     { name: 'Binary Tree Demo', route: 'binarytree-demo' },
+    { name: 'Sorting Algorithm Demo', route: 'sortalg-demo' },
     { name: 'Chips', route: 'chips' },
     { name: 'Gestures', route: 'gestures' },
     { name: 'Grid List', route: 'grid-list' },

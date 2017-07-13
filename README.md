@@ -3,6 +3,11 @@ Data Structure, including List, Tree, Graph, and Sorting Algorithm.
 
 Written by TypeScript.
 
+Based on the books
+- <Introduction to Algorithms>, Third Edition, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+- <数据结构 用面向对象方法与C++描述>， Tsinghua University Press
+- Others
+
 # CONTENT
 The project was created using angular-cli, which can be started directly as HTTP server and show the examples as the testing purpose.
 
