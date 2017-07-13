@@ -1,23 +1,11 @@
 <md-card class="demo-kmp demo-basic">
   <md-toolbar color="primary">Binary Tree Demo</md-toolbar>
   <md-card-content>
-    <form>
-      <md-input-container class="demo-full-width">
-        <input mdInput placeholder="Source String" [(ngModel)]="SourceString" name="sourcestr" required>
-        <md-error>This field is required</md-error>
-        <md-hint>Please type something here</md-hint>
+    <p>
+      <md-input-container class="example-full-width">
+        <textarea mdInput placeholder="Detail">{{DetailSteps}}</textarea>
       </md-input-container>
-
-      <md-input-container class="demo-full-width">
-        <input mdInput placeholder="Search String" [(ngModel)]="SearchString" name="searchstr" required>
-        <md-error>This field is required</md-error>
-        <md-hint>Please type something here</md-hint>
-      </md-input-container>
-
-      <md-input-container class="demo-full-width">
-        <textarea mdInput placeholder="Calculation Steps">{{DetailSteps}}</textarea>
-      </md-input-container>
-    </form>
+    </p>
   </md-card-content>
   <md-card-actions>
     <button md-button (click)="onCalc()">GO</button>

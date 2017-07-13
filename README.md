@@ -10,28 +10,31 @@ Folder lib (src\lib) contains two sub folders, and it has been exported via inde
 
 Folder app (src\app) contains an example application which used to demonstrate the demos, it is a web app using Angular Material.
 
+## HOW TO RUN
+Download or clone this repository, and then run the following commands in sequence:
+- npm install
+- ng serve
+
 ## LIST
 Interface **IList** defines the generic operations supported by List.
 
-Class **SequenceList** implements the Sequence List.
-
-Class **LinkList** implements the Link List.
-
-Class **StaticLinkList** implements the static link list.
+- Class **SequenceList** implements the Sequence List.
+- Class **LinkList** implements the Link List.
+- Class **StaticLinkList** implements the static link list.
 
 ## STACK AND QUEUE
 Interface **IStack** and **IQueue** defines the generic operations for Stack and Queue respectively.
 
-Class **SequenceStack** implements the Sequence Stack.
-
-Class **LinkStack** implements the Link Stack.
+- Class **SequenceStack** implements the Sequence Stack.
+- Class **LinkStack** implements the Link Stack.
 
 ## TREE
 Interface **ITree** defines the generic operations and attributes supported by Tree.
 
 Interface **IBinaryTree** define the generic operations and attributes for Binary Tree.
 
-Class **BinaryTree** implements the Binary Tree.
+- Class **BinaryTree** implements the Binary Tree.
+- Class **BinaryThreadTree** implements the Binary Thread Tree.
 
 TBD.
 
@@ -39,7 +42,7 @@ TBD.
 TBD.
 
 ## ALGORITHM
-The algorithm **KMP** which offer the functionality to search source string from the target string.
+- The algorithm **KMP** which offer the functionality to search source string from the target string.
 
 TBD.
 

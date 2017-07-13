@@ -28,7 +28,7 @@ export interface ITree<T> {
     /**
      * Insert a child
      */
-    InsertChild(par: ITreeNode<T>, data: T): boolean;
+    InsertChild(par: ITreeNode<T>, data: T): ITreeNode<T>;
 }
 
 
@@ -59,13 +59,14 @@ export interface IBinaryTree<T> {
      * InsertNode: Insert an node to the binary tree
      * @param parNode, the parent node. If it is null, it means add it as the root node.
      * Return false if the insertion is failed.
+     * Return a reference to new created note if succeed.
      */
-    InsertNode(parNode: IBinaryTreeNode<T>, data: T): boolean;
+    InsertNode(parNode: IBinaryTreeNode<T>, data: T): IBinaryTreeNode<T>;
 
     /**
      * FindNode: Find the node
      * @param elem, the element with specified data
      * Return the node if found
      */
-    FindNode(elem: T): IBinaryTreeNode<T> | null;
+    FindNode(elem: T): IBinaryTreeNode<T>;
 }

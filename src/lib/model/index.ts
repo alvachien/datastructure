@@ -16,6 +16,7 @@ export * from './IQueue';
 // Tree
 export * from './ITree';
 export * from './BinaryTree';
+export * from './BinaryThreadTree';
 
 // Algorithm
 export * from './Algorithm';
