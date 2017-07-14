@@ -1,11 +1,15 @@
 # INTRODUCTION
-Data Structure, including List, Tree, Graph, and Sorting Algorithm. 
+This project is all about building a lib for Data Structures and algorithms. 
 
-Written by TypeScript.
+The Data Structure part, including List, Tree, Graph, and others. 
 
-Based on the books
-- <Introduction to Algorithms>, Third Edition, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-- <数据结构 用面向对象方法与C++描述>， Tsinghua University Press
+The Algorithm part, including sorting, searching and others. 
+
+The whole project written with TypeScript and scaffold with Angular-CLI for demo-app.
+
+Based on the books:
+- Introduction to Algorithms, Third Edition, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+- 数据结构 用面向对象方法与C++描述， Tsinghua University Press
 - Others
 
 # CONTENT
@@ -15,7 +19,7 @@ Folder lib (src\lib) contains two sub folders, and it has been exported via inde
 
 Folder app (src\app) contains an example application which used to demonstrate the demos, it is a web app using Angular Material.
 
-## HOW TO RUN
+## RUN DEMO APP
 Download or clone this repository, and then run the following commands in sequence:
 - npm install
 - ng serve
@@ -48,8 +52,13 @@ TBD.
 
 ## ALGORITHM
 - The algorithm **KMP** which offer the functionality to search source string from the target string.
-
-TBD.
+- The algorithm **InsertionSort** using the insertion sort upon the array.
+- The algorithm **BinaryInsertSort** based on **InsertionSort** but improves the way to search for suitable position to insert.
+- The algorithm **BubbleSort** using the bubble-sort on the array: pickup the biggest and move it to the tail of the array.
+- The algorithm **QuickSort** based on **BubbleSort** but use recursive way to handle two parts of the array.
+- The algorithm **SelectionSort** choose the min (or max) from the unsorted part and append it to the sorted part.
+- The algorithm **CountingSort** give an item a n-th position because there are n-1 item less (or bigger) than it. This algorithm suits only for number based array.
+- TBD 
 
 # AUTHOR
 **Alva Chien | 钱红俊**
