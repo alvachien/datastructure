@@ -1,3 +1,7 @@
+/**
+ * IQueue.ts
+ * (C) Copyright, Alva Chien, 2017
+ */
 
 // Queue stands for FIFO
 export interface IQueue<T> {

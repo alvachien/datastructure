@@ -1,3 +1,7 @@
+/**
+ * BinaryThreadTree.ts
+ * (C) Copyright, Alva Chien, 2017
+ */
 
 import { IBinaryTreeNode, IBinaryTree } from './ITree';
 

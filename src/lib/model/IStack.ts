@@ -1,3 +1,7 @@
+/**
+ * IStack.ts
+ * (C) Copyright, Alva Chien, 2017
+ */
 
 // Stack stands for LIFO
 export interface IStack<T> {

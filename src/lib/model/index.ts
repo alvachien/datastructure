@@ -1,3 +1,7 @@
+/**
+ * index.ts
+ * (C) Copyright, Alva Chien, 2017
+ */
 
 // Link
 export * from './IList';

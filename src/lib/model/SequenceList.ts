@@ -1,3 +1,7 @@
+/**
+ * SequenceList.ts
+ * (C) Copyright, Alva Chien, 2017
+ */
 
 import { IList } from './IList';
 

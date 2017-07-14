@@ -1,4 +1,11 @@
 /**
+ * SparseMatrix.ts
+ * (C) Copyright, Alva Chien, 2017
+ */
+
+
+
+/**
  * SparseMatrix: Matrix with lots of empty entities inside
  * 
  */

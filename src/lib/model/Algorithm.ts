@@ -1,6 +1,6 @@
 /**
  * Algorithm.ts
- * (C) Copyright, Alva Chien
+ * (C) Copyright, Alva Chien, 2017
  * 
  * This file try to provide a set of algorithm
  * Including:
@@ -257,5 +257,66 @@ export function CountingSort(datalist: number[], max: number) {
 
     for(let i = 0; i < datalist.length; i ++) {
         datalist[i] = out[i];
+    }
+}
+
+
+/**
+ * Merge sorting
+ * @param datalist: data list for sorting
+ */
+export function MergeSort<T>(datalist: T[]) {
+    MergeSortImpl(datalist, 0, datalist.length);
+}
+
+function MergeSortImpl<T>(datalist: T[], begin: number, end: number)
+{
+    if(end - begin > 1)
+    {
+        let mid: number = Math.floor((begin + end) /2);
+        MergeSortImpl(datalist, begin, mid);
+        MergeSortImpl(datalist, mid, end);
+
+        MergeSortImpl2(datalist, begin, mid, end);
+    }
+}
+
+function MergeSortImpl2<T>(datalist: T[], begin: number, mid: number, end: number) {
+    let lsize: number = mid - begin;
+    let rsize: number = end - mid;
+    let arLeft: Array<T> = new Array<T>();
+    let arRight: Array<T> = new Array<T>();
+    let lnow: number = 0;
+    let rnow: number = 0;
+
+    for(let i: number = begin; i < mid; i++) {
+        arLeft.push(datalist[i]);
+    }
+    for(let i: number = mid; i < end; i ++) {
+        arRight.push(datalist[i]);
+    }
+
+    let idx: number = 0;
+    for(idx = 0; lnow < lsize && rnow < rsize; idx ++) {
+        if (arLeft[lnow] > arRight[rnow]) {
+            datalist[begin + idx] = arLeft[lnow];
+            lnow ++;
+        } else {
+            datalist[begin + idx] = arRight[rnow];
+            rnow ++;
+        }
+    }
+
+    if(lnow === lsize && rnow !== rsize)
+    {
+        for(let i = 0; i < (rsize - rnow); i++) {
+            datalist[begin + idx + i] = arRight[rnow + i];
+        }
+    }
+    else if(rnow === rsize && lnow !== lsize)
+    {
+        for(let i = 0; i < (lsize - lnow); i++) {
+            datalist[begin + idx + i] = arLeft[lnow + i];
+        }
     }
 }

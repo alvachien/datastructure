@@ -19,8 +19,8 @@ Folder lib (src\lib) contains two sub folders, and it has been exported via inde
 
 Folder app (src\app) contains an example application which used to demonstrate the demos, it is a web app using Angular Material.
 
-## RUN DEMO APP
-Download or clone this repository, and then run the following commands in sequence:
+## DEMO APP
+To run the demo app, you need download or clone this repository, and then run the following commands in sequence:
 - npm install
 - ng serve
 
@@ -58,7 +58,14 @@ TBD.
 - The algorithm **QuickSort** based on **BubbleSort** but use recursive way to handle two parts of the array.
 - The algorithm **SelectionSort** choose the min (or max) from the unsorted part and append it to the sorted part.
 - The algorithm **CountingSort** give an item a n-th position because there are n-1 item less (or bigger) than it. This algorithm suits only for number based array.
+- The algorithm **MergeSort** uses divide and consquer methology which try to split the arry and merge it to final results.
 - TBD 
+
+## OBJECT
+- The object **Matrix** defines the matrix object.
+- The object **Polynomial** defines the polynomial object.
+- The object **SparseMatrix** defines the Sparse Matrix object.
+- TBD
 
 # AUTHOR
 **Alva Chien | 钱红俊**
