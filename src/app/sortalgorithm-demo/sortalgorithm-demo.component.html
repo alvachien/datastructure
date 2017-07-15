@@ -1,6 +1,11 @@
 <md-card class="demo-kmp demo-basic">
   <md-toolbar color="primary">Sorting Algorithm Demo</md-toolbar>
   <md-card-content>
+    <p>
+      <md-input-container class="example-full-width">
+        <textarea mdInput placeholder="Detail">{{DetailSteps}}</textarea>
+      </md-input-container>
+    </p>
   </md-card-content>
   <md-card-actions>
     <button md-button (click)="onCalc()">GO</button>
