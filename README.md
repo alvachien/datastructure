@@ -1,11 +1,10 @@
 # INTRODUCTION
 This project is all about building a lib for Data Structures and algorithms. 
 
-The Data Structure part, including List, Tree, Graph, and others. 
+- The Data Structure part, including List, Tree, Graph, and others. 
+- The Algorithm part, including sorting, searching and others. 
 
-The Algorithm part, including sorting, searching and others. 
-
-The whole project written with TypeScript and scaffold with Angular-CLI for demo-app.
+The library written with TypeScript.
 
 Based on the books:
 - Introduction to Algorithms, Third Edition, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
@@ -15,9 +14,9 @@ Based on the books:
 # CONTENT
 The project was created using angular-cli, which can be started directly as HTTP server and show the examples as the testing purpose.
 
-Folder lib (src\lib) contains two sub folders, and it has been exported via index.ts directly.
+Folder **lib** (src\lib) contains two sub folders, and it has been exported via index.ts directly.
 
-Folder app (src\app) contains an example application which used to demonstrate the demos, it is a web app using Angular Material.
+Folder **app** (src\app) contains a demo application which used to demonstrate the demos, it is a web app using [Angular Material](https://material.angular.io).
 
 ## DEMO APP
 To run the demo app, you need download or clone this repository, and then run the following commands in sequence:

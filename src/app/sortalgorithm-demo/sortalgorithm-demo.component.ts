@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QuickSort } from '../../lib/model';
+import { MergeSort, QuickSort, BubbleSort, InsertionSort } from '../../lib/model';
+import { MdSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-sortalgorithm-demo',
@@ -9,6 +10,14 @@ import { QuickSort } from '../../lib/model';
 export class SortalgorithmDemoComponent implements OnInit {
 
   DetailSteps: string;
+  currentAlgor: string;
+
+  algorithms = [
+    { value: 'quicksort', viewValue: 'Quick Sort' },
+    { value: 'bubblesort', viewValue: 'Bubble Sort' },
+    { value: 'insertsort', viewValue: 'Insert Sort' },
+    { value: 'mergesort', viewValue: 'Merge Sort' },
+  ];
 
   constructor() { }
 
@@ -18,24 +27,35 @@ export class SortalgorithmDemoComponent implements OnInit {
   onCalc(): void {
     // Generate the randomize numbers
     let array1: number[] = [];
-    for (let i = 0; i < 100; i++) {
+    const maxamt: number = 5000;
+
+    for (let i = 0; i < maxamt; i++) {
       //parseInt(Math.random() * 1000, 10) + 1;
-      Math.floor(Math.random() * 1000) + 1;
-      array1.push(Math.ceil(Math.random() * 1000));
+      Math.floor(Math.random() * 10000) + 1;
+      array1.push(Math.ceil(Math.random() * 10000));
     }
 
     this.DetailSteps = "Random generated numbers: \n";
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < maxamt; i++) {
       this.DetailSteps += array1[i] + ";";
     }
     this.DetailSteps += "\n\n";
 
     // Sort use QuickSort
     let start = new Date().getTime();
-    QuickSort(array1);
+    if (this.currentAlgor === 'quicksort') {
+      QuickSort(array1);
+    } else if(this.currentAlgor === 'bubblesort') {
+      BubbleSort(array1);
+    } else if(this.currentAlgor === 'insertsort') {
+      InsertionSort(array1);
+    } else if(this.currentAlgor === 'mergesort') {
+      MergeSort(array1);
+    }
+
     let end = new Date().getTime();
-    this.DetailSteps += "Sorted after Quick Sort " + (end-start).toString() + " ms : \n";
-    for (let i = 0; i < 100; i++) {
+    this.DetailSteps += "Sorted after Sort " + (end - start).toString() + " ms : \n";
+    for (let i = 0; i < maxamt; i++) {
       this.DetailSteps += array1[i] + ";";
     }
   }

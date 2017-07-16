@@ -1,6 +1,13 @@
 <md-card class="demo-kmp demo-basic">
   <md-toolbar color="primary">Sorting Algorithm Demo</md-toolbar>
   <md-card-content>
+    <md-select placeholder="Sorting Algorithm" [(ngModel)]="currentAlgor" required
+       #algControl="ngModel">
+      <md-option>None</md-option>
+      <md-option *ngFor="let alg of algorithms" [value]="alg.value">
+        {{ alg.viewValue }}
+      </md-option>
+    </md-select>    
     <p>
       <md-input-container class="example-full-width">
         <textarea mdInput placeholder="Detail">{{DetailSteps}}</textarea>
