@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppComponent, DemoAppOnPush, Home } from './app.component';
+import { DemoAppComponent, DemoAppOnPush, Home } from './demoapp.component';
 import { PeopleDatabase } from './table-demo/people-database';
-import { MY_APP_ROUTES } from './app.routes';
+import { MY_APP_ROUTES } from './demoapp.routes';
 import {
   FullscreenOverlayContainer,
   MdAutocompleteModule,
@@ -104,7 +104,7 @@ export class DSMaterialModule { }
   declarations: [
     Home,
     DemoAppOnPush,
-    AppComponent,
+    DemoAppComponent,
     KmpDemoComponent,
     ExpansionDemoComponent,
     BaselineDemoComponent,
@@ -142,7 +142,7 @@ export class DSMaterialModule { }
     PeopleDatabase
   ],
   entryComponents: [
-    AppComponent,
+    DemoAppComponent,
     JazzDialog,
     ContentElementDialog,
     IFrameDialog,
@@ -150,12 +150,12 @@ export class DSMaterialModule { }
     ScienceJoke,
     SpagettiPanel,
   ]
-  //bootstrap: [AppComponent]
+  //bootstrap: [DemoAppComponent]
 })
-export class AppModule {
+export class DemoAppModule {
   constructor(private _appRef: ApplicationRef) { }
 
   ngDoBootstrap() {
-    this._appRef.bootstrap(AppComponent);
+    this._appRef.bootstrap(DemoAppComponent);
   }
 }

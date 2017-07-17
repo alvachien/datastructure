@@ -23,14 +23,14 @@ export class DemoAppOnPush { }
 
 @Component({
   selector: 'acds-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './demoapp.component.html',
+  styleUrls: ['./demoapp.component.scss'],
   host: {
     '[class.unicorn-dark-theme]': 'dark',
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class DemoAppComponent {
   dark = false;
   changeDetectionStrategy: string;
   navItems = [

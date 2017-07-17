@@ -1,5 +1,5 @@
 # TypeScript Library for Data Structure and Algorithm
-## INTRUDCTION
+## INTRODUCTION
 This project is all about building a lib for Data Structures and algorithms. 
 
 - The Data Structure part, including List, Tree, Graph, and others. 
