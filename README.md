@@ -15,9 +15,9 @@ The library which I written actually based the understanding when reading the bo
 ## CONTENT
 The project was generated using [Angular-CLI](https://github.com/angular/angular-cli), which can be started directly as HTTP server to run the demo app for the testing purpose.
 
-Folder **lib** (src\lib) contains two sub folders, and it has been exported via index.ts directly.
+Folder **lib** (src\lib) contains several sub folders, and it has been exported via index.ts directly.
 
-Folder **app** (src\app) contains a demo application which used to demonstrate the demos, it is a web app using [Angular Material](https://material.angular.io).
+Folder **demoapp** (src\demoapp) contains a demo application which used to demonstrate the demos, it is a web app using [Angular Material](https://material.angular.io).
 
 ### DEMO APP
 To run the demo app, you need download or clone this repository, and then run the following commands in sequence:
