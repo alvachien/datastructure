@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MergeSort, QuickSort, BubbleSort, InsertionSort } from '../../lib/model';
+import { MergeSort, QuickSort, BubbleSort, InsertionSort, HeapSort } from '../../lib/model';
 import { MdSelectChange } from '@angular/material';
 
 @Component({
@@ -17,9 +17,12 @@ export class SortalgorithmDemoComponent implements OnInit {
     { value: 'bubblesort', viewValue: 'Bubble Sort' },
     { value: 'insertsort', viewValue: 'Insert Sort' },
     { value: 'mergesort', viewValue: 'Merge Sort' },
+    { value: 'heapsort', viewValue: 'Heap Sort' },
   ];
 
-  constructor() { }
+  constructor() {
+    this.currentAlgor = 'quicksort';
+  }
 
   ngOnInit() {
   }
@@ -45,12 +48,14 @@ export class SortalgorithmDemoComponent implements OnInit {
     let start = new Date().getTime();
     if (this.currentAlgor === 'quicksort') {
       QuickSort(array1);
-    } else if(this.currentAlgor === 'bubblesort') {
+    } else if (this.currentAlgor === 'bubblesort') {
       BubbleSort(array1);
-    } else if(this.currentAlgor === 'insertsort') {
+    } else if (this.currentAlgor === 'insertsort') {
       InsertionSort(array1);
-    } else if(this.currentAlgor === 'mergesort') {
+    } else if (this.currentAlgor === 'mergesort') {
       MergeSort(array1);
+    } else if (this.currentAlgor === 'heapsort') {
+      HeapSort(array1);
     }
 
     let end = new Date().getTime();

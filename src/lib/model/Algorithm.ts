@@ -320,3 +320,11 @@ function MergeSortImpl2<T>(datalist: T[], begin: number, mid: number, end: numbe
         }
     }
 }
+
+/**
+ * Heap sort
+ * @param datalist : data list
+ */
+export function HeapSort<T>(datalist: T[]) {
+
+}
