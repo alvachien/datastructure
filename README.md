@@ -13,7 +13,7 @@ The library which I written actually based the understanding when reading the bo
 - Others
 
 ## CONTENT
-The project was generated using [Angular-CLI] (https://github.com/angular/angular-cli), which can be started directly as HTTP server to run the demo app for the testing purpose.
+The project was generated using [Angular-CLI](https://github.com/angular/angular-cli), which can be started directly as HTTP server to run the demo app for the testing purpose.
 
 Folder **lib** (src\lib) contains two sub folders, and it has been exported via index.ts directly.
 
