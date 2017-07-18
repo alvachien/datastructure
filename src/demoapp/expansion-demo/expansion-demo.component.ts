@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expansion-demo.component.scss']
 })
 export class ExpansionDemoComponent implements OnInit {
-  displayMode: string = 'default';
-  multi: boolean = false;
-  hideToggle: boolean = false;
+  displayMode = 'default';
+  multi = false;
+  hideToggle = false;
   showPanel3 = true;
-  
+
   constructor() { }
 
   ngOnInit() {

@@ -61,13 +61,18 @@ TBD.
 - The algorithm **SelectionSort** choose the min (or max) from the unsorted part and append it to the sorted part.
 - The algorithm **CountingSort** give an item a n-th position because there are n-1 item less (or bigger) than it. This algorithm suits only for number based array.
 - The algorithm **MergeSort** uses divide and consquer methology which try to split the arry and merge it to final results.
-- TBD 
+- The algorithm **HeapSort** try to build maximum (or minimum) heap for the unsorted part, and fetch the root node to the sorted part.
+- More to come.
 
 ### OBJECT
 - The object **Matrix** defines the matrix object.
 - The object **Polynomial** defines the polynomial object.
 - The object **SparseMatrix** defines the Sparse Matrix object.
-- TBD
+- More to come.
+
+### SUBJECT
+- The subject **MaximumSubArray** try to fetch out the maxium sub array from an existing array.
+- More to come.
 
 # AUTHOR
 **Alva Chien | 钱红俊**

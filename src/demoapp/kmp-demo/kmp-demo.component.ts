@@ -19,13 +19,13 @@ export class KmpDemoComponent implements OnInit {
   }
 
   onCalc() {
-    console.log("Entering onCalc");
-    
-    let f = DSModel.KMP(this.SourceString, this.SearchString);
+    console.log('Entering onCalc');
+
+    const f = DSModel.KMP(this.SourceString, this.SearchString);
     if (f === null) {
-      this.DetailSteps = "No found!";
+      this.DetailSteps = 'No found!';
     } else {
-      this.DetailSteps = "Found at position: " + f.toString();
+      this.DetailSteps = 'Found at position: ' + f.toString();
     }
   }
 }

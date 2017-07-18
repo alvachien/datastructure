@@ -24,7 +24,7 @@ export class StaticLinkListNode<T> {
     }
     set Cursor(cur: number) {
         this._cursor = cur;
-    }    
+    }
 }
 
 export class StaticLinkList<T> implements IList<T> {
@@ -35,8 +35,8 @@ export class StaticLinkList<T> implements IList<T> {
     private _data: Array<StaticLinkListNode<T>>;
 
     public Length(): number {
-        let j: number = 0;
-        for(let it of this._data) {
+        let j = 0;
+        for (const it of this._data) {
             if (it.Cursor !== -1) {
                 j ++;
             }
@@ -44,13 +44,13 @@ export class StaticLinkList<T> implements IList<T> {
 
         return j;
     }
- 
+
     public IsEmpty(): boolean {
         return this.Length() === 0;
     }
 
     public ClearAll(): boolean {
-        for(let it of this._data) {
+        for (const it of this._data) {
             it.Cursor = -1;
             it.Data = null;
         }
@@ -70,7 +70,7 @@ export class StaticLinkList<T> implements IList<T> {
 
     public InsertElement(index: number, elem: T) : boolean {
         // if (index < 0 || index >= this._data.length) {
-        //     return false;            
+        //     return false;
         // }
 
         // if (index < this._data.length) {
@@ -91,7 +91,7 @@ export class StaticLinkList<T> implements IList<T> {
 
     public DeleteElement(index: number): boolean {
         // if (index < 0 || index >= this._data.length) {
-        //     return false;            
+        //     return false;
         // }
 
         // if (index < this._data.length - 1) {

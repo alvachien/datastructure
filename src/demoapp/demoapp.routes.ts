@@ -31,7 +31,7 @@ export const MY_APP_ROUTES: Routes = [
   { path: 'overlay', component: OverlayDemoComponent },
   { path: 'portal', component: PortalDemoComponent },
   { path: 'tooltip', component: TooltipDemoComponent },
-  { path: 'binarytree-demo', component: BinarytreeDemoComponent }, 
-  { path: 'sortalg-demo', component: SortalgorithmDemoComponent }, 
+  { path: 'binarytree-demo', component: BinarytreeDemoComponent },
+  { path: 'sortalg-demo', component: SortalgorithmDemoComponent },
 ];
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LiveAnnouncer } from '@angular/material'
+import { LiveAnnouncer } from '@angular/material';
 
 @Component({
   moduleId: module.id,

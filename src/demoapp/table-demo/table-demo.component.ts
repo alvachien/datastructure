@@ -45,7 +45,7 @@ export class TableDemoComponent implements OnInit {
   }
 
   getOpacity(progress: number) {
-    let distanceFromMiddle = Math.abs(50 - progress);
+    const distanceFromMiddle = Math.abs(50 - progress);
     return distanceFromMiddle / 50 + .3;
   }
 
@@ -58,7 +58,7 @@ export class TableDemoComponent implements OnInit {
   }
 
   toggleColorColumn() {
-    let colorColumnIndex = this.displayedColumns.indexOf('color');
+    const colorColumnIndex = this.displayedColumns.indexOf('color');
     if (colorColumnIndex == -1) {
       this.displayedColumns.push('color');
     } else {

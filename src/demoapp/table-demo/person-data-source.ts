@@ -47,8 +47,8 @@ export class PersonDataSource extends DataSource<any> {
                 case 'color': [propertyA, propertyB] = [a.color, b.color]; break;
             }
 
-            let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-            let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+            const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+            const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
 
             return (valueA < valueB ? -1 : 1) * (this._sort.direction == 'asc' ? 1 : -1);
         });

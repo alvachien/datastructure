@@ -47,7 +47,7 @@ export class BinaryTree<T> implements IBinaryTree<T> {
     }
 
     public InorderTraversal(): Array<BinaryTreeNode<T>> {
-        let arRst: Array<BinaryTreeNode<T>> = new Array<BinaryTreeNode<T>>();
+        const arRst: Array<BinaryTreeNode<T>> = new Array<BinaryTreeNode<T>>();
 
         if (this._root !== null) {
             this.InorderImpl(this._root, arRst);
@@ -64,9 +64,9 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             this.InorderImpl(curNode.Right, arRst);
         }
     }
-    
+
     public PreorderTraversal(): Array<BinaryTreeNode<T>> {
-        let arRst: Array<BinaryTreeNode<T>> = new Array<BinaryTreeNode<T>>();
+        const arRst: Array<BinaryTreeNode<T>> = new Array<BinaryTreeNode<T>>();
 
         if (this._root !== null) {
             this.PreorderImpl(this._root, arRst);
@@ -83,9 +83,9 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             this.PreorderImpl(curNode.Right, arRst);
         }
     }
-    
+
     public PostorderTraversal(): Array<BinaryTreeNode<T>> {
-        let arRst: Array<BinaryTreeNode<T>> = new Array<BinaryTreeNode<T>>();
+        const arRst: Array<BinaryTreeNode<T>> = new Array<BinaryTreeNode<T>>();
 
         if (this._root !== null) {
             this.PostorderImpl(this._root, arRst);
@@ -108,9 +108,9 @@ export class BinaryTree<T> implements IBinaryTree<T> {
         }
 
         if (parNode === null) {
-            let node: BinaryTreeNode<T> = new BinaryTreeNode<T>();
+            const node: BinaryTreeNode<T> = new BinaryTreeNode<T>();
             node.Data = data;
-            
+
             this._root = node;
             return this._root;
         }
@@ -120,14 +120,14 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             return null;
         }
 
-        let nnode: BinaryTreeNode<T> = new BinaryTreeNode<T>();
+        const nnode: BinaryTreeNode<T> = new BinaryTreeNode<T>();
         nnode.Data = data;
         if (parNode.Left === null) {
             parNode.Left = nnode;
-        } else if(parNode.Right === null) {
+        } else if (parNode.Right === null) {
             parNode.Right = nnode;
         }
-        
+
         return nnode;
     }
 
@@ -136,8 +136,8 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             return null;
         }
 
-        let arNodes: Array<BinaryTreeNode<T>> = this.PreorderTraversal();
-        for(let nod of arNodes) {
+        const arNodes: Array<BinaryTreeNode<T>> = this.PreorderTraversal();
+        for (const nod of arNodes) {
             if (nod.Data === elem) {
                 return nod;
             }

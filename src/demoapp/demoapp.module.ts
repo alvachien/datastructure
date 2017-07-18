@@ -150,7 +150,7 @@ export class DSMaterialModule { }
     ScienceJoke,
     SpagettiPanel,
   ]
-  //bootstrap: [DemoAppComponent]
+  // bootstrap: [DemoAppComponent]
 })
 export class DemoAppModule {
   constructor(private _appRef: ApplicationRef) { }

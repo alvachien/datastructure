@@ -6,7 +6,7 @@
 import { IStack } from './IStack';
 
 export class SequenceStack<T> implements IStack<T> {
-    constructor() {        
+    constructor() {
     }
 
     private _data: T[] = [];
@@ -30,9 +30,9 @@ export class SequenceStack<T> implements IStack<T> {
             return null;
         }
 
-        let pi: T = this._data[this._data.length - 1];
-        this._data.splice(this._data.length - 1, 1);  
-        return pi;      
+        const pi: T = this._data[this._data.length - 1];
+        this._data.splice(this._data.length - 1, 1);
+        return pi;
     }
 
     public Peek(): T | null {
@@ -40,8 +40,8 @@ export class SequenceStack<T> implements IStack<T> {
             return null;
         }
 
-        let pi: T = this._data[this._data.length - 1];
-        return pi;      
+        const pi: T = this._data[this._data.length - 1];
+        return pi;
     }
 
     public ClearAll() : boolean {

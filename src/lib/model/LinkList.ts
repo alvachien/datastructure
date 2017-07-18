@@ -29,7 +29,7 @@ export class LinkListNode<T> {
 
 export class LinkList<T> implements IList<T> {
     private _head: LinkListNode<T> = null;
-    private _length: number = 0;
+    private _length = 0;
 
     constructor() {
         this._head = new LinkListNode<T>();
@@ -44,20 +44,20 @@ export class LinkList<T> implements IList<T> {
     }
 
     public GetElement(index: number): T | null {
-        if (this._length === 0 
+        if (this._length === 0
             || this._head === null
-            || index < 0 
+            || index < 0
             || index >= this._length)
             return null;
-        
+
         let cur = this._head;
-        for(let i = 0; i < index; i ++) {
+        for (let i = 0; i < index; i ++) {
             if (cur !== null) {
                 cur = cur.Next;
-            }            
+            }
         }
 
-        return cur === null? null : cur.Data;
+        return cur === null ? null : cur.Data;
     }
 
     public InsertElement(index: number, elem: T): boolean {
@@ -65,34 +65,34 @@ export class LinkList<T> implements IList<T> {
         if (elem === null) return false;
 
         let cur: LinkListNode<T> = this._head;
-        let i:number = 0;
-        while(cur != null && i < index) {
+        const i = 0;
+        while (cur != null && i < index) {
             cur = cur.Next;
         }
 
-        let nnode: LinkListNode<T> = new LinkListNode<T>();
+        const nnode: LinkListNode<T> = new LinkListNode<T>();
         nnode.Data = elem;
         nnode.Next = cur.Next;
         cur.Next = nnode;
         this._length++;
 
         return true;
-    }   
+    }
 
     public AppendElement(elem: T) : number {
         let cur: LinkListNode<T> = this._head;
-        while(cur !== null) {
+        while (cur !== null) {
             cur = cur.Next;
         }
 
-        let newnode = new LinkListNode<T>();
+        const newnode = new LinkListNode<T>();
         newnode.Data = elem;
         newnode.Next = null;
 
         cur.Next = newnode;
 
         return ++this._length;
-    } 
+    }
 
     public DeleteElement(index: number): boolean {
         if (index < 0 || index > this._length) return false;
@@ -104,8 +104,8 @@ export class LinkList<T> implements IList<T> {
             return true;
         }
 
-        let i:number = 0;
-        while(cur != null && i < index - 1) {
+        const i = 0;
+        while (cur != null && i < index - 1) {
             cur = cur.Next;
         }
 

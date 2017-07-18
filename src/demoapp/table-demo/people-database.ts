@@ -3,7 +3,7 @@ import { NAMES } from '../dataset/names';
 import { COLORS } from '../dataset/colors';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-export let LATEST_ID: number = 0;
+export let LATEST_ID = 0;
 
 export interface UserData {
     id: string;
@@ -31,7 +31,7 @@ export class PeopleDatabase {
     shuffle(changeReferences: boolean) {
         let copiedData = this.data.slice();
         for (let i = copiedData.length; i; i--) {
-            let j = Math.floor(Math.random() * i);
+            const j = Math.floor(Math.random() * i);
             [copiedData[i - 1], copiedData[j]] = [copiedData[j], copiedData[i - 1]];
         }
 

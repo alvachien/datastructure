@@ -29,8 +29,8 @@ export class SortalgorithmDemoComponent implements OnInit {
 
   onCalc(): void {
     // Generate the randomize numbers
-    let array1: number[] = [];
-    const maxamt: number = 5000;
+    const array1: number[] = [];
+    const maxamt = 5000;
 
     for (let i = 0; i < maxamt; i++) {
       //parseInt(Math.random() * 1000, 10) + 1;
@@ -38,14 +38,14 @@ export class SortalgorithmDemoComponent implements OnInit {
       array1.push(Math.ceil(Math.random() * 10000));
     }
 
-    this.DetailSteps = "Random generated numbers: \n";
+    this.DetailSteps = 'Random generated numbers: \n';
     for (let i = 0; i < maxamt; i++) {
-      this.DetailSteps += array1[i] + ";";
+      this.DetailSteps += array1[i] + ';';
     }
-    this.DetailSteps += "\n\n";
+    this.DetailSteps += '\n\n';
 
     // Sort use QuickSort
-    let start = new Date().getTime();
+    const start = new Date().getTime();
     if (this.currentAlgor === 'quicksort') {
       QuickSort(array1);
     } else if (this.currentAlgor === 'bubblesort') {
@@ -58,10 +58,10 @@ export class SortalgorithmDemoComponent implements OnInit {
       HeapSort(array1);
     }
 
-    let end = new Date().getTime();
-    this.DetailSteps += "Sorted after Sort " + (end - start).toString() + " ms : \n";
+    const end = new Date().getTime();
+    this.DetailSteps += 'Sorted after Sort ' + (end - start).toString() + ' ms : \n';
     for (let i = 0; i < maxamt; i++) {
-      this.DetailSteps += array1[i] + ";";
+      this.DetailSteps += array1[i] + ';';
     }
   }
 }

@@ -16,33 +16,33 @@ export class BinarytreeDemoComponent implements OnInit {
   }
 
   onCalc() : void {
-    let insTree: BinaryTree<number> = new BinaryTree<number>();
+    const insTree: BinaryTree<number> = new BinaryTree<number>();
     insTree.InsertNode(null, 1);
-    let lr1: BinaryTreeNode<number> = insTree.InsertNode(insTree.Root, 2);
-    let lr2: BinaryTreeNode<number> = insTree.InsertNode(insTree.Root, 3);
+    const lr1: BinaryTreeNode<number> = insTree.InsertNode(insTree.Root, 2);
+    const lr2: BinaryTreeNode<number> = insTree.InsertNode(insTree.Root, 3);
     insTree.InsertNode(lr1, 10);
     insTree.InsertNode(lr2, 11);
     insTree.InsertNode(lr2, 12);
 
-    let arNodes = insTree.PreorderTraversal();
-    this.DetailSteps = "Preorder traverse: ";
-    for(let arn of arNodes) {
-      this.DetailSteps += arn.Data.toString() + "; ";
+    const arNodes = insTree.PreorderTraversal();
+    this.DetailSteps = 'Preorder traverse: ';
+    for (const arn of arNodes) {
+      this.DetailSteps += arn.Data.toString() + '; ';
     }
-    this.DetailSteps += "\n";
+    this.DetailSteps += '\n';
 
-    let arnodes2 = insTree.InorderTraversal();
-    this.DetailSteps += "\nInorder traverse: ";
-    for(let arn of arnodes2) {
-      this.DetailSteps += arn.Data.toString() + "; ";
+    const arnodes2 = insTree.InorderTraversal();
+    this.DetailSteps += '\nInorder traverse: ';
+    for (const arn of arnodes2) {
+      this.DetailSteps += arn.Data.toString() + '; ';
     }
-    this.DetailSteps += "\n";
+    this.DetailSteps += '\n';
 
-    let arnodes3 = insTree.PostorderTraversal();
-    this.DetailSteps += "\nPostorder traverse: ";
-    for(let arn of arnodes3) {
-      this.DetailSteps += arn.Data.toString() + "; ";
+    const arnodes3 = insTree.PostorderTraversal();
+    this.DetailSteps += '\nPostorder traverse: ';
+    for (const arn of arnodes3) {
+      this.DetailSteps += arn.Data.toString() + '; ';
     }
-    this.DetailSteps += "\n";
+    this.DetailSteps += '\n';
   }
 }

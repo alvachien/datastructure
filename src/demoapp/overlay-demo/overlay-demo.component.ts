@@ -27,8 +27,8 @@ import {
 })
 export class OverlayDemoComponent {
 
-  nextPosition: number = 0;
-  isMenuOpen: boolean = false;
+  nextPosition = 0;
+  isMenuOpen = false;
   tortelliniFillings = ['cheese and spinach', 'mushroom and broccoli'];
 
   @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<Portal<any>>;
@@ -39,7 +39,7 @@ export class OverlayDemoComponent {
   constructor(public overlay: Overlay, public viewContainerRef: ViewContainerRef) { }
 
   openRotiniPanel() {
-    let config = new OverlayState();
+    const config = new OverlayState();
 
     config.positionStrategy = this.overlay.position()
       .global()
@@ -48,12 +48,12 @@ export class OverlayDemoComponent {
 
     this.nextPosition += 30;
 
-    let overlayRef = this.overlay.create(config);
+    const overlayRef = this.overlay.create(config);
     overlayRef.attach(new ComponentPortal(RotiniPanel, this.viewContainerRef));
   }
 
   openFusilliPanel() {
-    let config = new OverlayState();
+    const config = new OverlayState();
 
     config.positionStrategy = this.overlay.position()
       .global()
@@ -62,42 +62,42 @@ export class OverlayDemoComponent {
 
     this.nextPosition += 30;
 
-    let overlayRef = this.overlay.create(config);
+    const overlayRef = this.overlay.create(config);
     overlayRef.attach(this.templatePortals.first);
   }
 
   openSpaghettiPanel() {
     // TODO(jelbourn): separate overlay demo for connected positioning.
-    let strategy = this.overlay.position()
+    const strategy = this.overlay.position()
       .connectedTo(
       this._overlayOrigin.elementRef,
       { originX: 'start', originY: 'bottom' },
       { overlayX: 'start', overlayY: 'top' });
 
-    let config = new OverlayState();
+    const config = new OverlayState();
     config.positionStrategy = strategy;
 
-    let overlayRef = this.overlay.create(config);
+    const overlayRef = this.overlay.create(config);
     overlayRef.attach(new ComponentPortal(SpagettiPanel, this.viewContainerRef));
   }
 
   openTortelliniPanel() {
-    let strategy = this.overlay.position()
+    const strategy = this.overlay.position()
       .connectedTo(
       this.tortelliniOrigin.elementRef,
       { originX: 'start', originY: 'bottom' },
       { overlayX: 'end', overlayY: 'top' });
 
-    let config = new OverlayState();
+    const config = new OverlayState();
     config.positionStrategy = strategy;
 
-    let overlayRef = this.overlay.create(config);
+    const overlayRef = this.overlay.create(config);
 
     overlayRef.attach(this.tortelliniTemplate);
   }
 
   openPanelWithBackdrop() {
-    let config = new OverlayState();
+    const config = new OverlayState();
 
     config.positionStrategy = this.overlay.position()
       .global()
@@ -105,7 +105,7 @@ export class OverlayDemoComponent {
     config.hasBackdrop = true;
     config.backdropClass = 'cdk-overlay-transparent-backdrop';
 
-    let overlayRef = this.overlay.create(config);
+    const overlayRef = this.overlay.create(config);
     overlayRef.attach(this.templatePortals.first);
     overlayRef.backdropClick().subscribe(() => overlayRef.detach());
   }
@@ -119,7 +119,7 @@ export class OverlayDemoComponent {
   template: '<p class="demo-rotini">Rotini {{value}}</p>'
 })
 export class RotiniPanel {
-  value: number = 9000;
+  value = 9000;
 }
 
 /** Simple component to load into an overlay */
@@ -128,5 +128,5 @@ export class RotiniPanel {
   template: '<div class="demo-spagetti">Spagetti {{value}}</div>'
 })
 export class SpagettiPanel {
-  value: string = 'Omega';
+  value = 'Omega';
 }

@@ -1,17 +1,17 @@
 /**
  * ITree.ts
  * (C) Copyright, Alva Chien
- * 
+ *
  * This file provides a definition of tree.
- * 
+ *
  */
 
 export interface ITreeNode<T> {
 }
 
 export interface ITree<T> {
-    /** 
-     * Is empty? true means it is empty 
+    /**
+     * Is empty? true means it is empty
      */
     IsEmpty(): boolean;
 

@@ -68,7 +68,7 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
     }
 
     public InorderTraversal(): Array<BinaryThreadTreeNode<T>> {
-        let arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
+        const arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
 
         if (this._root !== null) {
             this.InorderImpl(this._root, arRst);
@@ -85,9 +85,9 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
             this.InorderImpl(curNode.Right, arRst);
         }
     }
-    
+
     public PreorderTraversal(): Array<BinaryThreadTreeNode<T>> {
-        let arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
+        const arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
 
         if (this._root !== null) {
             this.PreorderImpl(this._root, arRst);
@@ -104,9 +104,9 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
             this.PreorderImpl(curNode.Right, arRst);
         }
     }
-    
+
     public PostorderTraversal(): Array<BinaryThreadTreeNode<T>> {
-        let arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
+        const arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
 
         if (this._root !== null) {
             this.PostorderImpl(this._root, arRst);
@@ -129,9 +129,9 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
         }
 
         if (parNode === null) {
-            let node: BinaryThreadTreeNode<T> = new BinaryThreadTreeNode<T>();
+            const node: BinaryThreadTreeNode<T> = new BinaryThreadTreeNode<T>();
             node.Data = data;
-            
+
             this._root = node;
             return this._root;
         }
@@ -141,14 +141,14 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
             return null;
         }
 
-        let nnode: BinaryThreadTreeNode<T> = new BinaryThreadTreeNode<T>();
+        const nnode: BinaryThreadTreeNode<T> = new BinaryThreadTreeNode<T>();
         nnode.Data = data;
         if (parNode.Left === null) {
             parNode.Left = nnode;
-        } else if(parNode.Right === null) {
+        } else if (parNode.Right === null) {
             parNode.Right = nnode;
         }
-        
+
         return nnode;
     }
 
@@ -157,8 +157,8 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
             return null;
         }
 
-        let arNodes: Array<BinaryThreadTreeNode<T>> = this.PreorderTraversal();
-        for(let nod of arNodes) {
+        const arNodes: Array<BinaryThreadTreeNode<T>> = this.PreorderTraversal();
+        for (const nod of arNodes) {
             if (nod.Data === elem) {
                 return nod;
             }

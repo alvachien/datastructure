@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaselineDemoComponent implements OnInit {
   name: string;
-  
+
   constructor() { }
 
   ngOnInit() {

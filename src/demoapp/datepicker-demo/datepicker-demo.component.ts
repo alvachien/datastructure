@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  moduleId: module.id, 
+  moduleId: module.id,
   selector: 'app-datepicker-demo',
   templateUrl: './datepicker-demo.component.html',
   styleUrls: ['./datepicker-demo.component.scss']

@@ -7,7 +7,7 @@
 
 /**
  * SparseMatrix: Matrix with lots of empty entities inside
- * 
+ *
  */
 
 

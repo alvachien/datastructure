@@ -7,7 +7,7 @@ import { IStack } from './IStack';
 
 export class LinkStackNode<T> {
     private _data: T;
-    private _next:LinkStackNode<T> = null;
+    private _next: LinkStackNode<T> = null;
 
     constructore() {
         this._next = null;
@@ -24,12 +24,12 @@ export class LinkStackNode<T> {
     }
     set Next(next: LinkStackNode<T>) {
         this._next = next;
-    }    
+    }
 }
 
 export class LinkStack<T> implements IStack<T> {
     private _head: LinkStackNode<T> = null;
-    private _length: number = 0;
+    private _length = 0;
 
     constructor() {
         //this._head = new LinkStackNode<T>();
@@ -50,7 +50,7 @@ export class LinkStack<T> implements IStack<T> {
             return true;
         }
 
-        let node: LinkStackNode<T> = new LinkStackNode<T>();
+        const node: LinkStackNode<T> = new LinkStackNode<T>();
         node.Next = this._head;
         this._head = node;
 
@@ -62,7 +62,7 @@ export class LinkStack<T> implements IStack<T> {
             return null;
         }
 
-        let pi : T = this._head.Data;
+        const pi : T = this._head.Data;
 
         this._head = this._head.Next;
 

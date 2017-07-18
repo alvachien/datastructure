@@ -6,10 +6,10 @@
 import { IList } from './IList';
 
 export class SequenceList<T> implements IList<T> {
-    constructor() {        
+    constructor() {
     }
 
-    private _data: T[] = [];    
+    private _data: T[] = [];
 
     public InitList() {
     }
@@ -35,11 +35,11 @@ export class SequenceList<T> implements IList<T> {
 
     public InsertElement(index: number, elem: T) : boolean {
         if (index < 0 || index >= this._data.length) {
-            return false;            
+            return false;
         }
 
         if (index < this._data.length) {
-            for(let i = this._data.length - 1; i >= index; i --) {
+            for (let i = this._data.length - 1; i >= index; i --) {
                 this._data[i + 1] = this._data[i];
             }
 
@@ -55,12 +55,12 @@ export class SequenceList<T> implements IList<T> {
 
     public DeleteElement(index: number): boolean {
         if (index < 0 || index >= this._data.length) {
-            return false;            
+            return false;
         }
 
         if (index < this._data.length - 1) {
-            for(let k = index; k < this._data.length; k++) {
-                this._data[k-1] = this._data[k];
+            for (let k = index; k < this._data.length; k++) {
+                this._data[k - 1] = this._data[k];
             }
         }
 
@@ -71,7 +71,7 @@ export class SequenceList<T> implements IList<T> {
     public Length(): number {
         return this._data.length;
     }
-    
+
     // public readonly [index: number] {
     //     return this.GetElement(index);
     // };
