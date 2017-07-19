@@ -4,17 +4,40 @@
  *
  * This file try to provide a set of algorithm
  * Including:
- * 1. KMP
- * 2. Sorting algorithms
- *  2.1 Insert sort
- *  2.2 Bubble sort
- *  2.3 Quick sort
- *  2.4 Selection sort
- *  2.5 Counting sort
- * 3. Others
+ * 1. Utility methods
+ *  1.1 Swap elements
+ * 2. KMP
+ * 3. Sorting algorithms
+ *  3.1 Insert sort
+ *  3.2 Bubble sort
+ *  3.3 Quick sort
+ *  3.4 Selection sort
+ *  3.5 Counting sort
+ *  3.6 Merge sort
+ *  3.7 Heap sort
+ * 4. Others
  *
  */
 
+/**
+ * SwapElement: Unitity method, used to swap two elements in an array
+ * @param datalist : data array
+ * @param i : index of the first element
+ * @param j : index of the second element
+ */
+export function SwapElement<T>(datalist: T[], i: number, j: number) {
+    if (datalist.length <= 0
+        || i === j
+        || i >= datalist.length
+        || j > datalist.length) {
+            return;
+        }
+    let tmp: T = datalist[i];
+    datalist[i] = datalist[j];
+    datalist[j] = tmp;
+}
+
+/* 1. KMP */
 function KMP_MakeNext(arr: string): number[] {
     let q = 0;
     let k = 0;
@@ -64,6 +87,8 @@ export function KMP(arr1: string, arr2: string): number | null {
 
     return null;
 }
+
+/* 2. Sorting */
 
 /**
  * Insertion sort: an in-place sorting
@@ -154,9 +179,7 @@ export function BubbleSort<T>(datalist: T[]): boolean {
     for (let i = 0; i < datalist.length - 1; i ++) {
         for (let j = 0; j < datalist.length - 1 - i; j ++) {
             if (datalist[j] > datalist[j + 1]) {
-                const tmp = datalist[j];
-                datalist[j] = datalist[j + 1];
-                datalist[j + 1] = tmp;
+                SwapElement(datalist, j, j + 1);
             }
         }
     }
@@ -221,9 +244,7 @@ export function SelectionSort<T>(datalist: T[]) {
         }
 
         if (min !== i) {
-            const tmp: T = datalist[min];
-            datalist[min] = datalist[i];
-            datalist[i] = tmp;
+            SwapElement(datalist, min, i);
         }
     }
 }
@@ -335,45 +356,44 @@ export function HeapSort<T>(datalist: T[]) {
     }
 }
 
-function Heapsort_Parent(i: number): number {
-    if (i === 0) {
-        return null;
-    }
-    if (i === 1) {
-        return 1;
-    }
-
-    return Math.floor((i - 1) / 2);
-}
 function Heapsort_LeftChild(i: number): number {
     return 2*i + 1;
 }
 function Heapsort_RightChild(i: number): number {
     return 2*i + 2;
 }
-function Heapsort_MaxHeapify<T>(datalist: T[], i: number) {
+function Heapsort_MaxHeapify<T>(datalist: T[], i: number, size: number) {
     const leftchild: number = Heapsort_LeftChild(i);
     const rightchild: number = Heapsort_RightChild(i);
-    let largest: number ;
-    if (leftchild < datalist.length && datalist[leftchild] > datalist[i]) {
+    let largest: number = 0;
+
+    if (leftchild <= size && datalist[leftchild] > datalist[i]) {
         largest = leftchild;
-    } else  {
+    } else {
         largest = i;
     }
-    if (rightchild < datalist.length && datalist[rightchild] > datalist[i]) {
+
+    if (leftchild <= size && datalist[leftchild] > datalist[largest]) {
+        largest = leftchild;
+    } else {
+        largest = i;
+    }
+
+    if (rightchild <= size && datalist[rightchild] > datalist[largest]) {
         largest = rightchild;
     }
 
-    if (largest !== i) {
-        let tmp = datalist[i];
-        datalist[i] = datalist[largest];
-        datalist[largest] = tmp;
-        Heapsort_MaxHeapify(datalist, largest);
-    }
-}
-function Heapsort_BuildMaxHeap<T>(datalist: T[]) {
-    for(let i = Math.floor(datalist.length / 2); i >= 0; i --) {
-        Heapsort_MaxHeapify(datalist, i);
-    }
-}
 
+    if (i <= Math.floor(size / 2)) {
+
+        if (largest !== i) {
+            SwapElement(datalist, i, largest);
+            Heapsort_MaxHeapify(datalist, largest, size);
+        }
+    }
+}
+function Heapsort_BuildMaxHeap<T>(datalist: T[], size: number) {
+    for(let i = Math.floor(size / 2); i >= 0; i --) {
+        Heapsort_MaxHeapify(datalist, i, size);
+    }
+}
