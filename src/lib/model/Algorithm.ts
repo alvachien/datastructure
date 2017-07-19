@@ -348,11 +348,11 @@ function MergeSortImpl2<T>(datalist: T[], begin: number, mid: number, end: numbe
 export function HeapSort<T>(datalist: T[]) {
     Heapsort_BuildMaxHeap(datalist);
 
+    let heapsize: number = datalist.length - 1;
     for(let i = datalist.length - 1; i >= 1; i --) {
-        let tmp = datalist[0];
-        datalist[0] = datalist[i];
-        datalist[i] = tmp;
-        
+        SwapElement(datalist, 0, i);
+        heapsize = heapsize - 1;
+        Heapsort_MaxHeapify(datalist, 0, heapsize);
     }
 }
 
@@ -373,27 +373,18 @@ function Heapsort_MaxHeapify<T>(datalist: T[], i: number, size: number) {
         largest = i;
     }
 
-    if (leftchild <= size && datalist[leftchild] > datalist[largest]) {
-        largest = leftchild;
-    } else {
-        largest = i;
-    }
-
     if (rightchild <= size && datalist[rightchild] > datalist[largest]) {
         largest = rightchild;
     }
 
-
-    if (i <= Math.floor(size / 2)) {
-
-        if (largest !== i) {
-            SwapElement(datalist, i, largest);
-            Heapsort_MaxHeapify(datalist, largest, size);
-        }
+    if (largest !== i) {
+        SwapElement(datalist, i, largest);
+        Heapsort_MaxHeapify(datalist, largest, size);
     }
 }
-function Heapsort_BuildMaxHeap<T>(datalist: T[], size: number) {
-    for(let i = Math.floor(size / 2); i >= 0; i --) {
-        Heapsort_MaxHeapify(datalist, i, size);
+function Heapsort_BuildMaxHeap<T>(datalist: T[]) {
+    const heapsize: number = datalist.length;
+    for(let i = Math.floor(heapsize / 2); i >= 0; i --) {
+        Heapsort_MaxHeapify(datalist, i, heapsize);
     }
 }

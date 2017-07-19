@@ -74,6 +74,30 @@ TBD.
 - The subject **MaximumSubArray** try to fetch out the maxium sub array from an existing array.
 - More to come.
 
+### PROGRESS
+The project is still on-going.
+
+No|Content|Status|Comment
+----:|:----|:-----|:-----
+1|Graph|Not started yet|
+2|Binary Search Tree|Not started yet|
+3|B Tree|Not started yet|
+4|Red Black Tree|Not started yet|
+5|Strassen Algorithm|Not started yet|
+6|Birthday Theory|Not started yet|
+7|Ball and Box|Not started yet|
+8|Hire on-line|Not started yet|
+9|Priority Queue|Not started yet|
+10|Hash algorithms|Not started yet|
+11|van Emde Boas Tree|Not started yet|
+12|Kruskal Algorithm|Not started yet|
+13|Prim Algorithm|Not started yet
+14|Bellman-Ford Algorithm|Not started yet|
+15|Dijkstra Algorithm|Not started yet|
+16|Floyd-Warshall Algorithm|Not started yet|
+17|Radix sort|Not started yet|
+18|Bucket sort|Not started yet|
+
 # AUTHOR
 **Alva Chien | 钱红俊**
 

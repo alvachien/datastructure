@@ -1,3 +1,7 @@
+/**
+ * MaximumSubArray.ts
+ * (C) Copyright, Alva Chien, 2017
+ */
 
 /**
  * MaximumSubArray: Find out the sub array which contains the maximum sum.
