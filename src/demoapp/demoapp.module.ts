@@ -60,6 +60,9 @@ import { PortalDemoComponent, ScienceJoke } from './portal-demo/portal-demo.comp
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
 import { SortalgorithmDemoComponent } from './sortalgorithm-demo/sortalgorithm-demo.component';
+import { ListDemoComponent } from './list-demo/list-demo.component';
+import { TreeDemoComponent } from './tree-demo/tree-demo.component';
+import { GraphDemoComponent } from './graph-demo/graph-demo.component';
 
 @NgModule({
   exports: [
@@ -127,6 +130,9 @@ export class DSMaterialModule { }
     SpagettiPanel,
     BinarytreeDemoComponent,
     SortalgorithmDemoComponent,
+    ListDemoComponent,
+    TreeDemoComponent,
+    GraphDemoComponent
   ],
   imports: [
     BrowserModule,

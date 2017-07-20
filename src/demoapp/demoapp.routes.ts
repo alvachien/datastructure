@@ -15,6 +15,9 @@ import { PortalDemoComponent } from './portal-demo/portal-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
 import { SortalgorithmDemoComponent } from './sortalgorithm-demo/sortalgorithm-demo.component';
+import { ListDemoComponent } from './list-demo/list-demo.component';
+import { TreeDemoComponent } from './tree-demo/tree-demo.component';
+import { GraphDemoComponent } from './graph-demo/graph-demo.component';
 
 export const MY_APP_ROUTES: Routes = [
   { path: '', component: Home },
@@ -33,5 +36,8 @@ export const MY_APP_ROUTES: Routes = [
   { path: 'tooltip', component: TooltipDemoComponent },
   { path: 'binarytree-demo', component: BinarytreeDemoComponent },
   { path: 'sortalg-demo', component: SortalgorithmDemoComponent },
+  { path: 'list-demo', component: ListDemoComponent },
+  { path: 'tree-demo', component: TreeDemoComponent },
+  { path: 'graph-demo', component: GraphDemoComponent },
 ];
 
