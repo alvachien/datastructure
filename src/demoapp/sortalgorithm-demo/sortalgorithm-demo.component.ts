@@ -9,8 +9,12 @@ import { MdSelectChange } from '@angular/material';
 })
 export class SortalgorithmDemoComponent implements OnInit {
 
-  DetailSteps: string;
+  AfterSort: string;
   currentAlgor: string;
+  maxnumber: number = 100;
+  BeforeSort: string;
+  arrayForSort: number[] = [];
+  tmeSpent: number = 0;
 
   algorithms = [
     { value: 'quicksort', viewValue: 'Quick Sort' },
@@ -27,41 +31,48 @@ export class SortalgorithmDemoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onCalc(): void {
-    // Generate the randomize numbers
-    const array1: number[] = [];
-    const maxamt = 5000;
+  onGenerate(): void {
+    if (this.maxnumber <= 1) {
+      return;
+    }
 
-    for (let i = 0; i < maxamt; i++) {
+    this.BeforeSort = "";
+    this.arrayForSort = [];
+    for (let i = 0; i < this.maxnumber; i++) {
       //parseInt(Math.random() * 1000, 10) + 1;
-      Math.floor(Math.random() * 10000) + 1;
-      array1.push(Math.ceil(Math.random() * 10000));
+      //Math.floor(Math.random() * 10000) + 1;
+      this.arrayForSort.push(Math.ceil(Math.random() * 2 * this.maxnumber));
     }
+    for (let i = 0; i < this.maxnumber; i++) {
+      this.BeforeSort += this.arrayForSort[i] + '; ';
+    }
+  }
 
-    this.DetailSteps = 'Random generated numbers: \n';
-    for (let i = 0; i < maxamt; i++) {
-      this.DetailSteps += array1[i] + ';';
+  onSort(): void {
+    if (this.arrayForSort.length <= 1) {
+      return;
     }
-    this.DetailSteps += '\n\n';
 
     // Sort use QuickSort
     const start = new Date().getTime();
     if (this.currentAlgor === 'quicksort') {
-      QuickSort(array1);
+      QuickSort(this.arrayForSort);
     } else if (this.currentAlgor === 'bubblesort') {
-      BubbleSort(array1);
+      BubbleSort(this.arrayForSort);
     } else if (this.currentAlgor === 'insertsort') {
-      InsertionSort(array1);
+      InsertionSort(this.arrayForSort);
     } else if (this.currentAlgor === 'mergesort') {
-      MergeSort(array1);
+      MergeSort(this.arrayForSort);
     } else if (this.currentAlgor === 'heapsort') {
-      HeapSort(array1);
+      HeapSort(this.arrayForSort);
     }
 
     const end = new Date().getTime();
-    this.DetailSteps += 'Sorted after Sort ' + (end - start).toString() + ' ms : \n';
-    for (let i = 0; i < maxamt; i++) {
-      this.DetailSteps += array1[i] + ';';
+    this.tmeSpent = (end - start);
+    //this.DetailSteps = 'Sorted after Sort ' + (end - start).toString() + ' ms : \n';
+    this.AfterSort = "";
+    for (let i = 0; i < this.maxnumber; i++) {
+      this.AfterSort += this.arrayForSort[i] + '; ';
     }
   }
 }

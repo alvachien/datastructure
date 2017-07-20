@@ -6,7 +6,7 @@ const changeDetectionKey = 'mdDemoChangeDetection';
   selector: 'home',
   template: `
     <p>Welcome to the Demo of Data Structure which written totally in TypeScript!</p>
-    <p>Open the sidenav to choose a demo.</p>
+    <p>Open the sidenav to choose a demo to continue.</p>
   `
 })
 export class Home { }
@@ -19,7 +19,6 @@ export class Home { }
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoAppOnPush { }
-
 
 @Component({
   selector: 'acds-root',
@@ -40,16 +39,8 @@ export class DemoAppComponent {
     { name: 'Chips', route: 'chips' },
     { name: 'Gestures', route: 'gestures' },
     { name: 'Grid List', route: 'grid-list' },
-    { name: 'Icon', route: 'icon' },
-    { name: 'List', route: 'list' },
-    { name: 'Menu', route: 'menu' },
     { name: 'Ripple', route: 'ripple' },
-    { name: 'Select', route: 'select' },
-    { name: 'Sidenav', route: 'sidenav' },
-    { name: 'Slider', route: 'slider' },
-    { name: 'Slide Toggle', route: 'slide-toggle' },
     { name: 'Snack Bar', route: 'snack-bar' },
-    { name: 'Tabs', route: 'tabs' },
   ];
   navUIItems = [
     { name: 'Baseline', route: 'baseline' },
@@ -64,7 +55,6 @@ export class DemoAppComponent {
     { name: 'Overlay', route: 'overlay' },
     { name: 'Portal', route: 'portal' },
     { name: 'Tooltip', route: 'tooltip' },
-
   ];
 
   constructor(private _element: ElementRef) {

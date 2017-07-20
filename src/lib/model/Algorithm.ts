@@ -4,7 +4,7 @@
  *
  * This file try to provide a set of algorithm
  * Including:
- * 1. Utility methods
+ * 1. Utility functions
  *  1.1 Swap elements
  * 2. KMP
  * 3. Sorting algorithms
@@ -19,6 +19,7 @@
  *
  */
 
+ /* 1. Utility functions */
 /**
  * SwapElement: Unitity method, used to swap two elements in an array
  * @param datalist : data array
@@ -37,7 +38,7 @@ export function SwapElement<T>(datalist: T[], i: number, j: number) {
     datalist[j] = tmp;
 }
 
-/* 1. KMP */
+/* 2. KMP */
 function KMP_MakeNext(arr: string): number[] {
     let q = 0;
     let k = 0;
