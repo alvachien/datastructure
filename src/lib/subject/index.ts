@@ -4,3 +4,5 @@
  */
 
 export * from './MaximumSubArray';
+export * from './PriorityQueue';
+
