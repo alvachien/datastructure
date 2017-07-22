@@ -63,6 +63,7 @@ import { SortalgorithmDemoComponent } from './sortalgorithm-demo/sortalgorithm-d
 import { ListDemoComponent } from './list-demo/list-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { GraphDemoComponent } from './graph-demo/graph-demo.component';
+import { D3Service } from 'd3-ng2-service'; // <-- import statement
 
 @NgModule({
   exports: [
@@ -145,7 +146,8 @@ export class DSMaterialModule { }
   ],
   providers: [
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    PeopleDatabase
+    PeopleDatabase,
+    D3Service
   ],
   entryComponents: [
     DemoAppComponent,
