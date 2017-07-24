@@ -100,7 +100,7 @@ No|Content|Status|Comment
 18|Bucket sort|Not started yet|
 
 # CONTRIBUTORS
-- **Alva Chien | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;
+- **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;
 
 # Licence
 MIT
