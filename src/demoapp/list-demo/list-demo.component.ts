@@ -11,5 +11,4 @@ export class ListDemoComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
