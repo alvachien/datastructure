@@ -1,6 +1,6 @@
 # TypeScript Library for Data Structure and Algorithm
 ## INTRODUCTION
-This project is all about building a lib for Data Structures and algorithms. 
+This project is all about building a library (abbrv: lib) for Data Structures and algorithms. 
 
 - The Data Structure part, including List, Tree, Graph, and others. 
 - The Algorithm part, including sorting, searching and others. 
@@ -49,8 +49,11 @@ TBD.
 
 ### GRAPH
 Interface **IGraph** defines the generic operations and attributes supported by Graph.
+Interface **IGraphVertex** defines the interface for Vertex in the graph.
+Interface **IGraphEdge** defines the interface for the Edge in the graph.
 
-TBD.
+- Class **Graph** defines the implementation for the Graph.
+- TBD.
 
 ### ALGORITHM
 - The algorithm **KMP** which offer the functionality to search source string from the target string.
@@ -79,7 +82,7 @@ The project is still on-going.
 
 No|Content|Status|Comment
 ----:|:----|:-----|:-----
-1|Graph|Not started yet|
+1|Graph|In Process|Question left: how to demonstrate the Graph for demo?
 2|Binary Search Tree|Not started yet|
 3|B Tree|Not started yet|
 4|Red Black Tree|Not started yet|
