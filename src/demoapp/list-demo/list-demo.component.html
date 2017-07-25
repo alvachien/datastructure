@@ -7,16 +7,39 @@
       <md-toolbar color="primary">Sequence List</md-toolbar>
       <md-card-content>
         <md-input-container class="demo-full-width">
-          <input mdInput type="number" placeholder="New element" [(ngModel)]="SeqListNumber" name="seqlistnum" required>
-          <md-error>This field is required</md-error>
-          <md-hint>Please type something here</md-hint>
+          <input mdInput type="number" placeholder="New item to add" [(ngModel)]="SeqListNumberToAdd" name="seqlistnum2add">
+          <md-hint>Please type a new number here</md-hint>
         </md-input-container>
+        <div class="button-row">
+          <button md-raised-button (click)="onSeqListAdd()">ADD TO LIST</button>
+        </div>
+        <md-table #table [dataSource]="sqlistDataSource">
+          <!-- ID Column -->
+          <ng-container cdkColumnDef="ID">
+            <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.ID}} </md-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container cdkColumnDef="Name">
+            <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.Name}} </md-cell>
+          </ng-container>
+
+          <!-- Detail Column -->
+          <ng-container cdkColumnDef="Detail">
+            <md-header-cell *cdkHeaderCellDef> Detail </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.Detail}} </md-cell>
+          </ng-container>
+
+          <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+          <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+        </md-table>
       </md-card-content>
-      <!-- MD-TABLE control here? -->
       <md-card-actions>
-        <button md-button (click)="onSeqListInit()">INITIALIZE</button>
-        <button md-button (click)="onSeqListAdd()">ADD</button>
-        <button md-button>RESET</button>
+        <button md-button [disabled]="sqlistIsInit" (click)="onSeqListInit()">INITIALIZE</button>
+        <button md-button (click)="onSeqListPrint()">PRINT</button>
+        <button md-button (click)="onSeqListReset()">RESET</button>
       </md-card-actions>
     </md-card>
   </md-tab>

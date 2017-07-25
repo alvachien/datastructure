@@ -44,5 +44,8 @@ export interface IList<T> {
      */
     ClearAll(): boolean;
 
-    //readonly [index: number]: T;
+    /**
+     * Print all elements
+     */
+    Print(): string;
 }

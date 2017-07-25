@@ -1,6 +1,6 @@
 # TypeScript Library for Data Structure and Algorithm
 ## INTRODUCTION
-This project is all about building a library (abbrv: lib) for Data Structures and algorithms. 
+This project is target to build a library (abbrv: lib) for Data Structures and algorithms. 
 
 - The Data Structure part, including List, Tree, Graph, and others. 
 - The Algorithm part, including sorting, searching and others. 
@@ -21,6 +21,7 @@ Folder **demoapp** (src\demoapp) contains a demo application which used to demon
 
 ### DEMO APP
 To run the demo app, you need download or clone this repository, and then run the following commands in sequence:
+- npm install -g @angular/cli
 - npm install
 - ng serve
 
@@ -73,6 +74,7 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **Matrix** defines the matrix object.
 - The subject **Polynomial** defines the polynomial object.
 - The subject **SparseMatrix** defines the Sparse Matrix object.
+- The subject **ChineseChessGeneralsProblem** defines the Generals issue in Chinese Chess.
 - More to come.
 
 ### PROGRESS

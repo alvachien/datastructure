@@ -1,6 +1,6 @@
 /**
  * SequenceList.ts
- * (C) Copyright, Alva Chien, 2017
+ * (C) Alva Chien, 2017
  */
 
 import { IList } from './IList';
@@ -12,6 +12,7 @@ export class SequenceList<T> implements IList<T> {
     private _data: T[] = [];
 
     public InitList() {
+        this._data = [];
     }
 
     public IsEmpty(): boolean {
@@ -72,7 +73,10 @@ export class SequenceList<T> implements IList<T> {
         return this._data.length;
     }
 
-    // public readonly [index: number] {
-    //     return this.GetElement(index);
-    // };
+    public Print(): string {
+        return this._data.toString();
+        // for(let idx = 0; idx <this._data.length; idx++) {
+
+        // }
+    }
 }
