@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoAppComponent, DemoAppOnPush, Home } from './demoapp.component';
 import { PeopleDatabase } from './table-demo/people-database';
-import { MY_APP_ROUTES } from './demoapp.routes';
+import { DemoAppRoutes } from './demoapp.routes';
 import {
   FullscreenOverlayContainer,
   MdAutocompleteModule,
@@ -139,7 +139,7 @@ export class DSMaterialModule { }
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(MY_APP_ROUTES),
+    RouterModule.forRoot(DemoAppRoutes),
     DSMaterialModule,
   ],
   providers: [

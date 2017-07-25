@@ -18,7 +18,7 @@ import { ListDemoComponent } from './list-demo/list-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { GraphDemoComponent } from './graph-demo/graph-demo.component';
 
-export const MY_APP_ROUTES: Routes = [
+export const DemoAppRoutes: Routes = [
   { path: '', component: Home },
   { path: 'kmp-demo', component: KmpDemoComponent },
   { path: 'baseline', component: BaselineDemoComponent },
