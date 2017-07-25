@@ -120,4 +120,9 @@ export class LinkList<T> implements IList<T> {
         this._length = 0;
         return true;
     }
+
+    public Print(): string {
+        // TBD
+        return "";
+    }
 }

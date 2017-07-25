@@ -6,13 +6,28 @@
     <md-card>
       <md-toolbar color="primary">Sequence List</md-toolbar>
       <md-card-content>
-        <md-input-container class="demo-full-width">
-          <input mdInput type="number" placeholder="New item to add" [(ngModel)]="SeqListNumberToAdd" name="seqlistnum2add">
-          <md-hint>Please type a new number here</md-hint>
-        </md-input-container>
-        <div class="button-row">
-          <button md-raised-button (click)="onSeqListAdd()">ADD TO LIST</button>
+        <div class="demo-full-width">
+          <md-input-container>
+            <input mdInput type="number" placeholder="New item to add" [(ngModel)]="SeqListNumberToAdd" name="seqlistnum2add">
+            <md-hint>Please type a new number here</md-hint>
+          </md-input-container>
+          <button md-raised-button (click)="onSeqListAppend()">APPEND TO LIST</button>
         </div>
+
+        <div class="demo-full-width">
+          <md-input-container>
+            <input mdInput type="number" placeholder="Position to insert" [(ngModel)]="SeqListPositionToInsert" name="seqlistpos2insert">
+            <md-hint>Please choose a position here</md-hint>
+          </md-input-container>
+          <md-input-container>
+            <input mdInput type="number" placeholder="New item to insert" [(ngModel)]="SeqListNumberToInsert" name="seqlistnum2insert">
+            <md-hint>Please type a new number here</md-hint>
+          </md-input-container>
+          <button md-raised-button (click)="onSeqListInsert()">INSERT INTO LIST</button>
+        </div>
+        
+        <hr />
+
         <md-table #table [dataSource]="sqlistDataSource">
           <!-- ID Column -->
           <ng-container cdkColumnDef="ID">
@@ -45,22 +60,60 @@
   </md-tab>
   <md-tab>
     <ng-template md-tab-label>
-      <md-icon>thumb_up</md-icon>Linked List
+      <md-icon>thumb_up</md-icon>Link List
     </ng-template>
     <md-card>
-      <md-toolbar color="primary">Linked List</md-toolbar>
+      <md-toolbar>Link List</md-toolbar>
       <md-card-content>
-        <form>
-          <md-input-container class="demo-full-width">
-            <input mdInput placeholder="Source String" [(ngModel)]="SourceString" name="sourcestr" required>
-            <md-error>This field is required</md-error>
-            <md-hint>Please type something here</md-hint>
+        <div class="demo-full-width">
+          <md-input-container>
+            <input mdInput type="number" placeholder="New item to add" [(ngModel)]="LinkListNumberToAdd" name="linklistnum2add">
+            <md-hint>Please type a new number here</md-hint>
           </md-input-container>
-        </form>
+          <button md-raised-button (click)="onLinkListAppend()">APPEND TO LIST</button>
+        </div>
+
+        <div class="demo-full-width">
+          <md-input-container>
+            <input mdInput type="number" placeholder="Position to insert" [(ngModel)]="LinkListPositionToInsert" name="linklistpos2insert">
+            <md-hint>Please choose a position here</md-hint>
+          </md-input-container>
+          <md-input-container>
+            <input mdInput type="number" placeholder="New item to insert" [(ngModel)]="LinkListNumberToInsert" name="linklistnum2insert">
+            <md-hint>Please type a new number here</md-hint>
+          </md-input-container>
+          <button md-raised-button (click)="onLinkListInsert()">INSERT INTO LIST</button>
+        </div>
+        
+        <hr />
+
+        <md-table #table [dataSource]="linklistDataSource">
+          <!-- ID Column -->
+          <ng-container cdkColumnDef="ID">
+            <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.ID}} </md-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container cdkColumnDef="Name">
+            <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.Name}} </md-cell>
+          </ng-container>
+
+          <!-- Detail Column -->
+          <ng-container cdkColumnDef="Detail">
+            <md-header-cell *cdkHeaderCellDef> Detail </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.Detail}} </md-cell>
+          </ng-container>
+
+          <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+          <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+        </md-table>
       </md-card-content>
       <md-card-actions>
-        <button md-button (click)="onCalc()">GO</button>
-        <button md-button>RESET</button>
+        <button md-button [disabled]="linklistIsInit" (click)="onLinkListInit()">INITIALIZE</button>
+        <button md-button (click)="onLinkListPrint()">PRINT</button>
+        <button md-button (click)="onLinkListReset()">RESET</button>
       </md-card-actions>
     </md-card>
   </md-tab>

@@ -106,5 +106,9 @@ export class StaticLinkList<T> implements IList<T> {
         return false;
     }
 
+    public Print(): string {
+        // TBD
+        return "";
+    }
 }
 

@@ -35,7 +35,8 @@ export class SequenceList<T> implements IList<T> {
     }
 
     public InsertElement(index: number, elem: T) : boolean {
-        if (index < 0 || index >= this._data.length) {
+        if (index < 0 || index >= this._data.length || index === undefined || index === null
+            || elem === undefined || elem === null) {
             return false;
         }
 
@@ -50,7 +51,7 @@ export class SequenceList<T> implements IList<T> {
         return true;
     }
 
-    public AppendElement(elem: T) : number {
+    public AppendElement(elem: T) : number {        
         return this._data.push(elem);
     }
 
