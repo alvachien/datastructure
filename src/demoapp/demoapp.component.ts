@@ -47,7 +47,6 @@ export class DemoAppComponent {
     { name: 'Style', route: 'style' },
     { name: 'Typography', route: 'typography' },
     { name: 'Autocomplete', route: 'autocomplete' },
-    { name: 'Datepicker', route: 'datepicker' },
     { name: 'Live Announcer', route: 'live-announcer' },
     { name: 'Overlay', route: 'overlay' },
     { name: 'Portal', route: 'portal' },

@@ -53,7 +53,6 @@ import { ContentElementDialog, DialogDemoComponent, IFrameDialog, JazzDialog } f
 import { StyleDemoComponent } from './style-demo/style-demo.component';
 import { TypographyDemoComponent } from './typography-demo/typography-demo.component';
 import { AutocompleteDemoComponent } from './autocomplete-demo/autocomplete-demo.component';
-import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
 import { LiveannouncerDemoComponent } from './liveannouncer-demo/liveannouncer-demo.component';
 import { OverlayDemoComponent, RotiniPanel, SpagettiPanel } from './overlay-demo/overlay-demo.component';
 import { PortalDemoComponent, ScienceJoke } from './portal-demo/portal-demo.component';
@@ -121,7 +120,6 @@ export class DSMaterialModule { }
     StyleDemoComponent,
     TypographyDemoComponent,
     AutocompleteDemoComponent,
-    DatepickerDemoComponent,
     LiveannouncerDemoComponent,
     OverlayDemoComponent,
     PortalDemoComponent,
