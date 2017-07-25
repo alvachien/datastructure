@@ -1,3 +1,33 @@
-<p>
-  subject-demo works!
-</p>
+<md-tab-group>
+  <md-tab>
+    <ng-template md-tab-label>
+      Chinese Chess <em>General Problem</em>
+    </ng-template>
+    <md-card>
+      <md-toolbar color="accent">Chinese Chess General Problem</md-toolbar>
+      <md-card-content>
+        <img src="./assets/chinesechess.jpg" />
+      </md-card-content>
+      <md-card-actions>
+        <button md-button [disabled]="sqlistIsInit" (click)="onSeqListInit()">INITIALIZE</button>
+        <button md-button (click)="onSeqListPrint()">PRINT</button>
+        <button md-button (click)="onSeqListReset()">RESET</button>
+      </md-card-actions>
+    </md-card>
+  </md-tab>
+  <md-tab>
+    <ng-template md-tab-label>
+      <md-icon>thumb_up</md-icon>Link List
+    </ng-template>
+    <md-card>
+      <md-toolbar>Link List</md-toolbar>
+      <md-card-content>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button [disabled]="sqlistIsInit" (click)="onSeqListInit()">INITIALIZE</button>
+        <button md-button (click)="onSeqListPrint()">PRINT</button>
+        <button md-button (click)="onSeqListReset()">RESET</button>
+      </md-card-actions>
+    </md-card>
+  </md-tab>
+</md-tab-group>

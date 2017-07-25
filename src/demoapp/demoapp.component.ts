@@ -4,10 +4,7 @@ const changeDetectionKey = 'mdDemoChangeDetection';
 
 @Component({
   selector: 'home',
-  template: `
-    <p>Welcome to the Demo of Data Structure which written totally in TypeScript!</p>
-    <p>Open the sidenav to choose a demo to continue.</p>
-  `
+  templateUrl: './demoapp.home.html'
 })
 export class Home { }
 
@@ -40,17 +37,7 @@ export class DemoAppComponent {
     { name: 'Graph Demo', route: 'graph-demo' },
   ];
   navUIItems = [
-    { name: 'Baseline', route: 'baseline' },
-    { name: 'Expansion Panel', route: 'expansion' },
-    { name: 'Table', route: 'table' },
-    { name: 'Dialog', route: 'dialog' },
-    { name: 'Style', route: 'style' },
-    { name: 'Typography', route: 'typography' },
-    { name: 'Autocomplete', route: 'autocomplete' },
-    { name: 'Live Announcer', route: 'live-announcer' },
-    { name: 'Overlay', route: 'overlay' },
-    { name: 'Portal', route: 'portal' },
-    { name: 'Tooltip', route: 'tooltip' },
+    { name: 'Subject Demo', route: 'subject-demo' },
   ];
 
   constructor(private _element: ElementRef) {

@@ -1,41 +1,21 @@
 import { Routes } from '@angular/router';
 import { Home } from './demoapp.component';
 import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
-import { ExpansionDemoComponent } from './expansion-demo/expansion-demo.component';
-import { BaselineDemoComponent } from './baseline-demo/baseline-demo.component';
-import { TableDemoComponent } from './table-demo/table-demo.component';
-import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
-import { StyleDemoComponent } from './style-demo/style-demo.component';
-import { TypographyDemoComponent } from './typography-demo/typography-demo.component';
-import { AutocompleteDemoComponent } from './autocomplete-demo/autocomplete-demo.component';
-import { LiveannouncerDemoComponent } from './liveannouncer-demo/liveannouncer-demo.component';
-import { OverlayDemoComponent } from './overlay-demo/overlay-demo.component';
-import { PortalDemoComponent } from './portal-demo/portal-demo.component';
-import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
 import { SortalgorithmDemoComponent } from './sortalgorithm-demo/sortalgorithm-demo.component';
 import { ListDemoComponent } from './list-demo/list-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { GraphDemoComponent } from './graph-demo/graph-demo.component';
+import { SubjectDemoComponent } from './subject-demo/subject-demo.component';
 
 export const DemoAppRoutes: Routes = [
   { path: '', component: Home },
   { path: 'kmp-demo', component: KmpDemoComponent },
-  { path: 'baseline', component: BaselineDemoComponent },
-  { path: 'expansion', component: ExpansionDemoComponent },
-  { path: 'table', component: TableDemoComponent },
-  { path: 'dialog', component: DialogDemoComponent },
-  { path: 'style', component: StyleDemoComponent },
-  { path: 'typography', component: TypographyDemoComponent },
-  { path: 'autocomplete', component: AutocompleteDemoComponent },
-  { path: 'live-announcer', component: LiveannouncerDemoComponent },
-  { path: 'overlay', component: OverlayDemoComponent },
-  { path: 'portal', component: PortalDemoComponent },
-  { path: 'tooltip', component: TooltipDemoComponent },
   { path: 'binarytree-demo', component: BinarytreeDemoComponent },
   { path: 'sortalg-demo', component: SortalgorithmDemoComponent },
   { path: 'list-demo', component: ListDemoComponent },
   { path: 'tree-demo', component: TreeDemoComponent },
   { path: 'graph-demo', component: GraphDemoComponent },
+  { path: 'subject-demo', component: SubjectDemoComponent },
 ];
 

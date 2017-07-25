@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoAppComponent, DemoAppOnPush, Home } from './demoapp.component';
-import { PeopleDatabase } from './table-demo/people-database';
 import { DemoAppRoutes } from './demoapp.routes';
 import {
   FullscreenOverlayContainer,
@@ -44,24 +43,13 @@ import {
   StyleModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk';
-import { TableHeaderDemo } from './table-demo/table-header-demo';
 import { KmpDemoComponent } from './kmp-demo/kmp-demo.component';
-import { ExpansionDemoComponent } from './expansion-demo/expansion-demo.component';
-import { BaselineDemoComponent } from './baseline-demo/baseline-demo.component';
-import { TableDemoComponent } from './table-demo/table-demo.component';
-import { ContentElementDialog, DialogDemoComponent, IFrameDialog, JazzDialog } from './dialog-demo/dialog-demo.component';
-import { StyleDemoComponent } from './style-demo/style-demo.component';
-import { TypographyDemoComponent } from './typography-demo/typography-demo.component';
-import { AutocompleteDemoComponent } from './autocomplete-demo/autocomplete-demo.component';
-import { LiveannouncerDemoComponent } from './liveannouncer-demo/liveannouncer-demo.component';
-import { OverlayDemoComponent, RotiniPanel, SpagettiPanel } from './overlay-demo/overlay-demo.component';
-import { PortalDemoComponent, ScienceJoke } from './portal-demo/portal-demo.component';
-import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { BinarytreeDemoComponent } from './binarytree-demo/binarytree-demo.component';
 import { SortalgorithmDemoComponent } from './sortalgorithm-demo/sortalgorithm-demo.component';
 import { ListDemoComponent } from './list-demo/list-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { GraphDemoComponent } from './graph-demo/graph-demo.component';
+import { SubjectDemoComponent } from './subject-demo/subject-demo.component';
 import { D3Service } from 'd3-ng2-service'; // <-- import statement
 
 @NgModule({
@@ -109,29 +97,12 @@ export class DSMaterialModule { }
     DemoAppOnPush,
     DemoAppComponent,
     KmpDemoComponent,
-    ExpansionDemoComponent,
-    BaselineDemoComponent,
-    TableDemoComponent,
-    TableHeaderDemo,
-    JazzDialog,
-    ContentElementDialog,
-    IFrameDialog,
-    DialogDemoComponent,
-    StyleDemoComponent,
-    TypographyDemoComponent,
-    AutocompleteDemoComponent,
-    LiveannouncerDemoComponent,
-    OverlayDemoComponent,
-    PortalDemoComponent,
-    TooltipDemoComponent,
-    RotiniPanel,
-    ScienceJoke,
-    SpagettiPanel,
     BinarytreeDemoComponent,
     SortalgorithmDemoComponent,
     ListDemoComponent,
     TreeDemoComponent,
-    GraphDemoComponent
+    GraphDemoComponent,
+    SubjectDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -144,17 +115,10 @@ export class DSMaterialModule { }
   ],
   providers: [
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    PeopleDatabase,
     D3Service
   ],
   entryComponents: [
     DemoAppComponent,
-    JazzDialog,
-    ContentElementDialog,
-    IFrameDialog,
-    RotiniPanel,
-    ScienceJoke,
-    SpagettiPanel,
   ]
   // bootstrap: [DemoAppComponent]
 })
