@@ -101,8 +101,21 @@ No|Content|Status|Comment
 17|Radix sort|Not started yet|
 18|Bucket sort|Not started yet|
 
+<<<<<<< HEAD
+# AUTHOR
+**Alva Chien | 钱红俊**
+**TEST PUSH**
+A programmer, and a certificated Advanced Photographer.  
+ 
+Contact me via:
+
+1. Mailbox: alvachien@163.com. Or,
+2. [Check my flickr](http://www.flickr.com/photos/alvachien). Or,
+3. [Visit my website](http://www.alvachien.com)
+=======
 # CONTRIBUTORS
 - **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;
+>>>>>>> 90cfba9c94c88e958ec3f1e44afbc3a24e4f2dd5
 
 # Licence
 MIT
