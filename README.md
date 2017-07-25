@@ -24,10 +24,7 @@ Folder **lib** (src\lib) contains several sub folders, and it has been exported 
 Folder **demoapp** (src\demoapp) contains a demo application which used to demonstrate the demos, it is a web app using [Angular Material](https://material.angular.io).
 
 ### DEMO APP
-To run the demo app, you need download or clone this repository, and then run the following commands in sequence:
-- npm install -g @angular/cli
-- npm install
-- ng serve
+Try the demo app online now via a single [click](https://alvachien.github.io/datastructure/).
 
 ### LIST
 Interface **IList** defines the generic operations supported by List.
