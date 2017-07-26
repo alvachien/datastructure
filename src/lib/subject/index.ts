@@ -9,4 +9,6 @@ export * from './PriorityQueue';
 export * from './Matrix';
 export * from './Polynomial';
 export * from './SparseMatrix';
+export * from './ChineseChessGeneralProblem';
+export * from './PanCakeSorting';
 

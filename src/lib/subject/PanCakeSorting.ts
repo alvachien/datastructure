@@ -1,0 +1,48 @@
+/**
+ * Pan Cake Sorting
+ * (C) Alva Chien, 2017
+ * 
+ */
+
+/**
+ * Desp:
+ * 把一摞大小不一的烙饼按顺序排好，大的在下面，小的在上面，要求只能用一只手去翻转烙饼位置，另一只手要端盘子，要求输出最优化的排序过程。
+ */
+
+function ArrayFlip<T>(arr: T[], i: number) {
+    let tmp: T;
+    let start: number = 0;
+
+    while (start < i) {
+        tmp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = tmp;
+
+        start++;
+        i--;
+    }
+}
+
+function FindMax<T>(arr: T[], n: number) {
+    let max: number;
+    let i: number = 0;
+
+    for (; i < n; i++) {
+        if (arr[i] > arr[max]) {
+            max = i;
+        }
+    }
+    return max;
+}
+
+export function PanCakeSorting<T>(arr: T[], n: number) {
+    for (let currsize = n; currsize > 1; --currsize) {
+        let max = FindMax(arr, currsize);
+
+        if (max !== currsize - 1) {
+            ArrayFlip(arr, max);
+            ArrayFlip(arr, currsize - 1);
+        }
+    }
+}
+
