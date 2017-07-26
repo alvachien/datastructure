@@ -1,6 +1,7 @@
 /**
+ * @license
  * ITree.ts
- * (C) Copyright, Alva Chien
+ * (C) Alva Chien, 2017
  *
  * This file provides a definition of tree.
  *

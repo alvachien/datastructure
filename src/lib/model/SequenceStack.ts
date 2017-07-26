@@ -1,6 +1,7 @@
 /**
+ * @license
  * SequenceStack.ts
- * (C) Copyright, Alva Chien, 2017
+ * (C) Alva Chien, 2017
  */
 
 import { IStack } from './IStack';

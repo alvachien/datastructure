@@ -1,6 +1,7 @@
 /**
+ * @license
  * IList.ts
- * (C) Copyright, Alva Chien, 2017
+ * (C) Alva Chien, 2017
  */
 
 export interface IList<T> {

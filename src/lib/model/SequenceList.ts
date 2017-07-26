@@ -1,4 +1,5 @@
 /**
+ * @license
  * SequenceList.ts
  * (C) Alva Chien, 2017
  */

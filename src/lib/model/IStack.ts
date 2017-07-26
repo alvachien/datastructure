@@ -1,6 +1,7 @@
 /**
+ * @license
  * IStack.ts
- * (C) Copyright, Alva Chien, 2017
+ * (C) Alva Chien, 2017
  */
 
 // Stack stands for LIFO

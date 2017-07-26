@@ -1,6 +1,7 @@
 /**
+ * @license
  * Polynomial.ts
- * (C) Copyright, Alva Chien, 2017
+ * (C) Alva Chien, 2017
  */
 
 import '../model';

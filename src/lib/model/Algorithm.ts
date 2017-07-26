@@ -1,6 +1,7 @@
 /**
+ * @license
  * Algorithm.ts
- * (C) Copyright, Alva Chien, 2017
+ * (C) Alva Chien, 2017
  *
  * This file try to provide a set of algorithm
  * Including:

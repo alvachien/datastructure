@@ -1,6 +1,7 @@
 /**
+ * @license
  * Matrix.ts
- * (C) Copyright, Alva Chien, 2017
+ * (C) Alva Chien, 2017
  */
 
 

@@ -1,6 +1,7 @@
 /**
- * IGraph.ts
- * (C) Copyright, Alva Chien, 2017
+ * @license
+ * Graph.ts
+ * (C) Alva Chien, 2017
  */
 
  import { IGraph, IGraphVertex, IGraphEdge } from './IGraph';
@@ -73,12 +74,124 @@ export class Graph<X, Y> implements IGraph<X, Y> {
     public EdgeNumber(): number {
         return this._edge.length;
     }
-
-    public DFS(): GraphVertex<X>[] {
-        return [];
+    /**
+     * Vertex
+     */
+    public Vertexs(): GraphVertex<X>[] {
+        return this._vertex;
     }
 
+    /**
+     * Edges
+     */
+    public Edges(): GraphEdge<Y>[] {
+        return this._edge;
+    }
+
+    /**
+     * Add Vertex
+     */
+    public AddVertex(data: X): number {
+        let nnode: GraphVertex<X> = new GraphVertex<X>();
+        nnode.Data = data;
+        if (this._vertex.length === 0) {
+            nnode.ID = 1;
+        } else {
+            let mid: number = 1;
+            for(let vex of this._vertex) {
+                if (mid < vex.ID) {
+                    mid = vex.ID;
+                }
+            }
+
+            nnode.ID = mid;
+        }
+
+        this._vertex.push(nnode);
+        return nnode.ID;
+    }
+
+    public AddEdge(frm: number, to: number, weight: Y): boolean {
+        // Check from and to
+        for(let vex of this._vertex) {
+            
+        }
+        // Check existence of the edge
+
+        // TBD
+
+
+        return false;
+    }
+
+    /**
+     * DFS
+     */
+    public DFS(): GraphVertex<X>[] {
+        if (this._vertex.length <= 0) {
+            return [];
+        }
+
+        let visited: number[] = [];
+        let rst: GraphVertex<X>[] = [];
+
+        for(let i: number = 0; i < this._vertex.length; i ++) { 
+            this.DFSImpl(this._vertex[i], visited, rst);
+        }
+
+        return rst;
+    }
+    private DFSImpl(vex: GraphVertex<X>, visited: number[], rst: GraphVertex<X>[]) {
+        let bvisited: boolean = false;
+        
+        for(let i: number = 0; i < visited.length; i ++) {
+            if (visited[i] === vex.ID) {
+                bvisited = true;
+                break;
+            }
+        }
+
+        if (!bvisited) {
+            rst.push(vex);
+        } else {
+            return;
+        }
+
+        for(let i:number = 0; i < this._edge.length; i++) {
+            if (this._edge[i].From === vex.ID) {
+                // Get the to
+                let tonode: GraphVertex<X> = null;
+                for(let j: number = 0; j < this._vertex.length; j++) {
+                    if (this._vertex[j].ID === this._edge[i].To) {
+                        tonode = this._vertex[j];
+                        break;
+                    }
+                }
+
+                this.DFSImpl(tonode, visited, rst);
+            } 
+            // Not necessary??
+            // else if (this._edge[i].To === vex.ID) {
+            //     // Get the to
+            //     let fromnode: GraphVertex<X> = null;
+            //     for(let j: number = 0; j < this._vertex.length; j++) {
+            //         if (this._vertex[j].ID === this._edge[i].From) {
+            //             fromnode = this._vertex[j];
+            //             break;
+            //         }
+            //     }
+
+            //     this.DFSImpl(fromnode, visited, rst);
+            // }
+        }
+    }
+
+    /**
+     * BFS
+     */
     public BFS(): GraphVertex<X>[] {
-        return [];        
+        if (this._vertex.length <= 0) {
+            return [];
+        }
     }
 }
