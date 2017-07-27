@@ -19,7 +19,7 @@ export interface IGraphEdge<T> {
 /**
  * Adjact list
  */
-export interface IGraphAdjaceList<T> {    
+export interface IGraphAdjaceListVertex<T> {    
 }
 
 /**

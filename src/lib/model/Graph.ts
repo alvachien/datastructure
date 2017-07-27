@@ -1,7 +1,10 @@
 /**
  * @license
+ * 
  * Graph.ts
  * (C) Alva Chien, 2017
+ * 
+ * Implements the graph with Adjacement Matrix.
  */
 
  import { IGraph, IGraphVertex, IGraphEdge } from './IGraph';

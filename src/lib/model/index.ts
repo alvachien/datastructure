@@ -27,6 +27,7 @@ export * from './HuffmanTree';
 // Graph
 export * from './IGraph';
 export * from './Graph';
+export * from './AdjListGraph';
 
 // Algorithm
 export * from './Algorithm';
