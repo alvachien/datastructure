@@ -46,3 +46,18 @@ export function PanCakeSorting<T>(arr: T[], n: number) {
     }
 }
 
+export class PanCakeAlgorithm {
+    private _cakecount: number;
+    private _maxswap: number;
+
+    constructor() {
+        this._cakecount = 0;
+        this._maxswap = 0;
+    }
+
+    private UpBound(cnt: number) : number {
+        return cnt * 2;
+    }
+
+    // TBD.
+}
