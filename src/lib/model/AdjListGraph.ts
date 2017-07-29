@@ -55,8 +55,28 @@ export class GraphAdjaceListVertex<X, Y> implements IGraphAdjaceListVertex<X> {
 }
 
 export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
-    private _vertex : GraphAdjaceListVertex<X, Y>;
+    private _vertex : GraphAdjaceListVertex<X, Y>[];
 
+    constructor() {
+        this._vertex = []; 
+    }
+
+    public VertexNumber(): number {
+        return this._vertex.length;
+    }
+
+    /**
+     * Edge number
+     */
+    public EdgeNumber(): number {
+        let en: number = 0;
+        for (let vtx of this._vertex) {
+            en += vtx.AdjaceList.Length();
+        }
+
+        return en;
+    }
+    
     /**
      * Vertex
      */

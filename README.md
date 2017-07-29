@@ -55,7 +55,8 @@ Interface **IGraphVertex** defines the interface for Vertex in the graph.
 
 Interface **IGraphEdge** defines the interface for the Edge in the graph.
 
-- Class **Graph** defines the implementation for the Graph.
+- Class **Graph** defines the implementation for the Graph with Adjace Matrix.
+- Class **GraphAdjaceList** defines the implementation for the Graph with Adjact List.
 - More to come.
 
 ### ALGORITHM
@@ -76,7 +77,8 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **Matrix** defines the matrix object.
 - The subject **Polynomial** defines the polynomial object.
 - The subject **SparseMatrix** defines the Sparse Matrix object.
-- The subject **ChineseChessGeneralsProblem** defines the Generals issue in Chinese Chess.
+- The subject **ChineseChessGeneralsProblem** provides several solutions to the Generals issue in Chinese Chess.
+- The subject **PanCakeSort** provides the solution to sort the pan cakes.
 - More to come.
 
 ### PROGRESS
