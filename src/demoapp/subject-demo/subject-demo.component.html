@@ -17,10 +17,25 @@
   </md-tab>
   <md-tab>
     <ng-template md-tab-label>
-      <md-icon>thumb_up</md-icon>Link List
+      Polynomial
     </ng-template>
     <md-card>
-      <md-toolbar>Link List</md-toolbar>
+      <md-toolbar>Polynomial</md-toolbar>
+      <md-card-content>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button [disabled]="sqlistIsInit" (click)="onSeqListInit()">INITIALIZE</button>
+        <button md-button (click)="onSeqListPrint()">PRINT</button>
+        <button md-button (click)="onSeqListReset()">RESET</button>
+      </md-card-actions>
+    </md-card>
+  </md-tab>
+  <md-tab>
+    <ng-template md-tab-label>
+      Pan Cake Sorting
+    </ng-template>
+    <md-card>
+      <md-toolbar>Pan Cake Sorting</md-toolbar>
       <md-card-content>
       </md-card-content>
       <md-card-actions>
