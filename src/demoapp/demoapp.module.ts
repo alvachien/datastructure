@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ApplicationRef, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,6 +52,8 @@ import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { GraphDemoComponent } from './graph-demo/graph-demo.component';
 import { SubjectDemoComponent } from './subject-demo/subject-demo.component';
 import { D3Service } from 'd3-ng2-service'; // <-- import statement
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   exports: [
@@ -91,6 +94,14 @@ import { D3Service } from 'd3-ng2-service'; // <-- import statement
 })
 export class DSMaterialModule { }
 
+// For translate
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+// export function createTranslateLoader(http: Http) {
+//   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+// }
+
 @NgModule({
   declarations: [
     Home,
@@ -112,10 +123,18 @@ export class DSMaterialModule { }
     ReactiveFormsModule,
     RouterModule.forRoot(DemoAppRoutes),
     DSMaterialModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    D3Service
+    D3Service,
   ],
   entryComponents: [
     DemoAppComponent,

@@ -1,0 +1,14 @@
+{
+    "Languages": {
+        "en": "英语",
+        "zh": "简体中文"
+    },
+    "Home": {
+        "AppTitle": "数据结构与算法",
+        "WelcomeTitle": "基于TypeScript的数据结构及算法的示例程序",
+        "WelcomeDetail": "打开侧边栏以选择一个示例程序。",
+
+        "HomePage": "起始页",
+        "CloseButton": "关闭"
+    }
+}

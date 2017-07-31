@@ -1,0 +1,14 @@
+{
+    "Languages": {
+        "en": "English",
+        "zh": "Simpliled Chinese"
+    },
+    "Home": {
+        "AppTitle": "Data Structure and Algorithm Demos",
+        "WelcomeTitle": "Welcome to the Demo of Data Structure and Algorithm which written totally in TypeScript!",
+        "WelcomeDetail": "Open the sidenav to choose a demo to continue.",
+
+        "HomePage": "Home",
+        "CloseButton": "CLOSE"
+    }
+}

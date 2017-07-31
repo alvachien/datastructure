@@ -11,7 +11,7 @@
         {{navItem.name}}
       </a>
     </md-nav-list>
-    <button md-button (click)="start.close()">CLOSE</button>
+    <button md-button (click)="start.close()">{{'Home.CloseButton' | translate}}</button>
   </md-sidenav>
 
   <div>
@@ -20,8 +20,13 @@
         <md-icon class="md-24">menu</md-icon>
       </button>
       <div class="demo-toolbar">
-        <h1>Data Structure and Algorithm Demos</h1>
+        <h1>{{'Home.AppTitle' | translate}}</h1>
         <div>
+          <md-select [(ngModel)]="selectedLanguage" (change)="onLanguageChange()" name="lang">
+            <md-option *ngFor="let lang of availableLanguages" [value]="lang.Value">
+              {{ lang.DisplayName | translate }}
+            </md-option>
+          </md-select>
           <button md-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
             <md-icon class="md-24">fullscreen</md-icon>
           </button>

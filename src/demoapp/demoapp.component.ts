@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 const changeDetectionKey = 'mdDemoChangeDetection';
 
@@ -27,8 +28,8 @@ export class DemoAppOnPush { }
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoAppComponent {
-  dark = false;
   changeDetectionStrategy: string;
+  selectedLanguage: string;
   navItems = [
     { name: 'KMP Demo', route: 'kmp-demo' },
     { name: 'Sorting Algorithm Demo', route: 'sortalg-demo' },
@@ -39,14 +40,23 @@ export class DemoAppComponent {
   navUIItems = [
     { name: 'Subject Demo', route: 'subject-demo' },
   ];
+  availableLanguages = [
+    { DisplayName: 'Languages.en', Value: 'en' },
+    { DisplayName: 'Languages.zh', Value: 'zh' }
+  ];
 
-  constructor(private _element: ElementRef) {
-    // Some browsers will throw when trying to access localStorage in incognito.
-    try {
-      this.changeDetectionStrategy = window.localStorage.getItem(changeDetectionKey) || 'Default';
-    } catch (error) {
-      console.error(error);
-    }
+  constructor(private _element: ElementRef,
+    private _translate: TranslateService) {
+      // Setup the translate
+      this.selectedLanguage = 'en';
+      this._translate.setDefaultLang('en');
+      this._translate.use(this.selectedLanguage);
+
+      try {
+        this.changeDetectionStrategy = window.localStorage.getItem(changeDetectionKey) || 'Default';
+      } catch (error) {
+        console.error(error);
+      }
   }
 
   toggleFullscreen() {
@@ -69,6 +79,12 @@ export class DemoAppComponent {
       window.location.reload();
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  onLanguageChange() {
+    if (this._translate.currentLang !== this.selectedLanguage) {
+      this._translate.use(this.selectedLanguage);
     }
   }
 }
