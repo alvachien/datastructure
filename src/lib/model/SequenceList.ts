@@ -53,6 +53,11 @@ export class SequenceList<T> implements IList<T> {
         return null;
     }
 
+    /**
+     * Insert the element at the specified index
+     * @param index Specified index for insert
+     * @param elem New element for insert
+     */
     public InsertElement(index: number, elem: T): boolean {
         if (index < 0 || index >= this._data.length || index === undefined || index === null
             || elem === undefined || elem === null) {
@@ -70,10 +75,18 @@ export class SequenceList<T> implements IList<T> {
         return true;
     }
 
+    /**
+     * Append the element to the list
+     * @param elem Element to append
+     */
     public AppendElement(elem: T): number {
         return this._data.push(elem);
     }
 
+    /**
+     * Delete the element from the list
+     * @param index Specified index
+     */
     public DeleteElement(index: number): boolean {
         if (index < 0 || index >= this._data.length) {
             return false;
@@ -90,13 +103,33 @@ export class SequenceList<T> implements IList<T> {
         return true;
     }
 
+    /**
+     * Length of the list
+     */
     public Length(): number {
         return this._data.length;
     }
 
+    /**
+     * Print out the whole list into string
+     */
     public Print(): string {
         return this._data.toString();
         // for(let idx = 0; idx <this._data.length; idx++) {
         // }
+    }
+
+    /**
+     * Check the specified value existed or not
+     * @param val Value for checking with existence
+     */
+    public IsExist(val: T): boolean {
+        for (let i: number = 0; i < this._data.length; i++) {
+            if (this._data[i] === val) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

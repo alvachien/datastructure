@@ -21,6 +21,11 @@ export class PolynomialTerm {
     private _coef: number;
     private _exp: number;
 
+    constructor() {
+        this._coef = 0;
+        this._exp = 0;
+    }
+
     get Coef(): number {
         return this._coef;
     }
@@ -47,6 +52,20 @@ export class Polynomial {
      */
     constructor() {
         this._term = new SequenceList<PolynomialTerm>();
+    }
+
+    /**
+     * Term length
+     */
+    public TermLength(): number {
+        return this._term.Length();
+    }
+
+    /**
+     * Terms
+     */
+    public Terms(): SequenceList<PolynomialTerm> {
+        return this._term;
     }
 
     /**
@@ -109,11 +128,45 @@ export class Polynomial {
     }
 
     /**
-     * Add two polynomials
+     * Add two polynomials, returns a new Polynomial
      * @param other polynomal which apply to addition
      */
     public Add(other: Polynomial): Polynomial {
-        return null;
+        if (other === null
+            || other === undefined
+            || other.TermLength() === 0)  {
+            return this;    
+        }
+
+        let othlen: number = other.TermLength();
+        let visoth: SequenceList<number> = new SequenceList<number>();
+        let rst: Polynomial = new Polynomial();
+        for (let i = 0; i < this._term.Length(); ++i) {
+            let elem = this._term.GetElement(i);
+            for(let j: number = 0; j < othlen; ++j) {
+                let elemj = other.Terms().GetElement(j);
+                if (elem.Exp === elemj.Exp) {
+                    if (elem.Coef + elemj.Coef !== 0) {
+                        // When the Coef's addition meets zero, 
+                        rst.NewTerm(elem.Coef + elemj.Coef, elem.Exp);
+                    }
+
+                    visoth.AppendElement(elem.Exp);
+                }
+            }
+        }
+        if (othlen > visoth.Length()) {
+            for(let j: number = 0; j < othlen; ++j) {
+                let elemj = other.Terms().GetElement(j);
+                if (visoth.IsExist(elemj.Exp)) {
+                    continue;
+                }
+
+                rst.NewTerm(elemj.Coef, elemj.Exp);
+            }            
+        }
+
+        return rst;
     }
 
     /**
@@ -128,8 +181,15 @@ export class Polynomial {
      * Eval will evaluate the whole polynomial when variable x contains value @param val
      * @param val The value of variable x
      */
-    public Eval(val: number) {
+    public Eval(val: number): number {
+        let rst: number = 0;
+        for (let i = 0; i < this._term.Length(); ++i) {
+            let elem = this._term.GetElement(i);
 
+            rst += elem.Coef * Math.pow(val, elem.Exp);
+        }
+
+        return rst;
     }
 
     /**
