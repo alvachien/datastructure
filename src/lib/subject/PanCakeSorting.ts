@@ -1,7 +1,7 @@
 /**
  * Pan Cake Sorting
  * (C) Alva Chien, 2017
- * 
+ *
  */
 
 /**
@@ -11,7 +11,7 @@
 
 function ArrayFlip<T>(arr: T[], i: number) {
     let tmp: T;
-    let start: number = 0;
+    let start = 0;
 
     while (start < i) {
         tmp = arr[start];
@@ -25,7 +25,7 @@ function ArrayFlip<T>(arr: T[], i: number) {
 
 function FindMax<T>(arr: T[], n: number) {
     let max: number;
-    let i: number = 0;
+    let i = 0;
 
     for (; i < n; i++) {
         if (arr[i] > arr[max]) {
@@ -37,7 +37,7 @@ function FindMax<T>(arr: T[], n: number) {
 
 export function PanCakeSorting<T>(arr: T[], n: number) {
     for (let currsize = n; currsize > 1; --currsize) {
-        let max = FindMax(arr, currsize);
+        const max = FindMax(arr, currsize);
 
         if (max !== currsize - 1) {
             ArrayFlip(arr, max);
@@ -55,7 +55,7 @@ export class PanCakeAlgorithm {
         this._maxswap = 0;
     }
 
-    private UpBound(cnt: number) : number {
+    private UpBound(cnt: number): number {
         return cnt * 2;
     }
 

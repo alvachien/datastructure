@@ -15,19 +15,19 @@ export class ListDemoComponent implements OnInit {
   linklistDataSource: ListOperateDataSource | null;
   displayedColumns = ['ID', 'Name', 'Detail'];
   sqlistObject = new SequenceList<number>();
-  sqlistIsInit: boolean = false;
-  sqlistID: number = 0;
+  sqlistIsInit = false;
+  sqlistID = 0;
   SeqListNumberToAdd: number;
   SeqListPositionToInsert: number;
   SeqListNumberToInsert: number;
   linklistObject = new LinkList<number>();
-  linklistIsInit: boolean = false;
-  linklistID: number = 0;
+  linklistIsInit = false;
+  linklistID = 0;
   LinkListNumberToAdd: number;
   LinkListPositionToInsert: number;
   LinkListNumberToInsert: number;
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit() {

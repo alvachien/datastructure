@@ -7,26 +7,44 @@
 import { IList } from './IList';
 
 export class SequenceList<T> implements IList<T> {
+    private _data: T[] = [];
+
+    /**
+     * Constructor
+     */
     constructor() {
     }
 
-    private _data: T[] = [];
-
+    /**
+     * Initialize the whole list
+     */
     public InitList() {
         this._data = [];
     }
 
+    /**
+     * Check the list is empty or not
+     */
     public IsEmpty(): boolean {
         return this._data.length === 0;
     }
 
+    /**
+     * Clean the whole list
+     */
     public ClearAll(): boolean {
         this._data = [];
         return true;
     }
 
+    /**
+     * Get the element at the specified index, return null if not found
+     * @param index index
+     */
     public GetElement(index: number): T | null {
-        if (this._data.length === 0) return null;
+        if (this._data.length === 0) {
+            return null;
+        }
 
         if (index >= 0 && index < this._data.length) {
             return this._data[index];
@@ -35,7 +53,7 @@ export class SequenceList<T> implements IList<T> {
         return null;
     }
 
-    public InsertElement(index: number, elem: T) : boolean {
+    public InsertElement(index: number, elem: T): boolean {
         if (index < 0 || index >= this._data.length || index === undefined || index === null
             || elem === undefined || elem === null) {
             return false;
@@ -52,7 +70,7 @@ export class SequenceList<T> implements IList<T> {
         return true;
     }
 
-    public AppendElement(elem: T) : number {        
+    public AppendElement(elem: T): number {
         return this._data.push(elem);
     }
 
@@ -71,6 +89,7 @@ export class SequenceList<T> implements IList<T> {
 
         return true;
     }
+
     public Length(): number {
         return this._data.length;
     }
@@ -78,7 +97,6 @@ export class SequenceList<T> implements IList<T> {
     public Print(): string {
         return this._data.toString();
         // for(let idx = 0; idx <this._data.length; idx++) {
-
         // }
     }
 }

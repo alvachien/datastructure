@@ -15,7 +15,7 @@ export class BinarytreeDemoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onCalc() : void {
+  onCalc(): void {
     const insTree: BinaryTree<number> = new BinaryTree<number>();
     insTree.InsertNode(null, 1);
     const lr1: BinaryTreeNode<number> = insTree.InsertNode(insTree.Root, 2);

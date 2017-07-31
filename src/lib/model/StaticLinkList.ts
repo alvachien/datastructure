@@ -6,6 +6,9 @@
 
 import { IList } from './IList';
 
+/**
+ * Node in static link list
+ */
 export class StaticLinkListNode<T> {
     private _data: T;
     private _cursor: number = -1;
@@ -29,11 +32,14 @@ export class StaticLinkListNode<T> {
 }
 
 export class StaticLinkList<T> implements IList<T> {
+    private _data: Array<StaticLinkListNode<T>>;
+
+    /**
+     * Constructor
+     */
     constructor() {
         this._data = new Array<StaticLinkListNode<T>>(200);
     }
-
-    private _data: Array<StaticLinkListNode<T>>;
 
     public Length(): number {
         let j = 0;
@@ -60,7 +66,9 @@ export class StaticLinkList<T> implements IList<T> {
     }
 
     public GetElement(index: number): T | null {
-        if (this._data.length === 0) return null;
+        if (this._data.length === 0) {
+            return null;
+        }
 
         // if (index >= 0 && index < this._data.length) {
         //     return this._data[index];
@@ -109,7 +117,7 @@ export class StaticLinkList<T> implements IList<T> {
 
     public Print(): string {
         // TBD
-        return "";
+        return '';
     }
 }
 

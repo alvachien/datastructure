@@ -26,7 +26,7 @@ export interface IList<T> {
      * @param index zero-based position.
      * @param elem the element to be inserted.
      */
-    InsertElement(index: number, elem: T) : boolean;
+    InsertElement(index: number, elem: T): boolean;
 
     /**
      * Append the element to the tail of the list, returns the new length of the whole list

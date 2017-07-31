@@ -1,16 +1,16 @@
 /**
  * Chinese Chess General Problem
  * (C) Alva Chien, 2017
- * 
+ *
  */
 
  /**
   * Desp:
-  * 
+  *
   */
 export function CCGP_Solution2(): string[] {
-    let total: number = 81;
-    let rst: string[] = [];
+    let total = 81;
+    const rst: string[] = [];
 
     while (total--) {
         if (total / 9 % 3 === total % 9 / 3) {
@@ -24,9 +24,9 @@ export function CCGP_Solution2(): string[] {
 }
 
 export function CCGP_Solution3(): string[] {
-    let rst: string[] = [];
-    for(let a = 1; a <= 9; a++) {
-        for(let b = 1; b <= 9; b++) {
+    const rst: string[] = [];
+    for (let a = 1; a <= 9; a++) {
+        for (let b = 1; b <= 9; b++) {
             if (a % 3 === b % 3) {
                 rst.push(`A = ${ a }, B = ${ b}`);
             }

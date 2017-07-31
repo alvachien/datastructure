@@ -1,11 +1,11 @@
 /**
  * @license
- * 
+ *
  * Graph.ts
  * (C) Alva Chien, 2017
- * 
+ *
  * Implements the graph with Adjacement List.
- * 
+ *
  */
 
 import { IGraph, IGraphVertex, IGraphEdge, IGraphAdjaceListVertex } from './IGraph';
@@ -58,7 +58,7 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     private _vertex : GraphAdjaceListVertex<X, Y>[];
 
     constructor() {
-        this._vertex = []; 
+        this._vertex = [];
     }
 
     public VertexNumber(): number {
@@ -69,14 +69,14 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
      * Edge number
      */
     public EdgeNumber(): number {
-        let en: number = 0;
-        for (let vtx of this._vertex) {
+        let en = 0;
+        for (const vtx of this._vertex) {
             en += vtx.AdjaceList.Length();
         }
 
         return en;
     }
-    
+
     /**
      * Vertex
      */

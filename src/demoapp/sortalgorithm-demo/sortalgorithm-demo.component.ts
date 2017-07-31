@@ -11,10 +11,10 @@ export class SortalgorithmDemoComponent implements OnInit {
 
   AfterSort: string;
   currentAlgor: string;
-  maxnumber: number = 100;
+  maxnumber = 100;
   BeforeSort: string;
   arrayForSort: number[] = [];
-  tmeSpent: number = 0;
+  tmeSpent = 0;
 
   algorithms = [
     { value: 'quicksort', viewValue: 'Quick Sort' },
@@ -36,11 +36,11 @@ export class SortalgorithmDemoComponent implements OnInit {
       return;
     }
 
-    this.BeforeSort = "";
+    this.BeforeSort = '';
     this.arrayForSort = [];
     for (let i = 0; i < this.maxnumber; i++) {
-      //parseInt(Math.random() * 1000, 10) + 1;
-      //Math.floor(Math.random() * 10000) + 1;
+      // parseInt(Math.random() * 1000, 10) + 1;
+      // Math.floor(Math.random() * 10000) + 1;
       this.arrayForSort.push(Math.ceil(Math.random() * 2 * this.maxnumber));
     }
     for (let i = 0; i < this.maxnumber; i++) {
@@ -69,8 +69,8 @@ export class SortalgorithmDemoComponent implements OnInit {
 
     const end = new Date().getTime();
     this.tmeSpent = (end - start);
-    //this.DetailSteps = 'Sorted after Sort ' + (end - start).toString() + ' ms : \n';
-    this.AfterSort = "";
+    // this.DetailSteps = 'Sorted after Sort ' + (end - start).toString() + ' ms : \n';
+    this.AfterSort = '';
     for (let i = 0; i < this.maxnumber; i++) {
       this.AfterSort += this.arrayForSort[i] + '; ';
     }

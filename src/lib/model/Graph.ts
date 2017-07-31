@@ -1,9 +1,9 @@
 /**
  * @license
- * 
+ *
  * Graph.ts
  * (C) Alva Chien, 2017
- * 
+ *
  * Implements the graph with Adjacement Matrix.
  */
 
@@ -95,13 +95,13 @@ export class Graph<X, Y> implements IGraph<X, Y> {
      * Add Vertex
      */
     public AddVertex(data: X): number {
-        let nnode: GraphVertex<X> = new GraphVertex<X>();
+        const nnode: GraphVertex<X> = new GraphVertex<X>();
         nnode.Data = data;
         if (this._vertex.length === 0) {
             nnode.ID = 1;
         } else {
-            let mid: number = 1;
-            for(let vex of this._vertex) {
+            let mid = 1;
+            for (const vex of this._vertex) {
                 if (mid < vex.ID) {
                     mid = vex.ID;
                 }
@@ -116,8 +116,8 @@ export class Graph<X, Y> implements IGraph<X, Y> {
 
     public AddEdge(frm: number, to: number, weight: Y): boolean {
         // Check from and to
-        for(let vex of this._vertex) {
-            
+        for (const vex of this._vertex) {
+
         }
         // Check existence of the edge
 
@@ -135,19 +135,19 @@ export class Graph<X, Y> implements IGraph<X, Y> {
             return [];
         }
 
-        let visited: number[] = [];
-        let rst: GraphVertex<X>[] = [];
+        const visited: number[] = [];
+        const rst: GraphVertex<X>[] = [];
 
-        for(let i: number = 0; i < this._vertex.length; i ++) { 
+        for (let i = 0; i < this._vertex.length; i ++) {
             this.DFSImpl(this._vertex[i], visited, rst);
         }
 
         return rst;
     }
     private DFSImpl(vex: GraphVertex<X>, visited: number[], rst: GraphVertex<X>[]) {
-        let bvisited: boolean = false;
-        
-        for(let i: number = 0; i < visited.length; i ++) {
+        let bvisited = false;
+
+        for (let i = 0; i < visited.length; i ++) {
             if (visited[i] === vex.ID) {
                 bvisited = true;
                 break;
@@ -160,11 +160,11 @@ export class Graph<X, Y> implements IGraph<X, Y> {
             return;
         }
 
-        for(let i:number = 0; i < this._edge.length; i++) {
+        for (let i = 0; i < this._edge.length; i++) {
             if (this._edge[i].From === vex.ID) {
                 // Get the to
                 let tonode: GraphVertex<X> = null;
-                for(let j: number = 0; j < this._vertex.length; j++) {
+                for (let j = 0; j < this._vertex.length; j++) {
                     if (this._vertex[j].ID === this._edge[i].To) {
                         tonode = this._vertex[j];
                         break;
@@ -172,7 +172,7 @@ export class Graph<X, Y> implements IGraph<X, Y> {
                 }
 
                 this.DFSImpl(tonode, visited, rst);
-            } 
+            }
             // Not necessary??
             // else if (this._edge[i].To === vex.ID) {
             //     // Get the to

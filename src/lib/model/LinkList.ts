@@ -6,10 +6,16 @@
 
 import { IList } from './IList';
 
+/**
+ * Node in Link list
+ */
 export class LinkListNode<T> {
     private _data: T;
     private _next: LinkListNode<T> = null;
 
+    /**
+     * Constructor
+     */
     constructore() {
         this._next = null;
     }
@@ -28,10 +34,16 @@ export class LinkListNode<T> {
     }
 }
 
+/**
+ * Link list
+ */
 export class LinkList<T> implements IList<T> {
     private _head: LinkListNode<T> = null;
     private _length = 0;
 
+    /**
+     * Constructor
+     */
     constructor() {
         this._head = new LinkListNode<T>();
     }
@@ -48,8 +60,10 @@ export class LinkList<T> implements IList<T> {
         if (this._length === 0
             || this._head === null
             || index < 0
-            || index >= this._length)
+            || index >= this._length) {
             return null;
+        }
+
 
         let cur = this._head;
         for (let i = 0; i < index; i ++) {
@@ -62,8 +76,12 @@ export class LinkList<T> implements IList<T> {
     }
 
     public InsertElement(index: number, elem: T): boolean {
-        if (index < 0 || index > this._length) return false;
-        if (elem === null) return false;
+        if (index < 0 || index > this._length) {
+            return false;
+        }
+        if (elem === null) {
+            return false;
+        }
 
         let cur: LinkListNode<T> = this._head;
         const i = 0;
@@ -96,7 +114,9 @@ export class LinkList<T> implements IList<T> {
     }
 
     public DeleteElement(index: number): boolean {
-        if (index < 0 || index > this._length) return false;
+        if (index < 0 || index > this._length) {
+            return false;
+        }
 
         let cur: LinkListNode<T> = this._head;
         if (index === 0) {
@@ -124,6 +144,6 @@ export class LinkList<T> implements IList<T> {
 
     public Print(): string {
         // TBD
-        return "";
+        return '';
     }
 }

@@ -19,7 +19,7 @@ export interface IGraphEdge<T> {
 /**
  * Adjact list
  */
-export interface IGraphAdjaceListVertex<T> {    
+export interface IGraphAdjaceListVertex<T> {
 }
 
 /**
@@ -49,6 +49,6 @@ export interface IGraph<X, Y> {
     /**
      * BFS: Breadth First Search
      */
-    BFS(): IGraphVertex<Y>[];    
+    BFS(): IGraphVertex<Y>[];
 }
 

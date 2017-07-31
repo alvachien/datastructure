@@ -53,11 +53,11 @@ export class Polynomial {
      * Get Coef of specified exp
      * @param e specified exp
      */
-    public Coef(e: number) : number | null {
-        for(let i: number = 0; i < this._term.Length(); ++i) {
+    public Coef(e: number): number | null {
+        for (let i = 0; i < this._term.Length(); ++i) {
             if (this._term.GetElement(i).Exp === e) {
                 return this._term.GetElement(i).Coef;
-            } 
+            }
         }
         return null;
     }
@@ -70,9 +70,9 @@ export class Polynomial {
             return 0;
         }
 
-        let exp: number = 0;
-        for(let i: number = 0; i < this._term.Length(); ++i) {
-            let texp = this._term.GetElement(i).Exp; 
+        let exp = 0;
+        for (let i = 0; i < this._term.Length(); ++i) {
+            const texp = this._term.GetElement(i).Exp;
             if (exp < texp) {
                 exp = texp;
             }
@@ -82,25 +82,25 @@ export class Polynomial {
     }
 
     /**
-     * Reset 
+     * Reset
      */
     public Reset(): void {
         this._term.ClearAll();
     }
 
     /**
-     * Add a new term to the polynomial, return false when failed, for instance, the 
+     * Add a new term to the polynomial, return false when failed, for instance, the
      * @param coef The value of Coef
      * @param exp The value of Exp
      */
     public NewTerm(coef: number, exp: number): boolean {
-        for(let i: number = 0; i < this._term.Length(); ++i) {
+        for (let i = 0; i < this._term.Length(); ++i) {
             if (this._term.GetElement(i).Exp === exp) {
                 return false;
-            } 
+            }
         }
 
-        let pt: PolynomialTerm = new PolynomialTerm();
+        const pt: PolynomialTerm = new PolynomialTerm();
         pt.Coef = coef;
         pt.Exp = Math.floor(exp); // Ensure the exp is not a floor
         this._term.AppendElement(pt);

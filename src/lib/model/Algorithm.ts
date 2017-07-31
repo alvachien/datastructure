@@ -34,7 +34,7 @@ export function SwapElement<T>(datalist: T[], i: number, j: number) {
         || j > datalist.length) {
             return;
         }
-    let tmp: T = datalist[i];
+    const tmp: T = datalist[i];
     datalist[i] = datalist[j];
     datalist[j] = tmp;
 }
@@ -332,8 +332,7 @@ function MergeSortImpl2<T>(datalist: T[], begin: number, mid: number, end: numbe
         for (let i = 0; i < (rsize - rnow); i++) {
             datalist[begin + idx + i] = arRight[rnow + i];
         }
-    }
-    else if (rnow === rsize && lnow !== lsize) {
+    } else if (rnow === rsize && lnow !== lsize) {
         for (let i = 0; i < (lsize - lnow); i++) {
             datalist[begin + idx + i] = arLeft[lnow + i];
         }
@@ -351,7 +350,7 @@ export function HeapSort<T>(datalist: T[]) {
     Heapsort_BuildMaxHeap(datalist);
 
     let heapsize: number = datalist.length - 1;
-    for(let i = datalist.length - 1; i >= 1; i --) {
+    for (let i = datalist.length - 1; i >= 1; i --) {
         SwapElement(datalist, 0, i);
         heapsize = heapsize - 1;
         Heapsort_MaxHeapify(datalist, 0, heapsize);
@@ -359,15 +358,15 @@ export function HeapSort<T>(datalist: T[]) {
 }
 
 function Heapsort_LeftChild(i: number): number {
-    return 2*i + 1;
+    return 2 * i + 1;
 }
 function Heapsort_RightChild(i: number): number {
-    return 2*i + 2;
+    return 2 * i + 2;
 }
 function Heapsort_MaxHeapify<T>(datalist: T[], i: number, size: number) {
     const leftchild: number = Heapsort_LeftChild(i);
     const rightchild: number = Heapsort_RightChild(i);
-    let largest: number = 0;
+    let largest = 0;
 
     if (leftchild <= size && datalist[leftchild] > datalist[i]) {
         largest = leftchild;
@@ -386,7 +385,7 @@ function Heapsort_MaxHeapify<T>(datalist: T[], i: number, size: number) {
 }
 function Heapsort_BuildMaxHeap<T>(datalist: T[]) {
     const heapsize: number = datalist.length;
-    for(let i = Math.floor(heapsize / 2); i >= 0; i --) {
+    for (let i = Math.floor(heapsize / 2); i >= 0; i --) {
         Heapsort_MaxHeapify(datalist, i, heapsize);
     }
 }

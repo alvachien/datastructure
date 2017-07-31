@@ -49,11 +49,11 @@ export class SparseMatrix<T> {
         this._listTerms = new SequenceList<Trituple<T>>();
     }
 
-    public Transpose() : SparseMatrix<T> {
+    public Transpose(): SparseMatrix<T> {
         return null;
     }
 
-    public Add(other: SparseMatrix<T>) : SparseMatrix<T> {
+    public Add(other: SparseMatrix<T>): SparseMatrix<T> {
         return null;
     }
 
@@ -61,5 +61,4 @@ export class SparseMatrix<T> {
         return null;
     }
 }
-
 
