@@ -21,9 +21,32 @@
     <md-card>
       <md-toolbar>Polynomial</md-toolbar>
       <md-card-content>
+        <div class="demo-full-width" *ngFor="let pds of PolynomialDisplayStrings">
+          <span [innerHtml]='pds'></span>
+        </div>
+        
+        <!-- New term -->
+        <div class="demo-full-width">
+          <md-input-container>
+            <input mdInput type="number" placeholder="Coef" [(ngModel)]="polAddCoef" name="polAddCoef">
+          </md-input-container>
+          <md-input-container>
+            <input mdInput type="number" placeholder="Exp" [(ngModel)]="polAddExp" name="polAddExp">
+          </md-input-container>
+          <button md-raised-button (click)="OnPolynomialNewTerm()">NEW TERM</button>
+        </div>
+
+        <!-- Eval -->
+        <div class="demo-full-width">
+          <md-input-container>
+            <input mdInput type="number" placeholder="Value of Variable" [(ngModel)]="polEval" name="polEval">
+          </md-input-container>
+          <button md-raised-button (click)="OnPolynomialEval()">EVAL</button>
+        </div>
       </md-card-content>
+      
       <md-card-actions>
-        <button md-button >PRINT</button>
+        <button md-button (click)="OnPolynomialRandomGenerate()">INITIALIZE WITH RANDOMIZE</button>
         <button md-button>RESET</button>
       </md-card-actions>
     </md-card>

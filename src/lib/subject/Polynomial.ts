@@ -4,7 +4,7 @@
  * (C) Alva Chien, 2017
  */
 
-import { SequenceList } from '../model';
+import { SequenceList, QuickSort } from '../model';
 
 /**
  * Polynomial 多项式
@@ -193,9 +193,44 @@ export class Polynomial {
     }
 
     /**
-     * Print a readable string, for example: 4x^3- x^2+x-1
+     * Print a readable string, in HTML5 format 
+     * In HTML5, <SUP>2</SUP> can be used for exp
+     * And similiar, <SUB>2</SUB> use for sub.
+     * For example: 4x^3- x^2+x-1, prints 4x<sup>3</sup>-x<sup>2</sup>+x-1
      */
     public Print(): string {
-        return '';
+        const supbgn: string = '<sup>';
+        const supend: string = '</sup>';
+
+        let arexp: number[] = [];
+        for (let i:number = 0; i < this._term.Length(); ++i) {
+            arexp.push(this._term.GetElement(i).Exp);
+        }
+        if (arexp.length === 0) {
+            return '';
+        }
+
+        // Need sort the exp
+        QuickSort(arexp);
+
+        let rst: string = '';
+        let bfirst: boolean = false;
+        for(let i:number = arexp.length - 1; i >= 0; --i) {
+            for(let j: number = 0; j < this._term.Length(); j++) {
+                if (this._term.GetElement(j).Exp === arexp[i]) {
+                    if (!bfirst) {
+                        bfirst = true;
+                    } else {
+                        rst += '+';
+                    }
+                    rst += this._term.GetElement(j).Coef.toString();
+                    if (j !== 0)  {
+                        rst += 'X' + supbgn + j.toFixed() + supend;
+                    }
+                }
+            }
+        }
+        
+        return rst;
     }
 }
