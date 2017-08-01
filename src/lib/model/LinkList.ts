@@ -84,9 +84,9 @@ export class LinkList<T> implements IList<T> {
         }
 
         let cur: LinkListNode<T> = this._head;
-        const i = 0;
-        while (cur != null && i < index) {
-            cur = cur.Next;
+        let i: number = 0;
+        while (cur !== null && i++ < index) {
+            cur = cur.Next;            
         }
 
         const nnode: LinkListNode<T> = new LinkListNode<T>();
@@ -100,7 +100,7 @@ export class LinkList<T> implements IList<T> {
 
     public AppendElement(elem: T) : number {
         let cur: LinkListNode<T> = this._head;
-        while (cur !== null) {
+        while (cur.Next !== null) {
             cur = cur.Next;
         }
 

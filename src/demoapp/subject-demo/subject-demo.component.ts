@@ -56,6 +56,6 @@ export class SubjectDemoComponent implements OnInit {
   }
   public OnPolynomialEval(): void {
     let rst: number = this._polynomial.Eval(this.polEval);
-    this.PolynomialDisplayStrings.push(this._polynomial.Print() + ' = ' + rst.toString());
+    this.PolynomialDisplayStrings.push(this._polynomial.Print() + ' = ' + rst.toString() + ' when x = ' + this.polEval.toString());
   }
 }
