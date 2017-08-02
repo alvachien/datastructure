@@ -126,7 +126,7 @@ export class Polynomial {
 
         const pt: PolynomialTerm = new PolynomialTerm();
         pt.Coef = coef;
-        pt.Exp = Math.floor(exp); // Ensure the exp is not a floor
+        pt.Exp = Math.round(exp); // Ensure the exp is not a floor
         this._term.AppendElement(pt);
 
         return true;
@@ -153,7 +153,7 @@ export class Polynomial {
                 if (elem.Exp === elemj.Exp) {
                     if (elem.Coef + elemj.Coef !== 0) {
                         // When the Coef's addition meets zero,
-                        rst.NewTerm(elem.Coef + elemj.Coef, elem.Exp);
+                        rst.NewTerm(Math.round(elem.Coef + elemj.Coef), elem.Exp);
                     }
 
                     visoth.AppendElement(elem.Exp);
@@ -191,7 +191,7 @@ export class Polynomial {
             let subitem: Polynomial = new Polynomial();
             for(let j = 0; j < other.TermLength(); ++j) {
                 const elem2 = other.Terms().GetElement(j);
-                subitem.NewTerm(elem.Coef * elem2.Coef, elem.Exp * elem2.Exp);
+                subitem.NewTerm(Math.round(elem.Coef * elem2.Coef), Math.round(elem.Exp + elem2.Exp));
             }
 
             if (rst === null) {
@@ -251,8 +251,8 @@ export class Polynomial {
                         rst += '+';
                     }
                     rst += this._term.GetElement(j).Coef.toString();
-                    if (j !== 0)  {
-                        rst += 'X' + supbgn + j.toFixed() + supend;
+                    if (arexp[i] !== 0)  {
+                        rst += 'X' + supbgn + arexp[i].toString() + supend;
                     }
                 }
             }

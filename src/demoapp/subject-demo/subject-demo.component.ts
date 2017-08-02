@@ -21,7 +21,7 @@ export class SubjectDemoComponent implements OnInit {
   /**
    * Polynomial part
    */
-  private _polynomial: Polynomial;
+  _polynomial: Polynomial;
   PolynomialDisplayStrings: string[];
   polAddCoef: number;
   polAddExp: number;
@@ -31,8 +31,8 @@ export class SubjectDemoComponent implements OnInit {
   private _polForAdd: Polynomial;
   private _polForMultiply: Polynomial;
 
-  constructor() {
-    this._polynomial = new Polynomial();
+  constructor() {    
+    this._polynomial = null;
     this.PolynomialDisplayStrings = [];
     this.polAddCoef = 0;
     this.polAddExp = 0;
@@ -50,7 +50,7 @@ export class SubjectDemoComponent implements OnInit {
    * Polynomial part
    */
   public OnPolynomialRandomGenerate(): void {
-    this._polynomial.Reset();
+    this._polynomial = new Polynomial();
     this.PolynomialDisplayStrings = [];
 
     const nterms: number = Math.floor(Math.random() * 10) + 1;
@@ -102,5 +102,16 @@ export class SubjectDemoComponent implements OnInit {
       const rst = this._polynomial.Multiply(this._polForMultiply);
       this.PolynomialDisplayStrings.push(rst.Print());
     }
+  }
+  public OnPolynomialRetset(): void {
+    this._polynomial = null;
+    this.PolynomialDisplayStrings = [];
+    this.polAddCoef = 0;
+    this.polAddExp = 0;
+    this.polEval = 0;
+    this.polNewForAdd = '';
+    this.polNewForMultiply = '';
+    this._polForAdd = null;
+    this._polForMultiply = null;
   }
 }

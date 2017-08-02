@@ -60,8 +60,8 @@
       </md-card-content>
       
       <md-card-actions>
-        <button md-button (click)="OnPolynomialRandomGenerate()">INITIALIZE WITH RANDOMIZE</button>
-        <button md-button>RESET</button>
+        <button md-button (click)="OnPolynomialRandomGenerate()" [disabled]="_polynomial === null">INITIALIZE WITH RANDOMIZE</button>
+        <button md-button (click)="OnPolynomialRetset()" [disabled]="_polynomial !== null">RESET</button>
       </md-card-actions>
     </md-card>
   </md-tab>
