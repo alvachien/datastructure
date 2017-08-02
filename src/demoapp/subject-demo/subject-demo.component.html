@@ -43,6 +43,20 @@
           </md-input-container>
           <button md-raised-button (click)="OnPolynomialEval()">EVAL</button>
         </div>
+
+        <!-- Add -->
+        <div class="demo-full-width">
+          <span [innerHtml]='polNewForAdd'></span>
+          <button md-raised-button (click)="OnPolynomialNewForAddRandom()">NEW RANDOM</button>
+          <button md-raised-button (click)="OnPolynomialAdd()" [disabled]="polNewForAdd === null || polNewForAdd.length <= 0">ADD</button>
+        </div>
+
+        <!-- Multiply -->
+        <div class="demo-full-width">
+          <span [innerHtml]='polNewForMultiply'></span>
+          <button md-raised-button (click)="OnPolynomialNewForMultiplyRandom()">NEW RANDOM</button>
+          <button md-raised-button (click)="OnPolynomialMultiply()" [disabled]="polNewForMultiply === null || polNewForMultiply.length <= 0">MULTIPLY</button>
+        </div>
       </md-card-content>
       
       <md-card-actions>

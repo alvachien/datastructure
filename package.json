@@ -1,7 +1,16 @@
 {
   "name": "datastructure",
   "version": "0.2.0",
+  "homepage": "https://github.com/alvachien/datastructure",
+  "bugs": "https://github.com/alvachien/datastructure/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alvachien/datastructure.git"
+  },
   "license": "MIT",
+  "engines": {
+    "node": ">= 5.4.1 < 7"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +19,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^4.3.2",
     "@angular/cdk": "^2.0.0-beta.8",

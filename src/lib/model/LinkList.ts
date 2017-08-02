@@ -84,9 +84,9 @@ export class LinkList<T> implements IList<T> {
         }
 
         let cur: LinkListNode<T> = this._head;
-        let i: number = 0;
+        let i = 0;
         while (cur !== null && i++ < index) {
-            cur = cur.Next;            
+            cur = cur.Next;
         }
 
         const nnode: LinkListNode<T> = new LinkListNode<T>();

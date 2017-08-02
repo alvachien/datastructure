@@ -124,12 +124,12 @@ export class SequenceList<T> implements IList<T> {
      * @param val Value for checking with existence
      */
     public IsExist(val: T): boolean {
-        for (let i: number = 0; i < this._data.length; i++) {
+        for (let i = 0; i < this._data.length; i++) {
             if (this._data[i] === val) {
                 return true;
             }
         }
-        
+
         return false;
     }
 }
