@@ -70,12 +70,57 @@ export class SparseMatrix<T> {
         return this._listTerms;
     }
     
+    /**
+     * Rows
+     */
+    get Row(): number {
+        return this._maxrow;
+    }
+
+    /**
+     * Columns
+     */
+    get Column(): number {
+        return this._maxcol;
+    }
+
+    /**
+     * Retrieve an element at specified row and specified column
+     * @param row Specified row
+     * @param col Specified column
+     */
+    public GetElement(row: number, col: number): T | null {
+        if (row <= 0 || row > this._maxrow
+            || col <= 0 || col > this._maxcol) {
+            return null;
+        }
+
+        for(let i: number = 0; i < this._listTerms.Length(); i++) {
+            if (row === this._listTerms.GetElement(i).Row
+                && col === this._listTerms.GetElement(i).Column) {
+                return this._listTerms.GetElement(i).Value;
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Transpose
      */
     public Transpose(): SparseMatrix<T> {
-        return null;
+        let sm: SparseMatrix<T> = new SparseMatrix<T>(this._maxcol, this._maxrow);
+
+        for(let i = 0; i < this._listTerms.Length(); i++) {
+            let it2: Trituple<T> = new Trituple<T>();
+            let it = this._listTerms.GetElement(i);
+            it2.Column = it.Row;
+            it2.Row = it.Column;
+            it2.Value = it.Value;
+            sm.Terms.AppendElement(it2);
+        }
+
+        return sm;
     }
 
     /**
@@ -90,7 +135,7 @@ export class SparseMatrix<T> {
      * Multipy another matrix
      * @param other matrix which used to multiply
      */
-    public Multiply(other: SparseMatrix<T>): SparseMatrix<T> {
+    public Multiply(other: number | SparseMatrix<T>): SparseMatrix<T> {
         return null;
     }
 }

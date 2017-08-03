@@ -1,7 +1,11 @@
 /**
  * @license
- * Algorithm.ts
- * (C) Alva Chien, 2017
+ * (C) Alva Chien, 2017. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
+ *
+ * File: Algorithm.ts
  *
  * This file try to provide a set of algorithm
  * Including:
