@@ -84,6 +84,15 @@ export class SparseMatrix<T> {
         return this._maxcol;
     }
 
+    get Rows(): SequenceList<number> {
+        let sl: SequenceList<number> = new SequenceList<number>();
+        for(let i: number = 0; i < this._maxrow; i ++) {
+
+        }
+        
+        return sl;
+    }
+
     /**
      * Retrieve an element at specified row and specified column
      * @param row Specified row
@@ -103,6 +112,53 @@ export class SparseMatrix<T> {
         }
 
         return null;
+    }
+
+    /**
+     * Check whether the element of specified row and column exist or not
+     * @param row Specified row
+     * @param col Specified column
+     */
+    public IsExist(row: number, col: number): boolean {
+        if (row <= 0 || row > this._maxrow
+            || col <= 0 || col > this._maxcol) {
+            throw new Error('Invalid input');
+        }
+
+        for(let i: number = 0; i < this._listTerms.Length(); i++) {
+            if (row === this._listTerms.GetElement(i).Row
+                && col === this._listTerms.GetElement(i).Column) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Insert an element, return true if succeed
+     * @param row Specified row
+     * @param col Specified column 
+     * @param val Value
+     */
+    public InsertElement(row: number, col: number, val: T): boolean {
+        try {
+            if (this.IsExist(row, col)) {
+                return false;
+            } else {
+                let nt: Trituple<T> = new Trituple<T>();
+                // Try the destructure, failed!!!
+                //let { nt.Row, nt.Column, nt.Value } = {row, col, val};
+                nt.Row = row;
+                nt.Column = col;
+                nt.Value = val;
+                this._listTerms.AppendElement(nt);
+
+                return true;
+            }
+        } catch(exp) {
+            throw exp;
+        }
     }
 
     /**
