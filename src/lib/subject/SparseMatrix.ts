@@ -84,15 +84,38 @@ export class SparseMatrix<T> {
         return this._maxcol;
     }
 
+    /**
+     * Returns the list of actual rows
+     */
     get Rows(): SequenceList<number> {
         let sl: SequenceList<number> = new SequenceList<number>();
-        for(let i: number = 0; i < this._maxrow; i ++) {
 
+        for(let i: number = 0; i < this._listTerms.Length(); i ++) {
+            const elem = this._listTerms.GetElement(i);
+            if (!sl.IsExist(elem.Row)) {
+                sl.AppendElement(elem.Row);
+            }
         }
         
         return sl;
     }
 
+    /**
+     * Returns the list of actual column
+     */
+    get Columns(): SequenceList<number> {
+        let sl: SequenceList<number> = new SequenceList<number>();
+
+        for(let i: number = 0; i < this._listTerms.Length(); i ++) {
+            const elem = this._listTerms.GetElement(i);
+            if (!sl.IsExist(elem.Column)) {
+                sl.AppendElement(elem.Column);
+            }
+        }
+        
+        return sl;
+    }
+    
     /**
      * Retrieve an element at specified row and specified column
      * @param row Specified row
