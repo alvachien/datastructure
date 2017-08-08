@@ -9,6 +9,31 @@
         "WelcomeDetail": "Open the sidenav to choose a demo to continue.",
 
         "HomePage": "Home",
-        "CloseButton": "CLOSE"
+        "TimeSpent": "Time spent(s)",
+        "CloseButton": "CLOSE",
+        "SortButton": "SORT",
+        "ResetButton": "RESET"
+    },
+    "DataStructure": {
+        "DataStructure": "Data Structure",
+        "List": "List",
+        "SequenceList": "SequenceList",
+        "LinkList": "Link List",
+        "Tree": "Tree",
+        "BinaryTree": "Binary Tree",
+        "Graph": "Graph"
+    },
+    "Algorithm": {
+        "Algorithm": "Algorithm",
+        "SortingAlgorithm": "Sorting Algorithm",
+        "InsertionSort": "Insertion Sort",
+        "QuickSort": "Quick Sort",
+        "BubbleSort": "Bubbule Sort"
+    },
+    "Subject": {
+        "Subject": "Subject",
+        "Polynomial": "Polynomial",
+        "Matrix": "Matrix",
+        "SparseMatrix": "SparseMatrix"
     }
 }

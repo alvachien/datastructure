@@ -1,5 +1,5 @@
 <md-card class="demo-kmp demo-basic">
-  <md-toolbar color="primary">Sorting Algorithm Demo</md-toolbar>
+  <md-toolbar color="primary">{{'Algorithm.SortingAlgorithm' | translate}} Demo</md-toolbar>
   <md-card-content>
     <md-input-container class="demo-full-width">
       <input mdInput type="number" required placeholder="Maximum numbers" [(ngModel)]="maxnumber" name="maxnbr">
@@ -7,7 +7,7 @@
     <md-input-container class="demo-full-width">
       <textarea mdInput placeholder="Before Sort" readonly [value]="BeforeSort" name="bfsrt" rows="10"></textarea>
     </md-input-container>
-    <md-select placeholder="Sorting Algorithm" [(ngModel)]="currentAlgor" required
+    <md-select placeholder="{{'Algorithm.SortingAlgorithm' | translate}}" [(ngModel)]="currentAlgor" required
        #algControl="ngModel">
       <md-option>None</md-option>
       <md-option *ngFor="let alg of algorithms" [value]="alg.value">
@@ -15,7 +15,7 @@
       </md-option>
     </md-select>
     <md-input-container class="demo-full-width">
-      <input mdInput type="number" readonly placeholder="Time spent" [value]="tmeSpent" name="tmSpent">
+      <input mdInput type="number" readonly placeholder="{{'Home.TimeSpent' | translate}}" [value]="tmeSpent" name="tmSpent">
     </md-input-container>
     <p>
       <md-input-container class="demo-full-width">
@@ -25,7 +25,7 @@
   </md-card-content>
   <md-card-actions>
     <button md-button (click)="onGenerate()" [disabled]="maxnumber <= 1">GENERATE RADOMS</button>
-    <button md-button (click)="onSort()" [disabled]="arrayForSort.length <= 1">SORT</button>
-    <button md-button>RESET</button>
+    <button md-button (click)="onSort()" [disabled]="arrayForSort.length <= 1">{{'Home.SortButton' | translate}}</button>
+    <button md-button>{{'Home.RESET' | translate}}</button>
   </md-card-actions>
 </md-card>
