@@ -9,6 +9,9 @@
  *
  */
 
+// Iterator
+export * from './IIterator';
+
 // Link
 export * from './IList';
 export * from './SequenceList';
