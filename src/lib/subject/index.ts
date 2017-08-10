@@ -15,4 +15,5 @@ export * from './Polynomial';
 export * from './SparseMatrix';
 export * from './ChineseChessGeneralProblem';
 export * from './PanCakeSorting';
+export * from './Formula';
 

@@ -87,6 +87,7 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **SparseMatrix** defines the Sparse Matrix object.
 - The subject **ChineseChessGeneralsProblem** provides several solutions to the Generals issue in Chinese Chess.
 - The subject **PanCakeSort** provides the solution to sort the pan cakes.
+- The subject **Formula** provides the defintion of the formula.
 - More to come.
 
 ### PROGRESS
@@ -112,6 +113,7 @@ No|Content|Status|Comment
 16|Floyd-Warshall Algorithm|Not started yet|
 17|Radix sort|Not started yet|
 18|Bucket sort|Not started yet|
+19|Formula|In Process||
 
 # CONTRIBUTORS
 - **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;
