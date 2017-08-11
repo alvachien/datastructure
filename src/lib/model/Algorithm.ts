@@ -262,24 +262,38 @@ export function SelectionSort<T>(datalist: T[]) {
  *
  * The idea behind is, build an array for all possible values, the element of the list are map to that huge array with correct position.
  */
-export function CountingSort(datalist: number[], max: number) {
+export function CountingSort(datalist: number[]){
     const tmp: number[] = [];
     const out: number[] = [];
 
-    for (let i = 0; i < max; i ++) {
+    //Get min and max number in array
+    let max = datalist[0];
+    let min = max;
+    for(let i = 1; i < datalist.length; i++){
+        if( datalist[i] > max ){
+            max = datalist[i];
+        }
+        if( datalist[i] < min ){
+            min = datalist[i];
+        }
+    }
+
+    //Generate tmp[]
+    for (let i = 0; i < max - min + 1; i ++) {
         tmp.push(0);
     }
+
     for (let i = 0; i < datalist.length; i ++) {
-        tmp[datalist[i]] += 1;
+        tmp[datalist[i]-min] += 1;
         out.push(0);
     }
 
-    for (let i = 1; i < max; i ++) {
+    for (let i = 1; i < max - min + 1; i ++) {
         tmp[i] = tmp[i - 1] + tmp[i];
     }
     for (let i = datalist.length - 1; i >= 0; i --) {
-        out[tmp[datalist[i]] - 1] = datalist[i];
-        tmp[datalist[i]] --;
+        out[tmp[datalist[i]-min] - 1] = datalist[i];
+        tmp[datalist[i]-min] --;
     }
 
     for (let i = 0; i < datalist.length; i ++) {

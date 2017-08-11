@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MergeSort, QuickSort, BubbleSort, InsertionSort, HeapSort } from '../../lib/model';
+import { MergeSort, QuickSort, BubbleSort, InsertionSort, HeapSort, CountingSort } from '../../lib/model';
 import { MdSelectChange } from '@angular/material';
 
 @Component({
@@ -22,6 +22,7 @@ export class SortalgorithmDemoComponent implements OnInit {
     { value: 'insertsort', viewValue: 'Insert Sort' },
     { value: 'mergesort', viewValue: 'Merge Sort' },
     { value: 'heapsort', viewValue: 'Heap Sort' },
+    { value: 'countsort', viewValue: 'Count Sort'},
   ];
 
   constructor() {
@@ -65,6 +66,8 @@ export class SortalgorithmDemoComponent implements OnInit {
       MergeSort(this.arrayForSort);
     } else if (this.currentAlgor === 'heapsort') {
       HeapSort(this.arrayForSort);
+    } else if (this.currentAlgor === 'countsort') {
+      CountingSort(this.arrayForSort);
     }
 
     const end = new Date().getTime();
