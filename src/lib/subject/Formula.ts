@@ -95,6 +95,24 @@ export enum FormulaTokenEnum {
     PI = 21,   // PI
 }
 
+export class FormulaToken {
+    private _tokenEnum: FormulaTokenEnum;
+    get TokenEnum(): FormulaTokenEnum {
+        return this._tokenEnum;
+    } 
+    set TokenEnum(te: FormulaTokenEnum) {
+        this._tokenEnum = te;
+    }
+
+    private _varName: string;
+    get VariableName(): string {
+        return this._varName;
+    }
+    set VariableName(vn: string) {
+        this._varName = vn;
+    }
+}
+
 export class FormulaParser {
     private _orgInput: string;
 
@@ -102,6 +120,10 @@ export class FormulaParser {
     }
 
     public init(input: string) {
+        if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
+            return;
+        }
+        
         this._orgInput = input;
     }
 
@@ -110,7 +132,7 @@ export class FormulaParser {
             return;
         }
 
-        // let st: SequenceStack<any> = new SequenceStack<any>();
+        let st: SequenceStack<any> = new SequenceStack<any>();
         // for(let i: number = 0; i < this._orgInput.length; i ++) {
         //     if ( (this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
         //         || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z') ) {
