@@ -10,7 +10,7 @@
  *
  */
 
-import { SequenceStack } from '../model';
+import { SequenceStack, SequenceList } from '../model';
 
 export enum FormulaOperatorEnum {
     Add = 0,
@@ -133,6 +133,7 @@ export class FormulaParser {
         }
 
         let st: SequenceStack<any> = new SequenceStack<any>();
+        let listVar: SequenceList<string> = new SequenceList<string>();
         // for(let i: number = 0; i < this._orgInput.length; i ++) {
         //     if ( (this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
         //         || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z') ) {
@@ -163,7 +164,21 @@ export class FormulaParser {
                     ch = this._orgInput[p++];
                 }
                 let nvar = this._orgInput.substr(m, ch - m - 1);
+
                 // Check new variable is a keyword
+                for(let wi: number = 0; wi < FormulaKeyword.length; wi++) {
+                    if (nvar === FormulaKeyword[wi]) {
+                        if (wi === 0) { 
+                            // PI
+                            // Todo!
+                            break;
+                        } else if (wi === 1) {
+                            // power
+                            // Todo!
+                            break;
+                        }
+                    }
+                }
                 // Todo
 
                 // p--;
