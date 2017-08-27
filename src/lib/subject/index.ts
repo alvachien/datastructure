@@ -16,4 +16,5 @@ export * from './SparseMatrix';
 export * from './ChineseChessGeneralProblem';
 export * from './PanCakeSorting';
 export * from './Formula';
+export * from './rpn'; 
 
