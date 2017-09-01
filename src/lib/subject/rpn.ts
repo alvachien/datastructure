@@ -69,7 +69,10 @@ export function RPNGetOperatorResult(x: number, y: number, operator: any): numbe
 /**
  * Workout the result for string with RPN format
  * @param strinputs String with RPN format, like '34+', it returns 7
- * Note: it doesn't support ( and ), and it won't care of priority, for instance: '34+5*' will get 35 not 23 (3+4*5=23)
+ * Note: 
+ * 1) it only accept the inputs with PRN format; and 
+ * 2) it doesn't support '(' and ')', and 
+ * 3) it won't care of priority, for instance: '34+5*' will get 35 not 23 (3+4*5=23)
  */
 export function rpn1(strinputs: string) {
     if (strinputs.length === 0) {
@@ -118,10 +121,20 @@ export class RPN {
         return this._arInputs;
     }
 
+    constructor(){        
+    }
+
+    /**
+     * Save to string
+     */
     public toString(): string {
         return this._arInputs.join(' ');
     }
 
+    /**
+     * Build the express to PRN format
+     * @param exp Express string, like 3*(4+5)
+     */
     public buildExpress(exp: string) {
 
         let skOp = new Array();
@@ -182,6 +195,9 @@ export class RPN {
         return this._arInputs.toString();
     }
 
+    /**
+     * Workout the final result
+     */
     public WorkoutResult(): number {
         let stack = new Array();
         let result = 0;
@@ -199,6 +215,52 @@ export class RPN {
             }
         }
         return result;
+    }
+
+    // integer 
+    // fraction
+    // decimal fraction
+    public VerifyResult(allowNegative: boolean, allowDecimal: boolean): boolean {
+        let stack = new Array();
+        let result = 0;
+
+        for (let i = 0; i < this._arInputs.length; i++) {
+            let c = this._arInputs[i];
+
+            if (!Number.isNaN(+c)) {
+                stack.push(c);
+            }
+
+            else if (c === '+' || c === '-' || c === '*' || c === '/') {                
+                let nextNum = parseFloat(stack.pop());
+                if (!Number.isInteger(nextNum) && !allowDecimal) {
+                    return false;
+                }
+                if (nextNum < 0 && !allowNegative) {
+                    return false;
+                }
+
+                let prevNum = parseFloat(stack.pop());
+                if (!Number.isInteger(prevNum) && !allowDecimal) {
+                    return false;
+                }
+                if (prevNum < 0 && !allowNegative) {
+                    return false;
+                }
+
+                result = RPNGetOperatorResult(prevNum, nextNum, c);
+                if (!Number.isInteger(result) && !allowDecimal) {
+                    return false;
+                }
+                if (result < 0 && !allowNegative) {
+                    return false;
+                }
+
+                stack.push(result);
+            }
+        }
+
+        return true;
     }
 }
 
