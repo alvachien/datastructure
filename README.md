@@ -26,6 +26,12 @@ The library in the project actually based the understanding when learning the bo
 ## CONTENT
 Folder **lib** (src\lib) contains the kernel part of the whole library. It consists with several sub folders, and it has been exported via index.ts respectively.
 
+### UNIT TEST
+Unit test is supported by using Karam.
+
+Run 'npm test' to trigger the unit tests.
+
+
 ### DEMO APP
 Demo app was located in another [repository](https://www.github.com/alvachien/datastructure-demo/).
 
