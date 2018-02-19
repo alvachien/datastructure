@@ -6,7 +6,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ["jasmine", "karma-typescript"],
     files: [
-      "src/**/*.ts" // *.tsx for React Jsx
+      "src/test/*.ts" // *.tsx for React Jsx
     ],
     preprocessors: {
       "**/*.ts": "karma-typescript" // *.tsx for React Jsx
