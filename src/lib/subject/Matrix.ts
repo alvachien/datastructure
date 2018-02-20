@@ -15,7 +15,7 @@ import { SequenceList } from '../model';
  * Matrix
  */
 export class Matrix<T> {
-  private _listRows: SequenceList<T>;
+  private _cells: T[][];
   private _maxcol: number;
   private _maxrow: number;
   private _inited: boolean;
@@ -33,7 +33,6 @@ export class Matrix<T> {
 
     this._maxrow = rowcount;
     this._maxcol = colcount;
-    this._listRows = new SequenceList<T>();
 
     this._inited = false;
   }
@@ -52,11 +51,34 @@ export class Matrix<T> {
     return this._maxcol;
   }
 
+  /**
+   * Is inited
+   */
+  get isInited(): boolean {
+    return this._inited;
+  }
 
   /** 
    * init
    * Initialize the current Matrix 
    */
-  public init() {
+  public init(): void {
+    if (this._inited) {
+      throw new Error('already inited');
+    }
+
+    this._cells = [];
+    for (let r: number = 0; r < this._maxrow; r++) {
+      let nrow: T[] = [];
+
+      for(let j: number = 0; j < this._maxcol; j++) {
+        let ncell: any = undefined;
+        nrow.push(ncell);
+      }
+
+      this._cells.push(nrow);
+    }
+
+    this._inited = true;
   }
 }

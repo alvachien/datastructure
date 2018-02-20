@@ -6,12 +6,20 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ["jasmine", "karma-typescript"],
     files: [
-      "src/test/*.ts" // *.tsx for React Jsx
+      { pattern: "src/**/*.ts" },
+      { pattern: "test/**/*.ts" }
     ],
     preprocessors: {
-      "**/*.ts": "karma-typescript" // *.tsx for React Jsx
+      "src/**/*.ts": ["karma-typescript", "coverage"],
+      "test/**/*.ts": ["karma-typescript"]
     },
-    reporters: ["progress", "karma-typescript"],
+
+    reporters: ["progress", "coverage", "karma-typescript"],
+
+    karmaTypescriptConfig: {
+      tsconfig: "./tsconfig.json"
+    },
+
     browsers: ["Chrome"]
   });
 };

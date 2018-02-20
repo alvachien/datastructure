@@ -18,6 +18,7 @@
     "typescript": "^2.7.2"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.8.6",
     "jasmine-core": "^2.99.1",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.2.0",

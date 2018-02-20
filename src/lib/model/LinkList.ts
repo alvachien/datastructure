@@ -15,140 +15,140 @@ import { IList } from './IList';
  * Node in Link list
  */
 export class LinkListNode<T> {
-    private _data: T;
-    private _next: LinkListNode<T> = null;
+  private _data: T;
+  private _next: LinkListNode<T>;
 
-    /**
-     * Constructor
-     */
-    constructore() {
-        this._next = null;
-    }
+  /**
+   * Constructor
+   */
+  constructore() {
+    this._next = undefined;
+  }
 
-    get Data(): T {
-        return this._data;
-    }
-    set Data(data: T) {
-        this._data = data;
-    }
-    get Next(): LinkListNode<T> {
-        return this._next;
-    }
-    set Next(next: LinkListNode<T>) {
-        this._next = next;
-    }
+  get Data(): T {
+    return this._data;
+  }
+  set Data(data: T) {
+    this._data = data;
+  }
+  get Next(): LinkListNode<T> {
+    return this._next;
+  }
+  set Next(next: LinkListNode<T>) {
+    this._next = next;
+  }
 }
 
 /**
  * Link list
  */
 export class LinkList<T> implements IList<T> {
-    private _head: LinkListNode<T> = null;
-    private _length = 0;
+  private _head: LinkListNode<T> = null;
+  private _length = 0;
 
-    /**
-     * Constructor
-     */
-    constructor() {
-        this._head = new LinkListNode<T>();
+  /**
+   * Constructor
+   */
+  constructor() {
+    this._head = new LinkListNode<T>();
+  }
+
+  public Length(): number {
+    return this._length;
+  }
+
+  public IsEmpty(): boolean {
+    return this._length === 0;
+  }
+
+  public GetElement(index: number): T | null {
+    if (this._length === 0
+      || this._head === null
+      || index < 0
+      || index >= this._length) {
+      return null;
     }
 
-    public Length(): number {
-        return this._length;
+
+    let cur = this._head;
+    for (let i = 0; i < index; i++) {
+      if (cur !== null) {
+        cur = cur.Next;
+      }
     }
 
-    public IsEmpty(): boolean {
-        return this._length === 0;
+    return cur === null ? null : cur.Data;
+  }
+
+  public InsertElement(index: number, elem: T): boolean {
+    if (index < 0 || index > this._length) {
+      return false;
+    }
+    if (elem === null) {
+      return false;
     }
 
-    public GetElement(index: number): T | null {
-        if (this._length === 0
-            || this._head === null
-            || index < 0
-            || index >= this._length) {
-            return null;
-        }
-
-
-        let cur = this._head;
-        for (let i = 0; i < index; i ++) {
-            if (cur !== null) {
-                cur = cur.Next;
-            }
-        }
-
-        return cur === null ? null : cur.Data;
+    let cur: LinkListNode<T> = this._head;
+    let i = 0;
+    while (cur !== null && i++ < index) {
+      cur = cur.Next;
     }
 
-    public InsertElement(index: number, elem: T): boolean {
-        if (index < 0 || index > this._length) {
-            return false;
-        }
-        if (elem === null) {
-            return false;
-        }
+    const nnode: LinkListNode<T> = new LinkListNode<T>();
+    nnode.Data = elem;
+    nnode.Next = cur.Next;
+    cur.Next = nnode;
+    this._length++;
 
-        let cur: LinkListNode<T> = this._head;
-        let i = 0;
-        while (cur !== null && i++ < index) {
-            cur = cur.Next;
-        }
+    return true;
+  }
 
-        const nnode: LinkListNode<T> = new LinkListNode<T>();
-        nnode.Data = elem;
-        nnode.Next = cur.Next;
-        cur.Next = nnode;
-        this._length++;
-
-        return true;
+  public AppendElement(elem: T): number {
+    let cur: LinkListNode<T> = this._head;
+    while (cur.Next !== null) {
+      cur = cur.Next;
     }
 
-    public AppendElement(elem: T) : number {
-        let cur: LinkListNode<T> = this._head;
-        while (cur.Next !== null) {
-            cur = cur.Next;
-        }
+    const newnode = new LinkListNode<T>();
+    newnode.Data = elem;
+    newnode.Next = null;
 
-        const newnode = new LinkListNode<T>();
-        newnode.Data = elem;
-        newnode.Next = null;
+    cur.Next = newnode;
 
-        cur.Next = newnode;
+    return ++this._length;
+  }
 
-        return ++this._length;
+  public DeleteElement(index: number): boolean {
+    if (index < 0 || index > this._length) {
+      return false;
     }
 
-    public DeleteElement(index: number): boolean {
-        if (index < 0 || index > this._length) {
-            return false;
-        }
-
-        let cur: LinkListNode<T> = this._head;
-        if (index === 0) {
-            this._head = cur.Next;
-            this._length --;
-            return true;
-        }
-
-        const i = 0;
-        while (cur != null && i < index - 1) {
-            cur = cur.Next;
-        }
-
-        cur.Next = cur.Next.Next;
-        this._length--;
-
-        return true;
+    let cur: LinkListNode<T> = this._head;
+    if (index === 0) {
+      this._head = cur.Next;
+      this._length--;
+      return true;
     }
 
-    public ClearAll(): boolean {
-        this._head = null;
-        this._length = 0;
-        return true;
+    const i = 0;
+    while (cur != null && i < index - 1) {
+      cur = cur.Next;
     }
 
-    public Print(): string {
-        // TBD
-        return '';
-    }
+    cur.Next = cur.Next.Next;
+    this._length--;
+
+    return true;
+  }
+
+  public ClearAll(): boolean {
+    this._head = null;
+    this._length = 0;
+    return true;
+  }
+
+  public Print(): string {
+    // TBD
+    return '';
+  }
 }
