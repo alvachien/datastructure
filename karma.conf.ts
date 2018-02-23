@@ -16,15 +16,13 @@ module.exports = (config: any) => {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
-      { pattern: './src/lib/*.ts', watched: true },
-      { pattern: './src/test/*.spec.ts', watched: false }
+      { pattern: './src/**/*.ts', watched: true }
     ],
     mime: {
       'text/x-typescript': ['ts','tsx']
     },
     preprocessors: {
-      './src/lib/*.ts': 'karma-typescript',
-      './src/test/*.spec.ts': 'karma-typescript'
+      './src/**/*.ts': 'karma-typescript'
     },
 
     coverageIstanbulReporter: {
