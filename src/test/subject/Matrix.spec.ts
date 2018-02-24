@@ -1,4 +1,4 @@
-import { Matrix } from '../lib/subject/Matrix';
+import { Matrix } from '../../lib/subject/Matrix';
 
 describe('Test Matrix', () => {
   let _matrix: Matrix<number>;

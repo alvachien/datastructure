@@ -12,7 +12,7 @@
     "node": ">= 5.4.1 < 7"
   },
   "scripts": {
-    "test": "karma start ./karma.conf.ts"
+    "test": "karma start karma.conf.ts"
   },
   "dependencies": {
     "typescript": "^2.7.2"
@@ -23,6 +23,7 @@
     "jasmine-core": "^2.99.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
     "karma-coverage-istanbul-reporter": "^1.4.1",
     "karma-jasmine": "^1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
