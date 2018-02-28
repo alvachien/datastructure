@@ -83,20 +83,19 @@ export class Matrix<T> {
     this._inited = true;
   }
 
+  /** 
+   * Get slash output
+   */
   public getSlashOutput(): T[][] {
     const arrst: T[][] = [];
-    for (let i = 0; i < this.RowCount + this.ColumnCount - 1; i++) {
+    for (let i = 0; i < this._maxrow + this._maxcol - 1; i++) {
       const arpos: T[] = [];
   
       for (let j = 0; j <= i; j++) {
-        if (j <= this.ColumnCount - 1 && i <= this.RowCount + j - 1) {
-          arpos.push({x: j, y: i - j});
+        if (j <= this._maxcol - 1 && i <= this._maxrow + j - 1) {
+          arpos.push(this._cells[j][i - j]);
         }
       }
-  
-      arpos.sort((a, b) => {
-        return a.x - b.x;
-      });
   
       if (arpos.length > 0) {
         arrst.push(arpos);

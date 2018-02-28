@@ -13,5 +13,13 @@ describe('Test Matrix', () => {
 
     expect(_matrix.RowCount).toBe(10);
   });
+
+  it("#2. Check default output()", () => {
+    _matrix = new Matrix<number>(2, 3);
+    _matrix.init();
+    expect(_matrix).toBeTruthy();
+
+    expect(_matrix.RowCount).toBe(2);
+  });
 });
 

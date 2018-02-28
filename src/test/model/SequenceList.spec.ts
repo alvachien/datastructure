@@ -1,0 +1,31 @@
+import { SequenceList } from '../../lib/model/SequenceList';
+
+describe('Test SequenceList', () => {
+  let _seqList: SequenceList<number>;
+
+  beforeEach(() => {
+    _seqList = new SequenceList<number>();    
+  });
+
+  it("#1. Check InitList()", () => {
+    _seqList.InitList();
+    expect(_seqList).toBeTruthy();
+  });
+
+  it("#2. Check empty list.", () => {
+    _seqList.InitList();
+    expect(_seqList.IsEmpty()).toBe(true);
+    expect(_seqList.Length()).toBe(0);
+  });
+
+  it("#3. Check append of list.", () => {
+    _seqList.InitList();
+    _seqList.AppendElement(1);
+    expect(_seqList.IsEmpty()).toBe(false);
+    expect(_seqList.Length()).toBe(1);
+
+    _seqList.AppendElement(2);
+    expect(_seqList.IsEmpty()).toBe(false);
+    expect(_seqList.Length()).toBe(2);
+  });
+});
