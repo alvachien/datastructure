@@ -9,12 +9,5 @@
       "jasmine",
       "node"
     ]
-  },
-  "files": [
-    "src/test/*.ts"
-  ],
-  "include": [
-    "src/test/*.spec.ts",
-    "**/*.d.ts"
-  ]
+  }
 }

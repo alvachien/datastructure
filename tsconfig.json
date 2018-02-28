@@ -5,11 +5,11 @@
     "baseUrl": "src",
     "sourceMap": true,
     "declaration": true,
-    "strict": true,
+    "strict": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2015",
+    "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -20,6 +20,6 @@
   },
   "exclude": [
     "node_modules",
-    "test/**/*.spec.ts"
+    "karma.conf.ts"
   ]
 }
