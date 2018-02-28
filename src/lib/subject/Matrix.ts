@@ -35,6 +35,7 @@ export class Matrix<T> {
     this._maxcol = colcount;
 
     this._inited = false;
+    this._cells = [];
   }
 
   /**
@@ -80,5 +81,28 @@ export class Matrix<T> {
     }
 
     this._inited = true;
+  }
+
+  public getSlashOutput(): T[][] {
+    const arrst: T[][] = [];
+    for (let i = 0; i < this.RowCount + this.ColumnCount - 1; i++) {
+      const arpos: T[] = [];
+  
+      for (let j = 0; j <= i; j++) {
+        if (j <= this.ColumnCount - 1 && i <= this.RowCount + j - 1) {
+          arpos.push({x: j, y: i - j});
+        }
+      }
+  
+      arpos.sort((a, b) => {
+        return a.x - b.x;
+      });
+  
+      if (arpos.length > 0) {
+        arrst.push(arpos);
+      }
+    }
+  
+    return arrst;      
   }
 }
