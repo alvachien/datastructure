@@ -12,6 +12,14 @@
 import { SequenceList } from '../model';
 
 /**
+ * Matrix position
+ */
+export interface MatrixPosIntf {
+  x: number;
+  y: number;
+}
+
+/**
  * Matrix
  */
 export class Matrix<T> {
@@ -81,6 +89,42 @@ export class Matrix<T> {
     }
 
     this._inited = true;
+  }
+
+  /**
+   * Is a valid position
+   * @param pos Position
+   */
+  public isValidPosition(pos: MatrixPosIntf): boolean {
+    if (pos.x >= 0 && pos.x < this._maxrow && pos.y >= 0 && pos.y < this._maxcol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Get element
+   * @param pos Position
+   */
+  public getElement(pos: MatrixPosIntf): T {
+    if (!this.isValidPosition(pos)) {
+      return undefined;
+    }
+
+    return this._cells[pos.x][pos.y];
+  }
+
+  /**
+   * Set element
+   * @param pos Position
+   */
+  public setElement(pos: MatrixPosIntf, elem: T): void {
+    if (!this.isValidPosition(pos)) {
+      return undefined;
+    }
+
+    this._cells[pos.x][pos.y] = elem;
   }
 
   /** 

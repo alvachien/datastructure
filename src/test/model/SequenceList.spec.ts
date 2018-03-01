@@ -39,6 +39,9 @@ describe('Test SequenceList', () => {
     _seqList.InsertElement(1, 3);
     expect(_seqList.IsEmpty()).toBe(false);
     expect(_seqList.Length()).toBe(3);
-    
+
+    expect(_seqList.GetElement(0)).toBe(1);
+    expect(_seqList.GetElement(1)).toBe(3);
+    expect(_seqList.GetElement(2)).toBe(2);
   });
 });
