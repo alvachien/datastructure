@@ -28,4 +28,17 @@ describe('Test SequenceList', () => {
     expect(_seqList.IsEmpty()).toBe(false);
     expect(_seqList.Length()).toBe(2);
   });
+
+  it("#4. Check insert of list.", () => {
+    _seqList.InitList();
+    _seqList.AppendElement(1);
+    _seqList.AppendElement(2);
+    expect(_seqList.IsEmpty()).toBe(false);
+    expect(_seqList.Length()).toBe(2);
+    
+    _seqList.InsertElement(1, 3);
+    expect(_seqList.IsEmpty()).toBe(false);
+    expect(_seqList.Length()).toBe(3);
+    
+  });
 });
