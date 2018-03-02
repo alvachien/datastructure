@@ -20,6 +20,7 @@
   },
   "exclude": [
     "node_modules",
-    "karma.conf.ts"
+    "karma.conf.ts",
+    "dist"
   ]
 }

@@ -2,7 +2,8 @@
 /**
  * @license
  * index.ts
- * (C) Alva Chien, 2017
+ * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ *
  */
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
