@@ -55,8 +55,17 @@ var LinkList = /** @class */ (function () {
     function LinkList() {
         this._head = null;
         this._length = 0;
-        this._head = new LinkListNode();
     }
+    Object.defineProperty(LinkList.prototype, "Head", {
+        get: function () {
+            return this._head;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LinkList.prototype.InitList = function () {
+        this._head = new LinkListNode();
+    };
     LinkList.prototype.Length = function () {
         return this._length;
     };
@@ -131,7 +140,7 @@ var LinkList = /** @class */ (function () {
         this._length = 0;
         return true;
     };
-    LinkList.prototype.Print = function () {
+    LinkList.prototype.Print = function (splitter) {
         // TBD
         return '';
     };

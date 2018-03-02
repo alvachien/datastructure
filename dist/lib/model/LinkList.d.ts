@@ -32,6 +32,8 @@ export declare class LinkList<T> implements IList<T> {
      * Constructor
      */
     constructor();
+    readonly Head: LinkListNode<T>;
+    InitList(): void;
     Length(): number;
     IsEmpty(): boolean;
     GetElement(index: number): T | null;
@@ -39,5 +41,5 @@ export declare class LinkList<T> implements IList<T> {
     AppendElement(elem: T): number;
     DeleteElement(index: number): boolean;
     ClearAll(): boolean;
-    Print(): string;
+    Print(splitter?: string): string;
 }

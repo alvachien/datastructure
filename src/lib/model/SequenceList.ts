@@ -98,12 +98,13 @@ export class SequenceList<T> implements IList<T> {
     }
 
     if (index < this._data.length - 1) {
-      for (let k = index; k < this._data.length; k++) {
-        this._data[k - 1] = this._data[k];
+      for (let k = index; k < this._data.length - 1; k++) {
+        this._data[k] = this._data[k + 1];
       }
     }
 
     delete this._data[this._data.length - 1];
+    this._data.length --;
 
     return true;
   }
@@ -118,10 +119,8 @@ export class SequenceList<T> implements IList<T> {
   /**
    * Print out the whole list into string
    */
-  public Print(): string {
-    return this._data.toString();
-    // for(let idx = 0; idx <this._data.length; idx++) {
-    // }
+  public Print(splitter?: string): string {
+    return this._data.join(splitter);
   }
 
   /**

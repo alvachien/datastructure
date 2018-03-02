@@ -83,11 +83,12 @@ var SequenceList = /** @class */ (function () {
             return false;
         }
         if (index < this._data.length - 1) {
-            for (var k = index; k < this._data.length; k++) {
-                this._data[k - 1] = this._data[k];
+            for (var k = index; k < this._data.length - 1; k++) {
+                this._data[k] = this._data[k + 1];
             }
         }
         delete this._data[this._data.length - 1];
+        this._data.length--;
         return true;
     };
     /**
@@ -99,10 +100,8 @@ var SequenceList = /** @class */ (function () {
     /**
      * Print out the whole list into string
      */
-    SequenceList.prototype.Print = function () {
-        return this._data.toString();
-        // for(let idx = 0; idx <this._data.length; idx++) {
-        // }
+    SequenceList.prototype.Print = function (splitter) {
+        return this._data.join(splitter);
     };
     /**
      * Check the specified value existed or not

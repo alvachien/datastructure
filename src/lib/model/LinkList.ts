@@ -49,7 +49,14 @@ export class LinkList<T> implements IList<T> {
   /**
    * Constructor
    */
-  constructor() {
+  constructor() {    
+  }
+
+  get Head(): LinkListNode<T> {
+    return this._head;
+  }
+  
+  public InitList() {
     this._head = new LinkListNode<T>();
   }
 
@@ -68,7 +75,6 @@ export class LinkList<T> implements IList<T> {
       || index >= this._length) {
       return null;
     }
-
 
     let cur = this._head;
     for (let i = 0; i < index; i++) {
@@ -147,7 +153,7 @@ export class LinkList<T> implements IList<T> {
     return true;
   }
 
-  public Print(): string {
+  public Print(splitter?: string): string {
     // TBD
     return '';
   }

@@ -55,7 +55,7 @@ export declare class SequenceList<T> implements IList<T> {
     /**
      * Print out the whole list into string
      */
-    Print(): string;
+    Print(splitter?: string): string;
     /**
      * Check the specified value existed or not
      * @param val Value for checking with existence

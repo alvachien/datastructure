@@ -45,5 +45,5 @@ export interface IList<T> {
     /**
      * Print all elements
      */
-    Print(): string;
+    Print(splitter?: string): string;
 }
