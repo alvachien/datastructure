@@ -9,8 +9,8 @@
  *
  */
 
- export interface IIterator<T> {
-    hasNext(): boolean;
-    next(): T;
-    remove(): void;
- }
+export interface IIterator<T> {
+  hasNext(): boolean;
+  next(): T;
+  remove(): void;
+}

@@ -16,11 +16,11 @@ to add this library into your own topic.
 
 A code example below show the way to use the Matrix:
 
-`import { Matrix, MatrixPosIntf } from 'actslib';`
-
-`let matrix: Matrix = new Matrix(10, 10);`
-
-`let arpos = matrix.getSlashOutputPos();`
+```javascript
+import { Matrix, MatrixPosIntf } from 'actslib';
+let matrix: Matrix = new Matrix(10, 10);
+let arpos = matrix.getSlashOutputPos();
+```
 
 
 ## REFERENCE
@@ -109,25 +109,27 @@ The progress of the project shown in the table below.
 
 No|Content|Status|Comment
 ----:|:----|:-----|:-----
-1|Graph|In Process|Question left: how to demonstrate the Graph for demo?
-2|Binary Search Tree|Not started yet|
-3|B Tree|Not started yet|
-4|Red Black Tree|Not started yet|
-5|Strassen Algorithm|Not started yet|
-6|Birthday Theory|Not started yet|
-7|Ball and Box|Not started yet|
-8|Hire on-line|Not started yet|
-9|Priority Queue|Not started yet|
-10|Hash algorithms|Not started yet|
-11|van Emde Boas Tree|Not started yet|
-12|Kruskal Algorithm|Not started yet|
-13|Prim Algorithm|Not started yet
-14|Bellman-Ford Algorithm|Not started yet|
-15|Dijkstra Algorithm|Not started yet|
-16|Floyd-Warshall Algorithm|Not started yet|
-17|Radix sort|Not started yet|
-18|Bucket sort|Not started yet|
-19|Formula|In Process||
+1|**SequenceList**|**Finished**|Question left: search?
+2|**LinkList**|**In Process**|Question left: search?
+3|Graph|In Process|Question left: how to demonstrate the Graph for demo?
+4|Binary Search Tree|Not started yet|
+5|B Tree|Not started yet|
+6|Red Black Tree|Not started yet|
+7|Strassen Algorithm|Not started yet|
+8|Birthday Theory|Not started yet|
+9|Ball and Box|Not started yet|
+10|Hire on-line|Not started yet|
+11|Priority Queue|Not started yet|
+12|Hash algorithms|Not started yet|
+13|van Emde Boas Tree|Not started yet|
+14|Kruskal Algorithm|Not started yet|
+15|Prim Algorithm|Not started yet
+16|Bellman-Ford Algorithm|Not started yet|
+17|Dijkstra Algorithm|Not started yet|
+18|Floyd-Warshall Algorithm|Not started yet|
+19|Radix sort|Not started yet|
+20|Bucket sort|Not started yet|
+21|Formula|In Process||
 
 # CONTRIBUTORS
 - **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;

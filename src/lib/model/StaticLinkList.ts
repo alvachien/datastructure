@@ -15,114 +15,114 @@ import { IList } from './IList';
  * Node in static link list
  */
 export class StaticLinkListNode<T> {
-    private _data: T;
-    private _cursor: number = -1;
+  private _data: T;
+  private _cursor: number = -1;
 
-    constructore() {
-        this._cursor = -1;
-    }
+  constructore() {
+    this._cursor = -1;
+  }
 
-    get Data(): T {
-        return this._data;
-    }
-    set Data(data: T) {
-        this._data = data;
-    }
-    get Cursor(): number {
-        return this._cursor;
-    }
-    set Cursor(cur: number) {
-        this._cursor = cur;
-    }
+  get Data(): T {
+    return this._data;
+  }
+  set Data(data: T) {
+    this._data = data;
+  }
+  get Cursor(): number {
+    return this._cursor;
+  }
+  set Cursor(cur: number) {
+    this._cursor = cur;
+  }
 }
 
 export class StaticLinkList<T> implements IList<T> {
-    private _data: Array<StaticLinkListNode<T>>;
+  private _data: Array<StaticLinkListNode<T>>;
 
-    /**
-     * Constructor
-     */
-    constructor() {
-        this._data = new Array<StaticLinkListNode<T>>(200);
+  /**
+   * Constructor
+   */
+  constructor() {
+    this._data = new Array<StaticLinkListNode<T>>(200);
+  }
+
+  public Length(): number {
+    let j = 0;
+    for (const it of this._data) {
+      if (it.Cursor !== -1) {
+        j++;
+      }
     }
 
-    public Length(): number {
-        let j = 0;
-        for (const it of this._data) {
-            if (it.Cursor !== -1) {
-                j ++;
-            }
-        }
+    return j;
+  }
 
-        return j;
+  public IsEmpty(): boolean {
+    return this.Length() === 0;
+  }
+
+  public ClearAll(): boolean {
+    for (const it of this._data) {
+      it.Cursor = -1;
+      it.Data = null;
     }
 
-    public IsEmpty(): boolean {
-        return this.Length() === 0;
+    return true;
+  }
+
+  public GetElement(index: number): T | null {
+    if (this._data.length === 0) {
+      return null;
     }
 
-    public ClearAll(): boolean {
-        for (const it of this._data) {
-            it.Cursor = -1;
-            it.Data = null;
-        }
+    // if (index >= 0 && index < this._data.length) {
+    //     return this._data[index];
+    // }
 
-        return true;
-    }
+    return null;
+  }
 
-    public GetElement(index: number): T | null {
-        if (this._data.length === 0) {
-            return null;
-        }
+  public InsertElement(index: number, elem: T): boolean {
+    // if (index < 0 || index >= this._data.length) {
+    //     return false;
+    // }
 
-        // if (index >= 0 && index < this._data.length) {
-        //     return this._data[index];
-        // }
+    // if (index < this._data.length) {
+    //     for(let i = this._data.length - 1; i >= index; i --) {
+    //         this._data[i + 1] = this._data[i];
+    //     }
 
-        return null;
-    }
+    //     this._data[index] = elem;
+    // }
 
-    public InsertElement(index: number, elem: T) : boolean {
-        // if (index < 0 || index >= this._data.length) {
-        //     return false;
-        // }
+    return true;
+  }
 
-        // if (index < this._data.length) {
-        //     for(let i = this._data.length - 1; i >= index; i --) {
-        //         this._data[i + 1] = this._data[i];
-        //     }
+  public AppendElement(elem: T): number {
+    // return this._data.push(elem);
+    return -1;
+  }
 
-        //     this._data[index] = elem;
-        // }
+  public DeleteElement(index: number): boolean {
+    // if (index < 0 || index >= this._data.length) {
+    //     return false;
+    // }
 
-        return true;
-    }
+    // if (index < this._data.length - 1) {
+    //     for(let k = index; k < this._data.length; k++) {
+    //         this._data[k-1] = this._data[k];
+    //     }
+    // }
 
-    public AppendElement(elem: T) : number {
-        // return this._data.push(elem);
-        return -1;
-    }
+    // delete this._data[this._data.length - 1];
 
-    public DeleteElement(index: number): boolean {
-        // if (index < 0 || index >= this._data.length) {
-        //     return false;
-        // }
+    // return true;
+    return false;
+  }
 
-        // if (index < this._data.length - 1) {
-        //     for(let k = index; k < this._data.length; k++) {
-        //         this._data[k-1] = this._data[k];
-        //     }
-        // }
-
-        // delete this._data[this._data.length - 1];
-
-        // return true;
-        return false;
-    }
-
-    public Print(): string {
-        // TBD
-        return '';
-    }
+  public Print(): string {
+    // TBD
+    return '';
+  }
 }
 

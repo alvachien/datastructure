@@ -21,7 +21,7 @@ export class LinkListNode<T> {
   /**
    * Constructor
    */
-  constructore() {
+  constructor() {
     this._next = undefined;
   }
 
@@ -43,64 +43,96 @@ export class LinkListNode<T> {
  * Link list
  */
 export class LinkList<T> implements IList<T> {
-  private _head: LinkListNode<T> = null;
+  private _head: LinkListNode<T>;
   private _length = 0;
 
   /**
    * Constructor
    */
-  constructor() {    
+  constructor() {
   }
 
+  /**
+   * Head
+   */
   get Head(): LinkListNode<T> {
     return this._head;
   }
   
-  public InitList() {
+  /**
+   * Initialize the list
+   * @param hval Head value
+   */
+  public InitList(hval: T) {
     this._head = new LinkListNode<T>();
+    this._head.Data = hval;
+    this._length = 1;
   }
 
+  /** 
+   * Length
+   */
   public Length(): number {
     return this._length;
   }
 
+  /** 
+   * Is empty 
+   */
   public IsEmpty(): boolean {
     return this._length === 0;
   }
 
-  public GetElement(index: number): T | null {
+  /**
+   * Get element
+   * @param index index of element
+   */
+  public GetElement(index: number): T | undefined {
     if (this._length === 0
-      || this._head === null
+      || this._head === undefined
       || index < 0
       || index >= this._length) {
-      return null;
+      return undefined;
     }
 
     let cur = this._head;
-    for (let i = 0; i < index; i++) {
-      if (cur !== null) {
-        cur = cur.Next;
-      }
+    let i = 0;
+    while (cur !== undefined && i < index) {
+      cur = cur.Next;
+      i ++;
     }
 
-    return cur === null ? null : cur.Data;
+    return cur.Data;
   }
 
+  /**
+   * Insert an element
+   * @param index Index to insert
+   * @param elem Element to insert
+   */
   public InsertElement(index: number, elem: T): boolean {
-    if (index < 0 || index > this._length) {
+    if (index < 0 || index > this._length || this._head === undefined
+      || elem === undefined) {
       return false;
     }
-    if (elem === null) {
-      return false;
+
+    if (index === 0) {
+      const nnode: LinkListNode<T> = new LinkListNode<T>();
+      nnode.Data = elem;
+      nnode.Next = this._head.Next;
+      this._head = nnode;
+
+      return true;
     }
 
     let cur: LinkListNode<T> = this._head;
     let i = 0;
-    while (cur !== null && i++ < index) {
+    while (cur !== undefined && i < index) {
       cur = cur.Next;
+      i ++;
     }
 
-    const nnode: LinkListNode<T> = new LinkListNode<T>();
+    let nnode: LinkListNode<T> = new LinkListNode<T>();
     nnode.Data = elem;
     nnode.Next = cur.Next;
     cur.Next = nnode;
@@ -109,23 +141,35 @@ export class LinkList<T> implements IList<T> {
     return true;
   }
 
+  /**
+   * Append element
+   * @param elem Element to append
+   */
   public AppendElement(elem: T): number {
+    if (this._head === undefined || this._length <= 0) {
+      throw new Error('Invalid list');
+    }
+
     let cur: LinkListNode<T> = this._head;
-    while (cur.Next !== null) {
+    while (cur.Next !== undefined) {
       cur = cur.Next;
     }
 
-    const newnode = new LinkListNode<T>();
+    let newnode: LinkListNode<T> = new LinkListNode<T>();
     newnode.Data = elem;
-    newnode.Next = null;
+    newnode.Next = undefined;
 
     cur.Next = newnode;
 
     return ++this._length;
   }
 
+  /**
+   * Delete an element
+   * @param index Index to delete
+   */
   public DeleteElement(index: number): boolean {
-    if (index < 0 || index > this._length) {
+    if (index < 0 || index > this._length || this._head === undefined) {
       return false;
     }
 
@@ -136,23 +180,35 @@ export class LinkList<T> implements IList<T> {
       return true;
     }
 
-    const i = 0;
-    while (cur != null && i < index - 1) {
+    let i = 0;
+    while (cur !== undefined && i < index) {
       cur = cur.Next;
+      i ++;
     }
 
     cur.Next = cur.Next.Next;
     this._length--;
 
+    if (this._length === 0) {
+      this._head = undefined;
+    }
+
     return true;
   }
 
+  /** 
+   * Clear all elements 
+   */
   public ClearAll(): boolean {
-    this._head = null;
+    this._head = undefined;
     this._length = 0;
     return true;
   }
 
+  /**
+   * Print out full array
+   * @param splitter Splitter
+   */
   public Print(splitter?: string): string {
     // TBD
     return '';
