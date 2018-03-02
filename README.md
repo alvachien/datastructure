@@ -16,7 +16,7 @@ to add this library into your own topic.
 
 A code example below show the way to use the Matrix:
 
-`import { Matrix, MatrixPosInf } from 'actslib';`
+`import { Matrix, MatrixPosIntf } from 'actslib';`
 
 `let matrix: Matrix = new Matrix(10, 10);`
 

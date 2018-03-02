@@ -4,7 +4,7 @@
     "name": "Alva Chien(Hongjun Qian)",
     "email": "alvachien@163.com"
   },
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
