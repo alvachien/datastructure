@@ -8,10 +8,20 @@ This project is target to build a library (abbrv: lib) for Data Structures and a
 The library written with TypeScript.
 
 ## HOW TO USE
-Though the target of this project is providing a NPM package for usage, it will happen only after the project is nearly finish.
+Use command 
 
-- For TypeScript project, just copy the whole **lib** folder (.\src\lib) to your own project, and using `import` to import the class.
-- For JavaScript project, clone this project, and run `tsc` to compile the whole ts file to js and add the compiled js files to your project.
+`npm install actslib --save` 
+
+to add this library into your own topic.
+
+A code example below show the way to use the Matrix:
+
+`import { Matrix, MatrixPosInf } from 'actslib';`
+
+`let matrix: Matrix = new Matrix(10, 10);`
+
+`let arpos = matrix.getSlashOutputPos();`
+
 
 ## REFERENCE
 The library in the project actually based the understanding when learning the books below:

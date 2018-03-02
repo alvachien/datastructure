@@ -1,6 +1,12 @@
 {
-  "name": "datastructure",
+  "name": "actslib",
+  "author": {
+    "name": "Alva Chien(Hongjun Qian)",
+    "email": "alvachien@163.com"
+  },
   "version": "0.2.0",
+  "private": false,
+  "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
   "bugs": "https://github.com/alvachien/datastructure/issues",
   "repository": {
