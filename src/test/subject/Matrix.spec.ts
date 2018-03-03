@@ -127,30 +127,39 @@ describe('Test Matrix', () => {
 
     // Row 1
     expect(arOut[1].length).toBe(2);
-    // expect(arOut[1][0].row).toBe(0);
-    // expect(arOut[1][0].column).toBe(2);
-    // expect(_matrix.getElement(arOut[1][0])).toBe(2);
-    // expect(arOut[1][1].row).toBe(1);
-    // expect(arOut[1][1].column).toBe(3);
-    // expect(_matrix.getElement(arOut[1][1])).toBe(6);
+    expect(arOut[1][0].row).toBe(0);
+    expect(arOut[1][0].column).toBe(1);
+    expect(_matrix.getElement(arOut[1][0])).toBe(2);
+    expect(arOut[1][1].row).toBe(1);
+    expect(arOut[1][1].column).toBe(2);
+    expect(_matrix.getElement(arOut[1][1])).toBe(6);
 
     // Row 2
     expect(arOut[2].length).toBe(3);
-    // expect(arOut[2][0].row).toBe(0);
-    // expect(arOut[2][0].column).toBe(0);
-    // expect(_matrix.getElement(arOut[2][0])).toBe(1);
-    // expect(arOut[2][1].row).toBe(1);
-    // expect(arOut[2][1].column).toBe(1);
-    // expect(_matrix.getElement(arOut[2][1])).toBe(5);
-    // expect(arOut[2][2].row).toBe(2);
-    // expect(arOut[2][2].column).toBe(2);
-    // expect(_matrix.getElement(arOut[2][2])).toBe(9);
+    expect(arOut[2][0].row).toBe(0);
+    expect(arOut[2][0].column).toBe(0);
+    expect(_matrix.getElement(arOut[2][0])).toBe(1);
+    expect(arOut[2][1].row).toBe(1);
+    expect(arOut[2][1].column).toBe(1);
+    expect(_matrix.getElement(arOut[2][1])).toBe(5);
+    expect(arOut[2][2].row).toBe(2);
+    expect(arOut[2][2].column).toBe(2);
+    expect(_matrix.getElement(arOut[2][2])).toBe(9);
 
-    // // Row 3
-    // expect(arOut[3].length).toBe(1);
-    // expect(arOut[3][0].row).toBe(1);
-    // expect(arOut[3][0].column).toBe(2);
-    // expect(_matrix.getElement(arOut[3][0])).toBe(6);
+    // Row 3
+    expect(arOut[3].length).toBe(2);
+    expect(arOut[3][0].row).toBe(1);
+    expect(arOut[3][0].column).toBe(0);
+    expect(_matrix.getElement(arOut[3][0])).toBe(4);
+    expect(arOut[3][1].row).toBe(2);
+    expect(arOut[3][1].column).toBe(1);
+    expect(_matrix.getElement(arOut[3][1])).toBe(8);
+
+    // Row 4
+    expect(arOut[4].length).toBe(1);
+    expect(arOut[4][0].row).toBe(2);
+    expect(arOut[4][0].column).toBe(0);
+    expect(_matrix.getElement(arOut[4][0])).toBe(7);
   });
 });
 

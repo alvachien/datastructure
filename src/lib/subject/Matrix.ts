@@ -174,6 +174,9 @@ export class Matrix<T> {
       }
   
       if (arpos.length > 0) {
+        arpos.sort((a, b) => {
+          return a.row - b.row;
+        });
         arrst.push(arpos);
       }
     }
@@ -185,6 +188,9 @@ export class Matrix<T> {
       }
   
       if (arpos.length > 0) {
+        arpos.sort((a, b) => {
+          return a.row - b.row;
+        });
         arrst.push(arpos);
       }
     }
