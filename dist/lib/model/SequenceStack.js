@@ -11,19 +11,35 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var SequenceStack = /** @class */ (function () {
+    /**
+     * Constructor
+     */
     function SequenceStack() {
         this._data = [];
     }
+    /**
+     * Length
+     */
     SequenceStack.prototype.Length = function () {
         return this._data.length;
     };
+    /**
+     * Is empty
+     */
     SequenceStack.prototype.IsEmpty = function () {
         return this._data.length === 0;
     };
+    /**
+     * Push
+     * @param elem Element to push
+     */
     SequenceStack.prototype.Push = function (elem) {
-        this._data.push(elem);
-        return false;
+        return this._data.push(elem);
     };
+    /**
+     * Pop an element
+     *
+     */
     SequenceStack.prototype.Pop = function () {
         if (this._data.length === 0) {
             return null;
@@ -32,6 +48,9 @@ var SequenceStack = /** @class */ (function () {
         this._data.splice(this._data.length - 1, 1);
         return pi;
     };
+    /**
+     * Peek the stack
+     */
     SequenceStack.prototype.Peek = function () {
         if (this._data.length === 0) {
             return null;
@@ -39,6 +58,9 @@ var SequenceStack = /** @class */ (function () {
         var pi = this._data[this._data.length - 1];
         return pi;
     };
+    /**
+     * Clear all
+     */
     SequenceStack.prototype.ClearAll = function () {
         this._data = [];
         return true;

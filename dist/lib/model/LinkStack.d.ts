@@ -21,9 +21,19 @@ export declare class LinkStack<T> implements IStack<T> {
     private _length;
     constructor();
     Length(): number;
+    /**
+     * Is empty
+     */
     IsEmpty(): boolean;
-    Push(elem: T): boolean;
-    Pop(): T | null;
-    Peek(): T | null;
+    /**
+     * Push new element, return the new length
+     * @param elem Element to push
+     */
+    Push(elem: T): number;
+    /**
+     * Pop an item out
+     */
+    Pop(): T | undefined;
+    Peek(): T | undefined;
     ClearAll(): boolean;
 }

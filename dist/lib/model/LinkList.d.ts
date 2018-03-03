@@ -18,7 +18,7 @@ export declare class LinkListNode<T> {
     /**
      * Constructor
      */
-    constructore(): void;
+    constructor();
     Data: T;
     Next: LinkListNode<T>;
 }
@@ -32,14 +32,56 @@ export declare class LinkList<T> implements IList<T> {
      * Constructor
      */
     constructor();
+    /**
+     * Head
+     */
     readonly Head: LinkListNode<T>;
-    InitList(): void;
+    /**
+     * Initialize the list
+     * @param hval Head value
+     */
+    InitList(hval: T): void;
+    /**
+     * Length
+     */
     Length(): number;
+    /**
+     * Is empty
+     */
     IsEmpty(): boolean;
-    GetElement(index: number): T | null;
+    /**
+     * Get element
+     * @param index index of element
+     */
+    GetElement(index: number): T | undefined;
+    /**
+     * Insert an element
+     * @param index Index to insert
+     * @param elem Element to insert
+     */
     InsertElement(index: number, elem: T): boolean;
+    /**
+     * Append element
+     * @param elem Element to append
+     */
     AppendElement(elem: T): number;
+    /**
+     * Delete an element
+     * @param index Index to delete
+     */
     DeleteElement(index: number): boolean;
+    /**
+     * Clear all elements
+     */
     ClearAll(): boolean;
+    /**
+     * Print out full array
+     * @param splitter Splitter
+     */
     Print(splitter?: string): string;
+    /**
+     * Check the specified value existed or not
+     * @param val Value for checking with existence
+     */
+    IsExist(val: T): boolean;
 }

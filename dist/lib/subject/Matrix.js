@@ -146,6 +146,9 @@ var Matrix = /** @class */ (function () {
                 arpos.push({ row: i - j, column: this._maxrow - 1 - j });
             }
             if (arpos.length > 0) {
+                arpos.sort(function (a, b) {
+                    return a.row - b.row;
+                });
                 arrst.push(arpos);
             }
         }
@@ -155,6 +158,9 @@ var Matrix = /** @class */ (function () {
                 arpos.push({ row: i + j, column: j });
             }
             if (arpos.length > 0) {
+                arpos.sort(function (a, b) {
+                    return a.row - b.row;
+                });
                 arrst.push(arpos);
             }
         }

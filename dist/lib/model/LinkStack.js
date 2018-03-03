@@ -47,20 +47,30 @@ var LinkStack = /** @class */ (function () {
     LinkStack.prototype.Length = function () {
         return this._length;
     };
+    /**
+     * Is empty
+     */
     LinkStack.prototype.IsEmpty = function () {
         return this._length === 0;
     };
+    /**
+     * Push new element, return the new length
+     * @param elem Element to push
+     */
     LinkStack.prototype.Push = function (elem) {
         if (this._head === null) {
             this._head = new LinkStackNode();
             this._head.Data = elem;
-            return true;
+            return this._length++;
         }
         var node = new LinkStackNode();
         node.Next = this._head;
         this._head = node;
-        return true;
+        return this._length++;
     };
+    /**
+     * Pop an item out
+     */
     LinkStack.prototype.Pop = function () {
         if (this._head === null) {
             return null;

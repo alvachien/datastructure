@@ -10,12 +10,35 @@
  */
 import { IStack } from './IStack';
 export declare class SequenceStack<T> implements IStack<T> {
-    constructor();
     private _data;
+    /**
+     * Constructor
+     */
+    constructor();
+    /**
+     * Length
+     */
     Length(): number;
+    /**
+     * Is empty
+     */
     IsEmpty(): boolean;
-    Push(elem: T): boolean;
-    Pop(): T | null;
+    /**
+     * Push
+     * @param elem Element to push
+     */
+    Push(elem: T): number;
+    /**
+     * Pop an element
+     *
+     */
+    Pop(): T | undefined;
+    /**
+     * Peek the stack
+     */
     Peek(): T | null;
+    /**
+     * Clear all
+     */
     ClearAll(): boolean;
 }

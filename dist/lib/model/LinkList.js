@@ -14,14 +14,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Node in Link list
  */
 var LinkListNode = /** @class */ (function () {
-    function LinkListNode() {
-    }
     /**
      * Constructor
      */
-    LinkListNode.prototype.constructore = function () {
+    function LinkListNode() {
         this._next = undefined;
-    };
+    }
     Object.defineProperty(LinkListNode.prototype, "Data", {
         get: function () {
             return this._data;
@@ -53,51 +51,81 @@ var LinkList = /** @class */ (function () {
      * Constructor
      */
     function LinkList() {
-        this._head = null;
         this._length = 0;
     }
     Object.defineProperty(LinkList.prototype, "Head", {
+        /**
+         * Head
+         */
         get: function () {
             return this._head;
         },
         enumerable: true,
         configurable: true
     });
-    LinkList.prototype.InitList = function () {
+    /**
+     * Initialize the list
+     * @param hval Head value
+     */
+    LinkList.prototype.InitList = function (hval) {
         this._head = new LinkListNode();
+        this._head.Data = hval;
+        this._length = 1;
     };
+    /**
+     * Length
+     */
     LinkList.prototype.Length = function () {
         return this._length;
     };
+    /**
+     * Is empty
+     */
     LinkList.prototype.IsEmpty = function () {
         return this._length === 0;
     };
+    /**
+     * Get element
+     * @param index index of element
+     */
     LinkList.prototype.GetElement = function (index) {
         if (this._length === 0
-            || this._head === null
+            || this._head === undefined
             || index < 0
             || index >= this._length) {
-            return null;
-        }
-        var cur = this._head;
-        for (var i = 0; i < index; i++) {
-            if (cur !== null) {
-                cur = cur.Next;
-            }
-        }
-        return cur === null ? null : cur.Data;
-    };
-    LinkList.prototype.InsertElement = function (index, elem) {
-        if (index < 0 || index > this._length) {
-            return false;
-        }
-        if (elem === null) {
-            return false;
+            return undefined;
         }
         var cur = this._head;
         var i = 0;
-        while (cur !== null && i++ < index) {
+        while (cur !== undefined && i < index) {
             cur = cur.Next;
+            i++;
+        }
+        return cur.Data;
+    };
+    /**
+     * Insert an element
+     * @param index Index to insert
+     * @param elem Element to insert
+     */
+    LinkList.prototype.InsertElement = function (index, elem) {
+        if (index < 0 || index > this._length || this._head === undefined
+            || elem === undefined) {
+            return false;
+        }
+        if (index === 0) {
+            var nnode_1 = new LinkListNode();
+            nnode_1.Data = elem;
+            nnode_1.Next = this._head;
+            this._head = nnode_1;
+            this._length++;
+            return true;
+        }
+        var cur = this._head;
+        var i = 1;
+        while (cur !== undefined && i < index) {
+            cur = cur.Next;
+            i++;
         }
         var nnode = new LinkListNode();
         nnode.Data = elem;
@@ -106,43 +134,91 @@ var LinkList = /** @class */ (function () {
         this._length++;
         return true;
     };
+    /**
+     * Append element
+     * @param elem Element to append
+     */
     LinkList.prototype.AppendElement = function (elem) {
+        if (this._head === undefined || this._length <= 0) {
+            throw new Error('Invalid list');
+        }
         var cur = this._head;
-        while (cur.Next !== null) {
+        while (cur.Next !== undefined) {
             cur = cur.Next;
         }
         var newnode = new LinkListNode();
         newnode.Data = elem;
-        newnode.Next = null;
+        newnode.Next = undefined;
         cur.Next = newnode;
         return ++this._length;
     };
+    /**
+     * Delete an element
+     * @param index Index to delete
+     */
     LinkList.prototype.DeleteElement = function (index) {
-        if (index < 0 || index > this._length) {
+        if (index < 0 || index > this._length || this._head === undefined) {
             return false;
         }
-        var cur = this._head;
         if (index === 0) {
-            this._head = cur.Next;
+            this._head = this._head.Next;
             this._length--;
+            if (this._length === 0) {
+                this._head = undefined;
+            }
             return true;
         }
-        var i = 0;
-        while (cur != null && i < index - 1) {
+        var cur = this._head;
+        var i = 1;
+        while (cur !== undefined && i < index) {
             cur = cur.Next;
+            i++;
         }
         cur.Next = cur.Next.Next;
         this._length--;
         return true;
     };
+    /**
+     * Clear all elements
+     */
     LinkList.prototype.ClearAll = function () {
-        this._head = null;
+        this._head = undefined;
         this._length = 0;
         return true;
     };
+    /**
+     * Print out full array
+     * @param splitter Splitter
+     */
     LinkList.prototype.Print = function (splitter) {
-        // TBD
-        return '';
+        if (this._length === 0 || this._head === undefined) {
+            return '';
+        }
+        var ar = [];
+        var cur = this._head;
+        ar.push(cur.Data);
+        while (cur.Next !== undefined) {
+            cur = cur.Next;
+            ar.push(cur.Data);
+        }
+        return ar.join(splitter);
+    };
+    /**
+     * Check the specified value existed or not
+     * @param val Value for checking with existence
+     */
+    LinkList.prototype.IsExist = function (val) {
+        var cur = this._head;
+        if (cur.Data === val) {
+            return true;
+        }
+        while (cur.Next !== undefined) {
+            cur = cur.Next;
+            if (cur.Data === val) {
+                return true;
+            }
+        }
+        return false;
     };
     return LinkList;
 }());
