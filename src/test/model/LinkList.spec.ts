@@ -87,16 +87,15 @@ describe('Test LinkList', () => {
     expect(_linkList.Length()).toBe(0);
   });
 
-  // it("#7. Check IsExist.", () => {
-  //   _linkList.InitList();
-  //   _linkList.AppendElement(1);
-  //   _linkList.AppendElement(2);
-  //   _linkList.AppendElement(2);
+  it("#7. Check IsExist.", () => {
+    _linkList.InitList(1);
+    _linkList.AppendElement(2);
+    _linkList.AppendElement(2);
 
-  //   expect(_linkList.IsExist(1)).toBe(true);
-  //   expect(_linkList.IsExist(2)).toBe(true);
-  //   expect(_linkList.IsExist(3)).toBe(false);
-  // });
+    expect(_linkList.IsExist(1)).toBe(true);
+    expect(_linkList.IsExist(2)).toBe(true);
+    expect(_linkList.IsExist(3)).toBe(false);
+  });
 
   it("#8. Check Print.", () => {
     _linkList.InitList(1);

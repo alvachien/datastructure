@@ -107,29 +107,30 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 ### PROGRESS
 The progress of the project shown in the table below.
 
-No|Content|Status|Comment
-----:|:----|:-----|:-----
-1|**SequenceList**|**Finished**|Question left: search?
-2|**LinkList**|**In Process**|Question left: search?
-3|Graph|In Process|Question left: how to demonstrate the Graph for demo?
-4|Binary Search Tree|Not started yet|
-5|B Tree|Not started yet|
-6|Red Black Tree|Not started yet|
-7|Strassen Algorithm|Not started yet|
-8|Birthday Theory|Not started yet|
-9|Ball and Box|Not started yet|
-10|Hire on-line|Not started yet|
-11|Priority Queue|Not started yet|
-12|Hash algorithms|Not started yet|
-13|van Emde Boas Tree|Not started yet|
-14|Kruskal Algorithm|Not started yet|
-15|Prim Algorithm|Not started yet
-16|Bellman-Ford Algorithm|Not started yet|
-17|Dijkstra Algorithm|Not started yet|
-18|Floyd-Warshall Algorithm|Not started yet|
-19|Radix sort|Not started yet|
-20|Bucket sort|Not started yet|
-21|Formula|In Process||
+No|Content|Status|UT Status|Comment
+----:|:----|:-----|:-----|:-----
+1|**SequenceList**|**Finished**|**Passed**|Question left: search?
+2|**LinkList**|**Finished**|**Passed**|Question left: search?
+3|**SequenceStack**|**In Process**|**Passed**|Question left: search?
+11|Graph|In Process|n/a|Question left: how to demonstrate the Graph for demo?
+12|Binary Search Tree|n/a|n/a|Not started yet
+13|B Tree|n/a|n/a|Not started yet|
+14|Red Black Tree|n/a|n/a|Not started yet|
+15|Strassen Algorithm|n/a|n/a|Not started yet|
+16|Birthday Theory|n/a|n/a|Not started yet|
+17|Ball and Box|n/a|n/a|Not started yet|
+18|Hire on-line|n/a|n/a|Not started yet|
+19|Priority Queue|n/a|n/a|Not started yet|
+20|Hash algorithms|n/a|n/a|Not started yet|
+21|van Emde Boas Tree|n/a|n/a|Not started yet|
+22|Kruskal Algorithm|n/a|n/a|Not started yet|
+23|Prim Algorithm|n/a|n/a|Not started yet
+24|Bellman-Ford Algorithm|n/a|n/a|Not started yet|
+25|Dijkstra Algorithm|n/a|n/a|Not started yet|
+26|Floyd-Warshall Algorithm|n/a|n/a|Not started yet|
+27|Radix sort|n/a|n/a|Not started yet|
+28|Bucket sort|n/a|n/a|Not started yet|
+40|Formula|**In Process**|n/a|n/a|
 
 # CONTRIBUTORS
 - **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;

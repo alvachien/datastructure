@@ -117,16 +117,17 @@ export class LinkList<T> implements IList<T> {
     }
 
     if (index === 0) {
-      const nnode: LinkListNode<T> = new LinkListNode<T>();
+      let nnode: LinkListNode<T> = new LinkListNode<T>();
       nnode.Data = elem;
-      nnode.Next = this._head.Next;
+      nnode.Next = this._head;
       this._head = nnode;
+      this._length ++;
 
       return true;
     }
 
     let cur: LinkListNode<T> = this._head;
-    let i = 0;
+    let i = 1;
     while (cur !== undefined && i < index) {
       cur = cur.Next;
       i ++;
@@ -173,14 +174,19 @@ export class LinkList<T> implements IList<T> {
       return false;
     }
 
-    let cur: LinkListNode<T> = this._head;
     if (index === 0) {
-      this._head = cur.Next;
+      this._head = this._head.Next;
       this._length--;
+
+      if (this._length === 0) {
+        this._head = undefined;
+      }
+
       return true;
     }
 
-    let i = 0;
+    let cur: LinkListNode<T> = this._head;
+    let i = 1;
     while (cur !== undefined && i < index) {
       cur = cur.Next;
       i ++;
@@ -188,10 +194,6 @@ export class LinkList<T> implements IList<T> {
 
     cur.Next = cur.Next.Next;
     this._length--;
-
-    if (this._length === 0) {
-      this._head = undefined;
-    }
 
     return true;
   }
@@ -210,7 +212,37 @@ export class LinkList<T> implements IList<T> {
    * @param splitter Splitter
    */
   public Print(splitter?: string): string {
-    // TBD
-    return '';
+    if (this._length === 0 || this._head === undefined) {
+      return '';
+    }
+    let ar:T[] = [];
+    let cur: LinkListNode<T> = this._head;
+    ar.push(cur.Data);
+    while (cur.Next !== undefined) {
+      cur = cur.Next;
+      ar.push(cur.Data);
+    }
+
+    return ar.join(splitter);
+  }
+
+  /**
+   * Check the specified value existed or not
+   * @param val Value for checking with existence
+   */
+  public IsExist(val: T): boolean {
+    let cur: LinkListNode<T> = this._head;
+    if (cur.Data === val) {
+      return true;
+    }
+
+    while (cur.Next !== undefined) {
+      cur = cur.Next;
+      if (cur.Data === val) {
+        return true;
+      }  
+    }
+
+    return false;
   }
 }

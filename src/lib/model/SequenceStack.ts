@@ -12,26 +12,41 @@
 import { IStack } from './IStack';
 
 export class SequenceStack<T> implements IStack<T> {
+  private _data: T[] = [];
+
+  /** 
+   * Constructor
+   */
   constructor() {
   }
 
-  private _data: T[] = [];
-
+  /** 
+   * Length
+   */
   public Length(): number {
     return this._data.length;
   }
 
+  /** 
+   * Is empty 
+   */
   public IsEmpty(): boolean {
     return this._data.length === 0;
   }
 
-  public Push(elem: T): boolean {
-    this._data.push(elem);
-
-    return false;
+  /**
+   * Push
+   * @param elem Element to push
+   */
+  public Push(elem: T): number {
+    return this._data.push(elem);
   }
 
-  public Pop(): T | null {
+  /**
+   * Pop an element
+   * 
+   */
+  public Pop(): T | undefined {
     if (this._data.length === 0) {
       return null;
     }
@@ -41,6 +56,9 @@ export class SequenceStack<T> implements IStack<T> {
     return pi;
   }
 
+  /** 
+   * Peek the stack 
+   */
   public Peek(): T | null {
     if (this._data.length === 0) {
       return null;
@@ -50,6 +68,9 @@ export class SequenceStack<T> implements IStack<T> {
     return pi;
   }
 
+  /** 
+   * Clear all 
+   */
   public ClearAll(): boolean {
     this._data = [];
     return true;

@@ -45,25 +45,35 @@ export class LinkStack<T> implements IStack<T> {
     return this._length;
   }
 
+  /** 
+   * Is empty
+   */
   public IsEmpty(): boolean {
     return this._length === 0;
   }
 
-  public Push(elem: T): boolean {
+  /**
+   * Push new element, return the new length
+   * @param elem Element to push
+   */
+  public Push(elem: T): number {
     if (this._head === null) {
       this._head = new LinkStackNode<T>();
       this._head.Data = elem;
-      return true;
+      return this._length++;
     }
 
     const node: LinkStackNode<T> = new LinkStackNode<T>();
     node.Next = this._head;
     this._head = node;
 
-    return true;
+    return this._length++;
   }
 
-  public Pop(): T | null {
+  /** 
+   * Pop an item out
+   */
+  public Pop(): T | undefined {
     if (this._head === null) {
       return null;
     }
@@ -75,7 +85,7 @@ export class LinkStack<T> implements IStack<T> {
     return pi;
   }
 
-  public Peek(): T | null {
+  public Peek(): T | undefined {
     if (this._head === null) {
       return null;
     }
