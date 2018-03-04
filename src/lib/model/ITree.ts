@@ -11,7 +11,7 @@
  *
  */
 
-export interface ITreeNode<T> {
+export interface ITreeNode<T> {  
 }
 
 export interface ITree<T> {
@@ -38,7 +38,6 @@ export interface ITree<T> {
 
 
 export interface IBinaryTreeNode<T> {
-
 }
 
 export interface IBinaryTree<T> {

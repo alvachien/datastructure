@@ -16,7 +16,7 @@ export class LinkStackNode<T> {
   private _next: LinkStackNode<T>;
 
   constructore() {
-    this._next = null;
+    this._next = undefined;
   }
 
   get Data(): T {
@@ -38,9 +38,19 @@ export class LinkStack<T> implements IStack<T> {
   private _length = 0;
 
   constructor() {
-    //this._head = new LinkStackNode<T>();
+    this._head = undefined;
   }
 
+  /**
+   * Head
+   */
+  get Head(): LinkStackNode<T> {
+    return this._head;
+  }
+
+  /** 
+   * Length of the stack
+   */
   public Length(): number {
     return this._length;
   }
@@ -57,7 +67,7 @@ export class LinkStack<T> implements IStack<T> {
    * @param elem Element to push
    */
   public Push(elem: T): number {
-    if (this._head === null) {
+    if (this._head === undefined) {
       this._head = new LinkStackNode<T>();
       this._head.Data = elem;
       return this._length++;
@@ -74,8 +84,8 @@ export class LinkStack<T> implements IStack<T> {
    * Pop an item out
    */
   public Pop(): T | undefined {
-    if (this._head === null) {
-      return null;
+    if (this._head === undefined) {
+      return undefined;
     }
 
     const pi: T = this._head.Data;
@@ -85,17 +95,24 @@ export class LinkStack<T> implements IStack<T> {
     return pi;
   }
 
+  /** 
+   * Peek the first element 
+   */
   public Peek(): T | undefined {
-    if (this._head === null) {
-      return null;
+    if (this._head === undefined) {
+      return undefined;
     }
 
     return this._head.Data;
   }
 
+  /** 
+   * Clear all 
+   */
   public ClearAll(): boolean {
-    this._head = new LinkStackNode<T>();
+    this._head = undefined;
     this._length = 0;
+
     return true;
   }
 }
