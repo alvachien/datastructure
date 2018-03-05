@@ -5,25 +5,14 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: PriorityQueue.ts
+ * File: SequenceQueue.ts
  *
  */
 
-/**
- * Priority Queue
- */
-export class PriorityQueueItem<T> {
-  data: T;
-  priority: number;
+import { IQueue } from './IQueue';
 
-  constructor(data: T, priority: number) {
-    this.data = data;
-    this.priority = priority;
-  }
-}
-
-export class PriorityQueue<T> {
-  private _data: PriorityQueueItem<T>[] = [];
+export class SequenceQueue<T> implements IQueue<T> {
+  private _data: T[] = [];
 
   constructor() {
   }
@@ -46,27 +35,8 @@ export class PriorityQueue<T> {
    * Enqueue the  element at the tailor of the queue, returns the result: true means success
    * @param elem the element to be inserted.
    */
-  public Enqueue(elem: T, pri: number): boolean {
-    let item = new PriorityQueueItem<T>(elem, pri);
-
-    if (this._data.length === 0) {
-      this._data.push(item);
-    } else {
-      let added: boolean = false;
-
-      for(let i = 0; i < this._data.length; i ++) {
-        if (item.priority < this._data[i].priority) {
-          this._data.splice(i, 0, item);
-          added = true;
-          break;
-        }
-      }
-
-      if (added !== true) {
-        this._data.push(item);
-      }
-    }
-    
+  public Enqueue(elem: T): boolean {
+    this._data.push(elem);
     return true;
   }
 
@@ -78,7 +48,7 @@ export class PriorityQueue<T> {
       return undefined;
     }
 
-    return this._data[0].data;
+    return this._data[0];
   }
 
   /**
@@ -89,7 +59,7 @@ export class PriorityQueue<T> {
       return undefined;
     }
 
-    return this._data.shift().data;
+    return this._data.shift();
   }
 
   /**

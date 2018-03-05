@@ -5,18 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: PriorityQueue.ts
+ * File: SequenceQueue.ts
  *
  */
-/**
- * Priority Queue
- */
-export declare class PriorityQueueItem<T> {
-    data: T;
-    priority: number;
-    constructor(data: T, priority: number);
-}
-export declare class PriorityQueue<T> {
+import { IQueue } from './IQueue';
+export declare class SequenceQueue<T> implements IQueue<T> {
     private _data;
     constructor();
     /**
@@ -31,7 +24,7 @@ export declare class PriorityQueue<T> {
      * Enqueue the  element at the tailor of the queue, returns the result: true means success
      * @param elem the element to be inserted.
      */
-    Enqueue(elem: T, pri: number): boolean;
+    Enqueue(elem: T): boolean;
     /**
      * Peek the top element without remove it, returns the top element.
      */

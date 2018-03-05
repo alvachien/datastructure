@@ -43,7 +43,7 @@ export function CCGP_Solution2(): CGGPPostion[] {
     }
 
     //rst.push(`A = ${total / 9 + 1}, B = ${total % 9 + 1}`);
-    rst.push({PositionA: total / 9 + 1, PositionB:total % 9 + 1});
+    rst.push({PositionA: total / 9 + 1, PositionB: total % 9 + 1});
   }
 
   return rst;

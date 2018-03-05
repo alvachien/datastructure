@@ -11,10 +11,6 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Desp:
- *
- */
 function CCGP_Solution2() {
     var total = 81;
     var rst = [];
@@ -22,7 +18,8 @@ function CCGP_Solution2() {
         if (total / 9 % 3 === total % 9 / 3) {
             continue;
         }
-        rst.push("A = " + (total / 9 + 1) + ", B = " + (total % 9 + 1));
+        //rst.push(`A = ${total / 9 + 1}, B = ${total % 9 + 1}`);
+        rst.push({ PositionA: total / 9 + 1, PositionB: total % 9 + 1 });
     }
     return rst;
 }
@@ -31,8 +28,9 @@ function CCGP_Solution3() {
     var rst = [];
     for (var a = 1; a <= 9; a++) {
         for (var b = 1; b <= 9; b++) {
-            if (a % 3 === b % 3) {
-                rst.push("A = " + a + ", B = " + b);
+            if (a % 3 !== b % 3) {
+                //rst.push(`A = ${a}, B = ${b}`);
+                rst.push({ PositionA: a, PositionB: b });
             }
         }
     }

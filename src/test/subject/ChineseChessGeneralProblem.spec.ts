@@ -21,7 +21,7 @@ describe('Test ChineseChessGeneralProblem', () => {
   it("#1. Check CCGP_Solution2()", () => {
     let arstrs = CCGP_Solution2();
 
-    expect(arstrs.length > 0).toBe(true);
+    expect(arstrs.length).toBe(54);
   });
 
   it("#2. Check CCGP_Solution3()", () => {

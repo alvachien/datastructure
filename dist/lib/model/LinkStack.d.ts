@@ -20,6 +20,13 @@ export declare class LinkStack<T> implements IStack<T> {
     private _head;
     private _length;
     constructor();
+    /**
+     * Head
+     */
+    readonly Head: LinkStackNode<T>;
+    /**
+     * Length of the stack
+     */
     Length(): number;
     /**
      * Is empty
@@ -34,6 +41,12 @@ export declare class LinkStack<T> implements IStack<T> {
      * Pop an item out
      */
     Pop(): T | undefined;
+    /**
+     * Peek the first element
+     */
     Peek(): T | undefined;
+    /**
+     * Clear all
+     */
     ClearAll(): boolean;
 }

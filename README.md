@@ -113,6 +113,10 @@ No|Content|Status|UT Status|Comment
 2|**LinkList**|**Finished**|**Passed**|Question left: search?
 3|**SequenceStack**|**In Process**|**Passed**|Question left: search?
 4|**Matrix**|**Finished**|**Passed**|Question left: search?
+5|**Set**|**Finished**|**Passed**|Question left: search?
+6|**SequenceQueue**|**Finished**|**Passed**|Question left: search?
+7|**PriorityQueue**|**Finished**|**Passed**|Question left: search?
+8|**Dictionary**|**Finished**|**Passed**|Question left: search?
 11|Graph|In Process|n/a|Question left: how to demonstrate the Graph for demo?
 12|Binary Search Tree|n/a|n/a|Not started yet
 13|B Tree|n/a|n/a|Not started yet|

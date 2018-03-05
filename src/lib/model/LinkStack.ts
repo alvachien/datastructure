@@ -91,6 +91,7 @@ export class LinkStack<T> implements IStack<T> {
     const pi: T = this._head.Data;
 
     this._head = this._head.Next;
+    this._length --;
 
     return pi;
   }

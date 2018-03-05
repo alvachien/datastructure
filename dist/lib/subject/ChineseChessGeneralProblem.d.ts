@@ -10,8 +10,25 @@
  *
  */
 /**
- * Desp:
+ * Context:
+ * There is a simple run in Chinese chess: the General (or kings) cannot in the same line.
  *
+ * There are several solutions provided via functions.
+ *
+ * Position of King:
+ * -----------------------------
+ * |  1  2  3  |
+ * |  4  5  6  |
+ * |  7  8  9  |
+ *
+ * |  1  2  3  |
+ * |  4  5  6  |
+ * |  7  8  9  |
+ * -----------------------------
  */
-export declare function CCGP_Solution2(): string[];
-export declare function CCGP_Solution3(): string[];
+export interface CGGPPostion {
+    PositionA: number;
+    PositionB: number;
+}
+export declare function CCGP_Solution2(): CGGPPostion[];
+export declare function CCGP_Solution3(): CGGPPostion[];
