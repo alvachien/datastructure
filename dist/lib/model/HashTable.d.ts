@@ -5,19 +5,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: Dictionary.ts
+ * File: HashTable.ts
  *
  */
-export declare class Dictionary {
-    private _data;
+export declare class HashTable {
+    private _table;
     constructor();
-    has(key: any): boolean;
-    set(key: any, value: any): void;
-    remove(key: any): boolean;
+    put(key: string, value: any): void;
+    remove(key: any): void;
     get(key: any): any;
-    values(): any[];
-    keys(): any[];
-    clear(): void;
-    size(): number;
-    sizeLegacy(): number;
+    private generateLoseHashCode(key);
+    private generatedjb2HashCode(key);
 }

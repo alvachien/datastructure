@@ -19,4 +19,61 @@ export class Dictionary {
   public has(key: any): boolean {
     return key in this._data;
   }
+
+  public set(key: any, value: any) {
+    this._data[key] = value;
+  }
+
+  public remove(key: any): boolean {
+    if (this.has(key)) {
+      delete this._data[key];
+      return true;
+    }
+
+    return false;
+  }
+
+  public get(key: any) {
+    return this.has(key) ? this._data[key] : undefined;
+  }
+
+  public values(): any[] {
+    let ret: any[] = [];
+    for(let key in this._data) {
+      if (this.has(key)) {
+        ret.push(this._data[key]);
+      }
+    }
+
+    return ret;
+  }
+
+  public keys(): any[] {
+    let ret: any[] = [];
+    for(let key in this._data) {
+      if (this.has(key)) {
+        ret.push(key);
+      }
+    }
+
+    return ret;
+  }
+
+  public clear(): void {
+    this._data = {};
+  }
+
+  public size(): number {
+    return Object.keys(this._data).length;
+  }
+
+  public sizeLegacy(): number {
+    let count: number = 0;
+    for(let prop in this._data) {
+      if (this._data.hasOwnProperty(prop)) {
+        ++ count;
+      }
+    }
+    return count;
+  }
 }

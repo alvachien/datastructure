@@ -17,6 +17,52 @@ var Dictionary = /** @class */ (function () {
     Dictionary.prototype.has = function (key) {
         return key in this._data;
     };
+    Dictionary.prototype.set = function (key, value) {
+        this._data[key] = value;
+    };
+    Dictionary.prototype.remove = function (key) {
+        if (this.has(key)) {
+            delete this._data[key];
+            return true;
+        }
+        return false;
+    };
+    Dictionary.prototype.get = function (key) {
+        return this.has(key) ? this._data[key] : undefined;
+    };
+    Dictionary.prototype.values = function () {
+        var ret = [];
+        for (var key in this._data) {
+            if (this.has(key)) {
+                ret.push(this._data[key]);
+            }
+        }
+        return ret;
+    };
+    Dictionary.prototype.keys = function () {
+        var ret = [];
+        for (var key in this._data) {
+            if (this.has(key)) {
+                ret.push(key);
+            }
+        }
+        return ret;
+    };
+    Dictionary.prototype.clear = function () {
+        this._data = {};
+    };
+    Dictionary.prototype.size = function () {
+        return Object.keys(this._data).length;
+    };
+    Dictionary.prototype.sizeLegacy = function () {
+        var count = 0;
+        for (var prop in this._data) {
+            if (this._data.hasOwnProperty(prop)) {
+                ++count;
+            }
+        }
+        return count;
+    };
     return Dictionary;
 }());
 exports.Dictionary = Dictionary;

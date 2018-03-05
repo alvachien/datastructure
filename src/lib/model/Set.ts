@@ -38,7 +38,7 @@ export class Set {
     return false;
   }
 
-  public clean(): void {
+  public clear(): void {
     this._data = {};
   }
 

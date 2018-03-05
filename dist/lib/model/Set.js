@@ -31,7 +31,7 @@ var Set = /** @class */ (function () {
         }
         return false;
     };
-    Set.prototype.clean = function () {
+    Set.prototype.clear = function () {
         this._data = {};
     };
     Set.prototype.size = function () {

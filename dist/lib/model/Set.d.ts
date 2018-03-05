@@ -14,7 +14,7 @@ export declare class Set {
     has(val: any): any;
     add(val: any): boolean;
     remove(val: any): boolean;
-    clean(): void;
+    clear(): void;
     size(): number;
     sizeLegacy(): number;
     values(): any[];
