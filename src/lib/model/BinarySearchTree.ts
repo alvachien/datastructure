@@ -12,8 +12,33 @@
 export class BinarySearchTreeNode<T> {
   public leftNode: BinarySearchTreeNode<T>;
   public rightNode: BinarySearchTreeNode<T>;
-  public key: number;
-  public value: T;
+  private _key: number;
+  private _value: T;
+
+  get Key(): number {
+    return this._key;
+  }
+  set Key(key: number) {
+    this._key = key;
+  }
+  get Value(): T {
+    return this._value;
+  }
+  set Value(value: T) {
+    this._value = value;
+  }
+
+  constructor(key?: number, value?: T) {
+    if ( (key === undefined && value !== undefined)
+      || (key !== undefined && value === undefined)) {
+      throw new Error('invalid input');
+    }
+
+    if (key !== undefined && value !== undefined) {
+      this._key = key;
+      this._value = value;
+    }    
+  }
 }
 
 export class BinarySearchTree<T> {
@@ -23,9 +48,7 @@ export class BinarySearchTree<T> {
   }
 
   public insert(key: number, value: T) {
-    let newnode: BinarySearchTreeNode<T> = new BinarySearchTreeNode<T>();
-    newnode.key = key;
-    newnode.value = value;
+    let newnode: BinarySearchTreeNode<T> = new BinarySearchTreeNode<T>(key, value);
 
     if (this.root === undefined) {
       this.root = newnode;
@@ -36,7 +59,7 @@ export class BinarySearchTree<T> {
 
   private insertNode(parnode: BinarySearchTreeNode<T>, 
     newnode: BinarySearchTreeNode<T>) {
-      if (newnode.key < parnode.key) {
+      if (newnode.Key < parnode.Key) {
         if (parnode.leftNode === undefined) {
           parnode.leftNode = newnode;
         } else {

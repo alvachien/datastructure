@@ -11,8 +11,11 @@
 export declare class BinarySearchTreeNode<T> {
     leftNode: BinarySearchTreeNode<T>;
     rightNode: BinarySearchTreeNode<T>;
-    key: number;
-    value: T;
+    private _key;
+    private _value;
+    Key: number;
+    Value: T;
+    constructor(key?: number, value?: T);
 }
 export declare class BinarySearchTree<T> {
     root: BinarySearchTreeNode<T>;
