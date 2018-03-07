@@ -14,111 +14,111 @@ import { IGraph, IGraphVertex, IGraphEdge, IGraphAdjaceListVertex } from './IGra
 import { LinkList } from './LinkList';
 
 export class GraphAdjaceListEdge<T> {
-    private _to: number;
-    private _weight: T;
+  private _to: number;
+  private _weight: T;
 
-    get To(): number {
-        return this._to;
-    }
-    set ID(to: number) {
-        this._to = to;
-    }
+  get To(): number {
+    return this._to;
+  }
+  set ID(to: number) {
+    this._to = to;
+  }
 
-    get Weight(): T {
-        return this._weight;
-    }
-    set Data(weight: T) {
-        this._weight = weight;
-    }
+  get Weight(): T {
+    return this._weight;
+  }
+  set Data(weight: T) {
+    this._weight = weight;
+  }
 }
 
 export class GraphAdjaceListVertex<X, Y> implements IGraphAdjaceListVertex<X> {
-    private _id: number;
-    private _data: X;
-    private _linkAdjList: LinkList<GraphAdjaceListEdge<Y>> = new LinkList<GraphAdjaceListEdge<Y>>();
+  private _id: number;
+  private _data: X;
+  private _linkAdjList: LinkList<GraphAdjaceListEdge<Y>> = new LinkList<GraphAdjaceListEdge<Y>>();
 
-    get ID(): number {
-        return this._id;
-    }
-    set ID(id: number) {
-        this._id = id;
-    }
+  get ID(): number {
+    return this._id;
+  }
+  set ID(id: number) {
+    this._id = id;
+  }
 
-    get Data(): X {
-        return this._data;
-    }
-    set Data(data: X) {
-        this._data = data;
-    }
+  get Data(): X {
+    return this._data;
+  }
+  set Data(data: X) {
+    this._data = data;
+  }
 
-    get AdjaceList(): LinkList<GraphAdjaceListEdge<Y>> {
-        return this._linkAdjList;
-    }
+  get AdjaceList(): LinkList<GraphAdjaceListEdge<Y>> {
+    return this._linkAdjList;
+  }
 }
 
 export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
-    private _vertex : GraphAdjaceListVertex<X, Y>[];
+  private _vertex: GraphAdjaceListVertex<X, Y>[];
 
-    constructor() {
-        this._vertex = [];
+  constructor() {
+    this._vertex = [];
+  }
+
+  public VertexNumber(): number {
+    return this._vertex.length;
+  }
+
+  /**
+   * Edge number
+   */
+  public EdgeNumber(): number {
+    let en = 0;
+    for (const vtx of this._vertex) {
+      en += vtx.AdjaceList.Length();
     }
 
-    public VertexNumber(): number {
-        return this._vertex.length;
-    }
+    return en;
+  }
 
-    /**
-     * Edge number
-     */
-    public EdgeNumber(): number {
-        let en = 0;
-        for (const vtx of this._vertex) {
-            en += vtx.AdjaceList.Length();
-        }
+  /**
+   * Vertex
+   */
+  Vertexs(): IGraphVertex<X>[] {
+    return [];
+  }
 
-        return en;
-    }
+  /**
+   * Edges
+   */
+  Edges(): IGraphEdge<Y>[] {
+    return [];
+  }
 
-    /**
-     * Vertex
-     */
-    Vertexs(): IGraphVertex<X>[] {
-        return [];
-    }
+  /**
+   * Add Vertex
+   */
+  AddVertex(data: X): number {
+    return -1;
+  }
 
-    /**
-     * Edges
-     */
-    Edges(): IGraphEdge<Y>[] {
-        return [];
-    }
+  /**
+   * Add Edge
+   */
+  AddEdge(frm: number, to: number, weight: Y): boolean {
+    return false;
+  }
 
-    /**
-     * Add Vertex
-     */
-    AddVertex(data: X): number {
-        return -1;
-    }
+  /**
+   * DFS: Depth First Search
+   */
+  DFS(): IGraphVertex<X>[] {
+    return [];
+  }
 
-    /**
-     * Add Edge
-     */
-    AddEdge(frm: number, to: number, weight: Y) : boolean {
-        return false;
-    }
-
-    /**
-     * DFS: Depth First Search
-     */
-    DFS() : IGraphVertex<X>[] {
-        return [];
-    }
-
-    /**
-     * BFS: Breadth First Search
-     */
-    BFS(): IGraphVertex<Y>[] {
-        return [];
-    }
+  /**
+   * BFS: Breadth First Search
+   */
+  BFS(): IGraphVertex<Y>[] {
+    return [];
+  }
 }
 

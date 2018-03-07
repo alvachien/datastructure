@@ -29,7 +29,7 @@ export class BinarySearchTreeNode<T> {
   }
 
   constructor(key?: number, value?: T) {
-    if ( (key === undefined && value !== undefined)
+    if ((key === undefined && value !== undefined)
       || (key !== undefined && value === undefined)) {
       throw new Error('invalid input');
     }
@@ -37,7 +37,7 @@ export class BinarySearchTreeNode<T> {
     if (key !== undefined && value !== undefined) {
       this._key = key;
       this._value = value;
-    }    
+    }
   }
 }
 
@@ -57,21 +57,21 @@ export class BinarySearchTree<T> {
     }
   }
 
-  private insertNode(parnode: BinarySearchTreeNode<T>, 
+  private insertNode(parnode: BinarySearchTreeNode<T>,
     newnode: BinarySearchTreeNode<T>) {
-      if (newnode.Key < parnode.Key) {
-        if (parnode.leftNode === undefined) {
-          parnode.leftNode = newnode;
-        } else {
-          this.insertNode(parnode.leftNode, newnode);
-        }
+    if (newnode.Key < parnode.Key) {
+      if (parnode.leftNode === undefined) {
+        parnode.leftNode = newnode;
       } else {
-        if (parnode.rightNode === undefined) {
-          parnode.rightNode = newnode;
-        } else {
-          this.insertNode(parnode.rightNode, newnode);
-        }
+        this.insertNode(parnode.leftNode, newnode);
       }
+    } else {
+      if (parnode.rightNode === undefined) {
+        parnode.rightNode = newnode;
+      } else {
+        this.insertNode(parnode.rightNode, newnode);
+      }
+    }
   }
 
   public search(key: number) {
