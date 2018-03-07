@@ -18,8 +18,13 @@ describe('Test BinarySearchTree', () => {
     _bsTree = new BinarySearchTree<number>();
   });
 
-  it("#1. Test set, values, has and size()", () => {
+  it("#1. Test creation", () => {
     expect(_bsTree).toBeTruthy();
+  });
+
+  it("#2. Test insert", () => {
+    expect(_bsTree).toBeTruthy();
+    //_bsTree.insert()
   });
 });
 

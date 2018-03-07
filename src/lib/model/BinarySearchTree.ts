@@ -44,7 +44,10 @@ export class BinarySearchTreeNode<T> {
 }
 
 export class BinarySearchTree<T> {
-  public root: BinarySearchTreeNode<T>;
+  private _root: BinarySearchTreeNode<T>;
+  get Root(): BinarySearchTreeNode<T> {
+    return this._root;
+  }
 
   constructor() {
   }
@@ -52,8 +55,8 @@ export class BinarySearchTree<T> {
   public insert(key: number, value: T) {
     let newnode: BinarySearchTreeNode<T> = new BinarySearchTreeNode<T>(key, value);
 
-    if (this.root === undefined) {
-      this.root = newnode;
+    if (this._root === undefined) {
+      this._root = newnode;
     } else {
 
     }
@@ -77,23 +80,23 @@ export class BinarySearchTree<T> {
   }
 
   public search(key: number): BinarySearchTreeNode<T> {
-    return this.searchNode(this.root, key);
+    return this.searchNode(this._root, key);
   }
 
   public inOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
-    this.inOrderTraverseNode(this.root, callback);
+    this.inOrderTraverseNode(this._root, callback);
   }
   public preOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
-    this.preOrderTraverseNode(this.root, callback);
+    this.preOrderTraverseNode(this._root, callback);
   }
   public postOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
-    this.postOrderTraverseNode(this.root, callback);
+    this.postOrderTraverseNode(this._root, callback);
   }
   public min(): BinarySearchTreeNode<T> {
-    return this.minNode(this.root);
+    return this.minNode(this._root);
   }
   public max(): BinarySearchTreeNode<T> {
-    return this.maxNode(this.root);
+    return this.maxNode(this._root);
   }
   public remove(key: number) {
 

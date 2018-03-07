@@ -20,14 +20,14 @@ export class GraphAdjaceListEdge<T> {
   get To(): number {
     return this._to;
   }
-  set ID(to: number) {
+  set To(to: number) {
     this._to = to;
   }
 
   get Weight(): T {
     return this._weight;
   }
-  set Data(weight: T) {
+  set Weight(weight: T) {
     this._weight = weight;
   }
 }

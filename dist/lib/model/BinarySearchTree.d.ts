@@ -18,16 +18,23 @@ export declare class BinarySearchTreeNode<T> {
     constructor(key?: number, value?: T);
 }
 export declare class BinarySearchTree<T> {
-    root: BinarySearchTreeNode<T>;
+    private _root;
+    readonly Root: BinarySearchTreeNode<T>;
     constructor();
     insert(key: number, value: T): void;
     private insertNode(parnode, newnode);
-    search(key: number): void;
+    search(key: number): BinarySearchTreeNode<T>;
     inOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void): void;
-    private inOrderTraverseNode(node, callback);
-    preOrderTraverse(): void;
-    postOrderTraverse(): void;
-    min(): void;
-    max(): void;
+    preOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void): void;
+    postOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void): void;
+    min(): BinarySearchTreeNode<T>;
+    max(): BinarySearchTreeNode<T>;
     remove(key: number): void;
+    private inOrderTraverseNode(node, callback);
+    private preOrderTraverseNode(node, callback);
+    private postOrderTraverseNode(node, callback);
+    private minNode(node);
+    private maxNode(node);
+    private searchNode(node, key);
+    private removeNode(node, key);
 }

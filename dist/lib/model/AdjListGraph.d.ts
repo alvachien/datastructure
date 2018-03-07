@@ -14,10 +14,8 @@ import { LinkList } from './LinkList';
 export declare class GraphAdjaceListEdge<T> {
     private _to;
     private _weight;
-    readonly To: number;
-    ID: number;
-    readonly Weight: T;
-    Data: T;
+    To: number;
+    Weight: T;
 }
 export declare class GraphAdjaceListVertex<X, Y> implements IGraphAdjaceListVertex<X> {
     private _id;

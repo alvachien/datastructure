@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,7 +10,6 @@
  * File: BinarySearchTree.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 var BinarySearchTreeNode = /** @class */ (function () {
     function BinarySearchTreeNode(key, value) {
         if ((key === undefined && value !== undefined)
@@ -47,10 +47,17 @@ exports.BinarySearchTreeNode = BinarySearchTreeNode;
 var BinarySearchTree = /** @class */ (function () {
     function BinarySearchTree() {
     }
+    Object.defineProperty(BinarySearchTree.prototype, "Root", {
+        get: function () {
+            return this._root;
+        },
+        enumerable: true,
+        configurable: true
+    });
     BinarySearchTree.prototype.insert = function (key, value) {
         var newnode = new BinarySearchTreeNode(key, value);
-        if (this.root === undefined) {
-            this.root = newnode;
+        if (this._root === undefined) {
+            this._root = newnode;
         }
         else {
         }
@@ -74,9 +81,24 @@ var BinarySearchTree = /** @class */ (function () {
         }
     };
     BinarySearchTree.prototype.search = function (key) {
+        return this.searchNode(this._root, key);
     };
     BinarySearchTree.prototype.inOrderTraverse = function (callback) {
-        this.inOrderTraverseNode(this.root, callback);
+        this.inOrderTraverseNode(this._root, callback);
+    };
+    BinarySearchTree.prototype.preOrderTraverse = function (callback) {
+        this.preOrderTraverseNode(this._root, callback);
+    };
+    BinarySearchTree.prototype.postOrderTraverse = function (callback) {
+        this.postOrderTraverseNode(this._root, callback);
+    };
+    BinarySearchTree.prototype.min = function () {
+        return this.minNode(this._root);
+    };
+    BinarySearchTree.prototype.max = function () {
+        return this.maxNode(this._root);
+    };
+    BinarySearchTree.prototype.remove = function (key) {
     };
     BinarySearchTree.prototype.inOrderTraverseNode = function (node, callback) {
         if (node !== undefined) {
@@ -87,15 +109,87 @@ var BinarySearchTree = /** @class */ (function () {
             this.inOrderTraverseNode(node.rightNode, callback);
         }
     };
-    BinarySearchTree.prototype.preOrderTraverse = function () {
+    BinarySearchTree.prototype.preOrderTraverseNode = function (node, callback) {
+        if (node !== undefined) {
+            if (callback !== undefined) {
+                callback(node);
+            }
+            this.preOrderTraverseNode(node.leftNode, callback);
+            this.preOrderTraverseNode(node.rightNode, callback);
+        }
     };
-    BinarySearchTree.prototype.postOrderTraverse = function () {
+    BinarySearchTree.prototype.postOrderTraverseNode = function (node, callback) {
+        if (node !== undefined) {
+            this.postOrderTraverseNode(node.leftNode, callback);
+            this.postOrderTraverseNode(node.rightNode, callback);
+            if (callback !== undefined) {
+                callback(node);
+            }
+        }
     };
-    BinarySearchTree.prototype.min = function () {
+    BinarySearchTree.prototype.minNode = function (node) {
+        if (node !== undefined) {
+            while (node !== undefined && node.leftNode !== undefined) {
+                node = node.leftNode;
+            }
+            return node;
+        }
+        return undefined;
     };
-    BinarySearchTree.prototype.max = function () {
+    BinarySearchTree.prototype.maxNode = function (node) {
+        if (node !== undefined) {
+            while (node !== undefined && node.rightNode !== undefined) {
+                node = node.rightNode;
+            }
+            return node;
+        }
+        return undefined;
     };
-    BinarySearchTree.prototype.remove = function (key) {
+    BinarySearchTree.prototype.searchNode = function (node, key) {
+        if (node === undefined) {
+            return undefined;
+        }
+        if (key < node.Key) {
+            return this.searchNode(node.leftNode, key);
+        }
+        else if (key > node.Key) {
+            return this.searchNode(node.rightNode, key);
+        }
+        else {
+            return node;
+        }
+    };
+    BinarySearchTree.prototype.removeNode = function (node, key) {
+        if (node === undefined) {
+            return undefined;
+        }
+        if (key < node.Key) {
+            node.leftNode = this.removeNode(node.leftNode, key);
+            return node;
+        }
+        else if (key > node.Key) {
+            node.rightNode = this.removeNode(node.rightNode, key);
+            return node;
+        }
+        else {
+            if (node.leftNode === undefined && node.rightNode === undefined) {
+                node = undefined;
+                return node;
+            }
+            if (node.leftNode === undefined) {
+                node = node.rightNode;
+                return node;
+            }
+            else if (node.rightNode === undefined) {
+                node = node.leftNode;
+                return node;
+            }
+            var aux = void 0;
+            // let aux = findMinNode(node.rightNode);
+            node.Key = aux.Key;
+            node.rightNode = this.removeNode(node.rightNode, aux.Key);
+            return node;
+        }
     };
     return BinarySearchTree;
 }());

@@ -19,10 +19,6 @@ var GraphAdjaceListEdge = /** @class */ (function () {
         get: function () {
             return this._to;
         },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GraphAdjaceListEdge.prototype, "ID", {
         set: function (to) {
             this._to = to;
         },
@@ -33,10 +29,6 @@ var GraphAdjaceListEdge = /** @class */ (function () {
         get: function () {
             return this._weight;
         },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GraphAdjaceListEdge.prototype, "Data", {
         set: function (weight) {
             this._weight = weight;
         },
