@@ -1,3 +1,5 @@
+import { callbackify } from "util";
+
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -74,26 +76,125 @@ export class BinarySearchTree<T> {
     }
   }
 
-  public search(key: number) {
-
+  public search(key: number): BinarySearchTreeNode<T> {
+    return this.searchNode(this.root, key);
   }
 
-  public inOrderTraverse() {
-
+  public inOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
+    this.inOrderTraverseNode(this.root, callback);
   }
-  public preOrderTraverse() {
-
+  public preOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
+    this.preOrderTraverseNode(this.root, callback);
   }
-  public postOrderTraverse() {
-
+  public postOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
+    this.postOrderTraverseNode(this.root, callback);
   }
-  public min() {
-
+  public min(): BinarySearchTreeNode<T> {
+    return this.minNode(this.root);
   }
-  public max() {
-
+  public max(): BinarySearchTreeNode<T> {
+    return this.maxNode(this.root);
   }
   public remove(key: number) {
 
+  }
+
+  private inOrderTraverseNode(node: BinarySearchTreeNode<T>, 
+    callback: (node: BinarySearchTreeNode<T>) => void) {
+    if (node !== undefined) {
+      this.inOrderTraverseNode(node.leftNode, callback);
+      if (callback !== undefined) {
+        callback(node);
+      }
+      this.inOrderTraverseNode(node.rightNode, callback);
+    }
+  }
+  private preOrderTraverseNode(node: BinarySearchTreeNode<T>,
+    callback: (node: BinarySearchTreeNode<T>) => void) {
+    if (node !== undefined) {
+      if (callback !== undefined) {
+        callback(node);
+      }
+      this.preOrderTraverseNode(node.leftNode, callback);
+      this.preOrderTraverseNode(node.rightNode, callback);
+    }
+  }
+  private postOrderTraverseNode(node: BinarySearchTreeNode<T>,
+    callback: (node: BinarySearchTreeNode<T>) => void) {
+    if (node !== undefined) {
+      this.postOrderTraverseNode(node.leftNode, callback);
+      this.postOrderTraverseNode(node.rightNode, callback);
+      if (callback !== undefined) {
+        callback(node);
+      }
+    }
+  }
+
+  private minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    if (node !== undefined) {
+      while(node !== undefined && node.leftNode !== undefined) {
+        node = node.leftNode;
+      }
+
+      return node;
+    }
+
+    return undefined;
+  }
+  private maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    if (node !== undefined) {
+      while(node !== undefined && node.rightNode !== undefined) {
+        node = node.rightNode;
+      }
+
+      return node;
+    }
+
+    return undefined;
+  }
+  private searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> {
+    if (node === undefined) {
+      return undefined;
+    }
+
+    if (key < node.Key) {
+      return this.searchNode(node.leftNode, key);
+    } else if (key > node.Key) {
+      return this.searchNode(node.rightNode, key);
+    } else {
+      return node;
+    }
+  }
+  private removeNode(node: BinarySearchTreeNode<T>, key: number) {
+    if (node === undefined) {
+      return undefined;
+    }
+
+    if (key < node.Key) {
+      node.leftNode = this.removeNode(node.leftNode, key);
+      return node;
+    } else if (key > node.Key) {
+      node.rightNode = this.removeNode(node.rightNode, key);
+      return node;
+    } else {
+      if (node.leftNode === undefined && node.rightNode === undefined) {
+        node = undefined;
+        return node;
+      }
+
+      if (node.leftNode === undefined) {
+        node = node.rightNode;
+        return node;
+      } else if (node.rightNode === undefined) {
+        node = node.leftNode;
+        return node;
+      }
+
+      let aux;
+      // let aux = findMinNode(node.rightNode);
+      node.Key = aux.Key;
+      node.rightNode = this.removeNode(node.rightNode, aux.Key);
+      return node;
+    }
   }
 }

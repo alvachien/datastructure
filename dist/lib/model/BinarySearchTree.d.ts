@@ -23,7 +23,8 @@ export declare class BinarySearchTree<T> {
     insert(key: number, value: T): void;
     private insertNode(parnode, newnode);
     search(key: number): void;
-    inOrderTraverse(): void;
+    inOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void): void;
+    private inOrderTraverseNode(node, callback);
     preOrderTraverse(): void;
     postOrderTraverse(): void;
     min(): void;

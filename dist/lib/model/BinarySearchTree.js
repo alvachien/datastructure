@@ -75,7 +75,17 @@ var BinarySearchTree = /** @class */ (function () {
     };
     BinarySearchTree.prototype.search = function (key) {
     };
-    BinarySearchTree.prototype.inOrderTraverse = function () {
+    BinarySearchTree.prototype.inOrderTraverse = function (callback) {
+        this.inOrderTraverseNode(this.root, callback);
+    };
+    BinarySearchTree.prototype.inOrderTraverseNode = function (node, callback) {
+        if (node !== undefined) {
+            this.inOrderTraverseNode(node.leftNode, callback);
+            if (callback !== undefined) {
+                callback(node);
+            }
+            this.inOrderTraverseNode(node.rightNode, callback);
+        }
     };
     BinarySearchTree.prototype.preOrderTraverse = function () {
     };
