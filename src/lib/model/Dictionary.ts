@@ -16,15 +16,15 @@ export class Dictionary<X> {
     this._data = {};
   }
 
-  public has(key: any): boolean {
+  public has(key: string): boolean {
     return key in this._data;
   }
 
-  public set(key: any, value: X) {
+  public set(key: string, value: X) {
     this._data[key] = value;
   }
 
-  public remove(key: any): boolean {
+  public remove(key: string): boolean {
     if (this.has(key)) {
       delete this._data[key];
       return true;
@@ -33,7 +33,7 @@ export class Dictionary<X> {
     return false;
   }
 
-  public get(key: any): X {
+  public get(key: string): X {
     return this.has(key) ? this._data[key] : undefined;
   }
 
@@ -48,7 +48,7 @@ export class Dictionary<X> {
     return ret;
   }
 
-  public keys(): any[] {
+  public keys(): string[] {
     let ret: any[] = [];
     for(let key in this._data) {
       if (this.has(key)) {

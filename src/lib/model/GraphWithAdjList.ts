@@ -28,6 +28,9 @@ export class GraphWithAdjList<X, Y> {
   
   public addVertex(vertex: X) {
     this._vertices.AppendElement(vertex);
-    this._adjList.set(vertex, undefined);
+    this._adjList.set(vertex.toString(), undefined);
+  }
+  public addEdge(vertex1: X, vertex2: X, weight?: Y) {
+    // this._adjList.get(vertex1.toString()).push()
   }
 }
