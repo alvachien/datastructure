@@ -12,10 +12,10 @@
 import { Dictionary } from '../../lib/model/Dictionary';
 
 describe('Test Dictionary', () => {
-  let _dict: Dictionary;
+  let _dict: Dictionary<string>;
 
   beforeEach(() => {
-    _dict = new Dictionary();
+    _dict = new Dictionary<string>();
   });
 
   it("#1. Test set, values, has and size()", () => {

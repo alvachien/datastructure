@@ -8,14 +8,14 @@
  * File: Dictionary.ts
  *
  */
-export declare class Dictionary {
+export declare class Dictionary<X> {
     private _data;
     constructor();
     has(key: any): boolean;
-    set(key: any, value: any): void;
+    set(key: any, value: X): void;
     remove(key: any): boolean;
-    get(key: any): any;
-    values(): any[];
+    get(key: any): X;
+    values(): X[];
     keys(): any[];
     clear(): void;
     size(): number;

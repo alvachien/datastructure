@@ -9,7 +9,7 @@
  *
  */
 
-export class Dictionary {
+export class Dictionary<X> {
   private _data: any;
 
   constructor() {
@@ -20,7 +20,7 @@ export class Dictionary {
     return key in this._data;
   }
 
-  public set(key: any, value: any) {
+  public set(key: any, value: X) {
     this._data[key] = value;
   }
 
@@ -33,11 +33,11 @@ export class Dictionary {
     return false;
   }
 
-  public get(key: any) {
+  public get(key: any): X {
     return this.has(key) ? this._data[key] : undefined;
   }
 
-  public values(): any[] {
+  public values(): X[] {
     let ret: any[] = [];
     for(let key in this._data) {
       if (this.has(key)) {
