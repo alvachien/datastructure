@@ -16,4 +16,5 @@ export declare class GraphWithAdjList<X, Y> {
     constructor();
     Vertices(): SequenceList<X>;
     addVertex(vertex: X): void;
+    addEdge(vertex1: X, vertex2: X, weight?: Y): void;
 }

@@ -23,7 +23,10 @@ var GraphWithAdjList = /** @class */ (function () {
     };
     GraphWithAdjList.prototype.addVertex = function (vertex) {
         this._vertices.AppendElement(vertex);
-        this._adjList.set(vertex, undefined);
+        this._adjList.set(vertex.toString(), undefined);
+    };
+    GraphWithAdjList.prototype.addEdge = function (vertex1, vertex2, weight) {
+        // this._adjList.get(vertex1.toString()).push()
     };
     return GraphWithAdjList;
 }());
