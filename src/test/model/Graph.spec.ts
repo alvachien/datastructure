@@ -5,22 +5,20 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: GraphWithAdjList.spec.ts
+ * File: Graph.spec.ts
  *
  */
 
-import { GraphWithAdjList } from '../../lib/model/GraphWithAdjList';
+import { Graph } from '../../lib/model/Graph';
 
-describe('Test GraphWithAdjList', () => {
-  let _graph: GraphWithAdjList<string, number>;
+describe('Test Graph', () => {
+  let _graph: Graph<number, number>;
 
   beforeEach(() => {
-    _graph = new GraphWithAdjList<string, number>();
+    _graph = new Graph<number, number>();
   });
 
-  it("#1. Test init()", () => {
+  it("#1. Test create())", () => {
     expect(_graph).toBeTruthy();
-
-    // TBD.
   });
 });

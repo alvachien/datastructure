@@ -10,27 +10,30 @@
  *
  */
 import { IGraph, IGraphVertex, IGraphEdge, IGraphAdjaceListVertex } from './IGraph';
-import { LinkList } from './LinkList';
-export declare class GraphAdjaceListEdge<T> {
-    private _to;
-    private _weight;
-    To: number;
-    Weight: T;
-}
-export declare class GraphAdjaceListVertex<X, Y> implements IGraphAdjaceListVertex<X> {
+/**
+ * Vertex of graph
+ */
+export declare class GraphAdjaceListVertex<X> implements IGraphAdjaceListVertex<X> {
     private _id;
     private _data;
-    private _linkAdjList;
     ID: number;
     Data: X;
-    readonly AdjaceList: LinkList<GraphAdjaceListEdge<Y>>;
 }
+/**
+ * Graph with adjace list
+ * X: generic type of Vertex
+ * Y: generic type of Edge
+ */
 export declare class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     private _vertex;
+    private _adjList;
     constructor();
+    /**
+     * Number of vertext
+     */
     VertexNumber(): number;
     /**
-     * Edge number
+     * Number of edge
      */
     EdgeNumber(): number;
     /**
@@ -44,7 +47,7 @@ export declare class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     /**
      * Add Vertex
      */
-    AddVertex(data: X): number;
+    AddVertex(id: number, data: X): number;
     /**
      * Add Edge
      */

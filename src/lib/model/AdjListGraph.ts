@@ -11,31 +11,16 @@
  */
 
 import { IGraph, IGraphVertex, IGraphEdge, IGraphAdjaceListVertex } from './IGraph';
+import { SequenceList } from './SequenceList';
+import { Dictionary } from './Dictionary';
 import { LinkList } from './LinkList';
 
-export class GraphAdjaceListEdge<T> {
-  private _to: number;
-  private _weight: T;
-
-  get To(): number {
-    return this._to;
-  }
-  set To(to: number) {
-    this._to = to;
-  }
-
-  get Weight(): T {
-    return this._weight;
-  }
-  set Weight(weight: T) {
-    this._weight = weight;
-  }
-}
-
-export class GraphAdjaceListVertex<X, Y> implements IGraphAdjaceListVertex<X> {
+/**
+ * Vertex of graph
+ */
+export class GraphAdjaceListVertex<X> implements IGraphAdjaceListVertex<X> {
   private _id: number;
   private _data: X;
-  private _linkAdjList: LinkList<GraphAdjaceListEdge<Y>> = new LinkList<GraphAdjaceListEdge<Y>>();
 
   get ID(): number {
     return this._id;
@@ -50,31 +35,55 @@ export class GraphAdjaceListVertex<X, Y> implements IGraphAdjaceListVertex<X> {
   set Data(data: X) {
     this._data = data;
   }
+}
 
-  get AdjaceList(): LinkList<GraphAdjaceListEdge<Y>> {
-    return this._linkAdjList;
+class GraphAdjaceListEdge<Y> {
+  private _to: number;
+  private _weigth: Y;
+
+  get To(): number {
+    return this._to;
+  }
+  get Weight(): Y {
+    return this._weigth;
+  }
+  set To(to: number) {
+    this._to = to;
+  }
+  set Weight(wght: Y) {
+    this._weigth = wght;
   }
 }
 
+/**
+ * Graph with adjace list
+ * X: generic type of Vertex
+ * Y: generic type of Edge
+ */
 export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
-  private _vertex: GraphAdjaceListVertex<X, Y>[];
+  private _vertex: SequenceList<GraphAdjaceListVertex<X>>;
+  private _adjList: Dictionary<LinkList<GraphAdjaceListEdge<Y>>>;
 
   constructor() {
-    this._vertex = [];
-  }
-
-  public VertexNumber(): number {
-    return this._vertex.length;
+    this._vertex = new SequenceList<GraphAdjaceListVertex<X>>();
+    this._adjList = new Dictionary<LinkList<GraphAdjaceListEdge<Y>>>();
   }
 
   /**
-   * Edge number
+   * Number of vertext
+   */
+  public VertexNumber(): number {
+    return this._vertex.Length();
+  }
+
+  /**
+   * Number of edge
    */
   public EdgeNumber(): number {
     let en = 0;
-    for (const vtx of this._vertex) {
-      en += vtx.AdjaceList.Length();
-    }
+    // for (const vtx of this._vertex) {
+    //   en += vtx.AdjaceList.Length();
+    // }
 
     return en;
   }
@@ -96,15 +105,31 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
   /**
    * Add Vertex
    */
-  AddVertex(data: X): number {
-    return -1;
+  AddVertex(id: number, data: X): number {
+    let vetx: GraphAdjaceListVertex<X> = new GraphAdjaceListVertex<X>();
+    vetx.Data = data;
+    vetx.ID = id;
+
+    this._vertex.AppendElement(vetx);
+    this._adjList.set(id.toString(), new LinkList<GraphAdjaceListEdge<Y>>());
+
+    return id;
   }
 
   /**
    * Add Edge
    */
   AddEdge(frm: number, to: number, weight: Y): boolean {
-    return false;
+    let nedge: GraphAdjaceListEdge<Y> = new GraphAdjaceListEdge<Y>();
+    nedge.To = to;
+    nedge.Weight = weight;
+    this._adjList.get(frm.toString()).AppendElement(nedge);
+
+    nedge = new GraphAdjaceListEdge<Y>();
+    nedge.To = frm;
+    nedge.Weight = weight;
+    this._adjList.get(to.toString()).AppendElement(nedge);
+    return true;
   }
 
   /**

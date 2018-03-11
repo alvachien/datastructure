@@ -108,9 +108,10 @@ var Graph = /** @class */ (function () {
     /**
      * Add Vertex
      */
-    Graph.prototype.AddVertex = function (data) {
+    Graph.prototype.AddVertex = function (id, data) {
         var nnode = new GraphVertex();
         nnode.Data = data;
+        nnode.ID = id;
         if (this._vertex.length === 0) {
             nnode.ID = 1;
         }

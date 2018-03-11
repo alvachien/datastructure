@@ -26,7 +26,7 @@ export declare class GraphEdge<T> implements IGraphEdge<T> {
     private _weight;
     private _from;
     private _to;
-    Weight: number;
+    Weight: T;
     From: number;
     To: number;
 }
@@ -50,7 +50,7 @@ export declare class Graph<X, Y> implements IGraph<X, Y> {
     /**
      * Add Vertex
      */
-    AddVertex(data: X): number;
+    AddVertex(id: number, data: X): number;
     AddEdge(frm: number, to: number, weight: Y): boolean;
     /**
      * DFS

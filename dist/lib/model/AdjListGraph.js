@@ -11,36 +11,14 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+var SequenceList_1 = require("./SequenceList");
+var Dictionary_1 = require("./Dictionary");
 var LinkList_1 = require("./LinkList");
-var GraphAdjaceListEdge = /** @class */ (function () {
-    function GraphAdjaceListEdge() {
-    }
-    Object.defineProperty(GraphAdjaceListEdge.prototype, "To", {
-        get: function () {
-            return this._to;
-        },
-        set: function (to) {
-            this._to = to;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GraphAdjaceListEdge.prototype, "Weight", {
-        get: function () {
-            return this._weight;
-        },
-        set: function (weight) {
-            this._weight = weight;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GraphAdjaceListEdge;
-}());
-exports.GraphAdjaceListEdge = GraphAdjaceListEdge;
+/**
+ * Vertex of graph
+ */
 var GraphAdjaceListVertex = /** @class */ (function () {
     function GraphAdjaceListVertex() {
-        this._linkAdjList = new LinkList_1.LinkList();
     }
     Object.defineProperty(GraphAdjaceListVertex.prototype, "ID", {
         get: function () {
@@ -62,32 +40,58 @@ var GraphAdjaceListVertex = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(GraphAdjaceListVertex.prototype, "AdjaceList", {
+    return GraphAdjaceListVertex;
+}());
+exports.GraphAdjaceListVertex = GraphAdjaceListVertex;
+var GraphAdjaceListEdge = /** @class */ (function () {
+    function GraphAdjaceListEdge() {
+    }
+    Object.defineProperty(GraphAdjaceListEdge.prototype, "To", {
         get: function () {
-            return this._linkAdjList;
+            return this._to;
+        },
+        set: function (to) {
+            this._to = to;
         },
         enumerable: true,
         configurable: true
     });
-    return GraphAdjaceListVertex;
+    Object.defineProperty(GraphAdjaceListEdge.prototype, "Weight", {
+        get: function () {
+            return this._weigth;
+        },
+        set: function (wght) {
+            this._weigth = wght;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return GraphAdjaceListEdge;
 }());
-exports.GraphAdjaceListVertex = GraphAdjaceListVertex;
+/**
+ * Graph with adjace list
+ * X: generic type of Vertex
+ * Y: generic type of Edge
+ */
 var GraphAdjaceList = /** @class */ (function () {
     function GraphAdjaceList() {
-        this._vertex = [];
+        this._vertex = new SequenceList_1.SequenceList();
+        this._adjList = new Dictionary_1.Dictionary();
     }
+    /**
+     * Number of vertext
+     */
     GraphAdjaceList.prototype.VertexNumber = function () {
-        return this._vertex.length;
+        return this._vertex.Length();
     };
     /**
-     * Edge number
+     * Number of edge
      */
     GraphAdjaceList.prototype.EdgeNumber = function () {
         var en = 0;
-        for (var _i = 0, _a = this._vertex; _i < _a.length; _i++) {
-            var vtx = _a[_i];
-            en += vtx.AdjaceList.Length();
-        }
+        // for (const vtx of this._vertex) {
+        //   en += vtx.AdjaceList.Length();
+        // }
         return en;
     };
     /**
@@ -105,14 +109,27 @@ var GraphAdjaceList = /** @class */ (function () {
     /**
      * Add Vertex
      */
-    GraphAdjaceList.prototype.AddVertex = function (data) {
-        return -1;
+    GraphAdjaceList.prototype.AddVertex = function (id, data) {
+        var vetx = new GraphAdjaceListVertex();
+        vetx.Data = data;
+        vetx.ID = id;
+        this._vertex.AppendElement(vetx);
+        this._adjList.set(id.toString(), new LinkList_1.LinkList());
+        return id;
     };
     /**
      * Add Edge
      */
     GraphAdjaceList.prototype.AddEdge = function (frm, to, weight) {
-        return false;
+        var nedge = new GraphAdjaceListEdge();
+        nedge.To = to;
+        nedge.Weight = weight;
+        this._adjList.get(frm.toString()).AppendElement(nedge);
+        nedge = new GraphAdjaceListEdge();
+        nedge.To = frm;
+        nedge.Weight = weight;
+        this._adjList.get(to.toString()).AppendElement(nedge);
+        return true;
     };
     /**
      * DFS: Depth First Search

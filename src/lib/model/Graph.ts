@@ -38,14 +38,14 @@ export class GraphVertex<T> implements IGraphVertex<T> {
  * Edge in the graph
  */
 export class GraphEdge<T> implements IGraphEdge<T> {
-  private _weight: number;
+  private _weight: T;
   private _from: number; // From node
   private _to: number;
 
-  get Weight(): number {
+  get Weight(): T {
     return this._weight;
   }
-  set Weight(wgt: number) {
+  set Weight(wgt: T) {
     this._weight = wgt;
   }
   get From(): number {
@@ -97,9 +97,10 @@ export class Graph<X, Y> implements IGraph<X, Y> {
   /**
    * Add Vertex
    */
-  public AddVertex(data: X): number {
+  public AddVertex(id: number, data: X): number {
     const nnode: GraphVertex<X> = new GraphVertex<X>();
     nnode.Data = data;
+    nnode.ID = id;
     if (this._vertex.length === 0) {
       nnode.ID = 1;
     } else {

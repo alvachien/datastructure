@@ -38,7 +38,7 @@ export interface IGraph<X, Y> {
     /**
      * Add Vertex
      */
-    AddVertex(data: X): number;
+    AddVertex(id: number, data: X): number;
     /**
      * Add Edge
      */
