@@ -13,12 +13,15 @@
  * Vertex in the graph
  */
 export interface IGraphVertex<T> {
+  // ID: number
 }
 
 /**
  * Edge in the graph
  */
 export interface IGraphEdge<T> {
+  // From
+  // To
 }
 
 /**

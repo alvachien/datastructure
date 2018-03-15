@@ -81,9 +81,9 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
    */
   public EdgeNumber(): number {
     let en = 0;
-    // for (const vtx of this._vertex) {
-    //   en += vtx.AdjaceList.Length();
-    // }
+    for (let i = 0; i < this._vertex.Length(); i ++) {
+      en += this._adjList.get(this._vertex.GetElement(i).ID.toString()).Length();
+    }
 
     return en;
   }
@@ -92,7 +92,12 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
    * Vertex
    */
   Vertexs(): IGraphVertex<X>[] {
-    return [];
+    let rst: IGraphVertex<X>[] = [];
+    for (let i = 0; i < this._vertex.Length(); i ++) {
+      rst.push(this._vertex.GetElement(i));
+    }
+    
+    return rst;
   }
 
   /**
