@@ -12,11 +12,14 @@
  * Vertex in the graph
  */
 export interface IGraphVertex<T> {
+    id: number;
 }
 /**
  * Edge in the graph
  */
 export interface IGraphEdge<T> {
+    from: number;
+    to: number;
 }
 /**
  * Adjact list

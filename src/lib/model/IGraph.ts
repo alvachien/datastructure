@@ -14,6 +14,7 @@
  */
 export interface IGraphVertex<T> {
   // ID: number
+  id: number;
 }
 
 /**
@@ -21,7 +22,9 @@ export interface IGraphVertex<T> {
  */
 export interface IGraphEdge<T> {
   // From
+  from: number;
   // To
+  to: number;
 }
 
 /**

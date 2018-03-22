@@ -8,6 +8,11 @@
  * File: Dictionary.ts
  *
  */
+/**
+ * Dictionary
+ * Key: string
+ * Value: Template X
+ */
 export declare class Dictionary<X> {
     private _data;
     constructor();

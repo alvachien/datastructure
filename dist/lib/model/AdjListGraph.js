@@ -89,22 +89,44 @@ var GraphAdjaceList = /** @class */ (function () {
      */
     GraphAdjaceList.prototype.EdgeNumber = function () {
         var en = 0;
-        // for (const vtx of this._vertex) {
-        //   en += vtx.AdjaceList.Length();
-        // }
+        for (var i = 0; i < this._vertex.Length(); i++) {
+            en += this._adjList.get(this._vertex.GetElement(i).ID.toString()).Length();
+        }
         return en;
     };
     /**
      * Vertex
      */
     GraphAdjaceList.prototype.Vertexs = function () {
-        return [];
+        var rst = [];
+        for (var i = 0; i < this._vertex.Length(); i++) {
+            var elem = this._vertex.GetElement(i);
+            rst.push({
+                id: elem.ID
+            });
+        }
+        return rst;
     };
     /**
      * Edges
      */
     GraphAdjaceList.prototype.Edges = function () {
-        return [];
+        var rst = [];
+        if (this._adjList.size() > 0) {
+            var vers = this._adjList.keys();
+            for (var _i = 0, vers_1 = vers; _i < vers_1.length; _i++) {
+                var ver = vers_1[_i];
+                var edges = this._adjList.get(ver);
+                for (var i = 0; i < edges.Length(); i++) {
+                    var elem = edges.GetElement(i);
+                    rst.push({
+                        from: +ver,
+                        to: elem.To
+                    });
+                }
+            }
+        }
+        return rst;
     };
     /**
      * Add Vertex
@@ -124,11 +146,17 @@ var GraphAdjaceList = /** @class */ (function () {
         var nedge = new GraphAdjaceListEdge();
         nedge.To = to;
         nedge.Weight = weight;
-        this._adjList.get(frm.toString()).AppendElement(nedge);
-        nedge = new GraphAdjaceListEdge();
-        nedge.To = frm;
-        nedge.Weight = weight;
-        this._adjList.get(to.toString()).AppendElement(nedge);
+        var llist = this._adjList.get(frm.toString());
+        if (llist.Length() === 0) {
+            llist.InitList(nedge);
+        }
+        else {
+            llist.AppendElement(nedge);
+        }
+        // nedge = new GraphAdjaceListEdge<Y>();
+        // nedge.To = frm;
+        // nedge.Weight = weight;
+        // this._adjList.get(to.toString()).AppendElement(nedge);
         return true;
     };
     /**

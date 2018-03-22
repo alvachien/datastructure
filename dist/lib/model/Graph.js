@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var GraphVertex = /** @class */ (function () {
     function GraphVertex() {
     }
-    Object.defineProperty(GraphVertex.prototype, "ID", {
+    Object.defineProperty(GraphVertex.prototype, "id", {
         get: function () {
             return this._id;
         },
@@ -56,7 +56,7 @@ var GraphEdge = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(GraphEdge.prototype, "From", {
+    Object.defineProperty(GraphEdge.prototype, "from", {
         get: function () {
             return this._from;
         },
@@ -66,7 +66,7 @@ var GraphEdge = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(GraphEdge.prototype, "To", {
+    Object.defineProperty(GraphEdge.prototype, "to", {
         get: function () {
             return this._to;
         },
@@ -81,6 +81,8 @@ var GraphEdge = /** @class */ (function () {
 exports.GraphEdge = GraphEdge;
 /**
  * Graph
+ * X: Type of vertex
+ * Y: Weight of edge
  */
 var Graph = /** @class */ (function () {
     function Graph() {
@@ -111,22 +113,22 @@ var Graph = /** @class */ (function () {
     Graph.prototype.AddVertex = function (id, data) {
         var nnode = new GraphVertex();
         nnode.Data = data;
-        nnode.ID = id;
+        nnode.id = id;
         if (this._vertex.length === 0) {
-            nnode.ID = 1;
+            nnode.id = 1;
         }
         else {
             var mid = 1;
             for (var _i = 0, _a = this._vertex; _i < _a.length; _i++) {
                 var vex = _a[_i];
-                if (mid < vex.ID) {
-                    mid = vex.ID;
+                if (mid < vex.id) {
+                    mid = vex.id;
                 }
             }
-            nnode.ID = mid;
+            nnode.id = mid;
         }
         this._vertex.push(nnode);
-        return nnode.ID;
+        return nnode.id;
     };
     Graph.prototype.AddEdge = function (frm, to, weight) {
         // Check from and to
@@ -154,7 +156,7 @@ var Graph = /** @class */ (function () {
     Graph.prototype.DFSImpl = function (vex, visited, rst) {
         var bvisited = false;
         for (var i = 0; i < visited.length; i++) {
-            if (visited[i] === vex.ID) {
+            if (visited[i] === vex.id) {
                 bvisited = true;
                 break;
             }
@@ -166,11 +168,11 @@ var Graph = /** @class */ (function () {
             return;
         }
         for (var i = 0; i < this._edge.length; i++) {
-            if (this._edge[i].From === vex.ID) {
+            if (this._edge[i].from === vex.id) {
                 // Get the to
                 var tonode = null;
                 for (var j = 0; j < this._vertex.length; j++) {
-                    if (this._vertex[j].ID === this._edge[i].To) {
+                    if (this._vertex[j].id === this._edge[i].to) {
                         tonode = this._vertex[j];
                         break;
                     }

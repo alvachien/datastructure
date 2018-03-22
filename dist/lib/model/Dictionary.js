@@ -10,6 +10,11 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Dictionary
+ * Key: string
+ * Value: Template X
+ */
 var Dictionary = /** @class */ (function () {
     function Dictionary() {
         this._data = {};

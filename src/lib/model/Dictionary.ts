@@ -9,6 +9,11 @@
  *
  */
 
+ /**
+  * Dictionary
+  * Key: string
+  * Value: Template X
+  */
 export class Dictionary<X> {
   private _data: any;
 

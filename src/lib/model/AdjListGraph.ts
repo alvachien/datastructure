@@ -94,7 +94,10 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
   Vertexs(): IGraphVertex<X>[] {
     let rst: IGraphVertex<X>[] = [];
     for (let i = 0; i < this._vertex.Length(); i ++) {
-      rst.push(this._vertex.GetElement(i));
+      let elem = this._vertex.GetElement(i);
+      rst.push({
+        id: elem.ID
+      });
     }
     
     return rst;
@@ -104,7 +107,23 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
    * Edges
    */
   Edges(): IGraphEdge<Y>[] {
-    return [];
+    let rst: IGraphEdge<Y>[] = [];
+
+    if (this._adjList.size() > 0) {
+      let vers = this._adjList.keys();
+      for(let ver of vers) {
+        let edges = this._adjList.get(ver);
+        for(let i = 0; i < edges.Length(); i++) {
+          let elem = edges.GetElement(i);
+          rst.push({
+            from: +ver,
+            to: elem.To
+          });
+        }
+      }
+    }
+
+    return rst;
   }
 
   /**
@@ -128,15 +147,20 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     let nedge: GraphAdjaceListEdge<Y> = new GraphAdjaceListEdge<Y>();
     nedge.To = to;
     nedge.Weight = weight;
-    this._adjList.get(frm.toString()).AppendElement(nedge);
+    let llist = this._adjList.get(frm.toString());
+    if (llist.Length() === 0)  {
+      llist.InitList(nedge);
+    } else {
+      llist.AppendElement(nedge);
+    } 
 
-    nedge = new GraphAdjaceListEdge<Y>();
-    nedge.To = frm;
-    nedge.Weight = weight;
-    this._adjList.get(to.toString()).AppendElement(nedge);
+    // nedge = new GraphAdjaceListEdge<Y>();
+    // nedge.To = frm;
+    // nedge.Weight = weight;
+    // this._adjList.get(to.toString()).AppendElement(nedge);
     return true;
   }
-
+  
   /**
    * DFS: Depth First Search
    */
