@@ -9,15 +9,26 @@
  * Implements the graph with Adjacement List.
  *
  */
-import { IGraph, IGraphVertex, IGraphEdge, IGraphAdjaceListVertex } from './IGraph';
+import { IGraph, IGraphVertex, IGraphEdge } from './IGraph';
 /**
- * Vertex of graph
+ * Vertex of adjace list graph
  */
-export declare class GraphAdjaceListVertex<X> implements IGraphAdjaceListVertex<X> {
+export declare class GraphAdjaceListVertex<X> implements IGraphVertex<X> {
     private _id;
-    private _data;
-    ID: number;
-    Data: X;
+    private _value;
+    id: number;
+    value: X;
+}
+/**
+ * Edge of adjace list graph
+ */
+export declare class GraphAdjaceListEdge<Y> implements IGraphEdge<Y> {
+    private _from;
+    private _to;
+    private _weigth;
+    from: number;
+    to: number;
+    weight: Y;
 }
 /**
  * Graph with adjace list
@@ -39,11 +50,11 @@ export declare class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     /**
      * Vertex
      */
-    Vertexs(): IGraphVertex<X>[];
+    Vertexs(): GraphAdjaceListVertex<X>[];
     /**
      * Edges
      */
-    Edges(): IGraphEdge<Y>[];
+    Edges(): GraphAdjaceListEdge<Y>[];
     /**
      * Add Vertex
      */
@@ -59,5 +70,5 @@ export declare class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     /**
      * BFS: Breadth First Search
      */
-    BFS(): IGraphVertex<Y>[];
+    BFS(): IGraphVertex<X>[];
 }

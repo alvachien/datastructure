@@ -27,12 +27,12 @@ var GraphVertex = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(GraphVertex.prototype, "Data", {
+    Object.defineProperty(GraphVertex.prototype, "value", {
         get: function () {
-            return this._data;
+            return this._value;
         },
         set: function (data) {
-            this._data = data;
+            this._value = data;
         },
         enumerable: true,
         configurable: true
@@ -46,7 +46,7 @@ exports.GraphVertex = GraphVertex;
 var GraphEdge = /** @class */ (function () {
     function GraphEdge() {
     }
-    Object.defineProperty(GraphEdge.prototype, "Weight", {
+    Object.defineProperty(GraphEdge.prototype, "weight", {
         get: function () {
             return this._weight;
         },
@@ -112,7 +112,7 @@ var Graph = /** @class */ (function () {
      */
     Graph.prototype.AddVertex = function (id, data) {
         var nnode = new GraphVertex();
-        nnode.Data = data;
+        nnode.value = data;
         nnode.id = id;
         if (this._vertex.length === 0) {
             nnode.id = 1;
@@ -197,9 +197,10 @@ var Graph = /** @class */ (function () {
      * BFS
      */
     Graph.prototype.BFS = function () {
-        if (this._vertex.length <= 0) {
-            return [];
-        }
+        // if (this._vertex.length <= 0) {
+        //   return [];
+        // }
+        return [];
     };
     return Graph;
 }());

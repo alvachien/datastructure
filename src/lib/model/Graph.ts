@@ -17,7 +17,7 @@ import { IGraph, IGraphVertex, IGraphEdge } from './IGraph';
  */
 export class GraphVertex<T> implements IGraphVertex<T> {
   private _id: number;
-  private _data: T;
+  private _value: T;
 
   get id(): number {
     return this._id;
@@ -26,11 +26,11 @@ export class GraphVertex<T> implements IGraphVertex<T> {
     this._id = id;
   }
 
-  get Data(): T {
-    return this._data;
+  get value(): T {
+    return this._value;
   }
-  set Data(data: T) {
-    this._data = data;
+  set value(data: T) {
+    this._value = data;
   }
 }
 
@@ -42,10 +42,10 @@ export class GraphEdge<T> implements IGraphEdge<T> {
   private _from: number; // From node
   private _to: number;
 
-  get Weight(): T {
+  get weight(): T {
     return this._weight;
   }
-  set Weight(wgt: T) {
+  set weight(wgt: T) {
     this._weight = wgt;
   }
   get from(): number {
@@ -102,7 +102,7 @@ export class Graph<X, Y> implements IGraph<X, Y> {
    */
   public AddVertex(id: number, data: X): number {
     const nnode: GraphVertex<X> = new GraphVertex<X>();
-    nnode.Data = data;
+    nnode.value = data;
     nnode.id = id;
     if (this._vertex.length === 0) {
       nnode.id = 1;
@@ -200,8 +200,9 @@ export class Graph<X, Y> implements IGraph<X, Y> {
    * BFS
    */
   public BFS(): GraphVertex<X>[] {
-    if (this._vertex.length <= 0) {
-      return [];
-    }
+    // if (this._vertex.length <= 0) {
+    //   return [];
+    // }
+    return [];
   }
 }

@@ -13,6 +13,7 @@
  */
 export interface IGraphVertex<T> {
     id: number;
+    value: T;
 }
 /**
  * Edge in the graph
@@ -20,11 +21,7 @@ export interface IGraphVertex<T> {
 export interface IGraphEdge<T> {
     from: number;
     to: number;
-}
-/**
- * Adjact list
- */
-export interface IGraphAdjaceListVertex<T> {
+    weight: T;
 }
 /**
  * Interface for the graph
@@ -53,5 +50,5 @@ export interface IGraph<X, Y> {
     /**
      * BFS: Breadth First Search
      */
-    BFS(): IGraphVertex<Y>[];
+    BFS(): IGraphVertex<X>[];
 }
