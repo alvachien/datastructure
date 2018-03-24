@@ -43,7 +43,7 @@ describe('Test AdjListGraph', function () {
         var edgefrm3 = 0;
         var edgefrm4 = 0;
         for (var i = 0; i < _graph.EdgeNumber(); i++) {
-            var edge = _graph.Edges[i];
+            var edge = _graph.Edges()[i];
             if (edge.from === 1) {
                 edgefrm1++;
             }
@@ -58,7 +58,7 @@ describe('Test AdjListGraph', function () {
             }
         }
         expect(edgefrm1).toBe(3);
-        expect(edgefrm2).toBe(2);
+        expect(edgefrm2).toBe(1);
         expect(edgefrm3).toBe(0);
         expect(edgefrm4).toBe(0);
     });

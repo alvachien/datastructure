@@ -51,7 +51,7 @@ describe('Test AdjListGraph', () => {
     let edgefrm3: number = 0;
     let edgefrm4: number = 0;
     for(let i = 0; i < _graph.EdgeNumber(); i++) {
-      let edge = _graph.Edges[i];
+      let edge = _graph.Edges()[i];
       if (edge.from === 1) {
         edgefrm1 ++;
       } else if(edge.from === 2) {
@@ -64,7 +64,7 @@ describe('Test AdjListGraph', () => {
     }
 
     expect(edgefrm1).toBe(3);
-    expect(edgefrm2).toBe(2);
+    expect(edgefrm2).toBe(1);
     expect(edgefrm3).toBe(0);
     expect(edgefrm4).toBe(0);
   });

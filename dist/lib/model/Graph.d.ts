@@ -45,6 +45,7 @@ export declare class Graph<X, Y> implements IGraph<X, Y> {
      * Vertex
      */
     Vertexs(): GraphVertex<X>[];
+    IsVertexExist(id: number): boolean;
     /**
      * Edges
      */
@@ -54,6 +55,7 @@ export declare class Graph<X, Y> implements IGraph<X, Y> {
      */
     AddVertex(id: number, data: X): number;
     AddEdge(frm: number, to: number, weight: Y): boolean;
+    IsEdgeExist(frm: number, to: number): boolean;
     /**
      * DFS
      */

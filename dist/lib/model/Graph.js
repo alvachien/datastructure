@@ -101,6 +101,14 @@ var Graph = /** @class */ (function () {
     Graph.prototype.Vertexs = function () {
         return this._vertex;
     };
+    Graph.prototype.IsVertexExist = function (id) {
+        for (var i = 0; i < this._vertex.length; i++) {
+            if (this._vertex[i].id === id) {
+                return true;
+            }
+        }
+        return false;
+    };
     /**
      * Edges
      */
@@ -111,32 +119,35 @@ var Graph = /** @class */ (function () {
      * Add Vertex
      */
     Graph.prototype.AddVertex = function (id, data) {
+        if (id <= 0 || this.IsVertexExist(id)) {
+            return -1;
+        }
         var nnode = new GraphVertex();
         nnode.value = data;
         nnode.id = id;
-        if (this._vertex.length === 0) {
-            nnode.id = 1;
-        }
-        else {
-            var mid = 1;
-            for (var _i = 0, _a = this._vertex; _i < _a.length; _i++) {
-                var vex = _a[_i];
-                if (mid < vex.id) {
-                    mid = vex.id;
-                }
-            }
-            nnode.id = mid;
-        }
         this._vertex.push(nnode);
         return nnode.id;
     };
     Graph.prototype.AddEdge = function (frm, to, weight) {
-        // Check from and to
-        for (var _i = 0, _a = this._vertex; _i < _a.length; _i++) {
-            var vex = _a[_i];
+        if (frm <= 0 || to <= 0 || !this.IsVertexExist(frm) || !this.IsVertexExist(to)) {
+            return false;
         }
-        // Check existence of the edge
-        // TBD
+        if (this.IsEdgeExist(frm, to)) {
+            return false;
+        }
+        var edge = new GraphEdge();
+        edge.from = frm;
+        edge.to = to;
+        edge.weight = weight;
+        this._edge.push(edge);
+        return true;
+    };
+    Graph.prototype.IsEdgeExist = function (frm, to) {
+        for (var i = 0; i < this._edge.length; i++) {
+            if (this._edge[i].from === frm && this._edge[i].to === to) {
+                return true;
+            }
+        }
         return false;
     };
     /**

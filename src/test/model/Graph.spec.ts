@@ -18,11 +18,11 @@ describe('Test Graph', () => {
     _graph = new Graph<string, number>();
   });
 
-  it("#1. Test create())", () => {
+  it("#1. Test constructor.", () => {
     expect(_graph).toBeTruthy();
   });
 
-  it("#2. Test addVertex()", () => {
+  it("#2. Test normal case.", () => {
     expect(_graph).toBeTruthy();
 
     // A - 5 - B
@@ -48,8 +48,12 @@ describe('Test Graph', () => {
     let edgefrm2: number = 0;
     let edgefrm3: number = 0;
     let edgefrm4: number = 0;
+    let edgeto1: number = 0;
+    let edgeto2: number = 0;
+    let edgeto3: number = 0;
+    let edgeto4: number = 0;
     for(let i = 0; i < _graph.EdgeNumber(); i++) {
-      let edge = _graph.Edges[i];
+      let edge = _graph.Edges()[i];
       if (edge.from === 1) {
         edgefrm1 ++;
       } else if(edge.from === 2) {
@@ -59,11 +63,51 @@ describe('Test Graph', () => {
       } else if(edge.from === 4) {
         edgefrm4 ++;
       }
+
+      if (edge.to === 1) {
+        edgeto1 ++;
+      } else if(edge.to === 2) {
+        edgeto2 ++;
+      } else if(edge.to === 3) {
+        edgeto3 ++;
+      } else if(edge.to === 4) {
+        edgeto4 ++;
+      }
     }
 
     expect(edgefrm1).toBe(3);
-    expect(edgefrm2).toBe(2);
+    expect(edgefrm2).toBe(1);
     expect(edgefrm3).toBe(0);
     expect(edgefrm4).toBe(0);
+    expect(edgeto1).toBe(0);
+    expect(edgeto2).toBe(1);
+    expect(edgeto3).toBe(1);
+    expect(edgeto4).toBe(2);
+  });
+
+  it("#3. Test AddVertex()", () => {
+    expect(_graph).toBeTruthy();
+
+    _graph.AddVertex(1, 'A');
+    let naddrst = _graph.AddVertex(2, 'B');
+    expect(naddrst).toBe(2);
+    naddrst = _graph.AddVertex(2, 'C');
+    expect(naddrst).toBe(-1);
+    expect(_graph.IsVertexExist(2)).toBe(true);
+  });
+
+  it("#4. Test AddEdge()", () => {
+    expect(_graph).toBeTruthy();
+
+    _graph.AddVertex(1, 'A');
+    let brst = _graph.AddEdge(1, 2, 5);
+    expect(brst).toBe(false);
+    _graph.AddVertex(2, 'B');
+    brst = _graph.AddEdge(1, 2, 5);
+    expect(brst).toBe(true);
+    brst = _graph.AddEdge(1, 2, 5);
+    expect(brst).toBe(false);
+    brst = _graph.IsEdgeExist(1, 2);
+    expect(brst).toBe(true);
   });
 });

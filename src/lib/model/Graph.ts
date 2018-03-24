@@ -89,6 +89,14 @@ export class Graph<X, Y> implements IGraph<X, Y> {
   public Vertexs(): GraphVertex<X>[] {
     return this._vertex;
   }
+  public IsVertexExist(id: number): boolean {
+    for(let i = 0; i < this._vertex.length; i ++) {
+      if (this._vertex[i].id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /**
    * Edges
@@ -101,35 +109,39 @@ export class Graph<X, Y> implements IGraph<X, Y> {
    * Add Vertex
    */
   public AddVertex(id: number, data: X): number {
+    if (id <= 0 || this.IsVertexExist(id)) {
+      return -1;
+    }
+
     const nnode: GraphVertex<X> = new GraphVertex<X>();
     nnode.value = data;
     nnode.id = id;
-    if (this._vertex.length === 0) {
-      nnode.id = 1;
-    } else {
-      let mid = 1;
-      for (const vex of this._vertex) {
-        if (mid < vex.id) {
-          mid = vex.id;
-        }
-      }
-
-      nnode.id = mid;
-    }
-
     this._vertex.push(nnode);
     return nnode.id;
   }
 
   public AddEdge(frm: number, to: number, weight: Y): boolean {
-    // Check from and to
-    for (const vex of this._vertex) {
-
+    if (frm <= 0 || to <= 0 || !this.IsVertexExist(frm) || !this.IsVertexExist(to)) {
+      return false;
     }
-    // Check existence of the edge
+    if (this.IsEdgeExist(frm, to)) {
+      return false;
+    }
 
-    // TBD
+    const edge: GraphEdge<Y> = new GraphEdge<Y>();
+    edge.from = frm;
+    edge.to = to;
+    edge.weight = weight;
+    this._edge.push(edge);
+    return true;
+  }
 
+  public IsEdgeExist(frm: number, to: number): boolean {
+    for(let i = 0; i < this._edge.length; i ++) {
+      if (this._edge[i].from === frm && this._edge[i].to === to) {
+        return true;
+      }
+    }
 
     return false;
   }
