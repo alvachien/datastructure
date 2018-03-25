@@ -8,7 +8,7 @@ This project is target to build a library (abbrv: lib) for Data Structures and a
 The library written with TypeScript.
 
 ## HOW TO USE
-Use command 
+To use this library in your package, simply run following NPM command:
 
 `npm install actslib --save` 
 
@@ -36,8 +36,8 @@ The library in the project actually based the understanding when learning the bo
 ## CONTENT
 Folder **lib** (src\lib) contains the kernel part of the whole library. It consists with several sub folders, and it has been exported via index.ts respectively.
 
-### UNIT TEST
-Unit test is supported by using Karam.
+### UNIT TESTS
+Unit test is the mechanism to ensure the quality. It was supported by using Karam.
 
 Run 'npm test' to trigger the unit tests.
 
@@ -46,6 +46,7 @@ Run 'npm test' to trigger the unit tests.
 Demo app was located in another [repository](https://www.github.com/alvachien/datastructure-demo/).
 
 Try the demo app online now via a single [click](https://alvachien.github.io/datastructure-demo/).
+
 
 ### DATA STRUCTURE
 #### LIST
@@ -104,20 +105,23 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **Formula** provides the defintion of the formula.
 - More to come.
 
+
 ### PROGRESS
 The progress of the project shown in the table below.
 
-No|Content|Status|UT Status|Comment
+
+#|Content|Status|UT Status|Comment
 ----:|:----|:-----|:-----|:-----
 1|**SequenceList**|**Finished**|**Passed**|Question left: search?
 2|**LinkList**|**Finished**|**Passed**|Question left: search?
 3|**SequenceStack**|**In Process**|**Passed**|Question left: search?
 4|**Matrix**|**Finished**|**Passed**|Question left: search?
-5|**Set**|**Finished**|**Passed**|Question left: search?
+5|**Set**|**Finished**|**2 Cases failed**|Question left: search?
 6|**SequenceQueue**|**Finished**|**Passed**|Question left: search?
 7|**PriorityQueue**|**Finished**|**Passed**|Question left: search?
 8|**Dictionary**|**Finished**|**Passed**|Question left: search?
-11|Graph|In Process|n/a|Question left: how to demonstrate the Graph for demo?
+10|**Graph**|**In Process**|**In Process**|Question left: how to demonstrate the Graph for demo?
+11|**Graph with Adjace List**|**In Process**|**In Process**|Question left: how to demonstrate the Graph for demo?
 12|Binary Search Tree|n/a|n/a|Not started yet
 13|B Tree|n/a|n/a|Not started yet|
 14|Red Black Tree|n/a|n/a|Not started yet|
@@ -136,6 +140,7 @@ No|Content|Status|UT Status|Comment
 27|Radix sort|n/a|n/a|Not started yet|
 28|Bucket sort|n/a|n/a|Not started yet|
 40|Formula|**In Process**|n/a|n/a|
+
 
 # CONTRIBUTORS
 - **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;
