@@ -90,7 +90,7 @@ export class Graph<X, Y> implements IGraph<X, Y> {
     return this._vertex;
   }
   public IsVertexExist(id: number): boolean {
-    for(let i = 0; i < this._vertex.length; i ++) {
+    for (let i = 0; i < this._vertex.length; i ++) {
       if (this._vertex[i].id === id) {
         return true;
       }
@@ -137,7 +137,7 @@ export class Graph<X, Y> implements IGraph<X, Y> {
   }
 
   public IsEdgeExist(frm: number, to: number): boolean {
-    for(let i = 0; i < this._edge.length; i ++) {
+    for (let i = 0; i < this._edge.length; i ++) {
       if (this._edge[i].from === frm && this._edge[i].to === to) {
         return true;
       }

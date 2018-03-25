@@ -32,9 +32,17 @@ export interface IGraph<X, Y> {
      */
     Vertexs(): IGraphVertex<X>[];
     /**
+     * Is Vertext exist
+     */
+    IsVertexExist(id: number): boolean;
+    /**
      * Edges
      */
     Edges(): IGraphEdge<Y>[];
+    /**
+     * Is edge exist
+     */
+    IsEdgeExist(from: number, to: number): boolean;
     /**
      * Add Vertex
      */

@@ -48,7 +48,7 @@ export class Set {
 
   public sizeLegacy(): number {
     let count: number = 0;
-    for(let prop in this._data) {
+    for (let prop in this._data) {
       if (this._data.hasOwnProperty(prop)) {
         ++ count;
       }
@@ -62,7 +62,7 @@ export class Set {
 
   public valuesLegacy(): any[] {
     let keys: any[] = [];
-    for(let key in this._data) {
+    for (let key in this._data) {
       keys.push(key);
     }
     return keys;
@@ -71,12 +71,12 @@ export class Set {
   public union(otherSet: Set): Set {
     let unionSet: Set = new Set();
     let vals = this.values();
-    for(let i = 0; i < vals.length; i ++) {
+    for (let i = 0; i < vals.length; i ++) {
       unionSet.add(vals[i]);
     }
 
     vals = otherSet.values();
-    for(let i = 0; i < vals.length; i ++) {
+    for (let i = 0; i < vals.length; i ++) {
       unionSet.add(vals[i]);
     }
 
@@ -86,7 +86,7 @@ export class Set {
   public intersection(otherSet: Set): Set {
     let intersectionSet: Set = new Set();
     let vals = this.values();
-    for(let i = 0; i < vals.length; i ++) {
+    for (let i = 0; i < vals.length; i ++) {
       if (otherSet.has(vals[i])) {
         intersectionSet.add(vals[i]);
       }
@@ -98,7 +98,7 @@ export class Set {
   public difference(otherSet: Set): Set {
     let differenceSet: Set = new Set();
     let vals = this.values();
-    for(let i = 0; i < vals.length; i ++) {
+    for (let i = 0; i < vals.length; i ++) {
       if (!otherSet.has(vals[i])) {
         differenceSet.add(vals[i]);
       }
@@ -112,13 +112,13 @@ export class Set {
       return false;
     } else {
       let vals = this.values();
-      for(let i = 0; i < vals.length; i ++) {
+      for (let i = 0; i < vals.length; i ++) {
         if (!otherSet.has(vals[i])) {
           return false;
         }
       }
     }
-    
+
     return true;
   }
 }

@@ -18,11 +18,13 @@ describe('Test Graph', () => {
     _graph = new Graph<string, number>();
   });
 
-  it("#1. Test constructor.", () => {
+  it('#1. Test constructor.', () => {
     expect(_graph).toBeTruthy();
+    expect(_graph.VertexNumber()).toBe(0);
+    expect(_graph.EdgeNumber()).toBe(0);
   });
 
-  it("#2. Test normal case.", () => {
+  it('#2. Test normal case.', () => {
     expect(_graph).toBeTruthy();
 
     // A - 5 - B
@@ -44,33 +46,33 @@ describe('Test Graph', () => {
     expect(_graph.VertexNumber()).toBe(4);
     expect(_graph.EdgeNumber()).toBe(4);
 
-    let edgefrm1: number = 0;
-    let edgefrm2: number = 0;
-    let edgefrm3: number = 0;
-    let edgefrm4: number = 0;
-    let edgeto1: number = 0;
-    let edgeto2: number = 0;
-    let edgeto3: number = 0;
-    let edgeto4: number = 0;
-    for(let i = 0; i < _graph.EdgeNumber(); i++) {
-      let edge = _graph.Edges()[i];
+    let edgefrm1 = 0;
+    let edgefrm2 = 0;
+    let edgefrm3 = 0;
+    let edgefrm4 = 0;
+    let edgeto1 = 0;
+    let edgeto2 = 0;
+    let edgeto3 = 0;
+    let edgeto4 = 0;
+    for (let i = 0; i < _graph.EdgeNumber(); i++) {
+      const edge = _graph.Edges()[i];
       if (edge.from === 1) {
         edgefrm1 ++;
-      } else if(edge.from === 2) {
+      } else if (edge.from === 2) {
         edgefrm2 ++;
-      } else if(edge.from === 3) {
+      } else if (edge.from === 3) {
         edgefrm3 ++;
-      } else if(edge.from === 4) {
+      } else if (edge.from === 4) {
         edgefrm4 ++;
       }
 
       if (edge.to === 1) {
         edgeto1 ++;
-      } else if(edge.to === 2) {
+      } else if (edge.to === 2) {
         edgeto2 ++;
-      } else if(edge.to === 3) {
+      } else if (edge.to === 3) {
         edgeto3 ++;
-      } else if(edge.to === 4) {
+      } else if (edge.to === 4) {
         edgeto4 ++;
       }
     }
@@ -85,7 +87,7 @@ describe('Test Graph', () => {
     expect(edgeto4).toBe(2);
   });
 
-  it("#3. Test AddVertex()", () => {
+  it('#3. Test AddVertex()', () => {
     expect(_graph).toBeTruthy();
 
     _graph.AddVertex(1, 'A');
@@ -96,7 +98,7 @@ describe('Test Graph', () => {
     expect(_graph.IsVertexExist(2)).toBe(true);
   });
 
-  it("#4. Test AddEdge()", () => {
+  it('#4. Test AddEdge()', () => {
     expect(_graph).toBeTruthy();
 
     _graph.AddVertex(1, 'A');

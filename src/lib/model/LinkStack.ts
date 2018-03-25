@@ -48,14 +48,14 @@ export class LinkStack<T> implements IStack<T> {
     return this._head;
   }
 
-  /** 
+  /**
    * Length of the stack
    */
   public Length(): number {
     return this._length;
   }
 
-  /** 
+  /**
    * Is empty
    */
   public IsEmpty(): boolean {
@@ -74,13 +74,14 @@ export class LinkStack<T> implements IStack<T> {
     }
 
     const node: LinkStackNode<T> = new LinkStackNode<T>();
+    node.Data = elem;
     node.Next = this._head;
     this._head = node;
 
     return this._length++;
   }
 
-  /** 
+  /**
    * Pop an item out
    */
   public Pop(): T | undefined {
@@ -96,8 +97,8 @@ export class LinkStack<T> implements IStack<T> {
     return pi;
   }
 
-  /** 
-   * Peek the first element 
+  /**
+   * Peek the first element
    */
   public Peek(): T | undefined {
     if (this._head === undefined) {
@@ -107,8 +108,8 @@ export class LinkStack<T> implements IStack<T> {
     return this._head.Data;
   }
 
-  /** 
-   * Clear all 
+  /**
+   * Clear all
    */
   public ClearAll(): boolean {
     this._head = undefined;

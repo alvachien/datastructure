@@ -16,10 +16,12 @@ describe('Test Graph', function () {
     beforeEach(function () {
         _graph = new Graph_1.Graph();
     });
-    it("#1. Test constructor.", function () {
+    it('#1. Test constructor.', function () {
         expect(_graph).toBeTruthy();
+        expect(_graph.VertexNumber()).toBe(0);
+        expect(_graph.EdgeNumber()).toBe(0);
     });
-    it("#2. Test normal case.", function () {
+    it('#2. Test normal case.', function () {
         expect(_graph).toBeTruthy();
         // A - 5 - B
         // | \     |
@@ -80,7 +82,7 @@ describe('Test Graph', function () {
         expect(edgeto3).toBe(1);
         expect(edgeto4).toBe(2);
     });
-    it("#3. Test AddVertex()", function () {
+    it('#3. Test AddVertex()', function () {
         expect(_graph).toBeTruthy();
         _graph.AddVertex(1, 'A');
         var naddrst = _graph.AddVertex(2, 'B');
@@ -89,7 +91,7 @@ describe('Test Graph', function () {
         expect(naddrst).toBe(-1);
         expect(_graph.IsVertexExist(2)).toBe(true);
     });
-    it("#4. Test AddEdge()", function () {
+    it('#4. Test AddEdge()', function () {
         expect(_graph).toBeTruthy();
         _graph.AddVertex(1, 'A');
         var brst = _graph.AddEdge(1, 2, 5);

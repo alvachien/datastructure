@@ -77,6 +77,7 @@ var LinkStack = /** @class */ (function () {
             return this._length++;
         }
         var node = new LinkStackNode();
+        node.Data = elem;
         node.Next = this._head;
         this._head = node;
         return this._length++;

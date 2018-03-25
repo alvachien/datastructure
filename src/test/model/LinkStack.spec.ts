@@ -15,19 +15,19 @@ describe('Test LinkStack', () => {
   let _linkStack: LinkStack<number>;
 
   beforeEach(() => {
-    _linkStack = new LinkStack<number>();    
+    _linkStack = new LinkStack<number>();
   });
 
-  it("#1. Check InitStack()", () => {
+  it('#1. Check InitStack()', () => {
     expect(_linkStack).toBeTruthy();
   });
 
-  it("#2. Check empty stack.", () => {
+  it('#2. Check empty stack.', () => {
     expect(_linkStack.IsEmpty()).toBe(true);
     expect(_linkStack.Length()).toBe(0);
   });
 
-  it("#3. Check push on Stack.", () => {
+  it('#3. Check push on Stack.', () => {
     _linkStack.Push(1);
     expect(_linkStack.IsEmpty()).toBe(false);
     expect(_linkStack.Length()).toBe(1);
@@ -37,7 +37,7 @@ describe('Test LinkStack', () => {
     expect(_linkStack.Length()).toBe(2);
   });
 
-  it("#4. Check pop of Stack.", () => {
+  it('#4. Check pop of Stack.', () => {
     _linkStack.Push(1);
     _linkStack.Push(2);
     _linkStack.Push(3);
@@ -56,7 +56,7 @@ describe('Test LinkStack', () => {
     expect(_linkStack.Pop()).toBeFalsy();
   });
 
-  it("#5. Check empty stack.", () => {
+  it('#5. Check empty stack.', () => {
     // _linkStack.InitList();
     _linkStack.Push(1);
     _linkStack.Push(2);
@@ -68,7 +68,7 @@ describe('Test LinkStack', () => {
     expect(_linkStack.Length()).toBe(0);
   });
 
-  it("#6. Check IsExist.", () => {
+  it('#6. Check IsExist.', () => {
     // _linkStack.InitList();
     // _linkStack.AppendElement(1);
     // _linkStack.AppendElement(2);
@@ -79,7 +79,7 @@ describe('Test LinkStack', () => {
     // expect(_linkStack.IsExist(3)).toBe(false);
   });
 
-  it("#7. Check Print.", () => {
+  it('#7. Check Print.', () => {
     // _linkStack.InitList();
     // _linkStack.AppendElement(1);
     // _linkStack.AppendElement(2);

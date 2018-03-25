@@ -119,6 +119,14 @@ var GraphAdjaceList = /** @class */ (function () {
         }
         return rst;
     };
+    GraphAdjaceList.prototype.IsVertexExist = function (id) {
+        for (var i = 0; i < this._vertex.Length(); i++) {
+            if (this._vertex.GetElement(i).id === id) {
+                return true;
+            }
+        }
+        return false;
+    };
     /**
      * Edges
      */
@@ -135,10 +143,24 @@ var GraphAdjaceList = /** @class */ (function () {
         }
         return rst;
     };
+    GraphAdjaceList.prototype.IsEdgeExist = function (from, to) {
+        if (this.IsVertexExist(from) && this.IsVertexExist(to)) {
+            var llist = this._adjList.get(from.toString());
+            for (var i = 0; i < llist.Length(); i++) {
+                if (llist.GetElement(i).to === to) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
     /**
      * Add Vertex
      */
     GraphAdjaceList.prototype.AddVertex = function (id, data) {
+        if (id <= 0 || this.IsVertexExist(id)) {
+            return -1;
+        }
         var vetx = new GraphAdjaceListVertex();
         vetx.value = data;
         vetx.id = id;
@@ -150,6 +172,12 @@ var GraphAdjaceList = /** @class */ (function () {
      * Add Edge
      */
     GraphAdjaceList.prototype.AddEdge = function (frm, to, weight) {
+        if (frm <= 0 || to <= 0 || !this.IsVertexExist(frm) || !this.IsVertexExist(to)) {
+            return false;
+        }
+        if (this.IsEdgeExist(frm, to)) {
+            return false;
+        }
         var nedge = new GraphAdjaceListEdge();
         nedge.from = frm;
         nedge.to = to;

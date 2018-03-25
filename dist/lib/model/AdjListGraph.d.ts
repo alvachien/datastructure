@@ -51,10 +51,12 @@ export declare class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
      * Vertex
      */
     Vertexs(): GraphAdjaceListVertex<X>[];
+    IsVertexExist(id: number): boolean;
     /**
      * Edges
      */
     Edges(): GraphAdjaceListEdge<Y>[];
+    IsEdgeExist(from: number, to: number): boolean;
     /**
      * Add Vertex
      */

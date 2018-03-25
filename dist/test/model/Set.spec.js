@@ -16,7 +16,7 @@ describe('Test Set', function () {
     beforeEach(function () {
         _set = new Set_1.Set();
     });
-    it("#1. Check add, values, has and size()", function () {
+    it('#1. Check add, values, has and size()', function () {
         expect(_set).toBeTruthy();
         _set.add(1);
         var vals = _set.values();
@@ -33,7 +33,7 @@ describe('Test Set', function () {
         expect(vals[0]).toBe(1);
         expect(vals[1]).toBe(2);
     });
-    it("#2. Check remove()", function () {
+    it('#2. Check remove()', function () {
         _set.add(1);
         _set.add(2);
         var vals = _set.values();
@@ -45,7 +45,7 @@ describe('Test Set', function () {
         expect(vals.length).toBe(1);
         expect(vals[0]).toBe(2);
     });
-    it("#3. Test union()", function () {
+    it('#3. Test union()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);
@@ -59,7 +59,7 @@ describe('Test Set', function () {
         expect(vals.length).toBe(6);
         expect(unset.has(3)).toBe(true);
     });
-    it("#4. Test intersection()", function () {
+    it('#4. Test intersection()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);
@@ -74,7 +74,7 @@ describe('Test Set', function () {
         expect(unset.has(3)).toBe(true);
         expect(unset.has(2)).toBe(false);
     });
-    it("#5. Test difference()", function () {
+    it('#5. Test difference()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);
@@ -89,7 +89,7 @@ describe('Test Set', function () {
         expect(unset.has(3)).toBe(false);
         expect(unset.has(2)).toBe(true);
     });
-    it("#6. Test subset()", function () {
+    it('#6. Test subset()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);

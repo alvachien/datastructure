@@ -102,26 +102,36 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
    * Vertex
    */
   Vertexs(): GraphAdjaceListVertex<X>[] {
-    let rst: GraphAdjaceListVertex<X>[] = [];
+    const rst: GraphAdjaceListVertex<X>[] = [];
     for (let i = 0; i < this._vertex.Length(); i ++) {
-      let elem = this._vertex.GetElement(i);
+      const elem = this._vertex.GetElement(i);
       rst.push(elem);
     }
-    
+
     return rst;
+  }
+
+  IsVertexExist(id: number): boolean {
+    for (let i = 0; i < this._vertex.Length(); i ++) {
+      if (this._vertex.GetElement(i).id === id) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
    * Edges
    */
   Edges(): GraphAdjaceListEdge<Y>[] {
-    let rst: GraphAdjaceListEdge<Y>[] = [];
+    const rst: GraphAdjaceListEdge<Y>[] = [];
 
     if (this._adjList.size() > 0) {
-      let vers = this._adjList.values();
-      for(let i = 0; i < vers.length; i ++) {
-        let edges = vers[i];
-        for(let j = 0; j < edges.Length(); j++) {
+      const vers = this._adjList.values();
+      for (let i = 0; i < vers.length; i ++) {
+        const edges = vers[i];
+        for (let j = 0; j < edges.Length(); j++) {
           rst.push(edges.GetElement(j));
         }
       }
@@ -130,11 +140,28 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     return rst;
   }
 
+  IsEdgeExist(from: number, to: number): boolean {
+    if (this.IsVertexExist(from) && this.IsVertexExist(to)) {
+      const llist = this._adjList.get(from.toString());
+      for (let i = 0; i < llist.Length(); i ++) {
+        if (llist.GetElement(i).to === to) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
   /**
    * Add Vertex
    */
   AddVertex(id: number, data: X): number {
-    let vetx: GraphAdjaceListVertex<X> = new GraphAdjaceListVertex<X>();
+    if (id <= 0 || this.IsVertexExist(id)) {
+      return -1;
+    }
+
+    const vetx: GraphAdjaceListVertex<X> = new GraphAdjaceListVertex<X>();
     vetx.value = data;
     vetx.id = id;
 
@@ -148,16 +175,23 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
    * Add Edge
    */
   AddEdge(frm: number, to: number, weight: Y): boolean {
-    let nedge: GraphAdjaceListEdge<Y> = new GraphAdjaceListEdge<Y>();
+    if (frm <= 0 || to <= 0 || !this.IsVertexExist(frm) || !this.IsVertexExist(to)) {
+      return false;
+    }
+    if (this.IsEdgeExist(frm, to)) {
+      return false;
+    }
+
+    const nedge: GraphAdjaceListEdge<Y> = new GraphAdjaceListEdge<Y>();
     nedge.from = frm;
     nedge.to = to;
     nedge.weight = weight;
-    let llist = this._adjList.get(frm.toString());
+    const llist = this._adjList.get(frm.toString());
     if (llist.Length() === 0)  {
       llist.InitList(nedge);
     } else {
       llist.AppendElement(nedge);
-    } 
+    }
 
     // nedge = new GraphAdjaceListEdge<Y>();
     // nedge.To = frm;
@@ -165,7 +199,7 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     // this._adjList.get(to.toString()).AppendElement(nedge);
     return true;
   }
-  
+
   /**
    * DFS: Depth First Search
    */

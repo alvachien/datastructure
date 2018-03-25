@@ -16,12 +16,12 @@ describe('Test AdjListGraph', function () {
     beforeEach(function () {
         _graph = new AdjListGraph_1.GraphAdjaceList();
     });
-    it("#1. Test create())", function () {
+    it('#1. Test constructor.', function () {
         expect(_graph).toBeTruthy();
         expect(_graph.VertexNumber()).toBe(0);
         expect(_graph.EdgeNumber()).toBe(0);
     });
-    it("#2. Test addVertex()", function () {
+    it('#2. Test normal case.', function () {
         expect(_graph).toBeTruthy();
         // A - 5 - B
         // | \     |
@@ -42,6 +42,10 @@ describe('Test AdjListGraph', function () {
         var edgefrm2 = 0;
         var edgefrm3 = 0;
         var edgefrm4 = 0;
+        var edgeto1 = 0;
+        var edgeto2 = 0;
+        var edgeto3 = 0;
+        var edgeto4 = 0;
         for (var i = 0; i < _graph.EdgeNumber(); i++) {
             var edge = _graph.Edges()[i];
             if (edge.from === 1) {
@@ -56,11 +60,49 @@ describe('Test AdjListGraph', function () {
             else if (edge.from === 4) {
                 edgefrm4++;
             }
+            if (edge.to === 1) {
+                edgeto1++;
+            }
+            else if (edge.to === 2) {
+                edgeto2++;
+            }
+            else if (edge.to === 3) {
+                edgeto3++;
+            }
+            else if (edge.to === 4) {
+                edgeto4++;
+            }
         }
         expect(edgefrm1).toBe(3);
         expect(edgefrm2).toBe(1);
         expect(edgefrm3).toBe(0);
         expect(edgefrm4).toBe(0);
+        expect(edgeto1).toBe(0);
+        expect(edgeto2).toBe(1);
+        expect(edgeto3).toBe(1);
+        expect(edgeto4).toBe(2);
+    });
+    it('#3. Test AddVertex()', function () {
+        expect(_graph).toBeTruthy();
+        _graph.AddVertex(1, 'A');
+        var naddrst = _graph.AddVertex(2, 'B');
+        expect(naddrst).toBe(2);
+        naddrst = _graph.AddVertex(2, 'C');
+        expect(naddrst).toBe(-1);
+        expect(_graph.IsVertexExist(2)).toBe(true);
+    });
+    it('#4. Test AddEdge()', function () {
+        expect(_graph).toBeTruthy();
+        _graph.AddVertex(1, 'A');
+        var brst = _graph.AddEdge(1, 2, 5);
+        expect(brst).toBe(false);
+        _graph.AddVertex(2, 'B');
+        brst = _graph.AddEdge(1, 2, 5);
+        expect(brst).toBe(true);
+        brst = _graph.AddEdge(1, 2, 5);
+        expect(brst).toBe(false);
+        brst = _graph.IsEdgeExist(1, 2);
+        expect(brst).toBe(true);
     });
 });
 //# sourceMappingURL=AdjListGraph.spec.js.map

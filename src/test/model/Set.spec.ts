@@ -18,7 +18,7 @@ describe('Test Set', () => {
     _set = new Set();
   });
 
-  it("#1. Check add, values, has and size()", () => {
+  it('#1. Check add, values, has and size()', () => {
     expect(_set).toBeTruthy();
 
     _set.add(1);
@@ -39,7 +39,7 @@ describe('Test Set', () => {
     expect(vals[1]).toBe(2);
   });
 
-  it("#2. Check remove()", () => {
+  it('#2. Check remove()', () => {
     _set.add(1);
     _set.add(2);
     let vals = _set.values();
@@ -53,7 +53,7 @@ describe('Test Set', () => {
     expect(vals[0]).toBe(2);
   });
 
-  it("#3. Test union()", () => {
+  it('#3. Test union()', () => {
     _set.add(1);
     _set.add(2);
     _set.add(3);
@@ -70,7 +70,7 @@ describe('Test Set', () => {
     expect(unset.has(3)).toBe(true);
   });
 
-  it("#4. Test intersection()", () => {
+  it('#4. Test intersection()', () => {
     _set.add(1);
     _set.add(2);
     _set.add(3);
@@ -88,7 +88,7 @@ describe('Test Set', () => {
     expect(unset.has(2)).toBe(false);
   });
 
-  it("#5. Test difference()", () => {
+  it('#5. Test difference()', () => {
     _set.add(1);
     _set.add(2);
     _set.add(3);
@@ -106,7 +106,7 @@ describe('Test Set', () => {
     expect(unset.has(2)).toBe(true);
   });
 
-  it("#6. Test subset()", () => {
+  it('#6. Test subset()', () => {
     _set.add(1);
     _set.add(2);
     _set.add(3);
