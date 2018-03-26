@@ -43,7 +43,7 @@ export class Dictionary<X> {
   }
 
   public values(): X[] {
-    let ret: any[] = [];
+    const ret: any[] = [];
     for (let key in this._data) {
       if (this.has(key)) {
         ret.push(this._data[key]);
@@ -54,7 +54,7 @@ export class Dictionary<X> {
   }
 
   public keys(): string[] {
-    let ret: any[] = [];
+    const ret: any[] = [];
     for (let key in this._data) {
       if (this.has(key)) {
         ret.push(key);
