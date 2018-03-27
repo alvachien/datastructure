@@ -12,19 +12,17 @@
 import { BinarySearchTree } from '../../lib/model/BinarySearchTree';
 
 describe('Test BinarySearchTree', () => {
-  let _bsTree: BinarySearchTree<number>;
+  let _bsTree: BinarySearchTree<string>;
 
   beforeEach(() => {
-    _bsTree = new BinarySearchTree<number>();
+    _bsTree = new BinarySearchTree<string>();
   });
 
-  it("#1. Test creation", () => {
+  it('#1. Test creation', () => {
     expect(_bsTree).toBeTruthy();
   });
-
-  it("#2. Test insert", () => {
+  it('#2. Test insert', () => {
     expect(_bsTree).toBeTruthy();
-    //_bsTree.insert()
   });
 });
 

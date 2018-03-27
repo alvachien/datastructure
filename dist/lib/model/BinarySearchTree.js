@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,35 +7,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: BinarySearchTree.ts
- *
+ * Binary search tree
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+// Binary search tree node
 var BinarySearchTreeNode = /** @class */ (function () {
-    function BinarySearchTreeNode(key, value) {
-        if ((key === undefined && value !== undefined)
-            || (key !== undefined && value === undefined)) {
+    function BinarySearchTreeNode(key, data) {
+        if ((key === undefined && data !== undefined)
+            || (key !== undefined && data === undefined)) {
             throw new Error('invalid input');
         }
-        if (key !== undefined && value !== undefined) {
+        if (key !== undefined && data !== undefined) {
             this._key = key;
-            this._value = value;
+            this._data = data;
         }
     }
-    Object.defineProperty(BinarySearchTreeNode.prototype, "Key", {
+    Object.defineProperty(BinarySearchTreeNode.prototype, "key", {
         get: function () {
             return this._key;
         },
-        set: function (key) {
-            this._key = key;
+        set: function (keynumber) {
+            this._key = keynumber;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BinarySearchTreeNode.prototype, "Value", {
+    Object.defineProperty(BinarySearchTreeNode.prototype, "data", {
         get: function () {
-            return this._value;
+            return this._data;
         },
         set: function (value) {
-            this._value = value;
+            this._data = value;
         },
         enumerable: true,
         configurable: true
@@ -44,41 +45,26 @@ var BinarySearchTreeNode = /** @class */ (function () {
     return BinarySearchTreeNode;
 }());
 exports.BinarySearchTreeNode = BinarySearchTreeNode;
+// Binary search tree
 var BinarySearchTree = /** @class */ (function () {
     function BinarySearchTree() {
     }
-    Object.defineProperty(BinarySearchTree.prototype, "Root", {
+    Object.defineProperty(BinarySearchTree.prototype, "rootNode", {
         get: function () {
             return this._root;
         },
         enumerable: true,
         configurable: true
     });
-    BinarySearchTree.prototype.insert = function (key, value) {
-        var newnode = new BinarySearchTreeNode(key, value);
+    BinarySearchTree.prototype.insert = function (key, data) {
+        var newnode = new BinarySearchTreeNode(key, data);
         if (this._root === undefined) {
             this._root = newnode;
         }
         else {
+            this.insertNode(this._root, newnode);
         }
-    };
-    BinarySearchTree.prototype.insertNode = function (parnode, newnode) {
-        if (newnode.Key < parnode.Key) {
-            if (parnode.leftNode === undefined) {
-                parnode.leftNode = newnode;
-            }
-            else {
-                this.insertNode(parnode.leftNode, newnode);
-            }
-        }
-        else {
-            if (parnode.rightNode === undefined) {
-                parnode.rightNode = newnode;
-            }
-            else {
-                this.insertNode(parnode.rightNode, newnode);
-            }
-        }
+        return newnode;
     };
     BinarySearchTree.prototype.search = function (key) {
         return this.searchNode(this._root, key);
@@ -145,14 +131,32 @@ var BinarySearchTree = /** @class */ (function () {
         }
         return undefined;
     };
+    BinarySearchTree.prototype.insertNode = function (parnode, newnode) {
+        if (newnode.key < parnode.key) {
+            if (parnode.leftNode === undefined) {
+                parnode.leftNode = newnode;
+            }
+            else {
+                this.insertNode(parnode.leftNode, newnode);
+            }
+        }
+        else {
+            if (parnode.rightNode === undefined) {
+                parnode.rightNode = newnode;
+            }
+            else {
+                this.insertNode(parnode.rightNode, newnode);
+            }
+        }
+    };
     BinarySearchTree.prototype.searchNode = function (node, key) {
         if (node === undefined) {
             return undefined;
         }
-        if (key < node.Key) {
+        if (key < node.key) {
             return this.searchNode(node.leftNode, key);
         }
-        else if (key > node.Key) {
+        else if (key > node.key) {
             return this.searchNode(node.rightNode, key);
         }
         else {
@@ -163,11 +167,11 @@ var BinarySearchTree = /** @class */ (function () {
         if (node === undefined) {
             return undefined;
         }
-        if (key < node.Key) {
+        if (key < node.key) {
             node.leftNode = this.removeNode(node.leftNode, key);
             return node;
         }
-        else if (key > node.Key) {
+        else if (key > node.key) {
             node.rightNode = this.removeNode(node.rightNode, key);
             return node;
         }
@@ -186,7 +190,7 @@ var BinarySearchTree = /** @class */ (function () {
             }
             var aux = void 0;
             // let aux = findMinNode(node.rightNode);
-            node.Key = aux.Key;
+            node.key = aux.Key;
             node.rightNode = this.removeNode(node.rightNode, aux.Key);
             return node;
         }

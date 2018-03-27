@@ -23,7 +23,17 @@ var BinaryThreadTreeNode = /** @class */ (function () {
         this._left = undefined;
         this._right = undefined;
     };
-    Object.defineProperty(BinaryThreadTreeNode.prototype, "Data", {
+    Object.defineProperty(BinaryThreadTreeNode.prototype, "key", {
+        get: function () {
+            return this._key;
+        },
+        set: function (key) {
+            this._key = key;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BinaryThreadTreeNode.prototype, "data", {
         get: function () {
             return this._data;
         },
@@ -79,7 +89,7 @@ exports.BinaryThreadTreeNode = BinaryThreadTreeNode;
 var BinaryThreadTree = /** @class */ (function () {
     function BinaryThreadTree() {
     }
-    Object.defineProperty(BinaryThreadTree.prototype, "Root", {
+    Object.defineProperty(BinaryThreadTree.prototype, "rootNode", {
         get: function () {
             return this._root;
         },
@@ -131,13 +141,13 @@ var BinaryThreadTree = /** @class */ (function () {
             arRst.push(curNode);
         }
     };
-    BinaryThreadTree.prototype.InsertNode = function (parNode, data) {
+    BinaryThreadTree.prototype.InsertNode = function (parNode, key, data) {
         if (parNode === null && this._root !== null) {
             return null;
         }
         if (parNode === null) {
             var node = new BinaryThreadTreeNode();
-            node.Data = data;
+            node.data = data;
             this._root = node;
             return this._root;
         }
@@ -146,7 +156,7 @@ var BinaryThreadTree = /** @class */ (function () {
             return null;
         }
         var nnode = new BinaryThreadTreeNode();
-        nnode.Data = data;
+        nnode.data = data;
         if (parNode.Left === null) {
             parNode.Left = nnode;
         }
@@ -162,7 +172,7 @@ var BinaryThreadTree = /** @class */ (function () {
         var arNodes = this.PreorderTraversal();
         for (var _i = 0, arNodes_1 = arNodes; _i < arNodes_1.length; _i++) {
             var nod = arNodes_1[_i];
-            if (nod.Data === elem) {
+            if (nod.data === elem) {
                 return nod;
             }
         }

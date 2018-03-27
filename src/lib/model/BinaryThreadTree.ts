@@ -17,6 +17,7 @@ export enum BinaryThreadTag {
 };
 
 export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
+  private _key: number;
   private _data: T;
   private _left: BinaryThreadTreeNode<T>;
   private _right: BinaryThreadTreeNode<T>;
@@ -28,10 +29,16 @@ export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
     this._right = undefined;
   }
 
-  get Data(): T {
+  get key(): number {
+    return this._key;
+  }
+  set key(key: number) {
+    this._key = key;
+  }
+  get data(): T {
     return this._data;
   }
-  set Data(data: T) {
+  set data(data: T) {
     this._data = data;
   }
   get Left(): BinaryThreadTreeNode<T> {
@@ -66,10 +73,10 @@ export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
 export class BinaryThreadTree<T> implements IBinaryTree<T> {
   private _root: BinaryThreadTreeNode<T>;
 
-  get Root(): BinaryThreadTreeNode<T> {
+  get rootNode(): BinaryThreadTreeNode<T> {
     return this._root;
   }
-  set Root(root: BinaryThreadTreeNode<T>) {
+  set rootNode(root: BinaryThreadTreeNode<T>) {
     this._root = root;
   }
 
@@ -129,14 +136,14 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
     }
   }
 
-  public InsertNode(parNode: BinaryThreadTreeNode<T>, data: T): BinaryThreadTreeNode<T> {
+  public InsertNode(parNode: BinaryThreadTreeNode<T>, key: number, data: T): BinaryThreadTreeNode<T> {
     if (parNode === null && this._root !== null) {
       return null;
     }
 
     if (parNode === null) {
       const node: BinaryThreadTreeNode<T> = new BinaryThreadTreeNode<T>();
-      node.Data = data;
+      node.data = data;
 
       this._root = node;
       return this._root;
@@ -148,7 +155,7 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
     }
 
     const nnode: BinaryThreadTreeNode<T> = new BinaryThreadTreeNode<T>();
-    nnode.Data = data;
+    nnode.data = data;
     if (parNode.Left === null) {
       parNode.Left = nnode;
     } else if (parNode.Right === null) {
@@ -165,7 +172,7 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
 
     const arNodes: Array<BinaryThreadTreeNode<T>> = this.PreorderTraversal();
     for (const nod of arNodes) {
-      if (nod.Data === elem) {
+      if (nod.data === elem) {
         return nod;
       }
     }

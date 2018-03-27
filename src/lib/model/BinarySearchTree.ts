@@ -1,5 +1,3 @@
-import { callbackify } from "util";
-
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,63 +6,141 @@ import { callbackify } from "util";
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: BinarySearchTree.ts
- *
+ * Binary search tree
  */
 
-export class BinarySearchTreeNode<T> {
+import { IBinaryTreeNode, IBinarySearchTree, BinarySearchTreeCallback } from './ITree';
+
+// Binary search tree node
+export class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
   public leftNode: BinarySearchTreeNode<T>;
   public rightNode: BinarySearchTreeNode<T>;
   private _key: number;
-  private _value: T;
+  private _data: T;
 
-  get Key(): number {
+  get key(): number {
     return this._key;
   }
-  set Key(key: number) {
-    this._key = key;
+  set key(keynumber: number) {
+    this._key = keynumber;
   }
-  get Value(): T {
-    return this._value;
+  get data(): T {
+    return this._data;
   }
-  set Value(value: T) {
-    this._value = value;
+  set data(value: T) {
+    this._data = value;
   }
 
-  constructor(key?: number, value?: T) {
-    if ((key === undefined && value !== undefined)
-      || (key !== undefined && value === undefined)) {
+  constructor(key?: number, data?: T) {
+    if ((key === undefined && data !== undefined)
+      || (key !== undefined && data === undefined)) {
       throw new Error('invalid input');
     }
 
-    if (key !== undefined && value !== undefined) {
+    if (key !== undefined && data !== undefined) {
       this._key = key;
-      this._value = value;
+      this._data = data;
     }
   }
 }
 
-export class BinarySearchTree<T> {
+// Binary search tree
+export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   private _root: BinarySearchTreeNode<T>;
-  get Root(): BinarySearchTreeNode<T> {
+  get rootNode(): BinarySearchTreeNode<T> {
     return this._root;
   }
 
   constructor() {
   }
 
-  public insert(key: number, value: T) {
-    let newnode: BinarySearchTreeNode<T> = new BinarySearchTreeNode<T>(key, value);
+  public insert(key: number, data: T): BinarySearchTreeNode<T> {
+    const newnode: BinarySearchTreeNode<T> = new BinarySearchTreeNode<T>(key, data);
 
     if (this._root === undefined) {
       this._root = newnode;
     } else {
+      this.insertNode(this._root, newnode);
+    }
 
+    return newnode;
+  }
+
+  public search(key: number): BinarySearchTreeNode<T> {
+    return this.searchNode(this._root, key);
+  }
+
+  public inOrderTraverse(callback: BinarySearchTreeCallback<T>) {
+    this.inOrderTraverseNode(this._root, callback);
+  }
+  public preOrderTraverse(callback: BinarySearchTreeCallback<T>) {
+    this.preOrderTraverseNode(this._root, callback);
+  }
+  public postOrderTraverse(callback: BinarySearchTreeCallback<T>) {
+    this.postOrderTraverseNode(this._root, callback);
+  }
+  public min(): BinarySearchTreeNode<T> {
+    return this.minNode(this._root);
+  }
+  public max(): BinarySearchTreeNode<T> {
+    return this.maxNode(this._root);
+  }
+  public remove(key: number) {
+  }
+
+  private inOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+    if (node !== undefined) {
+      this.inOrderTraverseNode(node.leftNode, callback);
+      if (callback !== undefined) {
+        callback(node);
+      }
+      this.inOrderTraverseNode(node.rightNode, callback);
+    }
+  }
+  private preOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+    if (node !== undefined) {
+      if (callback !== undefined) {
+        callback(node);
+      }
+      this.preOrderTraverseNode(node.leftNode, callback);
+      this.preOrderTraverseNode(node.rightNode, callback);
+    }
+  }
+  private postOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+    if (node !== undefined) {
+      this.postOrderTraverseNode(node.leftNode, callback);
+      this.postOrderTraverseNode(node.rightNode, callback);
+      if (callback !== undefined) {
+        callback(node);
+      }
     }
   }
 
+  private minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    if (node !== undefined) {
+      while (node !== undefined && node.leftNode !== undefined) {
+        node = node.leftNode;
+      }
+
+      return node;
+    }
+
+    return undefined;
+  }
+  private maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    if (node !== undefined) {
+      while (node !== undefined && node.rightNode !== undefined) {
+        node = node.rightNode;
+      }
+
+      return node;
+    }
+
+    return undefined;
+  }
   private insertNode(parnode: BinarySearchTreeNode<T>,
     newnode: BinarySearchTreeNode<T>) {
-    if (newnode.Key < parnode.Key) {
+    if (newnode.key < parnode.key) {
       if (parnode.leftNode === undefined) {
         parnode.leftNode = newnode;
       } else {
@@ -78,91 +154,14 @@ export class BinarySearchTree<T> {
       }
     }
   }
-
-  public search(key: number): BinarySearchTreeNode<T> {
-    return this.searchNode(this._root, key);
-  }
-
-  public inOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
-    this.inOrderTraverseNode(this._root, callback);
-  }
-  public preOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
-    this.preOrderTraverseNode(this._root, callback);
-  }
-  public postOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void) {
-    this.postOrderTraverseNode(this._root, callback);
-  }
-  public min(): BinarySearchTreeNode<T> {
-    return this.minNode(this._root);
-  }
-  public max(): BinarySearchTreeNode<T> {
-    return this.maxNode(this._root);
-  }
-  public remove(key: number) {
-
-  }
-
-  private inOrderTraverseNode(node: BinarySearchTreeNode<T>, 
-    callback: (node: BinarySearchTreeNode<T>) => void) {
-    if (node !== undefined) {
-      this.inOrderTraverseNode(node.leftNode, callback);
-      if (callback !== undefined) {
-        callback(node);
-      }
-      this.inOrderTraverseNode(node.rightNode, callback);
-    }
-  }
-  private preOrderTraverseNode(node: BinarySearchTreeNode<T>,
-    callback: (node: BinarySearchTreeNode<T>) => void) {
-    if (node !== undefined) {
-      if (callback !== undefined) {
-        callback(node);
-      }
-      this.preOrderTraverseNode(node.leftNode, callback);
-      this.preOrderTraverseNode(node.rightNode, callback);
-    }
-  }
-  private postOrderTraverseNode(node: BinarySearchTreeNode<T>,
-    callback: (node: BinarySearchTreeNode<T>) => void) {
-    if (node !== undefined) {
-      this.postOrderTraverseNode(node.leftNode, callback);
-      this.postOrderTraverseNode(node.rightNode, callback);
-      if (callback !== undefined) {
-        callback(node);
-      }
-    }
-  }
-
-  private minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
-    if (node !== undefined) {
-      while(node !== undefined && node.leftNode !== undefined) {
-        node = node.leftNode;
-      }
-
-      return node;
-    }
-
-    return undefined;
-  }
-  private maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
-    if (node !== undefined) {
-      while(node !== undefined && node.rightNode !== undefined) {
-        node = node.rightNode;
-      }
-
-      return node;
-    }
-
-    return undefined;
-  }
   private searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> {
     if (node === undefined) {
       return undefined;
     }
 
-    if (key < node.Key) {
+    if (key < node.key) {
       return this.searchNode(node.leftNode, key);
-    } else if (key > node.Key) {
+    } else if (key > node.key) {
       return this.searchNode(node.rightNode, key);
     } else {
       return node;
@@ -173,10 +172,10 @@ export class BinarySearchTree<T> {
       return undefined;
     }
 
-    if (key < node.Key) {
+    if (key < node.key) {
       node.leftNode = this.removeNode(node.leftNode, key);
       return node;
-    } else if (key > node.Key) {
+    } else if (key > node.key) {
       node.rightNode = this.removeNode(node.rightNode, key);
       return node;
     } else {
@@ -195,7 +194,7 @@ export class BinarySearchTree<T> {
 
       let aux;
       // let aux = findMinNode(node.rightNode);
-      node.Key = aux.Key;
+      node.key = aux.Key;
       node.rightNode = this.removeNode(node.rightNode, aux.Key);
       return node;
     }

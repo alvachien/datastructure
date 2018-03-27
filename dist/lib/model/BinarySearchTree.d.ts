@@ -6,27 +6,27 @@
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: BinarySearchTree.ts
- *
+ * Binary search tree
  */
-export declare class BinarySearchTreeNode<T> {
+import { IBinaryTreeNode, IBinarySearchTree, BinarySearchTreeCallback } from './ITree';
+export declare class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
     leftNode: BinarySearchTreeNode<T>;
     rightNode: BinarySearchTreeNode<T>;
     private _key;
-    private _value;
-    Key: number;
-    Value: T;
-    constructor(key?: number, value?: T);
+    private _data;
+    key: number;
+    data: T;
+    constructor(key?: number, data?: T);
 }
-export declare class BinarySearchTree<T> {
+export declare class BinarySearchTree<T> implements IBinarySearchTree<T> {
     private _root;
-    readonly Root: BinarySearchTreeNode<T>;
+    readonly rootNode: BinarySearchTreeNode<T>;
     constructor();
-    insert(key: number, value: T): void;
-    private insertNode(parnode, newnode);
+    insert(key: number, data: T): BinarySearchTreeNode<T>;
     search(key: number): BinarySearchTreeNode<T>;
-    inOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void): void;
-    preOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void): void;
-    postOrderTraverse(callback: (node: BinarySearchTreeNode<T>) => void): void;
+    inOrderTraverse(callback: BinarySearchTreeCallback<T>): void;
+    preOrderTraverse(callback: BinarySearchTreeCallback<T>): void;
+    postOrderTraverse(callback: BinarySearchTreeCallback<T>): void;
     min(): BinarySearchTreeNode<T>;
     max(): BinarySearchTreeNode<T>;
     remove(key: number): void;
@@ -35,6 +35,7 @@ export declare class BinarySearchTree<T> {
     private postOrderTraverseNode(node, callback);
     private minNode(node);
     private maxNode(node);
+    private insertNode(parnode, newnode);
     private searchNode(node, key);
     private removeNode(node, key);
 }

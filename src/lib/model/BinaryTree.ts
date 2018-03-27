@@ -11,7 +11,7 @@
 
 import { IBinaryTreeNode, IBinaryTree } from './ITree';
 
-export class BinaryTreeNode<T> implements IBinaryTreeNode<T> {
+export class BinaryTreeNode<T>  {
   private _data: T;
   private _left: BinaryTreeNode<T> = null;
   private _right: BinaryTreeNode<T> = null;
@@ -42,7 +42,7 @@ export class BinaryTreeNode<T> implements IBinaryTreeNode<T> {
   }
 }
 
-export class BinaryTree<T> implements IBinaryTree<T> {
+export class BinaryTree<T> {
   private _root: BinaryTreeNode<T> = null;
 
   get Root(): BinaryTreeNode<T> {
@@ -145,7 +145,7 @@ export class BinaryTree<T> implements IBinaryTree<T> {
     const arNodes: Array<BinaryTreeNode<T>> = this.PreorderTraversal();
     for (const nod of arNodes) {
       if (nod.Data === elem) {
-        return nod;
+        return undefined;
       }
     }
   }

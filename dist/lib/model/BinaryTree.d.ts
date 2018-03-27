@@ -8,8 +8,8 @@
  * File: BinaryTree.ts
  *
  */
-import { IBinaryTreeNode, IBinaryTree } from './ITree';
-export declare class BinaryTreeNode<T> implements IBinaryTreeNode<T> {
+import { IBinaryTreeNode } from './ITree';
+export declare class BinaryTreeNode<T> {
     private _data;
     private _left;
     private _right;
@@ -18,7 +18,7 @@ export declare class BinaryTreeNode<T> implements IBinaryTreeNode<T> {
     Left: BinaryTreeNode<T>;
     Right: BinaryTreeNode<T>;
 }
-export declare class BinaryTree<T> implements IBinaryTree<T> {
+export declare class BinaryTree<T> {
     private _root;
     Root: BinaryTreeNode<T>;
     InorderTraversal(): Array<BinaryTreeNode<T>>;

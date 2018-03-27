@@ -14,13 +14,15 @@ export declare enum BinaryThreadTag {
     Thread = 1,
 }
 export declare class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
+    private _key;
     private _data;
     private _left;
     private _right;
     private _lefttag;
     private _righttag;
     constructore(): void;
-    Data: T;
+    key: number;
+    data: T;
     Left: BinaryThreadTreeNode<T>;
     LeftTag: BinaryThreadTag;
     Right: BinaryThreadTreeNode<T>;
@@ -28,13 +30,13 @@ export declare class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
 }
 export declare class BinaryThreadTree<T> implements IBinaryTree<T> {
     private _root;
-    Root: BinaryThreadTreeNode<T>;
+    rootNode: BinaryThreadTreeNode<T>;
     InorderTraversal(): Array<BinaryThreadTreeNode<T>>;
     private InorderImpl(curNode, arRst);
     PreorderTraversal(): Array<BinaryThreadTreeNode<T>>;
     private PreorderImpl(curNode, arRst);
     PostorderTraversal(): Array<BinaryThreadTreeNode<T>>;
     private PostorderImpl(curNode, arRst);
-    InsertNode(parNode: BinaryThreadTreeNode<T>, data: T): BinaryThreadTreeNode<T>;
+    InsertNode(parNode: BinaryThreadTreeNode<T>, key: number, data: T): BinaryThreadTreeNode<T>;
     FindNode(elem: T): IBinaryTreeNode<T>;
 }

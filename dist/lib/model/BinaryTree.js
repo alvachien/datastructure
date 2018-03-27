@@ -140,7 +140,7 @@ var BinaryTree = /** @class */ (function () {
         for (var _i = 0, arNodes_1 = arNodes; _i < arNodes_1.length; _i++) {
             var nod = arNodes_1[_i];
             if (nod.Data === elem) {
-                return nod;
+                return undefined;
             }
         }
     };

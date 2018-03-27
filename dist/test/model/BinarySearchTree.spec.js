@@ -16,12 +16,11 @@ describe('Test BinarySearchTree', function () {
     beforeEach(function () {
         _bsTree = new BinarySearchTree_1.BinarySearchTree();
     });
-    it("#1. Test creation", function () {
+    it('#1. Test creation', function () {
         expect(_bsTree).toBeTruthy();
     });
-    it("#2. Test insert", function () {
+    it('#2. Test insert', function () {
         expect(_bsTree).toBeTruthy();
-        //_bsTree.insert()
     });
 });
 //# sourceMappingURL=BinarySearchTree.spec.js.map
