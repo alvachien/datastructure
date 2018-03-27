@@ -21,8 +21,17 @@ describe('Test BinarySearchTree', () => {
   it('#1. Test creation', () => {
     expect(_bsTree).toBeTruthy();
   });
+
   it('#2. Test insert', () => {
-    expect(_bsTree).toBeTruthy();
+    // Insert
+    let nnode = _bsTree.insert(1, 'A');
+    expect(nnode).toBeTruthy();
+
+    nnode = _bsTree.insert(2, 'B');
+    expect(nnode).toBeTruthy();
+
+    nnode = _bsTree.insert(3, 'C');
+    expect(nnode).toBeTruthy();
   });
 });
 

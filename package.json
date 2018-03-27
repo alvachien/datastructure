@@ -18,6 +18,7 @@
     "node": ">= 5.4.1 < 9"
   },
   "scripts": {
+    "compile": "tsc",
     "test": "karma start karma.conf.ts"
   },
   "dependencies": {

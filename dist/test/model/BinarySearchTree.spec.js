@@ -20,7 +20,13 @@ describe('Test BinarySearchTree', function () {
         expect(_bsTree).toBeTruthy();
     });
     it('#2. Test insert', function () {
-        expect(_bsTree).toBeTruthy();
+        // Insert
+        var nnode = _bsTree.insert(1, 'A');
+        expect(nnode).toBeTruthy();
+        nnode = _bsTree.insert(2, 'B');
+        expect(nnode).toBeTruthy();
+        nnode = _bsTree.insert(3, 'C');
+        expect(nnode).toBeTruthy();
     });
 });
 //# sourceMappingURL=BinarySearchTree.spec.js.map
