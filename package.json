@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 5.4.1 < 7"
+    "node": ">= 5.4.1 < 9"
   },
   "scripts": {
     "test": "karma start karma.conf.ts"
