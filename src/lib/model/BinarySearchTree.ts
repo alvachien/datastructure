@@ -54,6 +54,11 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   constructor() {
   }
 
+  /**
+   * Insert node
+   * @param key Key of the node
+   * @param data Data of the node
+   */
   public insert(key: number, data: T): BinarySearchTreeNode<T> {
     const newnode: BinarySearchTreeNode<T> = new BinarySearchTreeNode<T>(key, data);
 
@@ -66,28 +71,63 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
     return newnode;
   }
 
+  /**
+   * Search
+   * @param key Key to search
+   */
   public search(key: number): BinarySearchTreeNode<T> {
     return this.searchNode(this._root, key);
   }
 
+  /**
+   * In-order traverse
+   * @param callback Callback to process each node
+   */
   public inOrderTraverse(callback: BinarySearchTreeCallback<T>) {
     this.inOrderTraverseNode(this._root, callback);
   }
+
+  /**
+   * Pre-order traverse
+   * @param callback Callback to process each node
+   */
   public preOrderTraverse(callback: BinarySearchTreeCallback<T>) {
     this.preOrderTraverseNode(this._root, callback);
   }
+
+  /**
+   * Post-order traverse
+   * @param callback Callback to process each node
+   */
   public postOrderTraverse(callback: BinarySearchTreeCallback<T>) {
     this.postOrderTraverseNode(this._root, callback);
   }
+
+  /**
+   * Minimum node 
+   */
   public min(): BinarySearchTreeNode<T> {
     return this.minNode(this._root);
   }
+
+  /**
+   * Maximum node 
+   */
   public max(): BinarySearchTreeNode<T> {
     return this.maxNode(this._root);
   }
+
+  /**
+   * Remove a node 
+   * @param key Key of the node to be deleted
+   */
   public remove(key: number) {
   }
 
+  /**
+   * @private
+   * In-Order Traverse Node
+   */
   private inOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       this.inOrderTraverseNode(node.leftNode, callback);
@@ -97,6 +137,11 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
       this.inOrderTraverseNode(node.rightNode, callback);
     }
   }
+
+  /**
+   * @private
+   * Pre-Order Traverse Node
+   */
   private preOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       if (callback !== undefined) {
@@ -106,6 +151,11 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
       this.preOrderTraverseNode(node.rightNode, callback);
     }
   }
+
+  /**
+   * @private
+   * Post-Order Traverse Node
+   */
   private postOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       this.postOrderTraverseNode(node.leftNode, callback);
@@ -116,6 +166,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
     }
   }
 
+  /**
+   * @private
+   * Minuimum Node
+   */
   private minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
     if (node !== undefined) {
       while (node !== undefined && node.leftNode !== undefined) {
@@ -127,6 +181,11 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
 
     return undefined;
   }
+
+  /**
+   * @private
+   * Maximum Node
+   */
   private maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
     if (node !== undefined) {
       while (node !== undefined && node.rightNode !== undefined) {
@@ -138,6 +197,11 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
 
     return undefined;
   }
+
+  /**
+   * @private
+   * Insert Node
+   */
   private insertNode(parnode: BinarySearchTreeNode<T>,
     newnode: BinarySearchTreeNode<T>) {
     if (newnode.key < parnode.key) {
@@ -154,6 +218,11 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
       }
     }
   }
+
+  /**
+   * @private
+   * Search Node
+   */
   private searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> {
     if (node === undefined) {
       return undefined;
@@ -167,6 +236,11 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
       return node;
     }
   }
+
+  /**
+   * @private
+   * Remove Node
+   */
   private removeNode(node: BinarySearchTreeNode<T>, key: number) {
     if (node === undefined) {
       return undefined;

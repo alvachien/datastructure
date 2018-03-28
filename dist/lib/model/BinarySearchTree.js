@@ -56,6 +56,11 @@ var BinarySearchTree = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * Insert node
+     * @param key Key of the node
+     * @param data Data of the node
+     */
     BinarySearchTree.prototype.insert = function (key, data) {
         var newnode = new BinarySearchTreeNode(key, data);
         if (this._root === undefined) {
@@ -66,26 +71,56 @@ var BinarySearchTree = /** @class */ (function () {
         }
         return newnode;
     };
+    /**
+     * Search
+     * @param key Key to search
+     */
     BinarySearchTree.prototype.search = function (key) {
         return this.searchNode(this._root, key);
     };
+    /**
+     * In-order traverse
+     * @param callback Callback to process each node
+     */
     BinarySearchTree.prototype.inOrderTraverse = function (callback) {
         this.inOrderTraverseNode(this._root, callback);
     };
+    /**
+     * Pre-order traverse
+     * @param callback Callback to process each node
+     */
     BinarySearchTree.prototype.preOrderTraverse = function (callback) {
         this.preOrderTraverseNode(this._root, callback);
     };
+    /**
+     * Post-order traverse
+     * @param callback Callback to process each node
+     */
     BinarySearchTree.prototype.postOrderTraverse = function (callback) {
         this.postOrderTraverseNode(this._root, callback);
     };
+    /**
+     * Minimum node
+     */
     BinarySearchTree.prototype.min = function () {
         return this.minNode(this._root);
     };
+    /**
+     * Maximum node
+     */
     BinarySearchTree.prototype.max = function () {
         return this.maxNode(this._root);
     };
+    /**
+     * Remove a node
+     * @param key Key of the node to be deleted
+     */
     BinarySearchTree.prototype.remove = function (key) {
     };
+    /**
+     * @private
+     * In-Order Traverse Node
+     */
     BinarySearchTree.prototype.inOrderTraverseNode = function (node, callback) {
         if (node !== undefined) {
             this.inOrderTraverseNode(node.leftNode, callback);
@@ -95,6 +130,10 @@ var BinarySearchTree = /** @class */ (function () {
             this.inOrderTraverseNode(node.rightNode, callback);
         }
     };
+    /**
+     * @private
+     * Pre-Order Traverse Node
+     */
     BinarySearchTree.prototype.preOrderTraverseNode = function (node, callback) {
         if (node !== undefined) {
             if (callback !== undefined) {
@@ -104,6 +143,10 @@ var BinarySearchTree = /** @class */ (function () {
             this.preOrderTraverseNode(node.rightNode, callback);
         }
     };
+    /**
+     * @private
+     * Post-Order Traverse Node
+     */
     BinarySearchTree.prototype.postOrderTraverseNode = function (node, callback) {
         if (node !== undefined) {
             this.postOrderTraverseNode(node.leftNode, callback);
@@ -113,6 +156,10 @@ var BinarySearchTree = /** @class */ (function () {
             }
         }
     };
+    /**
+     * @private
+     * Minuimum Node
+     */
     BinarySearchTree.prototype.minNode = function (node) {
         if (node !== undefined) {
             while (node !== undefined && node.leftNode !== undefined) {
@@ -122,6 +169,10 @@ var BinarySearchTree = /** @class */ (function () {
         }
         return undefined;
     };
+    /**
+     * @private
+     * Maximum Node
+     */
     BinarySearchTree.prototype.maxNode = function (node) {
         if (node !== undefined) {
             while (node !== undefined && node.rightNode !== undefined) {
@@ -131,6 +182,10 @@ var BinarySearchTree = /** @class */ (function () {
         }
         return undefined;
     };
+    /**
+     * @private
+     * Insert Node
+     */
     BinarySearchTree.prototype.insertNode = function (parnode, newnode) {
         if (newnode.key < parnode.key) {
             if (parnode.leftNode === undefined) {
@@ -149,6 +204,10 @@ var BinarySearchTree = /** @class */ (function () {
             }
         }
     };
+    /**
+     * @private
+     * Search Node
+     */
     BinarySearchTree.prototype.searchNode = function (node, key) {
         if (node === undefined) {
             return undefined;
@@ -163,6 +222,10 @@ var BinarySearchTree = /** @class */ (function () {
             return node;
         }
     };
+    /**
+     * @private
+     * Remove Node
+     */
     BinarySearchTree.prototype.removeNode = function (node, key) {
         if (node === undefined) {
             return undefined;
