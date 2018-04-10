@@ -46,7 +46,7 @@ export class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
 
 // Binary search tree
 export class BinarySearchTree<T> implements IBinarySearchTree<T> {
-  private _root: BinarySearchTreeNode<T>;
+  protected _root: BinarySearchTreeNode<T>;
   get rootNode(): BinarySearchTreeNode<T> {
     return this._root;
   }
@@ -125,10 +125,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * In-Order Traverse Node
    */
-  private inOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+  protected inOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       this.inOrderTraverseNode(node.leftNode, callback);
       if (callback !== undefined) {
@@ -139,10 +139,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * Pre-Order Traverse Node
    */
-  private preOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+  protected preOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       if (callback !== undefined) {
         callback(node);
@@ -153,10 +153,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * Post-Order Traverse Node
    */
-  private postOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+  protected postOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       this.postOrderTraverseNode(node.leftNode, callback);
       this.postOrderTraverseNode(node.rightNode, callback);
@@ -167,10 +167,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * Minuimum Node
    */
-  private minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+  protected minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
     if (node !== undefined) {
       while (node !== undefined && node.leftNode !== undefined) {
         node = node.leftNode;
@@ -183,10 +183,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * Maximum Node
    */
-  private maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+  protected maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
     if (node !== undefined) {
       while (node !== undefined && node.rightNode !== undefined) {
         node = node.rightNode;
@@ -199,10 +199,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * Insert Node
    */
-  private insertNode(parnode: BinarySearchTreeNode<T>,
+  protected insertNode(parnode: BinarySearchTreeNode<T>,
     newnode: BinarySearchTreeNode<T>) {
     if (newnode.key < parnode.key) {
       if (parnode.leftNode === undefined) {
@@ -220,10 +220,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * Search Node
    */
-  private searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> {
+  protected searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> {
     if (node === undefined) {
       return undefined;
     }
@@ -238,10 +238,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * @private
+   * @protected
    * Remove Node
    */
-  private removeNode(node: BinarySearchTreeNode<T>, key: number) {
+  protected removeNode(node: BinarySearchTreeNode<T>, key: number) {
     if (node === undefined) {
       return undefined;
     }
@@ -266,10 +266,9 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
         return node;
       }
 
-      let aux;
-      // let aux = findMinNode(node.rightNode);
-      node.key = aux.Key;
-      node.rightNode = this.removeNode(node.rightNode, aux.Key);
+      const aux: BinarySearchTreeNode<T> = this.minNode(node.rightNode);
+      node.key = aux.key;
+      node.rightNode = this.removeNode(node.rightNode, aux.key);
       return node;
     }
   }

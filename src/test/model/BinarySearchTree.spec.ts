@@ -16,7 +16,7 @@ describe('Test BinarySearchTree', () => {
   let _bsTree: BinarySearchTree<string>;
 
   beforeEach(() => {
-    _bsTree = new BinarySearchTree<string>();    
+    _bsTree = new BinarySearchTree<string>();
   });
 
   it('#1. Test creation', () => {
@@ -32,7 +32,7 @@ describe('Test BinarySearchTree', () => {
     expect(nnode).toBeTruthy();
 
     nnode = _bsTree.insert(3, 'C');
-    expect(nnode).toBeTruthy();    
+    expect(nnode).toBeTruthy();
   });
 
   let buildTestTree = () => {
@@ -50,7 +50,7 @@ describe('Test BinarySearchTree', () => {
     _bsTree.insert(20, '20');
     _bsTree.insert(18, '18');
     _bsTree.insert(25, '25');
-    _bsTree.insert(6, '6');    
+    _bsTree.insert(6, '6');
   };
 
   it('#3. Test inOrderTraverse', () => {
