@@ -81,7 +81,7 @@ describe('Test BinarySearchTree', () => {
         _rst += ',' + value.data;
       }
     });
-    
+
     expect(_rst).toBe('11,7,5,3,6,9,8,10,15,13,12,14,20,18,25');
   });
 
@@ -97,7 +97,7 @@ describe('Test BinarySearchTree', () => {
         _rst += ',' + value.data;
       }
     });
-    
+
     expect(_rst).toBe('3,6,5,8,10,9,7,12,14,13,18,25,20,15,11');
   });
 
@@ -105,7 +105,7 @@ describe('Test BinarySearchTree', () => {
     // Build test tree
     buildTestTree();
 
-    let minnode = _bsTree.min();
+    const minnode = _bsTree.min();
     expect(minnode).toBeTruthy();
     expect(minnode.key).toBe(3);
   });
@@ -114,7 +114,7 @@ describe('Test BinarySearchTree', () => {
     // Build test tree
     buildTestTree();
 
-    let maxnode = _bsTree.max();
+    const maxnode = _bsTree.max();
     expect(maxnode).toBeTruthy();
     expect(maxnode.key).toBe(25);
   });

@@ -15,21 +15,21 @@ describe('Test SequenceList', () => {
   let _seqList: SequenceList<number>;
 
   beforeEach(() => {
-    _seqList = new SequenceList<number>();    
+    _seqList = new SequenceList<number>();
   });
 
-  it("#1. Check InitList()", () => {
+  it('#1. Check InitList()', () => {
     _seqList.InitList();
     expect(_seqList).toBeTruthy();
   });
 
-  it("#2. Check empty list.", () => {
+  it('#2. Check empty list.', () => {
     _seqList.InitList();
     expect(_seqList.IsEmpty()).toBe(true);
     expect(_seqList.Length()).toBe(0);
   });
 
-  it("#3. Check append of list.", () => {
+  it('#3. Check append of list.', () => {
     _seqList.InitList();
     _seqList.AppendElement(1);
     expect(_seqList.IsEmpty()).toBe(false);
@@ -40,13 +40,13 @@ describe('Test SequenceList', () => {
     expect(_seqList.Length()).toBe(2);
   });
 
-  it("#4. Check insert of list.", () => {
+  it('#4. Check insert of list.', () => {
     _seqList.InitList();
     _seqList.AppendElement(1);
     _seqList.AppendElement(2);
     expect(_seqList.IsEmpty()).toBe(false);
     expect(_seqList.Length()).toBe(2);
-    
+
     _seqList.InsertElement(1, 3);
     expect(_seqList.IsEmpty()).toBe(false);
     expect(_seqList.Length()).toBe(3);
@@ -56,7 +56,7 @@ describe('Test SequenceList', () => {
     expect(_seqList.GetElement(2)).toBe(2);
   });
 
-  it("#5. Check delete of list.", () => {
+  it('#5. Check delete of list.', () => {
     _seqList.InitList();
     _seqList.AppendElement(1);
     _seqList.AppendElement(2);
@@ -79,7 +79,7 @@ describe('Test SequenceList', () => {
     expect(_seqList.DeleteElement(0)).toBe(false);
   });
 
-  it("#6. Check empty.", () => {
+  it('#6. Check empty.', () => {
     _seqList.InitList();
     _seqList.AppendElement(1);
     _seqList.AppendElement(2);
@@ -91,7 +91,7 @@ describe('Test SequenceList', () => {
     expect(_seqList.Length()).toBe(0);
   });
 
-  it("#7. Check IsExist.", () => {
+  it('#7. Check IsExist.', () => {
     _seqList.InitList();
     _seqList.AppendElement(1);
     _seqList.AppendElement(2);
@@ -102,7 +102,7 @@ describe('Test SequenceList', () => {
     expect(_seqList.IsExist(3)).toBe(false);
   });
 
-  it("#8. Check Print.", () => {
+  it('#8. Check Print.', () => {
     _seqList.InitList();
     _seqList.AppendElement(1);
     _seqList.AppendElement(2);

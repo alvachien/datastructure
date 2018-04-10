@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: SparseMatrix.ts
- * 
+ *
  */
 
 import { SequenceList } from '../model';
@@ -88,9 +88,9 @@ export class SparseMatrix<T> {
    * Returns the list of actual rows
    */
   get Rows(): SequenceList<number> {
-    let sl: SequenceList<number> = new SequenceList<number>();
+    const sl: SequenceList<number> = new SequenceList<number>();
 
-    for (let i: number = 0; i < this._listTerms.Length(); i++) {
+    for (let i = 0; i < this._listTerms.Length(); i++) {
       const elem = this._listTerms.GetElement(i);
       if (!sl.IsExist(elem.Row)) {
         sl.AppendElement(elem.Row);
@@ -104,9 +104,9 @@ export class SparseMatrix<T> {
    * Returns the list of actual column
    */
   get Columns(): SequenceList<number> {
-    let sl: SequenceList<number> = new SequenceList<number>();
+    const sl: SequenceList<number> = new SequenceList<number>();
 
-    for (let i: number = 0; i < this._listTerms.Length(); i++) {
+    for (let i = 0; i < this._listTerms.Length(); i++) {
       const elem = this._listTerms.GetElement(i);
       if (!sl.IsExist(elem.Column)) {
         sl.AppendElement(elem.Column);
@@ -127,7 +127,7 @@ export class SparseMatrix<T> {
       return null;
     }
 
-    for (let i: number = 0; i < this._listTerms.Length(); i++) {
+    for (let i = 0; i < this._listTerms.Length(); i++) {
       if (row === this._listTerms.GetElement(i).Row
         && col === this._listTerms.GetElement(i).Column) {
         return this._listTerms.GetElement(i).Value;
@@ -148,7 +148,7 @@ export class SparseMatrix<T> {
       throw new Error('Invalid input');
     }
 
-    for (let i: number = 0; i < this._listTerms.Length(); i++) {
+    for (let i = 0; i < this._listTerms.Length(); i++) {
       if (row === this._listTerms.GetElement(i).Row
         && col === this._listTerms.GetElement(i).Column) {
         return true;
@@ -161,7 +161,7 @@ export class SparseMatrix<T> {
   /**
    * Insert an element, return true if succeed
    * @param row Specified row
-   * @param col Specified column 
+   * @param col Specified column
    * @param val Value
    */
   public InsertElement(row: number, col: number, val: T): boolean {
@@ -169,9 +169,9 @@ export class SparseMatrix<T> {
       if (this.IsExist(row, col)) {
         return false;
       } else {
-        let nt: Trituple<T> = new Trituple<T>();
+        const nt: Trituple<T> = new Trituple<T>();
         // Try the destructure, failed!!!
-        //let { nt.Row, nt.Column, nt.Value } = {row, col, val};
+        // let { nt.Row, nt.Column, nt.Value } = {row, col, val};
         nt.Row = row;
         nt.Column = col;
         nt.Value = val;
@@ -188,11 +188,11 @@ export class SparseMatrix<T> {
    * Transpose
    */
   public Transpose(): SparseMatrix<T> {
-    let sm: SparseMatrix<T> = new SparseMatrix<T>(this._maxcol, this._maxrow);
+    const sm: SparseMatrix<T> = new SparseMatrix<T>(this._maxcol, this._maxrow);
 
     for (let i = 0; i < this._listTerms.Length(); i++) {
-      let it2: Trituple<T> = new Trituple<T>();
-      let it = this._listTerms.GetElement(i);
+      const it2: Trituple<T> = new Trituple<T>();
+      const it = this._listTerms.GetElement(i);
       it2.Column = it.Row;
       it2.Row = it.Column;
       it2.Value = it.Value;

@@ -24,7 +24,7 @@ export function baseConverter(decNumber: number, base: NumberBaseEnum): any {
     throw new Error('invalid parameter');
   }
 
-  let objStack = new SequenceStack<number>();
+  const objStack = new SequenceStack<number>();
   let baseString = '';
   const digits = '0123456789ABCDEF';
   let rem: any;

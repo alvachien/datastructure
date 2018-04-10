@@ -58,14 +58,14 @@ describe('Test Set', () => {
     _set.add(2);
     _set.add(3);
 
-    let set2 = new Set();
+    const set2 = new Set();
     set2.add(3);
     set2.add(4);
     set2.add(5);
     set2.add(6);
 
-    let unset = _set.union(set2);
-    let vals = unset.values();
+    const unset = _set.union(set2);
+    const vals = unset.values();
     expect(vals.length).toBe(6);
     expect(unset.has(3)).toBe(true);
   });
@@ -75,14 +75,14 @@ describe('Test Set', () => {
     _set.add(2);
     _set.add(3);
 
-    let set2 = new Set();
+    const set2 = new Set();
     set2.add(3);
     set2.add(4);
     set2.add(5);
     set2.add(6);
 
-    let unset = _set.intersection(set2);
-    let vals = unset.values();
+    const unset = _set.intersection(set2);
+    const vals = unset.values();
     expect(vals.length).toBe(1);
     expect(unset.has(3)).toBe(true);
     expect(unset.has(2)).toBe(false);
@@ -93,14 +93,14 @@ describe('Test Set', () => {
     _set.add(2);
     _set.add(3);
 
-    let set2 = new Set();
+    const set2 = new Set();
     set2.add(3);
     set2.add(4);
     set2.add(5);
     set2.add(6);
 
-    let unset = _set.difference(set2);
-    let vals = unset.values();
+    const unset = _set.difference(set2);
+    const vals = unset.values();
     expect(vals.length).toBe(2);
     expect(unset.has(3)).toBe(false);
     expect(unset.has(2)).toBe(true);
@@ -111,7 +111,7 @@ describe('Test Set', () => {
     _set.add(2);
     _set.add(3);
 
-    let set2 = new Set();
+    const set2 = new Set();
     set2.add(1);
     set2.add(2);
     set2.add(3);

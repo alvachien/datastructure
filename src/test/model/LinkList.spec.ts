@@ -15,21 +15,21 @@ describe('Test LinkList', () => {
   let _linkList: LinkList<number>;
 
   beforeEach(() => {
-    _linkList = new LinkList<number>();    
+    _linkList = new LinkList<number>();
   });
 
-  it("#1. Check InitList()", () => {
+  it('#1. Check InitList()', () => {
     _linkList.InitList(2);
     expect(_linkList.Head).toBeTruthy();
   });
 
-  it("#2. Check empty list.", () => {
+  it('#2. Check empty list.', () => {
     _linkList.InitList(1);
     expect(_linkList.IsEmpty()).toBe(false);
     expect(_linkList.Length()).toBe(1);
   });
 
-  it("#3. Check append of list.", () => {
+  it('#3. Check append of list.', () => {
     _linkList.InitList(1);
     _linkList.AppendElement(2);
     expect(_linkList.IsEmpty()).toBe(false);
@@ -40,12 +40,12 @@ describe('Test LinkList', () => {
     expect(_linkList.Length()).toBe(3);
   });
 
-  it("#4. Check insert of list.", () => {
+  it('#4. Check insert of list.', () => {
     _linkList.InitList(1);
     _linkList.AppendElement(2);
     expect(_linkList.IsEmpty()).toBe(false);
     expect(_linkList.Length()).toBe(2);
-    
+
     _linkList.InsertElement(1, 3);
     expect(_linkList.Length()).toBe(3);
 
@@ -54,7 +54,7 @@ describe('Test LinkList', () => {
     expect(_linkList.GetElement(2)).toBe(2);
   });
 
-  it("#5. Check delete of list.", () => {
+  it('#5. Check delete of list.', () => {
     _linkList.InitList(1);
     _linkList.AppendElement(2);
     _linkList.AppendElement(3);
@@ -76,7 +76,7 @@ describe('Test LinkList', () => {
     expect(_linkList.DeleteElement(0)).toBe(false);
   });
 
-  it("#6. Check empty.", () => {
+  it('#6. Check empty.', () => {
     _linkList.InitList(1);
     _linkList.AppendElement(2);
     _linkList.AppendElement(3);
@@ -87,7 +87,7 @@ describe('Test LinkList', () => {
     expect(_linkList.Length()).toBe(0);
   });
 
-  it("#7. Check IsExist.", () => {
+  it('#7. Check IsExist.', () => {
     _linkList.InitList(1);
     _linkList.AppendElement(2);
     _linkList.AppendElement(2);
@@ -97,7 +97,7 @@ describe('Test LinkList', () => {
     expect(_linkList.IsExist(3)).toBe(false);
   });
 
-  it("#8. Check Print.", () => {
+  it('#8. Check Print.', () => {
     _linkList.InitList(1);
     _linkList.AppendElement(2);
     _linkList.AppendElement(3);

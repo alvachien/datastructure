@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: Matrix.ts
- * 
+ *
  */
 
 import { SequenceList } from '../model';
@@ -67,9 +67,9 @@ export class Matrix<T> {
     return this._inited;
   }
 
-  /** 
+  /**
    * init
-   * Initialize the current Matrix 
+   * Initialize the current Matrix
    */
   public init(): void {
     if (this._inited) {
@@ -77,11 +77,11 @@ export class Matrix<T> {
     }
 
     this._cells = [];
-    for (let r: number = 0; r < this._maxrow; r++) {
-      let nrow: T[] = [];
+    for (let r = 0; r < this._maxrow; r++) {
+      const nrow: T[] = [];
 
-      for(let j: number = 0; j < this._maxcol; j++) {
-        let ncell: any = undefined;
+      for (let j = 0; j < this._maxcol; j++) {
+        const ncell: any = undefined;
         nrow.push(ncell);
       }
 
@@ -127,41 +127,41 @@ export class Matrix<T> {
     this._cells[pos.row][pos.column] = elem;
   }
 
-  /** 
+  /**
    * Get slash output
    */
   public getSlashOutputPos(): MatrixPosIntf[][] {
     if (this._maxrow <= 1 || this._maxcol <= 1) {
       throw new Error('Wrong parameter');
     }
-  
+
     const arrst: MatrixPosIntf[][] = [];
     for (let i = 0; i < this._maxrow + this._maxcol - 1; i++) {
       const arpos: MatrixPosIntf[] = [];
-  
+
       for (let j = 0; j <= i; j++) {
         if (j <= this._maxrow - 1 && i <= this._maxcol + j - 1) {
           arpos.push({row: j, column: i - j});
         }
       }
-  
+
       arpos.sort((a, b) => {
         return a.row - b.row;
       });
-  
+
       if (arpos.length > 0) {
         arrst.push(arpos);
       }
     }
-  
+
     return arrst;
   }
-  
-  /** 
-   * Get backslash positions 
+
+  /**
+   * Get backslash positions
    */
   public getBackSlashOutputPos(): MatrixPosIntf[][] {
-    if (this._maxrow != this._maxcol || this._maxrow <= 1) {
+    if (this._maxrow !== this._maxcol || this._maxrow <= 1) {
       throw new Error('Wrong parameter');
     }
 
@@ -172,7 +172,7 @@ export class Matrix<T> {
       for (let j = 0; j <= i; j++) {
         arpos.push({row: i - j, column: this._maxrow - 1 - j});
       }
-  
+
       if (arpos.length > 0) {
         arpos.sort((a, b) => {
           return a.row - b.row;
@@ -180,13 +180,13 @@ export class Matrix<T> {
         arrst.push(arpos);
       }
     }
-  
+
     for (let i = 1; i <= this._maxrow - 1; i ++) {
       const arpos: MatrixPosIntf[] = [];
       for (let j = 0; j <= this._maxrow - 1 - i; j++) {
         arpos.push({row: i + j, column: j});
       }
-  
+
       if (arpos.length > 0) {
         arpos.sort((a, b) => {
           return a.row - b.row;
@@ -194,7 +194,7 @@ export class Matrix<T> {
         arrst.push(arpos);
       }
     }
-  
+
     return arrst;
   }
 }

@@ -18,13 +18,13 @@ describe('Test HashTable', () => {
     _hashTable = new HashTable();
   });
 
-  it("#1. Test set, values, has and size()", () => {
+  it('#1. Test set, values, has and size()', () => {
     expect(_hashTable).toBeTruthy();
 
     // TBD.
   });
 
-  it("#2. Test remove()", () => {
+  it('#2. Test remove()', () => {
     expect(_hashTable).toBeTruthy();
 
     // TBD.

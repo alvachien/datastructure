@@ -18,7 +18,7 @@ describe('Test Dictionary', () => {
     _dict = new Dictionary<string>();
   });
 
-  it("#1. Test set, values, has and size()", () => {
+  it('#1. Test set, values, has and size()', () => {
     expect(_dict).toBeTruthy();
 
     _dict.set('test1', 'test1');
@@ -37,7 +37,7 @@ describe('Test Dictionary', () => {
     expect(vals.length).toBe(3);
   });
 
-  it("#2. Test remove()", () => {
+  it('#2. Test remove()', () => {
     expect(_dict).toBeTruthy();
 
     _dict.set('test1', 'test1');

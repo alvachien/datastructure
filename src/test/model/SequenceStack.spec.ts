@@ -15,21 +15,21 @@ describe('Test SequenceStack', () => {
   let _seqStack: SequenceStack<number>;
 
   beforeEach(() => {
-    _seqStack = new SequenceStack<number>();    
+    _seqStack = new SequenceStack<number>();
   });
 
-  it("#1. Check InitStack()", () => {
+  it('#1. Check InitStack()', () => {
     // _seqStack.InitList();
     expect(_seqStack).toBeTruthy();
   });
 
-  it("#2. Check empty stack.", () => {
+  it('#2. Check empty stack.', () => {
     // _seqStack.InitList();
     expect(_seqStack.IsEmpty()).toBe(true);
     expect(_seqStack.Length()).toBe(0);
   });
 
-  it("#3. Check push on Stack.", () => {
+  it('#3. Check push on Stack.', () => {
     // _seqStack.InitList();
     _seqStack.Push(1);
     expect(_seqStack.IsEmpty()).toBe(false);
@@ -40,7 +40,7 @@ describe('Test SequenceStack', () => {
     expect(_seqStack.Length()).toBe(2);
   });
 
-  it("#4. Check pop of Stack.", () => {
+  it('#4. Check pop of Stack.', () => {
     // _seqStack.InitList();
     _seqStack.Push(1);
     _seqStack.Push(2);
@@ -60,7 +60,7 @@ describe('Test SequenceStack', () => {
     expect(_seqStack.Pop()).toBeFalsy();
   });
 
-  it("#5. Check empty stack.", () => {
+  it('#5. Check empty stack.', () => {
     // _seqStack.InitList();
     _seqStack.Push(1);
     _seqStack.Push(2);
@@ -72,7 +72,7 @@ describe('Test SequenceStack', () => {
     expect(_seqStack.Length()).toBe(0);
   });
 
-  it("#6. Check IsExist.", () => {
+  it('#6. Check IsExist.', () => {
     // _seqStack.InitList();
     // _seqStack.AppendElement(1);
     // _seqStack.AppendElement(2);
@@ -83,7 +83,7 @@ describe('Test SequenceStack', () => {
     // expect(_seqStack.IsExist(3)).toBe(false);
   });
 
-  it("#7. Check Print.", () => {
+  it('#7. Check Print.', () => {
     // _seqStack.InitList();
     // _seqStack.AppendElement(1);
     // _seqStack.AppendElement(2);

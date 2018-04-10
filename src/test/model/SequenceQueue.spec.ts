@@ -15,19 +15,19 @@ describe('Test SequenceQueue', () => {
   let _seqQueue: SequenceQueue<number>;
 
   beforeEach(() => {
-    _seqQueue = new SequenceQueue<number>();    
+    _seqQueue = new SequenceQueue<number>();
   });
 
-  it("#1. Check init", () => {
+  it('#1. Check init', () => {
     expect(_seqQueue).toBeTruthy();
   });
 
-  it("#2. Check empty Queue.", () => {
+  it('#2. Check empty Queue.', () => {
     expect(_seqQueue.IsEmpty()).toBe(true);
     expect(_seqQueue.Length()).toBe(0);
   });
 
-  it("#3. Check enqueue on Queue.", () => {    
+  it('#3. Check enqueue on Queue.', () => {
     _seqQueue.Enqueue(1);
     expect(_seqQueue.IsEmpty()).toBe(false);
     expect(_seqQueue.Length()).toBe(1);
@@ -37,7 +37,7 @@ describe('Test SequenceQueue', () => {
     expect(_seqQueue.Length()).toBe(2);
   });
 
-  it("#4. Check dequeue of Queue.", () => {
+  it('#4. Check dequeue of Queue.', () => {
     _seqQueue.Enqueue(1);
     _seqQueue.Enqueue(2);
     _seqQueue.Enqueue(3);
@@ -56,7 +56,7 @@ describe('Test SequenceQueue', () => {
     expect(_seqQueue.Dequeue()).toBeFalsy();
   });
 
-  it("#5. Check empty Queue.", () => {
+  it('#5. Check empty Queue.', () => {
     _seqQueue.Enqueue(1);
     _seqQueue.Enqueue(2);
     _seqQueue.Enqueue(3);
@@ -67,7 +67,7 @@ describe('Test SequenceQueue', () => {
     expect(_seqQueue.Length()).toBe(0);
   });
 
-  it("#6. Check IsExist.", () => {
+  it('#6. Check IsExist.', () => {
     // _seqQueue.InitList();
     // _seqQueue.AppendElement(1);
     // _seqQueue.AppendElement(2);
@@ -78,7 +78,7 @@ describe('Test SequenceQueue', () => {
     // expect(_seqQueue.IsExist(3)).toBe(false);
   });
 
-  it("#7. Check Print.", () => {
+  it('#7. Check Print.', () => {
     // _seqQueue.InitList();
     // _seqQueue.AppendElement(1);
     // _seqQueue.AppendElement(2);
