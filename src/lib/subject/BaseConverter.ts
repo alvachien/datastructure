@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -12,6 +12,9 @@
 
 import { SequenceStack } from '../model/SequenceStack';
 
+/**
+ * Number base
+ */
 export enum NumberBaseEnum {
   binary = 2,
   octal = 8,
@@ -19,15 +22,20 @@ export enum NumberBaseEnum {
   hexadecimal = 16,
 }
 
-export function baseConverter(decNumber: number, base: NumberBaseEnum): any {
+/**
+ * Convert a decimal number to a new based number (with string format)
+ * @param decNumber Decimal number
+ * @param base new base
+ */
+export function baseConverter(decNumber: number, base: NumberBaseEnum): string {
   if (base <= 0) {
     throw new Error('invalid parameter');
   }
 
   const objStack = new SequenceStack<number>();
-  let baseString = '';
+  let baseString: string = '';
   const digits = '0123456789ABCDEF';
-  let rem: any;
+  let rem: number;
 
   while (decNumber > 0) {
     rem = Math.floor(decNumber % base);

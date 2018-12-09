@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -11,6 +11,9 @@
 
 import { SequenceStack, SequenceList } from '../model';
 
+/**
+ * Basic formula operator
+ */
 export enum FormulaOperatorEnum {
   Add = 0,
   Sub = 1,
@@ -18,6 +21,9 @@ export enum FormulaOperatorEnum {
   Div = 3
 }
 
+/**
+ * Formula operator
+ */
 export class FormulaOperator {
   private optype: FormulaOperatorEnum;
   private opnumber: number;

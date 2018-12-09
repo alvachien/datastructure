@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -28,11 +28,17 @@
  * -----------------------------
  */
 
+ /**
+  * Interface of the position
+  */
 export interface CGGPPostion {
   PositionA: number;
   PositionB: number;
 }
 
+/**
+ * Solution to CCGP, approach 2
+ */
 export function CCGP_Solution2(): CGGPPostion[] {
   let total = 81;
   const rst: CGGPPostion[] = [];
@@ -49,6 +55,9 @@ export function CCGP_Solution2(): CGGPPostion[] {
   return rst;
 }
 
+/**
+ * Solution to CCGP, approach 3
+ */
 export function CCGP_Solution3(): CGGPPostion[] {
   const rst: CGGPPostion[] = [];
 

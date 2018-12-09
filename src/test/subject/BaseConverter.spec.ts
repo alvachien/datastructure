@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -18,7 +18,7 @@ describe('Test baseConverter', () => {
     // Do nothing
   });
 
-  it("#1. 10 => 2()", () => {
+  it('#1. 10 => 2()', () => {
     let rst = baseConverter(10, NumberBaseEnum.binary);
     expect(rst).toBe('1010');
 
@@ -26,14 +26,14 @@ describe('Test baseConverter', () => {
     expect(rst).toBe('11101001');
   });
 
-  it("#2. 10 => 8", () => {
-    let rst = baseConverter(100345, NumberBaseEnum.octal);
+  it('#2. 10 => 8', () => {
+    const rst = baseConverter(100345, NumberBaseEnum.octal);
 
     expect(rst).toBe('303771');
   });
 
-  it("#3. 10 => 16", () => {
-    let rst = baseConverter(100345, NumberBaseEnum.hexadecimal);
+  it('#3. 10 => 16', () => {
+    const rst = baseConverter(100345, NumberBaseEnum.hexadecimal);
 
     expect(rst).toBe('187F9');
   });
