@@ -14,12 +14,20 @@ To use this library in your package, simply run following NPM command:
 
 to add this library into your own topic.
 
-A code example below show the way to use the Matrix:
+Code snippet 1: show the way to use the Matrix:
 
 ```javascript
 import { Matrix, MatrixPosIntf } from 'actslib';
 let matrix: Matrix = new Matrix(10, 10);
 let arpos = matrix.getSlashOutputPos();
+```
+
+Code snippet 2: show the way to use the Quick-Sorting algorithm:
+
+```javascript
+import { QuickSort } from 'actslib';
+let arArray: number[] = [10, 3, 26, 1, 35];
+QuickSort(arArray);
 ```
 
 
@@ -68,6 +76,7 @@ Interface **ITree** defines the generic operations and attributes supported by T
 Interface **IBinaryTree** define the generic operations and attributes for Binary Tree.
 
 - Class **BinaryTree** implements the Binary Tree.
+- Class **BinarySearchTree** implements the Binary Search Tree.
 - Class **BinaryThreadTree** implements the Binary Thread Tree.
 - More to come.
 
