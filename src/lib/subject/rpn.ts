@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -75,17 +75,21 @@ export function RPNGetOperatorResult(x: number, y: number, operator: any): numbe
  * 2) it doesn't support '(' and ')', and 
  * 3) it won't care of priority, for instance: '34+5*' will get 35 not 23 (3+4*5=23)
  */
-export function rpn1(strinputs: string) {
+export function rpn1(strinputs: string): number {
   if (strinputs.length === 0) {
     return 0;
   }
 
   // Split into array of tokens
-  let arinputs: any[] = strinputs.split(/\s+/);
+  // let arinputs: any[] = strinputs.split(/\s+/);
+  let arinputs: any[] = strinputs.split(/(\d)/);
   let stack = [];
 
-  for (var i = 0; i < arinputs.length; i++) {
+  for (var i = 0; i < arinputs.length; i++) {    
     let token = arinputs[i];
+    if (arinputs[i] === '') {
+      continue;
+    }
 
     // Token is a value, push it onto the stack
     if (!Number.isNaN(+token)) {

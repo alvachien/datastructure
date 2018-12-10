@@ -16,7 +16,7 @@ describe('Test Dictionary', function () {
     beforeEach(function () {
         _dict = new Dictionary_1.Dictionary();
     });
-    it("#1. Test set, values, has and size()", function () {
+    it('#1. Test set, values, has and size()', function () {
         expect(_dict).toBeTruthy();
         _dict.set('test1', 'test1');
         _dict.set('test2', 'test2');
@@ -30,7 +30,7 @@ describe('Test Dictionary', function () {
         vals = _dict.keys();
         expect(vals.length).toBe(3);
     });
-    it("#2. Test remove()", function () {
+    it('#2. Test remove()', function () {
         expect(_dict).toBeTruthy();
         _dict.set('test1', 'test1');
         _dict.set('test2', 'test2');

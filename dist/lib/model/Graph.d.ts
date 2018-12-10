@@ -60,7 +60,7 @@ export declare class Graph<X, Y> implements IGraph<X, Y> {
      * DFS
      */
     DFS(): GraphVertex<X>[];
-    private DFSImpl(vex, visited, rst);
+    private DFSImpl;
     /**
      * BFS
      */

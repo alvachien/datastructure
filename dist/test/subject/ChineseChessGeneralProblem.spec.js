@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -16,11 +16,11 @@ describe('Test ChineseChessGeneralProblem', function () {
     beforeEach(function () {
         // Do nothing
     });
-    it("#1. Check CCGP_Solution2()", function () {
+    it('#1. Check CCGP_Solution2()', function () {
         var arstrs = ChineseChessGeneralProblem_1.CCGP_Solution2();
-        expect(arstrs.length).toBe(54);
+        expect(arstrs.length).toBe(78);
     });
-    it("#2. Check CCGP_Solution3()", function () {
+    it('#2. Check CCGP_Solution3()', function () {
         var arstrs = ChineseChessGeneralProblem_1.CCGP_Solution3();
         expect(arstrs.length).toBe(54);
     });

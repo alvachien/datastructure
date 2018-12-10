@@ -1,19 +1,21 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: Formula.ts
  * Formula definition as well as calculation, using stack
- *
  */
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -22,6 +24,9 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var model_1 = require("../model");
+/**
+ * Basic formula operator
+ */
 var FormulaOperatorEnum;
 (function (FormulaOperatorEnum) {
     FormulaOperatorEnum[FormulaOperatorEnum["Add"] = 0] = "Add";
@@ -29,6 +34,9 @@ var FormulaOperatorEnum;
     FormulaOperatorEnum[FormulaOperatorEnum["Multi"] = 2] = "Multi";
     FormulaOperatorEnum[FormulaOperatorEnum["Div"] = 3] = "Div";
 })(FormulaOperatorEnum = exports.FormulaOperatorEnum || (exports.FormulaOperatorEnum = {}));
+/**
+ * Formula operator
+ */
 var FormulaOperator = /** @class */ (function () {
     function FormulaOperator(typ, opnum) {
         this.optype = typ;
@@ -51,6 +59,9 @@ var FormulaOperator = /** @class */ (function () {
     return FormulaOperator;
 }());
 exports.FormulaOperator = FormulaOperator;
+/**
+ * Formula Operator: Add
+ */
 var FormulaOperatorAddition = /** @class */ (function (_super) {
     __extends(FormulaOperatorAddition, _super);
     function FormulaOperatorAddition() {
@@ -59,6 +70,9 @@ var FormulaOperatorAddition = /** @class */ (function (_super) {
     return FormulaOperatorAddition;
 }(FormulaOperator));
 exports.FormulaOperatorAddition = FormulaOperatorAddition;
+/**
+ * Formula Operator: Subtract
+ */
 var FormulaOperationSbbtraction = /** @class */ (function (_super) {
     __extends(FormulaOperationSbbtraction, _super);
     function FormulaOperationSbbtraction() {
@@ -67,6 +81,9 @@ var FormulaOperationSbbtraction = /** @class */ (function (_super) {
     return FormulaOperationSbbtraction;
 }(FormulaOperator));
 exports.FormulaOperationSbbtraction = FormulaOperationSbbtraction;
+/**
+ * Formula Operator: Multipy
+ */
 var FormulaOperationMultiplication = /** @class */ (function (_super) {
     __extends(FormulaOperationMultiplication, _super);
     function FormulaOperationMultiplication() {
@@ -75,6 +92,9 @@ var FormulaOperationMultiplication = /** @class */ (function (_super) {
     return FormulaOperationMultiplication;
 }(FormulaOperator));
 exports.FormulaOperationMultiplication = FormulaOperationMultiplication;
+/**
+ * Formula Operator: Divide
+ */
 var FormulaOperationDivision = /** @class */ (function (_super) {
     __extends(FormulaOperationDivision, _super);
     function FormulaOperationDivision() {
@@ -83,10 +103,16 @@ var FormulaOperationDivision = /** @class */ (function (_super) {
     return FormulaOperationDivision;
 }(FormulaOperator));
 exports.FormulaOperationDivision = FormulaOperationDivision;
+/**
+ * Keyword in Formula
+ */
 exports.FormulaKeyword = [
     'PI',
     'power'
 ];
+/**
+ * Paremter in Formula
+ */
 var FormulaParameter = /** @class */ (function () {
     function FormulaParameter() {
     }
@@ -103,6 +129,9 @@ var FormulaParameter = /** @class */ (function () {
     return FormulaParameter;
 }());
 exports.FormulaParameter = FormulaParameter;
+/**
+ * Token enum
+ */
 var FormulaTokenEnum;
 (function (FormulaTokenEnum) {
     FormulaTokenEnum[FormulaTokenEnum["Add"] = 0] = "Add";
@@ -120,6 +149,9 @@ var FormulaTokenEnum;
     FormulaTokenEnum[FormulaTokenEnum["Digit"] = 12] = "Digit";
     FormulaTokenEnum[FormulaTokenEnum["PI"] = 21] = "PI";
 })(FormulaTokenEnum = exports.FormulaTokenEnum || (exports.FormulaTokenEnum = {}));
+/**
+ * Token
+ */
 var FormulaToken = /** @class */ (function () {
     function FormulaToken() {
     }
@@ -146,18 +178,22 @@ var FormulaToken = /** @class */ (function () {
     return FormulaToken;
 }());
 exports.FormulaToken = FormulaToken;
+/**
+ * Formula Parser
+ */
 var FormulaParser = /** @class */ (function () {
     function FormulaParser() {
     }
     FormulaParser.prototype.init = function (input) {
-        if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
-            return;
+        if (input === null || input === undefined || input.length <= 0) {
+            return false;
         }
         this._orgInput = input;
+        return true;
     };
     FormulaParser.prototype.parse = function () {
         if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
-            return;
+            return false;
         }
         var st = new model_1.SequenceStack();
         var listVar = new model_1.SequenceList();
@@ -223,7 +259,7 @@ var FormulaParser = /** @class */ (function () {
                 // if (sum > 32767)
                 //     syn = -1;
             }
-            // else switch (ch) 
+            // else switch (ch)
             // {
             // case '<': m = 0; token[m++] = ch;
             //     ch = this._orgInput[p++];
@@ -274,16 +310,16 @@ var FormulaParser = /** @class */ (function () {
             // default: syn = -1; break;
             // }
             switch (syn) {
-                case 11:// cout << "(" << syn << "," << sum << ")" << endl; break;
+                case 11: // cout << "(" << syn << "," << sum << ")" << endl; break;
                     break;
-                case -1:// cout << "Error in row " << row << "!" << endl; break;
+                case -1: // cout << "Error in row " << row << "!" << endl; break;
                     break;
-                case -2:// row = row++; break;
+                case -2: // row = row++; break;
                     break;
-                default:// cout << "(" << syn << "," << token << ")" << endl; break;
+                default: // cout << "(" << syn << "," << token << ")" << endl; break;
                     break;
             }
-        } while (syn != 0);
+        } while (syn !== 0);
     };
     return FormulaParser;
 }());

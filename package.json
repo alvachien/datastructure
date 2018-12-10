@@ -4,7 +4,7 @@
     "name": "Alva Chien(Hongjun Qian)",
     "email": "alvachien@163.com"
   },
-  "version": "0.4.2",
+  "version": "0.4.3",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -22,7 +22,7 @@
     "test": "karma start karma.conf.ts"
   },
   "dependencies": {
-    "typescript": "^2.7.2"
+    "typescript": "^3.1.6"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.11",

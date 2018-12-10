@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -30,7 +30,7 @@ export declare function RPNGetOperatorResult(x: number, y: number, operator: any
  * 2) it doesn't support '(' and ')', and
  * 3) it won't care of priority, for instance: '34+5*' will get 35 not 23 (3+4*5=23)
  */
-export declare function rpn1(strinputs: string): any;
+export declare function rpn1(strinputs: string): number;
 /**
  * Class for RPN
  */

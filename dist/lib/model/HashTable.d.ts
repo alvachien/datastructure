@@ -14,6 +14,6 @@ export declare class HashTable {
     put(key: string, value: any): void;
     remove(key: any): void;
     get(key: any): any;
-    private generateLoseHashCode(key);
-    private generatedjb2HashCode(key);
+    private generateLoseHashCode;
+    private generatedjb2HashCode;
 }

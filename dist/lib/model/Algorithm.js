@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -95,54 +95,73 @@ exports.KMP = KMP;
  *  When inserting the i-th element, the previous list (0 .. i-1) has been sorted already.
  *  And, then insert i-th element into the (0 .. i-1), and shift the positions for impacted elements.
  */
-function InsertionSort(datalist) {
+function InsertionSort(datalist, compareFn) {
     if (datalist.length <= 0) {
         return false;
     }
     for (var i = 1; i < datalist.length; i++) {
-        InsertionSort_Insert(datalist, i);
+        InsertionSort_Insert(datalist, i, compareFn);
     }
     return true;
 }
 exports.InsertionSort = InsertionSort;
-function InsertionSort_Insert(datalist, idx) {
+function InsertionSort_Insert(datalist, idx, compareFn) {
     var tmp = datalist[idx];
     var j = idx;
-    while (j > 0 && tmp < datalist[j - 1]) {
-        datalist[j] = datalist[j - 1];
-        j--;
+    if (compareFn !== undefined) {
+        while (j > 0 && compareFn(tmp, datalist[j - 1]) < 0) {
+            datalist[j] = datalist[j - 1];
+            j--;
+        }
+    }
+    else {
+        while (j > 0 && tmp < datalist[j - 1]) {
+            datalist[j] = datalist[j - 1];
+            j--;
+        }
     }
     datalist[j] = tmp;
 }
 /**
  * Binary insertion sort: an in-place sorting by using binary searching
  * @param datalist: data list for sorting
+ * @param compareFn Compare function
  *
  * Loop through the list:
  *  When inserting the i-th element, the previous list (0 .. i-1) has been sorted already.
  *  And, then insert i-th element into the (0 .. i-1), and shift the positions for impacted elements.
  */
-function BinaryInsertSort(datalist) {
+function BinaryInsertSort(datalist, compareFn) {
     if (datalist.length <= 0) {
         return false;
     }
     for (var i = 1; i < datalist.length; i++) {
-        BinaryInsertSort_Insert(datalist, i);
+        BinaryInsertSort_Insert(datalist, i, compareFn);
     }
     return true;
 }
 exports.BinaryInsertSort = BinaryInsertSort;
-function BinaryInsertSort_Insert(datalist, idx) {
+function BinaryInsertSort_Insert(datalist, idx, compareFn) {
     var tmp = datalist[idx];
     var left = 0;
     var right = idx - 1;
     while (left <= right) {
         var middle = Math.floor((left + right) / 2);
-        if (tmp < datalist[middle]) {
-            right = middle - 1;
+        if (compareFn !== undefined) {
+            if (compareFn(tmp, datalist[middle]) < 0) {
+                right = middle - 1;
+            }
+            else {
+                left = middle + 1;
+            }
         }
         else {
-            left = middle + 1;
+            if (tmp < datalist[middle]) {
+                right = middle - 1;
+            }
+            else {
+                left = middle + 1;
+            }
         }
     }
     for (var k = idx - 1; k >= left; k--) {
@@ -153,20 +172,28 @@ function BinaryInsertSort_Insert(datalist, idx) {
 /**
  * Bubble sort: an in-place exchange sort
  * @param datalist: data list for sorting
+ * @param compareFn Compare function
  *
  * Two nested loops through the list:
  * First loop through 0 .. length - 1
  *  Second loop through available elements (length - 1 - i)
  *  Compare the two elements, exchange the larger one to higher position.
  */
-function BubbleSort(datalist) {
+function BubbleSort(datalist, compareFn) {
     if (datalist.length <= 0) {
         return false;
     }
     for (var i = 0; i < datalist.length - 1; i++) {
         for (var j = 0; j < datalist.length - 1 - i; j++) {
-            if (datalist[j] > datalist[j + 1]) {
-                SwapElement(datalist, j, j + 1);
+            if (compareFn !== undefined) {
+                if (compareFn(datalist[j], datalist[j + 1]) > 0) {
+                    SwapElement(datalist, j, j + 1);
+                }
+            }
+            else {
+                if (datalist[j] > datalist[j + 1]) {
+                    SwapElement(datalist, j, j + 1);
+                }
             }
         }
     }
@@ -176,17 +203,21 @@ exports.BubbleSort = BubbleSort;
 /**
  * Quick sort: an in-place exchange sort
  * @param datalist: data list for sorting
+ * @param compareFn Compare function
  *
  * The core method of quick sort is the recursive.
  * Choose one number, split the whole array to two arrays: one all smaller than that number, the other all larger than it.
  * Then recursively process the two new arrays with the same idea.
  */
-function QuickSort(datalist) {
-    QuickSortImpl(datalist, 0, datalist.length - 1);
+function QuickSort(datalist, compareFn) {
+    if (datalist.length <= 0) {
+        return false;
+    }
+    QuickSortImpl(datalist, 0, datalist.length - 1, compareFn);
     return true;
 }
 exports.QuickSort = QuickSort;
-function QuickSortImpl(datalist, left, right) {
+function QuickSortImpl(datalist, left, right, compareFn) {
     if (left >= right) {
         return;
     }
@@ -194,32 +225,56 @@ function QuickSortImpl(datalist, left, right) {
     var j = right;
     var key = datalist[left];
     while (i < j) {
-        while (i < j && key <= datalist[j]) {
-            j--;
+        if (compareFn !== undefined) {
+            while (i < j && compareFn(key, datalist[j]) <= 0) {
+                j--;
+            }
+        }
+        else {
+            while (i < j && key <= datalist[j]) {
+                j--;
+            }
         }
         datalist[i] = datalist[j];
-        while (i < j && key >= datalist[i]) {
-            i++;
+        if (compareFn !== undefined) {
+            while (i < j && compareFn(key, datalist[i]) >= 0) {
+                i++;
+            }
+        }
+        else {
+            while (i < j && key >= datalist[i]) {
+                i++;
+            }
         }
         datalist[j] = datalist[i];
     }
     datalist[i] = key;
-    QuickSortImpl(datalist, left, i - 1);
-    QuickSortImpl(datalist, i + 1, right);
+    QuickSortImpl(datalist, left, i - 1, compareFn);
+    QuickSortImpl(datalist, i + 1, right, compareFn);
 }
 /**
  * Selection sort: an in-place sorting
  * @param datalist data list for sorting
+ * @param compareFn Compare function
  *
  * The idea for selection sort is, choose the min (or max) from un-sorted part, and append it to the sorted part
  */
-function SelectionSort(datalist) {
-    var i = 0;
-    for (i = 0; i < datalist.length - 1; i++) {
+function SelectionSort(datalist, compareFn) {
+    if (datalist.length <= 0) {
+        return false;
+    }
+    for (var i = 0; i < datalist.length - 1; i++) {
         var min = i;
         for (var j = i + 1; j < datalist.length; j++) {
-            if (datalist[min] > datalist[j]) {
-                min = j;
+            if (compareFn !== undefined) {
+                if (compareFn(datalist[min], datalist[j]) > 0) {
+                    min = j;
+                }
+            }
+            else {
+                if (datalist[min] > datalist[j]) {
+                    min = j;
+                }
             }
         }
         if (min !== i) {
@@ -238,7 +293,7 @@ exports.SelectionSort = SelectionSort;
 function CountingSort(datalist) {
     var tmp = [];
     var out = [];
-    //Get min and max number in array
+    // Get min and max number in array
     var max = datalist[0];
     var min = max;
     for (var i = 1; i < datalist.length; i++) {
@@ -249,7 +304,7 @@ function CountingSort(datalist) {
             min = datalist[i];
         }
     }
-    //Generate tmp[]
+    // Generate tmp[]
     for (var i = 0; i < max - min + 1; i++) {
         tmp.push(0);
     }
@@ -272,20 +327,21 @@ exports.CountingSort = CountingSort;
 /**
  * Merge sorting
  * @param datalist: data list for sorting
+ * @param compareFn Compare function
  */
-function MergeSort(datalist) {
-    MergeSortImpl(datalist, 0, datalist.length);
+function MergeSort(datalist, compareFn) {
+    MergeSortImpl(datalist, 0, datalist.length, compareFn);
 }
 exports.MergeSort = MergeSort;
-function MergeSortImpl(datalist, begin, end) {
+function MergeSortImpl(datalist, begin, end, compareFn) {
     if (end - begin > 1) {
         var mid = Math.floor((begin + end) / 2);
-        MergeSortImpl(datalist, begin, mid);
-        MergeSortImpl(datalist, mid, end);
-        MergeSortImpl2(datalist, begin, mid, end);
+        MergeSortImpl(datalist, begin, mid, compareFn);
+        MergeSortImpl(datalist, mid, end, compareFn);
+        MergeSortImpl2(datalist, begin, mid, end, compareFn);
     }
 }
-function MergeSortImpl2(datalist, begin, mid, end) {
+function MergeSortImpl2(datalist, begin, mid, end, compareFn) {
     var lsize = mid - begin;
     var rsize = end - mid;
     var arLeft = new Array();
@@ -300,13 +356,25 @@ function MergeSortImpl2(datalist, begin, mid, end) {
     }
     var idx = 0;
     for (idx = 0; lnow < lsize && rnow < rsize; idx++) {
-        if (arLeft[lnow] > arRight[rnow]) {
-            datalist[begin + idx] = arLeft[lnow];
-            lnow++;
+        if (compareFn !== undefined) {
+            if (compareFn(arLeft[lnow], arRight[rnow]) > 0) {
+                datalist[begin + idx] = arLeft[lnow];
+                lnow++;
+            }
+            else {
+                datalist[begin + idx] = arRight[rnow];
+                rnow++;
+            }
         }
         else {
-            datalist[begin + idx] = arRight[rnow];
-            rnow++;
+            if (arLeft[lnow] > arRight[rnow]) {
+                datalist[begin + idx] = arLeft[lnow];
+                lnow++;
+            }
+            else {
+                datalist[begin + idx] = arRight[rnow];
+                rnow++;
+            }
         }
     }
     if (lnow === lsize && rnow !== rsize) {
@@ -322,13 +390,14 @@ function MergeSortImpl2(datalist, begin, mid, end) {
 }
 /**
  * Heap sort
- * @param datalist : data list
+ * @param datalist data list
+ * @param compareFn Compare function
  *
  * The heap sort will struct the unsorted part as a maximum (or minimum) tree, and fetch the root node to the sort part.
  * Via this way, the array got sorted
  */
-function HeapSort(datalist) {
-    Heapsort_BuildMaxHeap(datalist);
+function HeapSort(datalist, compareFn) {
+    Heapsort_BuildMaxHeap(datalist, compareFn);
     var heapsize = datalist.length - 1;
     for (var i = datalist.length - 1; i >= 1; i--) {
         SwapElement(datalist, 0, i);
@@ -343,28 +412,41 @@ function Heapsort_LeftChild(i) {
 function Heapsort_RightChild(i) {
     return 2 * i + 2;
 }
-function Heapsort_MaxHeapify(datalist, i, size) {
+function Heapsort_MaxHeapify(datalist, i, size, compareFn) {
     var leftchild = Heapsort_LeftChild(i);
     var rightchild = Heapsort_RightChild(i);
     var largest = 0;
-    if (leftchild <= size && datalist[leftchild] > datalist[i]) {
-        largest = leftchild;
+    if (compareFn !== undefined) {
+        if (leftchild <= size && compareFn(datalist[leftchild], datalist[i]) > 0) {
+            largest = leftchild;
+        }
+        else {
+            largest = i;
+        }
+        if (rightchild <= size && compareFn(datalist[rightchild], datalist[largest]) > 0) {
+            largest = rightchild;
+        }
     }
     else {
-        largest = i;
-    }
-    if (rightchild <= size && datalist[rightchild] > datalist[largest]) {
-        largest = rightchild;
+        if (leftchild <= size && datalist[leftchild] > datalist[i]) {
+            largest = leftchild;
+        }
+        else {
+            largest = i;
+        }
+        if (rightchild <= size && datalist[rightchild] > datalist[largest]) {
+            largest = rightchild;
+        }
     }
     if (largest !== i) {
         SwapElement(datalist, i, largest);
-        Heapsort_MaxHeapify(datalist, largest, size);
+        Heapsort_MaxHeapify(datalist, largest, size, compareFn);
     }
 }
-function Heapsort_BuildMaxHeap(datalist) {
+function Heapsort_BuildMaxHeap(datalist, compareFn) {
     var heapsize = datalist.length;
     for (var i = Math.floor(heapsize / 2); i >= 0; i--) {
-        Heapsort_MaxHeapify(datalist, i, heapsize);
+        Heapsort_MaxHeapify(datalist, i, heapsize, compareFn);
     }
 }
 //# sourceMappingURL=Algorithm.js.map

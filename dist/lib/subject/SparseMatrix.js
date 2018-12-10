@@ -182,7 +182,7 @@ var SparseMatrix = /** @class */ (function () {
             else {
                 var nt = new Trituple();
                 // Try the destructure, failed!!!
-                //let { nt.Row, nt.Column, nt.Value } = {row, col, val};
+                // let { nt.Row, nt.Column, nt.Value } = {row, col, val};
                 nt.Row = row;
                 nt.Column = col;
                 nt.Value = val;

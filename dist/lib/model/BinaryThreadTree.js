@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -10,12 +10,18 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Thread tag
+ */
 var BinaryThreadTag;
 (function (BinaryThreadTag) {
     BinaryThreadTag[BinaryThreadTag["Link"] = 0] = "Link";
     BinaryThreadTag[BinaryThreadTag["Thread"] = 1] = "Thread";
 })(BinaryThreadTag = exports.BinaryThreadTag || (exports.BinaryThreadTag = {}));
 ;
+/**
+ * Thread Tree Node
+ */
 var BinaryThreadTreeNode = /** @class */ (function () {
     function BinaryThreadTreeNode() {
     }
@@ -86,6 +92,9 @@ var BinaryThreadTreeNode = /** @class */ (function () {
     return BinaryThreadTreeNode;
 }());
 exports.BinaryThreadTreeNode = BinaryThreadTreeNode;
+/**
+ * Binary Thread Tree
+ */
 var BinaryThreadTree = /** @class */ (function () {
     function BinaryThreadTree() {
     }

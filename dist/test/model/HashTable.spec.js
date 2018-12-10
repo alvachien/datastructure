@@ -16,11 +16,11 @@ describe('Test HashTable', function () {
     beforeEach(function () {
         _hashTable = new HashTable_1.HashTable();
     });
-    it("#1. Test set, values, has and size()", function () {
+    it('#1. Test set, values, has and size()', function () {
         expect(_hashTable).toBeTruthy();
         // TBD.
     });
-    it("#2. Test remove()", function () {
+    it('#2. Test remove()', function () {
         expect(_hashTable).toBeTruthy();
         // TBD.
     });

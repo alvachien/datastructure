@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -136,7 +136,7 @@ var Matrix = /** @class */ (function () {
      * Get backslash positions
      */
     Matrix.prototype.getBackSlashOutputPos = function () {
-        if (this._maxrow != this._maxcol || this._maxrow <= 1) {
+        if (this._maxrow !== this._maxcol || this._maxrow <= 1) {
             throw new Error('Wrong parameter');
         }
         var arrst = [];

@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -19,6 +19,7 @@ export * from './LinkStack';
 export * from './IQueue';
 export * from './ITree';
 export * from './BinaryTree';
+export * from './BinarySearchTree';
 export * from './BinaryThreadTree';
 export * from './HuffmanTree';
 export * from './IGraph';

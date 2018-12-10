@@ -12,7 +12,7 @@
 // Iterator
 export * from './IIterator';
 
-// Link
+// List
 export * from './IList';
 export * from './SequenceList';
 export * from './LinkList';

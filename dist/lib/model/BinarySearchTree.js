@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -118,7 +118,7 @@ var BinarySearchTree = /** @class */ (function () {
     BinarySearchTree.prototype.remove = function (key) {
     };
     /**
-     * @private
+     * @protected
      * In-Order Traverse Node
      */
     BinarySearchTree.prototype.inOrderTraverseNode = function (node, callback) {
@@ -131,7 +131,7 @@ var BinarySearchTree = /** @class */ (function () {
         }
     };
     /**
-     * @private
+     * @protected
      * Pre-Order Traverse Node
      */
     BinarySearchTree.prototype.preOrderTraverseNode = function (node, callback) {
@@ -144,7 +144,7 @@ var BinarySearchTree = /** @class */ (function () {
         }
     };
     /**
-     * @private
+     * @protected
      * Post-Order Traverse Node
      */
     BinarySearchTree.prototype.postOrderTraverseNode = function (node, callback) {
@@ -157,7 +157,7 @@ var BinarySearchTree = /** @class */ (function () {
         }
     };
     /**
-     * @private
+     * @protected
      * Minuimum Node
      */
     BinarySearchTree.prototype.minNode = function (node) {
@@ -170,7 +170,7 @@ var BinarySearchTree = /** @class */ (function () {
         return undefined;
     };
     /**
-     * @private
+     * @protected
      * Maximum Node
      */
     BinarySearchTree.prototype.maxNode = function (node) {
@@ -183,7 +183,7 @@ var BinarySearchTree = /** @class */ (function () {
         return undefined;
     };
     /**
-     * @private
+     * @protected
      * Insert Node
      */
     BinarySearchTree.prototype.insertNode = function (parnode, newnode) {
@@ -205,7 +205,7 @@ var BinarySearchTree = /** @class */ (function () {
         }
     };
     /**
-     * @private
+     * @protected
      * Search Node
      */
     BinarySearchTree.prototype.searchNode = function (node, key) {
@@ -223,7 +223,7 @@ var BinarySearchTree = /** @class */ (function () {
         }
     };
     /**
-     * @private
+     * @protected
      * Remove Node
      */
     BinarySearchTree.prototype.removeNode = function (node, key) {
@@ -251,10 +251,9 @@ var BinarySearchTree = /** @class */ (function () {
                 node = node.leftNode;
                 return node;
             }
-            var aux = void 0;
-            // let aux = findMinNode(node.rightNode);
-            node.key = aux.Key;
-            node.rightNode = this.removeNode(node.rightNode, aux.Key);
+            var aux = this.minNode(node.rightNode);
+            node.key = aux.key;
+            node.rightNode = this.removeNode(node.rightNode, aux.key);
             return node;
         }
     };

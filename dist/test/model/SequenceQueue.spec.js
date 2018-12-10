@@ -16,14 +16,14 @@ describe('Test SequenceQueue', function () {
     beforeEach(function () {
         _seqQueue = new SequenceQueue_1.SequenceQueue();
     });
-    it("#1. Check init", function () {
+    it('#1. Check init', function () {
         expect(_seqQueue).toBeTruthy();
     });
-    it("#2. Check empty Queue.", function () {
+    it('#2. Check empty Queue.', function () {
         expect(_seqQueue.IsEmpty()).toBe(true);
         expect(_seqQueue.Length()).toBe(0);
     });
-    it("#3. Check enqueue on Queue.", function () {
+    it('#3. Check enqueue on Queue.', function () {
         _seqQueue.Enqueue(1);
         expect(_seqQueue.IsEmpty()).toBe(false);
         expect(_seqQueue.Length()).toBe(1);
@@ -31,7 +31,7 @@ describe('Test SequenceQueue', function () {
         expect(_seqQueue.IsEmpty()).toBe(false);
         expect(_seqQueue.Length()).toBe(2);
     });
-    it("#4. Check dequeue of Queue.", function () {
+    it('#4. Check dequeue of Queue.', function () {
         _seqQueue.Enqueue(1);
         _seqQueue.Enqueue(2);
         _seqQueue.Enqueue(3);
@@ -45,7 +45,7 @@ describe('Test SequenceQueue', function () {
         expect(_seqQueue.Length()).toBe(0);
         expect(_seqQueue.Dequeue()).toBeFalsy();
     });
-    it("#5. Check empty Queue.", function () {
+    it('#5. Check empty Queue.', function () {
         _seqQueue.Enqueue(1);
         _seqQueue.Enqueue(2);
         _seqQueue.Enqueue(3);
@@ -54,7 +54,7 @@ describe('Test SequenceQueue', function () {
         _seqQueue.ClearAll();
         expect(_seqQueue.Length()).toBe(0);
     });
-    it("#6. Check IsExist.", function () {
+    it('#6. Check IsExist.', function () {
         // _seqQueue.InitList();
         // _seqQueue.AppendElement(1);
         // _seqQueue.AppendElement(2);
@@ -63,7 +63,7 @@ describe('Test SequenceQueue', function () {
         // expect(_seqQueue.IsExist(2)).toBe(true);
         // expect(_seqQueue.IsExist(3)).toBe(false);
     });
-    it("#7. Check Print.", function () {
+    it('#7. Check Print.', function () {
         // _seqQueue.InitList();
         // _seqQueue.AppendElement(1);
         // _seqQueue.AppendElement(2);

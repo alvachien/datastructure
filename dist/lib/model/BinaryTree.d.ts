@@ -22,11 +22,11 @@ export declare class BinaryTree<T> {
     private _root;
     Root: BinaryTreeNode<T>;
     InorderTraversal(): Array<BinaryTreeNode<T>>;
-    private InorderImpl(curNode, arRst);
+    private InorderImpl;
     PreorderTraversal(): Array<BinaryTreeNode<T>>;
-    private PreorderImpl(curNode, arRst);
+    private PreorderImpl;
     PostorderTraversal(): Array<BinaryTreeNode<T>>;
-    private PostorderImpl(curNode, arRst);
+    private PostorderImpl;
     InsertNode(parNode: BinaryTreeNode<T>, data: T): BinaryTreeNode<T>;
     FindNode(elem: T): IBinaryTreeNode<T>;
 }

@@ -41,18 +41,27 @@ export class FormulaOperator {
   }
 }
 
+/**
+ * Formula Operator: Add
+ */
 export class FormulaOperatorAddition extends FormulaOperator {
   constructor() {
     super(FormulaOperatorEnum.Add, 2);
   }
 }
 
+/**
+ * Formula Operator: Subtract
+ */
 export class FormulaOperationSbbtraction extends FormulaOperator {
   constructor() {
     super(FormulaOperatorEnum.Sub, 2);
   }
 }
 
+/**
+ * Formula Operator: Multipy
+ */
 export class FormulaOperationMultiplication extends FormulaOperator {
   constructor() {
     super(FormulaOperatorEnum.Multi, 2);
@@ -60,6 +69,9 @@ export class FormulaOperationMultiplication extends FormulaOperator {
 
 }
 
+/**
+ * Formula Operator: Divide
+ */
 export class FormulaOperationDivision extends FormulaOperator {
   constructor() {
     super(FormulaOperatorEnum.Div, 2);
@@ -67,11 +79,17 @@ export class FormulaOperationDivision extends FormulaOperator {
 
 }
 
+/**
+ * Keyword in Formula
+ */
 export const FormulaKeyword: string[] = [
   'PI',
   'power'
 ];
 
+/**
+ * Paremter in Formula
+ */
 export class FormulaParameter {
   private _par: string;
   get Parameter(): string {
@@ -83,6 +101,9 @@ export class FormulaParameter {
   }
 }
 
+/**
+ * Token enum
+ */
 export enum FormulaTokenEnum {
   Add = 0,        // +
   Sub = 1,        // -
@@ -100,6 +121,9 @@ export enum FormulaTokenEnum {
   PI = 21,        // PI
 }
 
+/**
+ * Token
+ */
 export class FormulaToken {
   private _tokenEnum: FormulaTokenEnum;
   get TokenEnum(): FormulaTokenEnum {
@@ -118,23 +142,27 @@ export class FormulaToken {
   }
 }
 
+/**
+ * Formula Parser
+ */
 export class FormulaParser {
   private _orgInput: string;
 
   constructor() {
   }
 
-  public init(input: string) {
-    if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
-      return;
+  public init(input: string): boolean {
+    if (input === null || input === undefined || input.length <= 0) {
+      return false;
     }
 
     this._orgInput = input;
+    return true;
   }
 
-  private parse() {
+  private parse(): boolean {
     if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
-      return;
+      return false;
     }
 
     const st: SequenceStack<any> = new SequenceStack<any>();

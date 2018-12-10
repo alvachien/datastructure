@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -96,10 +96,14 @@ function rpn1(strinputs) {
         return 0;
     }
     // Split into array of tokens
-    var arinputs = strinputs.split(/\s+/);
+    // let arinputs: any[] = strinputs.split(/\s+/);
+    var arinputs = strinputs.split(/(\d)/);
     var stack = [];
     for (var i = 0; i < arinputs.length; i++) {
         var token = arinputs[i];
+        if (arinputs[i] === '') {
+            continue;
+        }
         // Token is a value, push it onto the stack
         if (!Number.isNaN(+token)) {
             stack.push(parseFloat(token));
@@ -153,7 +157,8 @@ var RPN = /** @class */ (function () {
         var digit = "";
         for (var i = 0; i < exp.length; i++) {
             var token = exp.charAt(i);
-            if (!Number.isNaN(+token)) {
+            if (!Number.isNaN(+token)) // Digitials
+             {
                 digit += token;
             }
             else if (operations.indexOf(token) >= 0) {

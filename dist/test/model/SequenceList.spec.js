@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -16,16 +16,16 @@ describe('Test SequenceList', function () {
     beforeEach(function () {
         _seqList = new SequenceList_1.SequenceList();
     });
-    it("#1. Check InitList()", function () {
+    it('#1. Check InitList()', function () {
         _seqList.InitList();
         expect(_seqList).toBeTruthy();
     });
-    it("#2. Check empty list.", function () {
+    it('#2. Check empty list.', function () {
         _seqList.InitList();
         expect(_seqList.IsEmpty()).toBe(true);
         expect(_seqList.Length()).toBe(0);
     });
-    it("#3. Check append of list.", function () {
+    it('#3. Check append of list.', function () {
         _seqList.InitList();
         _seqList.AppendElement(1);
         expect(_seqList.IsEmpty()).toBe(false);
@@ -34,7 +34,7 @@ describe('Test SequenceList', function () {
         expect(_seqList.IsEmpty()).toBe(false);
         expect(_seqList.Length()).toBe(2);
     });
-    it("#4. Check insert of list.", function () {
+    it('#4. Check insert of list.', function () {
         _seqList.InitList();
         _seqList.AppendElement(1);
         _seqList.AppendElement(2);
@@ -47,7 +47,7 @@ describe('Test SequenceList', function () {
         expect(_seqList.GetElement(1)).toBe(3);
         expect(_seqList.GetElement(2)).toBe(2);
     });
-    it("#5. Check delete of list.", function () {
+    it('#5. Check delete of list.', function () {
         _seqList.InitList();
         _seqList.AppendElement(1);
         _seqList.AppendElement(2);
@@ -65,7 +65,7 @@ describe('Test SequenceList', function () {
         expect(_seqList.Length()).toBe(0);
         expect(_seqList.DeleteElement(0)).toBe(false);
     });
-    it("#6. Check empty.", function () {
+    it('#6. Check empty.', function () {
         _seqList.InitList();
         _seqList.AppendElement(1);
         _seqList.AppendElement(2);
@@ -75,7 +75,7 @@ describe('Test SequenceList', function () {
         _seqList.ClearAll();
         expect(_seqList.Length()).toBe(0);
     });
-    it("#7. Check IsExist.", function () {
+    it('#7. Check IsExist.', function () {
         _seqList.InitList();
         _seqList.AppendElement(1);
         _seqList.AppendElement(2);
@@ -84,7 +84,7 @@ describe('Test SequenceList', function () {
         expect(_seqList.IsExist(2)).toBe(true);
         expect(_seqList.IsExist(3)).toBe(false);
     });
-    it("#8. Check Print.", function () {
+    it('#8. Check Print.', function () {
         _seqList.InitList();
         _seqList.AppendElement(1);
         _seqList.AppendElement(2);

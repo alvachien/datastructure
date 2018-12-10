@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -19,7 +19,7 @@ export declare class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
     constructor(key?: number, data?: T);
 }
 export declare class BinarySearchTree<T> implements IBinarySearchTree<T> {
-    private _root;
+    protected _root: BinarySearchTreeNode<T>;
     readonly rootNode: BinarySearchTreeNode<T>;
     constructor();
     /**
@@ -62,43 +62,43 @@ export declare class BinarySearchTree<T> implements IBinarySearchTree<T> {
      */
     remove(key: number): void;
     /**
-     * @private
+     * @protected
      * In-Order Traverse Node
      */
-    private inOrderTraverseNode(node, callback);
+    protected inOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>): void;
     /**
-     * @private
+     * @protected
      * Pre-Order Traverse Node
      */
-    private preOrderTraverseNode(node, callback);
+    protected preOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>): void;
     /**
-     * @private
+     * @protected
      * Post-Order Traverse Node
      */
-    private postOrderTraverseNode(node, callback);
+    protected postOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>): void;
     /**
-     * @private
+     * @protected
      * Minuimum Node
      */
-    private minNode(node);
+    protected minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T>;
     /**
-     * @private
+     * @protected
      * Maximum Node
      */
-    private maxNode(node);
+    protected maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T>;
     /**
-     * @private
+     * @protected
      * Insert Node
      */
-    private insertNode(parnode, newnode);
+    protected insertNode(parnode: BinarySearchTreeNode<T>, newnode: BinarySearchTreeNode<T>): void;
     /**
-     * @private
+     * @protected
      * Search Node
      */
-    private searchNode(node, key);
+    protected searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T>;
     /**
-     * @private
+     * @protected
      * Remove Node
      */
-    private removeNode(node, key);
+    protected removeNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T>;
 }

@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -11,11 +11,17 @@
 
 import { IBinaryTreeNode, IBinaryTree } from './ITree';
 
+/**
+ * Thread tag
+ */
 export enum BinaryThreadTag {
   Link = 0,
   Thread
 };
 
+/**
+ * Thread Tree Node
+ */
 export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
   private _key: number;
   private _data: T;
@@ -70,6 +76,9 @@ export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
   }
 }
 
+/**
+ * Binary Thread Tree
+ */
 export class BinaryThreadTree<T> implements IBinaryTree<T> {
   private _root: BinaryThreadTreeNode<T>;
 

@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -19,6 +19,7 @@ __export(require("./StaticLinkList"));
 __export(require("./SequenceStack"));
 __export(require("./LinkStack"));
 __export(require("./BinaryTree"));
+__export(require("./BinarySearchTree"));
 __export(require("./BinaryThreadTree"));
 __export(require("./HuffmanTree"));
 __export(require("./Graph"));
