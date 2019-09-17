@@ -13,6 +13,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+// Faked Guid
+__export(require("./FakedGuid"));
 __export(require("./SequenceList"));
 __export(require("./LinkList"));
 __export(require("./StaticLinkList"));

@@ -8,6 +8,7 @@
  * File: index.ts
  *
  */
+export * from './FakedGuid';
 export * from './IIterator';
 export * from './IList';
 export * from './SequenceList';
