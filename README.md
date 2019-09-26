@@ -4,6 +4,7 @@ This project is target to build a library (abbrv: lib) for Data Structures and a
 
 - The Data Structure part, including List, Tree, Graph, and others. 
 - The Algorithm part, including sorting, searching and others. 
+- The Utility part, including string replacement, reading text from HTML element, etc.
 
 The library written with TypeScript.
 
