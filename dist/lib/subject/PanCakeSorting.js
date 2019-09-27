@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,14 +8,13 @@
  * File: PanCakeSorting.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Desp:
  * 把一摞大小不一的烙饼按顺序排好，大的在下面，小的在上面，要求只能用一只手去翻转烙饼位置，另一只手要端盘子，要求输出最优化的排序过程。
  */
 function ArrayFlip(arr, i) {
-    var tmp;
-    var start = 0;
+    let tmp;
+    let start = 0;
     while (start < i) {
         tmp = arr[start];
         arr[start] = arr[i];
@@ -26,8 +24,8 @@ function ArrayFlip(arr, i) {
     }
 }
 function FindMax(arr, n) {
-    var max;
-    var i = 0;
+    let max;
+    let i = 0;
     for (; i < n; i++) {
         if (arr[i] > arr[max]) {
             max = i;
@@ -35,25 +33,22 @@ function FindMax(arr, n) {
     }
     return max;
 }
-function PanCakeSorting(arr, n) {
-    for (var currsize = n; currsize > 1; --currsize) {
-        var max = FindMax(arr, currsize);
+export function PanCakeSorting(arr, n) {
+    for (let currsize = n; currsize > 1; --currsize) {
+        const max = FindMax(arr, currsize);
         if (max !== currsize - 1) {
             ArrayFlip(arr, max);
             ArrayFlip(arr, currsize - 1);
         }
     }
 }
-exports.PanCakeSorting = PanCakeSorting;
-var PanCakeAlgorithm = /** @class */ (function () {
-    function PanCakeAlgorithm() {
+export class PanCakeAlgorithm {
+    constructor() {
         this._cakecount = 0;
         this._maxswap = 0;
     }
-    PanCakeAlgorithm.prototype.UpBound = function (cnt) {
+    UpBound(cnt) {
         return cnt * 2;
-    };
-    return PanCakeAlgorithm;
-}());
-exports.PanCakeAlgorithm = PanCakeAlgorithm;
+    }
+}
 //# sourceMappingURL=PanCakeSorting.js.map

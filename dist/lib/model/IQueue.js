@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,5 +8,4 @@
  * File: IQueue.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=IQueue.js.map

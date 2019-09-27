@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,21 +8,20 @@
  * File: LinkStack.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var LinkStack_1 = require("../../lib/model/LinkStack");
-describe('Test LinkStack', function () {
-    var _linkStack;
-    beforeEach(function () {
-        _linkStack = new LinkStack_1.LinkStack();
+import { LinkStack } from '../../lib/model/LinkStack';
+describe('Test LinkStack', () => {
+    let _linkStack;
+    beforeEach(() => {
+        _linkStack = new LinkStack();
     });
-    it('#1. Check InitStack()', function () {
+    it('#1. Check InitStack()', () => {
         expect(_linkStack).toBeTruthy();
     });
-    it('#2. Check empty stack.', function () {
+    it('#2. Check empty stack.', () => {
         expect(_linkStack.IsEmpty()).toBe(true);
         expect(_linkStack.Length()).toBe(0);
     });
-    it('#3. Check push on Stack.', function () {
+    it('#3. Check push on Stack.', () => {
         _linkStack.Push(1);
         expect(_linkStack.IsEmpty()).toBe(false);
         expect(_linkStack.Length()).toBe(1);
@@ -31,7 +29,7 @@ describe('Test LinkStack', function () {
         expect(_linkStack.IsEmpty()).toBe(false);
         expect(_linkStack.Length()).toBe(2);
     });
-    it('#4. Check pop of Stack.', function () {
+    it('#4. Check pop of Stack.', () => {
         _linkStack.Push(1);
         _linkStack.Push(2);
         _linkStack.Push(3);
@@ -45,7 +43,7 @@ describe('Test LinkStack', function () {
         expect(_linkStack.Length()).toBe(0);
         expect(_linkStack.Pop()).toBeFalsy();
     });
-    it('#5. Check empty stack.', function () {
+    it('#5. Check empty stack.', () => {
         // _linkStack.InitList();
         _linkStack.Push(1);
         _linkStack.Push(2);
@@ -55,7 +53,7 @@ describe('Test LinkStack', function () {
         _linkStack.ClearAll();
         expect(_linkStack.Length()).toBe(0);
     });
-    it('#6. Check IsExist.', function () {
+    it('#6. Check IsExist.', () => {
         // _linkStack.InitList();
         // _linkStack.AppendElement(1);
         // _linkStack.AppendElement(2);
@@ -64,7 +62,7 @@ describe('Test LinkStack', function () {
         // expect(_linkStack.IsExist(2)).toBe(true);
         // expect(_linkStack.IsExist(3)).toBe(false);
     });
-    it('#7. Check Print.', function () {
+    it('#7. Check Print.', () => {
         // _linkStack.InitList();
         // _linkStack.AppendElement(1);
         // _linkStack.AppendElement(2);

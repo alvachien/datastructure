@@ -1,11 +1,11 @@
 {
   "name": "actslib",
-  "description": "Typescript Library",
+  "description": "Typescript Library for Data Structure, Algorithm, and Utilities",
   "author": {
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.4.5",
+  "version": "0.4.6",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -26,9 +26,9 @@
     "typescript": "^3.5.3"
   },
   "devDependencies": {
-    "@types/jasmine": "^3.4.0",
-    "@types/node": "^12.7.5",
-    "jasmine-core": "^3.4.0",
+    "@types/jasmine": "^3.4.1",
+    "@types/node": "^12.7.8",
+    "jasmine-core": "^3.5.0",
     "karma": "^4.3.0",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^2.0.1",

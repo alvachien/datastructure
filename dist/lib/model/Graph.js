@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -10,163 +9,134 @@
  *
  * Implements the graph with Adjacement Matrix.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Vertext in the graph
  */
-var GraphVertex = /** @class */ (function () {
-    function GraphVertex() {
+export class GraphVertex {
+    get id() {
+        return this._id;
     }
-    Object.defineProperty(GraphVertex.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (id) {
-            this._id = id;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GraphVertex.prototype, "value", {
-        get: function () {
-            return this._value;
-        },
-        set: function (data) {
-            this._value = data;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GraphVertex;
-}());
-exports.GraphVertex = GraphVertex;
+    set id(id) {
+        this._id = id;
+    }
+    get value() {
+        return this._value;
+    }
+    set value(data) {
+        this._value = data;
+    }
+}
 /**
  * Edge in the graph
  */
-var GraphEdge = /** @class */ (function () {
-    function GraphEdge() {
+export class GraphEdge {
+    get weight() {
+        return this._weight;
     }
-    Object.defineProperty(GraphEdge.prototype, "weight", {
-        get: function () {
-            return this._weight;
-        },
-        set: function (wgt) {
-            this._weight = wgt;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GraphEdge.prototype, "from", {
-        get: function () {
-            return this._from;
-        },
-        set: function (frm) {
-            this._from = frm;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GraphEdge.prototype, "to", {
-        get: function () {
-            return this._to;
-        },
-        set: function (to) {
-            this._to = to;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return GraphEdge;
-}());
-exports.GraphEdge = GraphEdge;
+    set weight(wgt) {
+        this._weight = wgt;
+    }
+    get from() {
+        return this._from;
+    }
+    set from(frm) {
+        this._from = frm;
+    }
+    get to() {
+        return this._to;
+    }
+    set to(to) {
+        this._to = to;
+    }
+}
 /**
  * Graph
  * X: Type of vertex
  * Y: Weight of edge
  */
-var Graph = /** @class */ (function () {
-    function Graph() {
+export class Graph {
+    constructor() {
         this._vertex = [];
         this._edge = [];
     }
-    Graph.prototype.VertexNumber = function () {
+    VertexNumber() {
         return this._vertex.length;
-    };
-    Graph.prototype.EdgeNumber = function () {
+    }
+    EdgeNumber() {
         return this._edge.length;
-    };
+    }
     /**
      * Vertex
      */
-    Graph.prototype.Vertexs = function () {
+    Vertexs() {
         return this._vertex;
-    };
-    Graph.prototype.IsVertexExist = function (id) {
-        for (var i = 0; i < this._vertex.length; i++) {
+    }
+    IsVertexExist(id) {
+        for (let i = 0; i < this._vertex.length; i++) {
             if (this._vertex[i].id === id) {
                 return true;
             }
         }
         return false;
-    };
+    }
     /**
      * Edges
      */
-    Graph.prototype.Edges = function () {
+    Edges() {
         return this._edge;
-    };
+    }
     /**
      * Add Vertex
      */
-    Graph.prototype.AddVertex = function (id, data) {
+    AddVertex(id, data) {
         if (id <= 0 || this.IsVertexExist(id)) {
             return -1;
         }
-        var nnode = new GraphVertex();
+        const nnode = new GraphVertex();
         nnode.value = data;
         nnode.id = id;
         this._vertex.push(nnode);
         return nnode.id;
-    };
-    Graph.prototype.AddEdge = function (frm, to, weight) {
+    }
+    AddEdge(frm, to, weight) {
         if (frm <= 0 || to <= 0 || !this.IsVertexExist(frm) || !this.IsVertexExist(to)) {
             return false;
         }
         if (this.IsEdgeExist(frm, to)) {
             return false;
         }
-        var edge = new GraphEdge();
+        const edge = new GraphEdge();
         edge.from = frm;
         edge.to = to;
         edge.weight = weight;
         this._edge.push(edge);
         return true;
-    };
-    Graph.prototype.IsEdgeExist = function (frm, to) {
-        for (var i = 0; i < this._edge.length; i++) {
+    }
+    IsEdgeExist(frm, to) {
+        for (let i = 0; i < this._edge.length; i++) {
             if (this._edge[i].from === frm && this._edge[i].to === to) {
                 return true;
             }
         }
         return false;
-    };
+    }
     /**
      * DFS
      */
-    Graph.prototype.DFS = function () {
+    DFS() {
         if (this._vertex.length <= 0) {
             return [];
         }
-        var visited = [];
-        var rst = [];
-        for (var i = 0; i < this._vertex.length; i++) {
+        const visited = [];
+        const rst = [];
+        for (let i = 0; i < this._vertex.length; i++) {
             this.DFSImpl(this._vertex[i], visited, rst);
         }
         return rst;
-    };
-    Graph.prototype.DFSImpl = function (vex, visited, rst) {
-        var bvisited = false;
-        for (var i = 0; i < visited.length; i++) {
+    }
+    DFSImpl(vex, visited, rst) {
+        let bvisited = false;
+        for (let i = 0; i < visited.length; i++) {
             if (visited[i] === vex.id) {
                 bvisited = true;
                 break;
@@ -178,11 +148,11 @@ var Graph = /** @class */ (function () {
         else {
             return;
         }
-        for (var i = 0; i < this._edge.length; i++) {
+        for (let i = 0; i < this._edge.length; i++) {
             if (this._edge[i].from === vex.id) {
                 // Get the to
-                var tonode = null;
-                for (var j = 0; j < this._vertex.length; j++) {
+                let tonode = null;
+                for (let j = 0; j < this._vertex.length; j++) {
                     if (this._vertex[j].id === this._edge[i].to) {
                         tonode = this._vertex[j];
                         break;
@@ -203,17 +173,15 @@ var Graph = /** @class */ (function () {
             //     this.DFSImpl(fromnode, visited, rst);
             // }
         }
-    };
+    }
     /**
      * BFS
      */
-    Graph.prototype.BFS = function () {
+    BFS() {
         // if (this._vertex.length <= 0) {
         //   return [];
         // }
         return [];
-    };
-    return Graph;
-}());
-exports.Graph = Graph;
+    }
+}
 //# sourceMappingURL=Graph.js.map

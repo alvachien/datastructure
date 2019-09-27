@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,23 +8,22 @@
  * File: LinkList.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var LinkList_1 = require("../../lib/model/LinkList");
-describe('Test LinkList', function () {
-    var _linkList;
-    beforeEach(function () {
-        _linkList = new LinkList_1.LinkList();
+import { LinkList } from '../../lib/model/LinkList';
+describe('Test LinkList', () => {
+    let _linkList;
+    beforeEach(() => {
+        _linkList = new LinkList();
     });
-    it('#1. Check InitList()', function () {
+    it('#1. Check InitList()', () => {
         _linkList.InitList(2);
         expect(_linkList.Head).toBeTruthy();
     });
-    it('#2. Check empty list.', function () {
+    it('#2. Check empty list.', () => {
         _linkList.InitList(1);
         expect(_linkList.IsEmpty()).toBe(false);
         expect(_linkList.Length()).toBe(1);
     });
-    it('#3. Check append of list.', function () {
+    it('#3. Check append of list.', () => {
         _linkList.InitList(1);
         _linkList.AppendElement(2);
         expect(_linkList.IsEmpty()).toBe(false);
@@ -34,7 +32,7 @@ describe('Test LinkList', function () {
         expect(_linkList.IsEmpty()).toBe(false);
         expect(_linkList.Length()).toBe(3);
     });
-    it('#4. Check insert of list.', function () {
+    it('#4. Check insert of list.', () => {
         _linkList.InitList(1);
         _linkList.AppendElement(2);
         expect(_linkList.IsEmpty()).toBe(false);
@@ -45,7 +43,7 @@ describe('Test LinkList', function () {
         expect(_linkList.GetElement(1)).toBe(3);
         expect(_linkList.GetElement(2)).toBe(2);
     });
-    it('#5. Check delete of list.', function () {
+    it('#5. Check delete of list.', () => {
         _linkList.InitList(1);
         _linkList.AppendElement(2);
         _linkList.AppendElement(3);
@@ -62,7 +60,7 @@ describe('Test LinkList', function () {
         expect(_linkList.Length()).toBe(0);
         expect(_linkList.DeleteElement(0)).toBe(false);
     });
-    it('#6. Check empty.', function () {
+    it('#6. Check empty.', () => {
         _linkList.InitList(1);
         _linkList.AppendElement(2);
         _linkList.AppendElement(3);
@@ -71,7 +69,7 @@ describe('Test LinkList', function () {
         _linkList.ClearAll();
         expect(_linkList.Length()).toBe(0);
     });
-    it('#7. Check IsExist.', function () {
+    it('#7. Check IsExist.', () => {
         _linkList.InitList(1);
         _linkList.AppendElement(2);
         _linkList.AppendElement(2);
@@ -79,7 +77,7 @@ describe('Test LinkList', function () {
         expect(_linkList.IsExist(2)).toBe(true);
         expect(_linkList.IsExist(3)).toBe(false);
     });
-    it('#8. Check Print.', function () {
+    it('#8. Check Print.', () => {
         _linkList.InitList(1);
         _linkList.AppendElement(2);
         _linkList.AppendElement(3);

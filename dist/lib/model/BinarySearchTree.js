@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,10 +8,9 @@
  * File: BinarySearchTree.ts
  * Binary search tree
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 // Binary search tree node
-var BinarySearchTreeNode = /** @class */ (function () {
-    function BinarySearchTreeNode(key, data) {
+export class BinarySearchTreeNode {
+    constructor(key, data) {
         if ((key === undefined && data !== undefined)
             || (key !== undefined && data === undefined)) {
             throw new Error('invalid input');
@@ -22,47 +20,33 @@ var BinarySearchTreeNode = /** @class */ (function () {
             this._data = data;
         }
     }
-    Object.defineProperty(BinarySearchTreeNode.prototype, "key", {
-        get: function () {
-            return this._key;
-        },
-        set: function (keynumber) {
-            this._key = keynumber;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(BinarySearchTreeNode.prototype, "data", {
-        get: function () {
-            return this._data;
-        },
-        set: function (value) {
-            this._data = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return BinarySearchTreeNode;
-}());
-exports.BinarySearchTreeNode = BinarySearchTreeNode;
-// Binary search tree
-var BinarySearchTree = /** @class */ (function () {
-    function BinarySearchTree() {
+    get key() {
+        return this._key;
     }
-    Object.defineProperty(BinarySearchTree.prototype, "rootNode", {
-        get: function () {
-            return this._root;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    set key(keynumber) {
+        this._key = keynumber;
+    }
+    get data() {
+        return this._data;
+    }
+    set data(value) {
+        this._data = value;
+    }
+}
+// Binary search tree
+export class BinarySearchTree {
+    constructor() {
+    }
+    get rootNode() {
+        return this._root;
+    }
     /**
      * Insert node
      * @param key Key of the node
      * @param data Data of the node
      */
-    BinarySearchTree.prototype.insert = function (key, data) {
-        var newnode = new BinarySearchTreeNode(key, data);
+    insert(key, data) {
+        const newnode = new BinarySearchTreeNode(key, data);
         if (this._root === undefined) {
             this._root = newnode;
         }
@@ -70,58 +54,58 @@ var BinarySearchTree = /** @class */ (function () {
             this.insertNode(this._root, newnode);
         }
         return newnode;
-    };
+    }
     /**
      * Search
      * @param key Key to search
      */
-    BinarySearchTree.prototype.search = function (key) {
+    search(key) {
         return this.searchNode(this._root, key);
-    };
+    }
     /**
      * In-order traverse
      * @param callback Callback to process each node
      */
-    BinarySearchTree.prototype.inOrderTraverse = function (callback) {
+    inOrderTraverse(callback) {
         this.inOrderTraverseNode(this._root, callback);
-    };
+    }
     /**
      * Pre-order traverse
      * @param callback Callback to process each node
      */
-    BinarySearchTree.prototype.preOrderTraverse = function (callback) {
+    preOrderTraverse(callback) {
         this.preOrderTraverseNode(this._root, callback);
-    };
+    }
     /**
      * Post-order traverse
      * @param callback Callback to process each node
      */
-    BinarySearchTree.prototype.postOrderTraverse = function (callback) {
+    postOrderTraverse(callback) {
         this.postOrderTraverseNode(this._root, callback);
-    };
+    }
     /**
      * Minimum node
      */
-    BinarySearchTree.prototype.min = function () {
+    min() {
         return this.minNode(this._root);
-    };
+    }
     /**
      * Maximum node
      */
-    BinarySearchTree.prototype.max = function () {
+    max() {
         return this.maxNode(this._root);
-    };
+    }
     /**
      * Remove a node
      * @param key Key of the node to be deleted
      */
-    BinarySearchTree.prototype.remove = function (key) {
-    };
+    remove(key) {
+    }
     /**
      * @protected
      * In-Order Traverse Node
      */
-    BinarySearchTree.prototype.inOrderTraverseNode = function (node, callback) {
+    inOrderTraverseNode(node, callback) {
         if (node !== undefined) {
             this.inOrderTraverseNode(node.leftNode, callback);
             if (callback !== undefined) {
@@ -129,12 +113,12 @@ var BinarySearchTree = /** @class */ (function () {
             }
             this.inOrderTraverseNode(node.rightNode, callback);
         }
-    };
+    }
     /**
      * @protected
      * Pre-Order Traverse Node
      */
-    BinarySearchTree.prototype.preOrderTraverseNode = function (node, callback) {
+    preOrderTraverseNode(node, callback) {
         if (node !== undefined) {
             if (callback !== undefined) {
                 callback(node);
@@ -142,12 +126,12 @@ var BinarySearchTree = /** @class */ (function () {
             this.preOrderTraverseNode(node.leftNode, callback);
             this.preOrderTraverseNode(node.rightNode, callback);
         }
-    };
+    }
     /**
      * @protected
      * Post-Order Traverse Node
      */
-    BinarySearchTree.prototype.postOrderTraverseNode = function (node, callback) {
+    postOrderTraverseNode(node, callback) {
         if (node !== undefined) {
             this.postOrderTraverseNode(node.leftNode, callback);
             this.postOrderTraverseNode(node.rightNode, callback);
@@ -155,12 +139,12 @@ var BinarySearchTree = /** @class */ (function () {
                 callback(node);
             }
         }
-    };
+    }
     /**
      * @protected
      * Minuimum Node
      */
-    BinarySearchTree.prototype.minNode = function (node) {
+    minNode(node) {
         if (node !== undefined) {
             while (node !== undefined && node.leftNode !== undefined) {
                 node = node.leftNode;
@@ -168,12 +152,12 @@ var BinarySearchTree = /** @class */ (function () {
             return node;
         }
         return undefined;
-    };
+    }
     /**
      * @protected
      * Maximum Node
      */
-    BinarySearchTree.prototype.maxNode = function (node) {
+    maxNode(node) {
         if (node !== undefined) {
             while (node !== undefined && node.rightNode !== undefined) {
                 node = node.rightNode;
@@ -181,12 +165,12 @@ var BinarySearchTree = /** @class */ (function () {
             return node;
         }
         return undefined;
-    };
+    }
     /**
      * @protected
      * Insert Node
      */
-    BinarySearchTree.prototype.insertNode = function (parnode, newnode) {
+    insertNode(parnode, newnode) {
         if (newnode.key < parnode.key) {
             if (parnode.leftNode === undefined) {
                 parnode.leftNode = newnode;
@@ -203,12 +187,12 @@ var BinarySearchTree = /** @class */ (function () {
                 this.insertNode(parnode.rightNode, newnode);
             }
         }
-    };
+    }
     /**
      * @protected
      * Search Node
      */
-    BinarySearchTree.prototype.searchNode = function (node, key) {
+    searchNode(node, key) {
         if (node === undefined) {
             return undefined;
         }
@@ -221,12 +205,12 @@ var BinarySearchTree = /** @class */ (function () {
         else {
             return node;
         }
-    };
+    }
     /**
      * @protected
      * Remove Node
      */
-    BinarySearchTree.prototype.removeNode = function (node, key) {
+    removeNode(node, key) {
         if (node === undefined) {
             return undefined;
         }
@@ -251,13 +235,11 @@ var BinarySearchTree = /** @class */ (function () {
                 node = node.leftNode;
                 return node;
             }
-            var aux = this.minNode(node.rightNode);
+            const aux = this.minNode(node.rightNode);
             node.key = aux.key;
             node.rightNode = this.removeNode(node.rightNode, aux.key);
             return node;
         }
-    };
-    return BinarySearchTree;
-}());
-exports.BinarySearchTree = BinarySearchTree;
+    }
+}
 //# sourceMappingURL=BinarySearchTree.js.map

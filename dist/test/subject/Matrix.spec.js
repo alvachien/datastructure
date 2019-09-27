@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,27 +8,26 @@
  * File: Matrix.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var Matrix_1 = require("../../lib/subject/Matrix");
-describe('Test Matrix', function () {
-    var _matrix;
-    beforeEach(function () {
-        _matrix = new Matrix_1.Matrix(10, 10);
+import { Matrix } from '../../lib/subject/Matrix';
+describe('Test Matrix', () => {
+    let _matrix;
+    beforeEach(() => {
+        _matrix = new Matrix(10, 10);
     });
-    it("#1. Check init()", function () {
+    it("#1. Check init()", () => {
         _matrix.init();
         expect(_matrix).toBeTruthy();
         expect(_matrix.RowCount).toBe(10);
     });
-    it("#2. Check default output()", function () {
-        _matrix = new Matrix_1.Matrix(2, 3);
+    it("#2. Check default output()", () => {
+        _matrix = new Matrix(2, 3);
         _matrix.init();
         expect(_matrix).toBeTruthy();
         expect(_matrix.RowCount).toBe(2);
         expect(_matrix.ColumnCount).toBe(3);
     });
-    it("#3. Check getSlashOutputPos()", function () {
-        _matrix = new Matrix_1.Matrix(2, 3);
+    it("#3. Check getSlashOutputPos()", () => {
+        _matrix = new Matrix(2, 3);
         _matrix.init();
         expect(_matrix).toBeTruthy();
         _matrix.setElement({ row: 0, column: 0 }, 1);
@@ -47,7 +45,7 @@ describe('Test Matrix', function () {
         // [[2, 4]]
         // [[3, 5]]
         // [[6]]
-        var arOut = _matrix.getSlashOutputPos();
+        let arOut = _matrix.getSlashOutputPos();
         expect(arOut.length).toBe(2 + 3 - 1);
         // Row 0
         expect(arOut[0].length).toBe(1);
@@ -76,8 +74,8 @@ describe('Test Matrix', function () {
         expect(arOut[3][0].column).toBe(2);
         expect(_matrix.getElement(arOut[3][0])).toBe(6);
     });
-    it("#3. Check getBackSlashOutputPos()", function () {
-        _matrix = new Matrix_1.Matrix(3, 3);
+    it("#3. Check getBackSlashOutputPos()", () => {
+        _matrix = new Matrix(3, 3);
         _matrix.init();
         expect(_matrix).toBeTruthy();
         _matrix.setElement({ row: 0, column: 0 }, 1);
@@ -99,7 +97,7 @@ describe('Test Matrix', function () {
         // [[1, 5, 9]]
         // [[4, 8]]
         // [[7]]
-        var arOut = _matrix.getBackSlashOutputPos();
+        let arOut = _matrix.getBackSlashOutputPos();
         expect(arOut.length).toBe(3 + 3 - 1);
         // Row 0
         expect(arOut[0].length).toBe(1);

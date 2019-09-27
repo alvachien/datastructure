@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,23 +8,22 @@
  * File: SequenceStack.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var SequenceStack_1 = require("../../lib/model/SequenceStack");
-describe('Test SequenceStack', function () {
-    var _seqStack;
-    beforeEach(function () {
-        _seqStack = new SequenceStack_1.SequenceStack();
+import { SequenceStack } from '../../lib/model/SequenceStack';
+describe('Test SequenceStack', () => {
+    let _seqStack;
+    beforeEach(() => {
+        _seqStack = new SequenceStack();
     });
-    it('#1. Check InitStack()', function () {
+    it('#1. Check InitStack()', () => {
         // _seqStack.InitList();
         expect(_seqStack).toBeTruthy();
     });
-    it('#2. Check empty stack.', function () {
+    it('#2. Check empty stack.', () => {
         // _seqStack.InitList();
         expect(_seqStack.IsEmpty()).toBe(true);
         expect(_seqStack.Length()).toBe(0);
     });
-    it('#3. Check push on Stack.', function () {
+    it('#3. Check push on Stack.', () => {
         // _seqStack.InitList();
         _seqStack.Push(1);
         expect(_seqStack.IsEmpty()).toBe(false);
@@ -34,7 +32,7 @@ describe('Test SequenceStack', function () {
         expect(_seqStack.IsEmpty()).toBe(false);
         expect(_seqStack.Length()).toBe(2);
     });
-    it('#4. Check pop of Stack.', function () {
+    it('#4. Check pop of Stack.', () => {
         // _seqStack.InitList();
         _seqStack.Push(1);
         _seqStack.Push(2);
@@ -49,7 +47,7 @@ describe('Test SequenceStack', function () {
         expect(_seqStack.Length()).toBe(0);
         expect(_seqStack.Pop()).toBeFalsy();
     });
-    it('#5. Check empty stack.', function () {
+    it('#5. Check empty stack.', () => {
         // _seqStack.InitList();
         _seqStack.Push(1);
         _seqStack.Push(2);
@@ -59,7 +57,7 @@ describe('Test SequenceStack', function () {
         _seqStack.ClearAll();
         expect(_seqStack.Length()).toBe(0);
     });
-    it('#6. Check IsExist.', function () {
+    it('#6. Check IsExist.', () => {
         // _seqStack.InitList();
         // _seqStack.AppendElement(1);
         // _seqStack.AppendElement(2);
@@ -68,7 +66,7 @@ describe('Test SequenceStack', function () {
         // expect(_seqStack.IsExist(2)).toBe(true);
         // expect(_seqStack.IsExist(3)).toBe(false);
     });
-    it('#7. Check Print.', function () {
+    it('#7. Check Print.', () => {
         // _seqStack.InitList();
         // _seqStack.AppendElement(1);
         // _seqStack.AppendElement(2);

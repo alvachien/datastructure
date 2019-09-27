@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,66 +8,63 @@
  * File: SequenceStack.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Sequence Stack
  */
-var SequenceStack = /** @class */ (function () {
+export class SequenceStack {
     /**
      * Constructor
      */
-    function SequenceStack() {
+    constructor() {
         this._data = [];
     }
     /**
      * Length
      */
-    SequenceStack.prototype.Length = function () {
+    Length() {
         return this._data.length;
-    };
+    }
     /**
      * Is empty
      */
-    SequenceStack.prototype.IsEmpty = function () {
+    IsEmpty() {
         return this._data.length === 0;
-    };
+    }
     /**
      * Push
      * @param elem Element to push
      */
-    SequenceStack.prototype.Push = function (elem) {
+    Push(elem) {
         return this._data.push(elem);
-    };
+    }
     /**
      * Pop an element
      *
      */
-    SequenceStack.prototype.Pop = function () {
+    Pop() {
         if (this._data.length === 0) {
             return null;
         }
-        var pi = this._data[this._data.length - 1];
+        const pi = this._data[this._data.length - 1];
         this._data.splice(this._data.length - 1, 1);
         return pi;
-    };
+    }
     /**
      * Peek the stack
      */
-    SequenceStack.prototype.Peek = function () {
+    Peek() {
         if (this._data.length === 0) {
             return null;
         }
-        var pi = this._data[this._data.length - 1];
+        const pi = this._data[this._data.length - 1];
         return pi;
-    };
+    }
     /**
      * Clear all
      */
-    SequenceStack.prototype.ClearAll = function () {
+    ClearAll() {
         this._data = [];
         return true;
-    };
-    return SequenceStack;
-}());
-exports.SequenceStack = SequenceStack;
+    }
+}
 //# sourceMappingURL=SequenceStack.js.map

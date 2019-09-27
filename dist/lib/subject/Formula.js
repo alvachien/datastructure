@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,130 +8,86 @@
  * File: Formula.ts
  * Formula definition as well as calculation, using stack
  */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var model_1 = require("../model");
+import { SequenceStack, SequenceList } from '../model';
 /**
  * Basic formula operator
  */
-var FormulaOperatorEnum;
+export var FormulaOperatorEnum;
 (function (FormulaOperatorEnum) {
     FormulaOperatorEnum[FormulaOperatorEnum["Add"] = 0] = "Add";
     FormulaOperatorEnum[FormulaOperatorEnum["Sub"] = 1] = "Sub";
     FormulaOperatorEnum[FormulaOperatorEnum["Multi"] = 2] = "Multi";
     FormulaOperatorEnum[FormulaOperatorEnum["Div"] = 3] = "Div";
-})(FormulaOperatorEnum = exports.FormulaOperatorEnum || (exports.FormulaOperatorEnum = {}));
+})(FormulaOperatorEnum || (FormulaOperatorEnum = {}));
 /**
  * Formula operator
  */
-var FormulaOperator = /** @class */ (function () {
-    function FormulaOperator(typ, opnum) {
+export class FormulaOperator {
+    constructor(typ, opnum) {
         this.optype = typ;
         this.opnumber = 2;
     }
-    Object.defineProperty(FormulaOperator.prototype, "OperatorType", {
-        get: function () {
-            return this.optype;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FormulaOperator.prototype, "OperatorNumber", {
-        get: function () {
-            return this.opnumber;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return FormulaOperator;
-}());
-exports.FormulaOperator = FormulaOperator;
+    get OperatorType() {
+        return this.optype;
+    }
+    get OperatorNumber() {
+        return this.opnumber;
+    }
+}
 /**
  * Formula Operator: Add
  */
-var FormulaOperatorAddition = /** @class */ (function (_super) {
-    __extends(FormulaOperatorAddition, _super);
-    function FormulaOperatorAddition() {
-        return _super.call(this, FormulaOperatorEnum.Add, 2) || this;
+export class FormulaOperatorAddition extends FormulaOperator {
+    constructor() {
+        super(FormulaOperatorEnum.Add, 2);
     }
-    return FormulaOperatorAddition;
-}(FormulaOperator));
-exports.FormulaOperatorAddition = FormulaOperatorAddition;
+}
 /**
  * Formula Operator: Subtract
  */
-var FormulaOperationSbbtraction = /** @class */ (function (_super) {
-    __extends(FormulaOperationSbbtraction, _super);
-    function FormulaOperationSbbtraction() {
-        return _super.call(this, FormulaOperatorEnum.Sub, 2) || this;
+export class FormulaOperationSbbtraction extends FormulaOperator {
+    constructor() {
+        super(FormulaOperatorEnum.Sub, 2);
     }
-    return FormulaOperationSbbtraction;
-}(FormulaOperator));
-exports.FormulaOperationSbbtraction = FormulaOperationSbbtraction;
+}
 /**
  * Formula Operator: Multipy
  */
-var FormulaOperationMultiplication = /** @class */ (function (_super) {
-    __extends(FormulaOperationMultiplication, _super);
-    function FormulaOperationMultiplication() {
-        return _super.call(this, FormulaOperatorEnum.Multi, 2) || this;
+export class FormulaOperationMultiplication extends FormulaOperator {
+    constructor() {
+        super(FormulaOperatorEnum.Multi, 2);
     }
-    return FormulaOperationMultiplication;
-}(FormulaOperator));
-exports.FormulaOperationMultiplication = FormulaOperationMultiplication;
+}
 /**
  * Formula Operator: Divide
  */
-var FormulaOperationDivision = /** @class */ (function (_super) {
-    __extends(FormulaOperationDivision, _super);
-    function FormulaOperationDivision() {
-        return _super.call(this, FormulaOperatorEnum.Div, 2) || this;
+export class FormulaOperationDivision extends FormulaOperator {
+    constructor() {
+        super(FormulaOperatorEnum.Div, 2);
     }
-    return FormulaOperationDivision;
-}(FormulaOperator));
-exports.FormulaOperationDivision = FormulaOperationDivision;
+}
 /**
  * Keyword in Formula
  */
-exports.FormulaKeyword = [
+export const FormulaKeyword = [
     'PI',
     'power'
 ];
 /**
  * Paremter in Formula
  */
-var FormulaParameter = /** @class */ (function () {
-    function FormulaParameter() {
+export class FormulaParameter {
+    get Parameter() {
+        return this._par;
     }
-    Object.defineProperty(FormulaParameter.prototype, "Parameter", {
-        get: function () {
-            return this._par;
-        },
-        set: function (par) {
-            this._par = par;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return FormulaParameter;
-}());
-exports.FormulaParameter = FormulaParameter;
+    set Parameter(par) {
+        this._par = par;
+    }
+}
 /**
  * Token enum
  */
-var FormulaTokenEnum;
+export var FormulaTokenEnum;
 (function (FormulaTokenEnum) {
     FormulaTokenEnum[FormulaTokenEnum["Add"] = 0] = "Add";
     FormulaTokenEnum[FormulaTokenEnum["Sub"] = 1] = "Sub";
@@ -148,55 +103,43 @@ var FormulaTokenEnum;
     FormulaTokenEnum[FormulaTokenEnum["Variable"] = 11] = "Variable";
     FormulaTokenEnum[FormulaTokenEnum["Digit"] = 12] = "Digit";
     FormulaTokenEnum[FormulaTokenEnum["PI"] = 21] = "PI";
-})(FormulaTokenEnum = exports.FormulaTokenEnum || (exports.FormulaTokenEnum = {}));
+})(FormulaTokenEnum || (FormulaTokenEnum = {}));
 /**
  * Token
  */
-var FormulaToken = /** @class */ (function () {
-    function FormulaToken() {
+export class FormulaToken {
+    get TokenEnum() {
+        return this._tokenEnum;
     }
-    Object.defineProperty(FormulaToken.prototype, "TokenEnum", {
-        get: function () {
-            return this._tokenEnum;
-        },
-        set: function (te) {
-            this._tokenEnum = te;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FormulaToken.prototype, "VariableName", {
-        get: function () {
-            return this._varName;
-        },
-        set: function (vn) {
-            this._varName = vn;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return FormulaToken;
-}());
-exports.FormulaToken = FormulaToken;
+    set TokenEnum(te) {
+        this._tokenEnum = te;
+    }
+    get VariableName() {
+        return this._varName;
+    }
+    set VariableName(vn) {
+        this._varName = vn;
+    }
+}
 /**
  * Formula Parser
  */
-var FormulaParser = /** @class */ (function () {
-    function FormulaParser() {
+export class FormulaParser {
+    constructor() {
     }
-    FormulaParser.prototype.init = function (input) {
+    init(input) {
         if (input === null || input === undefined || input.length <= 0) {
             return false;
         }
         this._orgInput = input;
         return true;
-    };
-    FormulaParser.prototype.parse = function () {
+    }
+    parse() {
         if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
             return false;
         }
-        var st = new model_1.SequenceStack();
-        var listVar = new model_1.SequenceList();
+        const st = new SequenceStack();
+        const listVar = new SequenceList();
         // for(let i: number = 0; i < this._orgInput.length; i ++) {
         //     if ( (this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
         //         || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z') ) {
@@ -204,11 +147,11 @@ var FormulaParser = /** @class */ (function () {
         //     if (this._orgInput[i] === '(') {
         //     }
         // }
-        var syn = 0;
-        var p = 0;
-        var ch;
-        var sum = 0;
-        var m = 0;
+        let syn = 0;
+        let p = 0;
+        let ch;
+        let sum = 0;
+        let m = 0;
         do {
             ch = this._orgInput[p++];
             while (ch === ' ') {
@@ -220,10 +163,10 @@ var FormulaParser = /** @class */ (function () {
                 while ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
                     ch = this._orgInput[p++];
                 }
-                var nvar = this._orgInput.substr(m, ch - m - 1);
+                const nvar = this._orgInput.substr(m, ch - m - 1);
                 // Check new variable is a keyword
-                for (var wi = 0; wi < exports.FormulaKeyword.length; wi++) {
-                    if (nvar === exports.FormulaKeyword[wi]) {
+                for (let wi = 0; wi < FormulaKeyword.length; wi++) {
+                    if (nvar === FormulaKeyword[wi]) {
                         if (wi === 0) {
                             // PI
                             // Todo!
@@ -320,8 +263,6 @@ var FormulaParser = /** @class */ (function () {
                     break;
             }
         } while (syn !== 0);
-    };
-    return FormulaParser;
-}());
-exports.FormulaParser = FormulaParser;
+    }
+}
 //# sourceMappingURL=Formula.js.map
