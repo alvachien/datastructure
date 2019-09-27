@@ -1,10 +1,15 @@
+"use strict";
 /**
  * @license
  * index.ts
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
  *
  */
-export * from './model';
-export * from './subject';
-export * from './utility';
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(require("./model"));
+__export(require("./subject"));
+__export(require("./utility"));
 //# sourceMappingURL=index.js.map

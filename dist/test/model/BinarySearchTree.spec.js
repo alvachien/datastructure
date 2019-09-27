@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,25 +9,26 @@
  * File: BinarySearchTree.spec.ts
  *
  */
-import { BinarySearchTree } from '../../lib/model/BinarySearchTree';
-describe('Test BinarySearchTree', () => {
-    let _bsTree;
-    beforeEach(() => {
-        _bsTree = new BinarySearchTree();
+Object.defineProperty(exports, "__esModule", { value: true });
+var BinarySearchTree_1 = require("../../lib/model/BinarySearchTree");
+describe('Test BinarySearchTree', function () {
+    var _bsTree;
+    beforeEach(function () {
+        _bsTree = new BinarySearchTree_1.BinarySearchTree();
     });
-    it('#1. Test creation', () => {
+    it('#1. Test creation', function () {
         expect(_bsTree).toBeTruthy();
     });
-    it('#2. Test insert', () => {
+    it('#2. Test insert', function () {
         // Insert
-        let nnode = _bsTree.insert(1, 'A');
+        var nnode = _bsTree.insert(1, 'A');
         expect(nnode).toBeTruthy();
         nnode = _bsTree.insert(2, 'B');
         expect(nnode).toBeTruthy();
         nnode = _bsTree.insert(3, 'C');
         expect(nnode).toBeTruthy();
     });
-    let buildTestTree = () => {
+    var buildTestTree = function () {
         _bsTree.insert(11, '11');
         _bsTree.insert(7, '7');
         _bsTree.insert(15, '15');
@@ -43,11 +45,11 @@ describe('Test BinarySearchTree', () => {
         _bsTree.insert(25, '25');
         _bsTree.insert(6, '6');
     };
-    it('#3. Test inOrderTraverse', () => {
+    it('#3. Test inOrderTraverse', function () {
         // Build test tree
         buildTestTree();
-        let _rst = '';
-        _bsTree.inOrderTraverse((value) => {
+        var _rst = '';
+        _bsTree.inOrderTraverse(function (value) {
             if (_rst === '') {
                 _rst = value.data;
             }
@@ -57,11 +59,11 @@ describe('Test BinarySearchTree', () => {
         });
         expect(_rst).toBe('3,5,6,7,8,9,10,11,12,13,14,15,18,20,25');
     });
-    it('#4. Test preOrderTraverse', () => {
+    it('#4. Test preOrderTraverse', function () {
         // Build test tree
         buildTestTree();
-        let _rst = '';
-        _bsTree.preOrderTraverse((value) => {
+        var _rst = '';
+        _bsTree.preOrderTraverse(function (value) {
             if (_rst === '') {
                 _rst = value.data;
             }
@@ -71,11 +73,11 @@ describe('Test BinarySearchTree', () => {
         });
         expect(_rst).toBe('11,7,5,3,6,9,8,10,15,13,12,14,20,18,25');
     });
-    it('#5. Test postOrderTraverse', () => {
+    it('#5. Test postOrderTraverse', function () {
         // Build test tree
         buildTestTree();
-        let _rst = '';
-        _bsTree.postOrderTraverse((value) => {
+        var _rst = '';
+        _bsTree.postOrderTraverse(function (value) {
             if (_rst === '') {
                 _rst = value.data;
             }
@@ -85,24 +87,24 @@ describe('Test BinarySearchTree', () => {
         });
         expect(_rst).toBe('3,6,5,8,10,9,7,12,14,13,18,25,20,15,11');
     });
-    it('#6. Test min', () => {
+    it('#6. Test min', function () {
         // Build test tree
         buildTestTree();
-        const minnode = _bsTree.min();
+        var minnode = _bsTree.min();
         expect(minnode).toBeTruthy();
         expect(minnode.key).toBe(3);
     });
-    it('#7. Test max', () => {
+    it('#7. Test max', function () {
         // Build test tree
         buildTestTree();
-        const maxnode = _bsTree.max();
+        var maxnode = _bsTree.max();
         expect(maxnode).toBeTruthy();
         expect(maxnode.key).toBe(25);
     });
-    it('#8. Test search', () => {
+    it('#8. Test search', function () {
         // Build test tree
         buildTestTree();
-        let node = _bsTree.search(1);
+        var node = _bsTree.search(1);
         expect(node).toBeFalsy();
         node = _bsTree.search(8);
         expect(node).toBeTruthy();

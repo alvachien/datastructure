@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,14 +10,18 @@
  * Algorithm
  *
  */
-import { InsertionSort, QuickSort, BubbleSort } from '../../lib/model/Algorithm';
-describe('Test Algorithm', () => {
-    class TestObject {
-    }
-    let orgNumArray = [];
-    let orgStringArray = [];
-    let orgObjectArray = [];
-    beforeEach(() => {
+Object.defineProperty(exports, "__esModule", { value: true });
+var Algorithm_1 = require("../../lib/model/Algorithm");
+describe('Test Algorithm', function () {
+    var TestObject = /** @class */ (function () {
+        function TestObject() {
+        }
+        return TestObject;
+    }());
+    var orgNumArray = [];
+    var orgStringArray = [];
+    var orgObjectArray = [];
+    beforeEach(function () {
         // Do nothing
         orgNumArray = [71, 57, 29, 19, 33, 14];
         orgStringArray = ['apple', 'sap', 'microsoft', 'adobe'];
@@ -34,8 +39,8 @@ describe('Test Algorithm', () => {
                 name: 'No.7'
             }];
     });
-    it('#1. InsertionSort: number', () => {
-        const rst = InsertionSort(orgNumArray);
+    it('#1. InsertionSort: number', function () {
+        var rst = Algorithm_1.InsertionSort(orgNumArray);
         expect(rst).toBe(true);
         expect(orgNumArray[0]).toBe(14);
         expect(orgNumArray[1]).toBe(19);
@@ -44,16 +49,16 @@ describe('Test Algorithm', () => {
         expect(orgNumArray[4]).toBe(57);
         expect(orgNumArray[5]).toBe(71);
     });
-    it('#2. InsertionSort: string', () => {
-        const rst = InsertionSort(orgStringArray);
+    it('#2. InsertionSort: string', function () {
+        var rst = Algorithm_1.InsertionSort(orgStringArray);
         expect(rst).toBe(true);
         expect(orgStringArray[0]).toBe('adobe');
         expect(orgStringArray[1]).toBe('apple');
         expect(orgStringArray[2]).toBe('microsoft');
         expect(orgStringArray[3]).toBe('sap');
     });
-    it('#3. InsertionSort: object', () => {
-        const rst = InsertionSort(orgObjectArray, (a, b) => {
+    it('#3. InsertionSort: object', function () {
+        var rst = Algorithm_1.InsertionSort(orgObjectArray, function (a, b) {
             return a.seq - b.seq;
         });
         expect(rst).toBe(true);
@@ -62,8 +67,8 @@ describe('Test Algorithm', () => {
         expect(orgObjectArray[2].seq).toBe(25);
         expect(orgObjectArray[3].name).toBe('No.44');
     });
-    it('#4. QuickSort: number', () => {
-        const rst = QuickSort(orgNumArray);
+    it('#4. QuickSort: number', function () {
+        var rst = Algorithm_1.QuickSort(orgNumArray);
         expect(rst).toBe(true);
         expect(orgNumArray[0]).toBe(14);
         expect(orgNumArray[1]).toBe(19);
@@ -72,16 +77,16 @@ describe('Test Algorithm', () => {
         expect(orgNumArray[4]).toBe(57);
         expect(orgNumArray[5]).toBe(71);
     });
-    it('#5. QuickSort: string', () => {
-        const rst = QuickSort(orgStringArray);
+    it('#5. QuickSort: string', function () {
+        var rst = Algorithm_1.QuickSort(orgStringArray);
         expect(rst).toBe(true);
         expect(orgStringArray[0]).toBe('adobe');
         expect(orgStringArray[1]).toBe('apple');
         expect(orgStringArray[2]).toBe('microsoft');
         expect(orgStringArray[3]).toBe('sap');
     });
-    it('#6. QuickSort: object', () => {
-        const rst = QuickSort(orgObjectArray, (a, b) => {
+    it('#6. QuickSort: object', function () {
+        var rst = Algorithm_1.QuickSort(orgObjectArray, function (a, b) {
             return a.seq - b.seq;
         });
         expect(rst).toBe(true);
@@ -90,8 +95,8 @@ describe('Test Algorithm', () => {
         expect(orgObjectArray[2].seq).toBe(25);
         expect(orgObjectArray[3].name).toBe('No.44');
     });
-    it('#7. BubbleSort: number', () => {
-        const rst = BubbleSort(orgNumArray);
+    it('#7. BubbleSort: number', function () {
+        var rst = Algorithm_1.BubbleSort(orgNumArray);
         expect(rst).toBe(true);
         expect(orgNumArray[0]).toBe(14);
         expect(orgNumArray[1]).toBe(19);
@@ -100,16 +105,16 @@ describe('Test Algorithm', () => {
         expect(orgNumArray[4]).toBe(57);
         expect(orgNumArray[5]).toBe(71);
     });
-    it('#8. BubbleSort: string', () => {
-        const rst = BubbleSort(orgStringArray);
+    it('#8. BubbleSort: string', function () {
+        var rst = Algorithm_1.BubbleSort(orgStringArray);
         expect(rst).toBe(true);
         expect(orgStringArray[0]).toBe('adobe');
         expect(orgStringArray[1]).toBe('apple');
         expect(orgStringArray[2]).toBe('microsoft');
         expect(orgStringArray[3]).toBe('sap');
     });
-    it('#9. BubbleSort: object', () => {
-        const rst = BubbleSort(orgObjectArray, (a, b) => {
+    it('#9. BubbleSort: object', function () {
+        var rst = Algorithm_1.BubbleSort(orgObjectArray, function (a, b) {
             return a.seq - b.seq;
         });
         expect(rst).toBe(true);

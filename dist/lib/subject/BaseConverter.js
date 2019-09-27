@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,30 +10,31 @@
  * Convert the number to specified base
  *
  */
-import { SequenceStack } from '../model/SequenceStack';
+Object.defineProperty(exports, "__esModule", { value: true });
+var SequenceStack_1 = require("../model/SequenceStack");
 /**
  * Number base
  */
-export var NumberBaseEnum;
+var NumberBaseEnum;
 (function (NumberBaseEnum) {
     NumberBaseEnum[NumberBaseEnum["binary"] = 2] = "binary";
     NumberBaseEnum[NumberBaseEnum["octal"] = 8] = "octal";
     NumberBaseEnum[NumberBaseEnum["decimal"] = 10] = "decimal";
     NumberBaseEnum[NumberBaseEnum["hexadecimal"] = 16] = "hexadecimal";
-})(NumberBaseEnum || (NumberBaseEnum = {}));
+})(NumberBaseEnum = exports.NumberBaseEnum || (exports.NumberBaseEnum = {}));
 /**
  * Convert a decimal number to a new based number (with string format)
  * @param decNumber Decimal number
  * @param base new base
  */
-export function baseConverter(decNumber, base) {
+function baseConverter(decNumber, base) {
     if (base <= 0) {
         throw new Error('invalid parameter');
     }
-    const objStack = new SequenceStack();
-    let baseString = '';
-    const digits = '0123456789ABCDEF';
-    let rem;
+    var objStack = new SequenceStack_1.SequenceStack();
+    var baseString = '';
+    var digits = '0123456789ABCDEF';
+    var rem;
     while (decNumber > 0) {
         rem = Math.floor(decNumber % base);
         objStack.Push(rem);
@@ -43,4 +45,5 @@ export function baseConverter(decNumber, base) {
     }
     return baseString;
 }
+exports.baseConverter = baseConverter;
 //# sourceMappingURL=BaseConverter.js.map

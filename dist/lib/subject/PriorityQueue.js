@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,43 +9,46 @@
  * File: PriorityQueue.ts
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Priority Queue
  */
-export class PriorityQueueItem {
-    constructor(data, priority) {
+var PriorityQueueItem = /** @class */ (function () {
+    function PriorityQueueItem(data, priority) {
         this.data = data;
         this.priority = priority;
     }
-}
-export class PriorityQueue {
-    constructor() {
+    return PriorityQueueItem;
+}());
+exports.PriorityQueueItem = PriorityQueueItem;
+var PriorityQueue = /** @class */ (function () {
+    function PriorityQueue() {
         this._data = [];
     }
     /**
      * The length of the whole stack
      */
-    Length() {
+    PriorityQueue.prototype.Length = function () {
         return this._data.length;
-    }
+    };
     /**
      * Is empty? true means it is empty
      */
-    IsEmpty() {
+    PriorityQueue.prototype.IsEmpty = function () {
         return this._data.length === 0;
-    }
+    };
     /**
      * Enqueue the  element at the tailor of the queue, returns the result: true means success
      * @param elem the element to be inserted.
      */
-    Enqueue(elem, pri) {
-        let item = new PriorityQueueItem(elem, pri);
+    PriorityQueue.prototype.Enqueue = function (elem, pri) {
+        var item = new PriorityQueueItem(elem, pri);
         if (this._data.length === 0) {
             this._data.push(item);
         }
         else {
-            let added = false;
-            for (let i = 0; i < this._data.length; i++) {
+            var added = false;
+            for (var i = 0; i < this._data.length; i++) {
                 if (item.priority < this._data[i].priority) {
                     this._data.splice(i, 0, item);
                     added = true;
@@ -56,31 +60,33 @@ export class PriorityQueue {
             }
         }
         return true;
-    }
+    };
     /**
      * Peek the top element without remove it, returns the top element.
      */
-    Peek() {
+    PriorityQueue.prototype.Peek = function () {
         if (this._data.length === 0) {
             return undefined;
         }
         return this._data[0].data;
-    }
+    };
     /**
      * Return the first element and remove it from the queue, returns the poped element.
      */
-    Dequeue() {
+    PriorityQueue.prototype.Dequeue = function () {
         if (this._data.length === 0) {
             return undefined;
         }
         return this._data.shift().data;
-    }
+    };
     /**
      * Clear all elements, returns the result: true means suces
      */
-    ClearAll() {
+    PriorityQueue.prototype.ClearAll = function () {
         this._data = [];
         return true;
-    }
-}
+    };
+    return PriorityQueue;
+}());
+exports.PriorityQueue = PriorityQueue;
 //# sourceMappingURL=PriorityQueue.js.map

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -8,57 +9,60 @@
  * File: SequenceQueue.ts
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Sequence Queue
  */
-export class SequenceQueue {
-    constructor() {
+var SequenceQueue = /** @class */ (function () {
+    function SequenceQueue() {
         this._data = [];
     }
     /**
      * The length of the whole stack
      */
-    Length() {
+    SequenceQueue.prototype.Length = function () {
         return this._data.length;
-    }
+    };
     /**
      * Is empty? true means it is empty
      */
-    IsEmpty() {
+    SequenceQueue.prototype.IsEmpty = function () {
         return this._data.length === 0;
-    }
+    };
     /**
      * Enqueue the  element at the tailor of the queue, returns the result: true means success
      * @param elem the element to be inserted.
      */
-    Enqueue(elem) {
+    SequenceQueue.prototype.Enqueue = function (elem) {
         this._data.push(elem);
         return true;
-    }
+    };
     /**
      * Peek the top element without remove it, returns the top element.
      */
-    Peek() {
+    SequenceQueue.prototype.Peek = function () {
         if (this._data.length === 0) {
             return undefined;
         }
         return this._data[0];
-    }
+    };
     /**
      * Return the first element and remove it from the queue, returns the poped element.
      */
-    Dequeue() {
+    SequenceQueue.prototype.Dequeue = function () {
         if (this._data.length === 0) {
             return undefined;
         }
         return this._data.shift();
-    }
+    };
     /**
      * Clear all elements, returns the result: true means suces
      */
-    ClearAll() {
+    SequenceQueue.prototype.ClearAll = function () {
         this._data = [];
         return true;
-    }
-}
+    };
+    return SequenceQueue;
+}());
+exports.SequenceQueue = SequenceQueue;
 //# sourceMappingURL=SequenceQueue.js.map

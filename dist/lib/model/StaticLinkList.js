@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -8,56 +9,69 @@
  * File: StaticLinkList.ts
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Node in static link list
  */
-export class StaticLinkListNode {
-    constructor() {
+var StaticLinkListNode = /** @class */ (function () {
+    function StaticLinkListNode() {
         this._cursor = -1;
     }
-    constructore() {
+    StaticLinkListNode.prototype.constructore = function () {
         this._cursor = -1;
-    }
-    get Data() {
-        return this._data;
-    }
-    set Data(data) {
-        this._data = data;
-    }
-    get Cursor() {
-        return this._cursor;
-    }
-    set Cursor(cur) {
-        this._cursor = cur;
-    }
-}
-export class StaticLinkList {
+    };
+    Object.defineProperty(StaticLinkListNode.prototype, "Data", {
+        get: function () {
+            return this._data;
+        },
+        set: function (data) {
+            this._data = data;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StaticLinkListNode.prototype, "Cursor", {
+        get: function () {
+            return this._cursor;
+        },
+        set: function (cur) {
+            this._cursor = cur;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return StaticLinkListNode;
+}());
+exports.StaticLinkListNode = StaticLinkListNode;
+var StaticLinkList = /** @class */ (function () {
     /**
      * Constructor
      */
-    constructor() {
+    function StaticLinkList() {
         this._data = new Array(200);
     }
-    Length() {
-        let j = 0;
-        for (const it of this._data) {
-            if (it.Cursor !== -1) {
+    StaticLinkList.prototype.Length = function () {
+        var j = 0;
+        for (var _i = 0, _a = this._data; _i < _a.length; _i++) {
+            var it_1 = _a[_i];
+            if (it_1.Cursor !== -1) {
                 j++;
             }
         }
         return j;
-    }
-    IsEmpty() {
+    };
+    StaticLinkList.prototype.IsEmpty = function () {
         return this.Length() === 0;
-    }
-    ClearAll() {
-        for (const it of this._data) {
-            it.Cursor = -1;
-            it.Data = null;
+    };
+    StaticLinkList.prototype.ClearAll = function () {
+        for (var _i = 0, _a = this._data; _i < _a.length; _i++) {
+            var it_2 = _a[_i];
+            it_2.Cursor = -1;
+            it_2.Data = null;
         }
         return true;
-    }
-    GetElement(index) {
+    };
+    StaticLinkList.prototype.GetElement = function (index) {
         if (this._data.length === 0) {
             return null;
         }
@@ -65,8 +79,8 @@ export class StaticLinkList {
         //     return this._data[index];
         // }
         return null;
-    }
-    InsertElement(index, elem) {
+    };
+    StaticLinkList.prototype.InsertElement = function (index, elem) {
         // if (index < 0 || index >= this._data.length) {
         //     return false;
         // }
@@ -77,12 +91,12 @@ export class StaticLinkList {
         //     this._data[index] = elem;
         // }
         return true;
-    }
-    AppendElement(elem) {
+    };
+    StaticLinkList.prototype.AppendElement = function (elem) {
         // return this._data.push(elem);
         return -1;
-    }
-    DeleteElement(index) {
+    };
+    StaticLinkList.prototype.DeleteElement = function (index) {
         // if (index < 0 || index >= this._data.length) {
         //     return false;
         // }
@@ -94,10 +108,12 @@ export class StaticLinkList {
         // delete this._data[this._data.length - 1];
         // return true;
         return false;
-    }
-    Print() {
+    };
+    StaticLinkList.prototype.Print = function () {
         // TBD
         return '';
-    }
-}
+    };
+    return StaticLinkList;
+}());
+exports.StaticLinkList = StaticLinkList;
 //# sourceMappingURL=StaticLinkList.js.map

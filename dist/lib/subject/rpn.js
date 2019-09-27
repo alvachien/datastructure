@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,8 +10,9 @@
  * Contains the logic for Revers Polish Notation
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 // RPN(Reverse Polish Notation)
-export const RPNOperators = [
+exports.RPNOperators = [
     '+',
     '-',
     '*',
@@ -22,8 +24,8 @@ export const RPNOperators = [
  * Get the priority of the operators
  * @param operator The inputted operator
  */
-export function RPNOperationPriority(operator) {
-    let opResult = 0;
+function RPNOperationPriority(operator) {
+    var opResult = 0;
     switch (operator) {
         case '+':
             opResult = 1;
@@ -48,14 +50,15 @@ export function RPNOperationPriority(operator) {
     }
     return opResult;
 }
+exports.RPNOperationPriority = RPNOperationPriority;
 /**
  * Workout the result based on the operator
  * @param x Previous element
  * @param y Next element
  * @param operator The operator
  */
-export function RPNGetOperatorResult(x, y, operator) {
-    let rst = 0;
+function RPNGetOperatorResult(x, y, operator) {
+    var rst = 0;
     switch (operator) {
         case '+':
             rst = x + y;
@@ -79,6 +82,7 @@ export function RPNGetOperatorResult(x, y, operator) {
     }
     return rst;
 }
+exports.RPNGetOperatorResult = RPNGetOperatorResult;
 /**
  * Workout the result for string with RPN format
  * @param strinputs String with RPN format, like '34+', it returns 7
@@ -87,16 +91,16 @@ export function RPNGetOperatorResult(x, y, operator) {
  * 2) it doesn't support '(' and ')', and
  * 3) it won't care of priority, for instance: '34+5*' will get 35 not 23 (3+4*5=23)
  */
-export function rpn1(strinputs) {
+function rpn1(strinputs) {
     if (strinputs.length === 0) {
         return 0;
     }
     // Split into array of tokens
     // let arinputs: any[] = strinputs.split(/\s+/);
-    let arinputs = strinputs.split(/(\d)/);
-    let stack = [];
+    var arinputs = strinputs.split(/(\d)/);
+    var stack = [];
     for (var i = 0; i < arinputs.length; i++) {
-        let token = arinputs[i];
+        var token = arinputs[i];
         if (arinputs[i] === '') {
             continue;
         }
@@ -111,8 +115,8 @@ export function rpn1(strinputs) {
             }
             // Pop two items from the top of the stack and push the result of the
             // operation onto the stack.
-            let y = stack.pop();
-            let x = stack.pop();
+            var y = stack.pop();
+            var x = stack.pop();
             /* eslint no-eval: 0 */
             stack.push(eval(x + token + ' ' + y));
         }
@@ -122,32 +126,37 @@ export function rpn1(strinputs) {
     }
     return stack.pop();
 }
+exports.rpn1 = rpn1;
 /**
  * Class for RPN
  */
-export class RPN {
-    constructor() {
+var RPN = /** @class */ (function () {
+    function RPN() {
         this._arInputs = [];
     }
-    get InputArray() {
-        return this._arInputs;
-    }
+    Object.defineProperty(RPN.prototype, "InputArray", {
+        get: function () {
+            return this._arInputs;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Save to string
      */
-    toString() {
+    RPN.prototype.toString = function () {
         return this._arInputs.join(' ');
-    }
+    };
     /**
      * Build the express to PRN format
      * @param exp Express string, like 3*(4+5)
      */
-    buildExpress(exp) {
-        let skOp = new Array();
-        const operations = "+-*/";
-        let digit = "";
-        for (let i = 0; i < exp.length; i++) {
-            let token = exp.charAt(i);
+    RPN.prototype.buildExpress = function (exp) {
+        var skOp = new Array();
+        var operations = "+-*/";
+        var digit = "";
+        for (var i = 0; i < exp.length; i++) {
+            var token = exp.charAt(i);
             if (!Number.isNaN(+token)) // Digitials
              {
                 digit += token;
@@ -196,15 +205,15 @@ export class RPN {
             this._arInputs.push(opInStack);
         }
         return this._arInputs.toString();
-    }
+    };
     /**
      * Workout the final result
      */
-    WorkoutResult() {
-        let stack = new Array();
-        let result = 0;
-        for (let i = 0; i < this._arInputs.length; i++) {
-            let c = this._arInputs[i];
+    RPN.prototype.WorkoutResult = function () {
+        var stack = new Array();
+        var result = 0;
+        for (var i = 0; i < this._arInputs.length; i++) {
+            var c = this._arInputs[i];
             if (!Number.isNaN(+c)) {
                 stack.push(c);
             }
@@ -216,27 +225,27 @@ export class RPN {
             }
         }
         return result;
-    }
+    };
     // integer 
     // fraction
     // decimal fraction
-    VerifyResult(allowNegative, allowDecimal) {
-        let stack = new Array();
-        let result = 0;
-        for (let i = 0; i < this._arInputs.length; i++) {
-            let c = this._arInputs[i];
+    RPN.prototype.VerifyResult = function (allowNegative, allowDecimal) {
+        var stack = new Array();
+        var result = 0;
+        for (var i = 0; i < this._arInputs.length; i++) {
+            var c = this._arInputs[i];
             if (!Number.isNaN(+c)) {
                 stack.push(c);
             }
             else if (c === '+' || c === '-' || c === '*' || c === '/') {
-                let nextNum = parseFloat(stack.pop());
+                var nextNum = parseFloat(stack.pop());
                 if (!Number.isInteger(nextNum) && !allowDecimal) {
                     return false;
                 }
                 if (nextNum < 0 && !allowNegative) {
                     return false;
                 }
-                let prevNum = parseFloat(stack.pop());
+                var prevNum = parseFloat(stack.pop());
                 if (!Number.isInteger(prevNum) && !allowDecimal) {
                     return false;
                 }
@@ -254,6 +263,8 @@ export class RPN {
             }
         }
         return true;
-    }
-}
+    };
+    return RPN;
+}());
+exports.RPN = RPN;
 //# sourceMappingURL=rpn.js.map

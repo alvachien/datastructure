@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,17 +9,18 @@
  * File: HashTable.spec.ts
  *
  */
-import { HashTable } from '../../lib/model/HashTable';
-describe('Test HashTable', () => {
-    let _hashTable;
-    beforeEach(() => {
-        _hashTable = new HashTable();
+Object.defineProperty(exports, "__esModule", { value: true });
+var HashTable_1 = require("../../lib/model/HashTable");
+describe('Test HashTable', function () {
+    var _hashTable;
+    beforeEach(function () {
+        _hashTable = new HashTable_1.HashTable();
     });
-    it('#1. Test set, values, has and size()', () => {
+    it('#1. Test set, values, has and size()', function () {
         expect(_hashTable).toBeTruthy();
         // TBD.
     });
-    it('#2. Test remove()', () => {
+    it('#2. Test remove()', function () {
         expect(_hashTable).toBeTruthy();
         // TBD.
     });

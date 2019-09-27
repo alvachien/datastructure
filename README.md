@@ -1,6 +1,6 @@
 # TypeScript Library for Data Structure, Algorithms and Utilities
 ## INTRODUCTION
-This project is target to build a library (abbrv: lib) for Data Structures and algorithms. 
+This project is target to build a library (abbrv: lib) for Data Structures, algorithms and Utilities. 
 
 - The Data Structure part, including List, Tree, Graph, and others. 
 - The Algorithm part, including sorting, searching and others. 

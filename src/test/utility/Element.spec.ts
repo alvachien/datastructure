@@ -5,11 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: Text.spec.ts
+ * File: Element.spec.ts
  *
  */
 
-import { ISelectionPosition, replaceChar160ToSpace, readElementText, checkSelectInsideElement } from '../../lib/utility/Text';
+import { IElementSelectionPosition, replaceChar160ToSpace, readElementText, checkSelectInsideElement } from '../../lib/utility/Element';
 
 describe('Test Utility Text', () => {
 

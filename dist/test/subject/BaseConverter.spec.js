@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,23 +10,24 @@
  * Base convert
  *
  */
-import { NumberBaseEnum, baseConverter } from '../../lib/subject/BaseConverter';
-describe('Test baseConverter', () => {
-    beforeEach(() => {
+Object.defineProperty(exports, "__esModule", { value: true });
+var BaseConverter_1 = require("../../lib/subject/BaseConverter");
+describe('Test baseConverter', function () {
+    beforeEach(function () {
         // Do nothing
     });
-    it('#1. 10 => 2()', () => {
-        let rst = baseConverter(10, NumberBaseEnum.binary);
+    it('#1. 10 => 2()', function () {
+        var rst = BaseConverter_1.baseConverter(10, BaseConverter_1.NumberBaseEnum.binary);
         expect(rst).toBe('1010');
-        rst = baseConverter(233, 2);
+        rst = BaseConverter_1.baseConverter(233, 2);
         expect(rst).toBe('11101001');
     });
-    it('#2. 10 => 8', () => {
-        const rst = baseConverter(100345, NumberBaseEnum.octal);
+    it('#2. 10 => 8', function () {
+        var rst = BaseConverter_1.baseConverter(100345, BaseConverter_1.NumberBaseEnum.octal);
         expect(rst).toBe('303771');
     });
-    it('#3. 10 => 16', () => {
-        const rst = baseConverter(100345, NumberBaseEnum.hexadecimal);
+    it('#3. 10 => 16', function () {
+        var rst = BaseConverter_1.baseConverter(100345, BaseConverter_1.NumberBaseEnum.hexadecimal);
         expect(rst).toBe('187F9');
     });
 });

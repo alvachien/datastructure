@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,17 +10,18 @@
  * Chinese Chess General Problem
  *
  */
-import { CCGP_Solution2, CCGP_Solution3 } from '../../lib/subject/ChineseChessGeneralProblem';
-describe('Test ChineseChessGeneralProblem', () => {
-    beforeEach(() => {
+Object.defineProperty(exports, "__esModule", { value: true });
+var ChineseChessGeneralProblem_1 = require("../../lib/subject/ChineseChessGeneralProblem");
+describe('Test ChineseChessGeneralProblem', function () {
+    beforeEach(function () {
         // Do nothing
     });
-    it('#1. Check CCGP_Solution2()', () => {
-        const arstrs = CCGP_Solution2();
+    it('#1. Check CCGP_Solution2()', function () {
+        var arstrs = ChineseChessGeneralProblem_1.CCGP_Solution2();
         expect(arstrs.length).toBe(78);
     });
-    it('#2. Check CCGP_Solution3()', () => {
-        const arstrs = CCGP_Solution3();
+    it('#2. Check CCGP_Solution3()', function () {
+        var arstrs = ChineseChessGeneralProblem_1.CCGP_Solution3();
         expect(arstrs.length).toBe(54);
     });
 });

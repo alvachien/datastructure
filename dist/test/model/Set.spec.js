@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,16 +9,17 @@
  * File: Set.spec.ts
  *
  */
-import { Set } from '../../lib/model/Set';
-describe('Test Set', () => {
-    let _set;
-    beforeEach(() => {
-        _set = new Set();
+Object.defineProperty(exports, "__esModule", { value: true });
+var Set_1 = require("../../lib/model/Set");
+describe('Test Set', function () {
+    var _set;
+    beforeEach(function () {
+        _set = new Set_1.Set();
     });
-    it('#1. Check add, values, has and size()', () => {
+    it('#1. Check add, values, has and size()', function () {
         expect(_set).toBeTruthy();
         _set.add(1);
-        let vals = _set.values();
+        var vals = _set.values();
         expect(vals.length).toBe(1);
         //    expect(vals[0]).toBe(1);
         vals = _set.valuesLegacy();
@@ -31,10 +33,10 @@ describe('Test Set', () => {
         //    expect(vals[0]).toBe(1);
         //    expect(vals[1]).toBe(2);
     });
-    it('#2. Check remove()', () => {
+    it('#2. Check remove()', function () {
         _set.add(1);
         _set.add(2);
-        let vals = _set.values();
+        var vals = _set.values();
         expect(vals.length).toBe(2);
         //    expect(vals[0]).toBe(1);
         //    expect(vals[1]).toBe(2);
@@ -43,55 +45,55 @@ describe('Test Set', () => {
         expect(vals.length).toBe(1);
         //    expect(vals[0]).toBe(2);
     });
-    it('#3. Test union()', () => {
+    it('#3. Test union()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);
-        const set2 = new Set();
+        var set2 = new Set_1.Set();
         set2.add(3);
         set2.add(4);
         set2.add(5);
         set2.add(6);
-        const unset = _set.union(set2);
-        const vals = unset.values();
+        var unset = _set.union(set2);
+        var vals = unset.values();
         expect(vals.length).toBe(6);
         expect(unset.has(3)).toBe(true);
     });
-    it('#4. Test intersection()', () => {
+    it('#4. Test intersection()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);
-        const set2 = new Set();
+        var set2 = new Set_1.Set();
         set2.add(3);
         set2.add(4);
         set2.add(5);
         set2.add(6);
-        const unset = _set.intersection(set2);
-        const vals = unset.values();
+        var unset = _set.intersection(set2);
+        var vals = unset.values();
         expect(vals.length).toBe(1);
         expect(unset.has(3)).toBe(true);
         expect(unset.has(2)).toBe(false);
     });
-    it('#5. Test difference()', () => {
+    it('#5. Test difference()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);
-        const set2 = new Set();
+        var set2 = new Set_1.Set();
         set2.add(3);
         set2.add(4);
         set2.add(5);
         set2.add(6);
-        const unset = _set.difference(set2);
-        const vals = unset.values();
+        var unset = _set.difference(set2);
+        var vals = unset.values();
         expect(vals.length).toBe(2);
         expect(unset.has(3)).toBe(false);
         expect(unset.has(2)).toBe(true);
     });
-    it('#6. Test subset()', () => {
+    it('#6. Test subset()', function () {
         _set.add(1);
         _set.add(2);
         _set.add(3);
-        const set2 = new Set();
+        var set2 = new Set_1.Set();
         set2.add(1);
         set2.add(2);
         set2.add(3);

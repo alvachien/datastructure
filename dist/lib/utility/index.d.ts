@@ -7,4 +7,4 @@
  *
  * File: index.ts
  */
-export * from './Text';
+export * from './Element';

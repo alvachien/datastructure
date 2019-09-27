@@ -5,7 +5,7 @@
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.4.6",
+  "version": "0.4.7",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -19,7 +19,7 @@
     "node": ">= 5.4.1 <= 10"
   },
   "scripts": {
-    "compile": "tsc",
+    "build": "tsc",
     "test": "karma start karma.conf.ts"
   },
   "dependencies": {

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,13 +9,14 @@
  * File: AVLTree.spec.ts
  *
  */
-import { AVLTree } from '../../lib/model/AVLTree';
-describe('Test AVLTree', () => {
-    let _avlTree;
-    beforeEach(() => {
-        _avlTree = new AVLTree();
+Object.defineProperty(exports, "__esModule", { value: true });
+var AVLTree_1 = require("../../lib/model/AVLTree");
+describe('Test AVLTree', function () {
+    var _avlTree;
+    beforeEach(function () {
+        _avlTree = new AVLTree_1.AVLTree();
     });
-    it('#1. Test creation', () => {
+    it('#1. Test creation', function () {
         expect(_avlTree).toBeTruthy();
     });
 });

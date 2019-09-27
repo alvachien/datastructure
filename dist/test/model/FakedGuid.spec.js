@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,14 +10,15 @@
  * Fake Guid
  *
  */
-import { FakedGuid } from '../../lib/model/FakedGuid';
-describe('Test BinarySearchTree', () => {
-    beforeEach(() => {
+Object.defineProperty(exports, "__esModule", { value: true });
+var FakedGuid_1 = require("../../lib/model/FakedGuid");
+describe('Test BinarySearchTree', function () {
+    beforeEach(function () {
     });
-    it('#1. Test creation', () => {
-        let nid = FakedGuid.newGuid();
+    it('#1. Test creation', function () {
+        var nid = FakedGuid_1.FakedGuid.newGuid();
         expect(nid).toBeTruthy();
-        let nid2 = FakedGuid.newGuid();
+        var nid2 = FakedGuid_1.FakedGuid.newGuid();
         expect(nid2).toBeTruthy();
     });
 });

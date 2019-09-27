@@ -5,12 +5,12 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: Text.ts
+ * File: Element.ts
  *
  */
 
 // Selection position
-export interface ISelectionPosition {
+export interface IElementSelectionPosition {
   start: number;
   end: number;
 }
@@ -26,7 +26,7 @@ export function readElementText(element: HTMLElement) {
 }
 
 // Check whether the range is i
-export function checkSelectInsideElement(element: HTMLElement, range?: Range) {
+export function checkSelectInsideElement(element: HTMLElement, range?: Range): boolean {
   let isEditor = false;
   if (!range) {
     if (window.getSelection().rangeCount === 0) {
@@ -56,13 +56,13 @@ export function checkSelectInsideElement(element: HTMLElement, range?: Range) {
 }
 
 // Reset selection range
-export function resetSelectionRange(range: Range) {
+export function resetSelectionRange(range: Range): void {
   const selection = window.getSelection();
   selection.removeAllRanges();
   selection.addRange(range);
 }
 
-export function setSelectionByPosition(editor: HTMLElement, positoin: ISelectionPosition) {
+export function setSelectionByPosition(editor: HTMLElement, positoin: IElementSelectionPosition): Range {
   let charIndex = 0;
   let line = 0;
   let pNode = editor.childNodes[line];
@@ -121,7 +121,7 @@ export function setSelectionByPosition(editor: HTMLElement, positoin: ISelection
   return range;
 }
 
-export function setSelectionByInlineText(text: string, childNodes: NodeListOf<ChildNode>) {
+export function setSelectionByInlineText(text: string, childNodes: NodeListOf<ChildNode>): void {
   let offset = 0;
   let startIndex = 0;
   Array.from(childNodes).some((node: HTMLElement, index: number) => {
@@ -142,8 +142,8 @@ export function setSelectionByInlineText(text: string, childNodes: NodeListOf<Ch
 }
 
 // Get selection position
-export function getSelectPosition(element: HTMLElement, range?: Range): ISelectionPosition {
-  const position: ISelectionPosition = {
+export function getSelectPosition(element: HTMLElement, range?: Range): IElementSelectionPosition {
+  const position: IElementSelectionPosition = {
     end: 0,
     start: 0,
   };
@@ -170,14 +170,31 @@ export function getSelectPosition(element: HTMLElement, range?: Range): ISelecti
     position.start = preSelectionRange.toString().length;
     position.end = position.start + range.toString().length;
   }
+
   return position;
 }
 
-export function formatElementText(element: HTMLElement, content: string, position?: ISelectionPosition) {
+export function getElementSelectionText(element: HTMLElement, range?: Range): string {
+  if (!range) {
+    if (window.getSelection().rangeCount === 0) {
+      return '';
+    } else {
+      range = window.getSelection().getRangeAt(0);
+    }
+  }
+
+  if (checkSelectInsideElement(element, range)) {
+    return window.getSelection().toString();
+  }
+  return '';
+}
+
+export function formatElementText(element: HTMLElement, content: string, position?: IElementSelectionPosition) {
 
   const textList = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
-  let html = '';
   const newLine = `<span><br><span style="display: none">\n</span></span>`;
+  let html = '';
+
   textList.forEach((text, index) => {
     if (index === textList.length - 1 && text === '') {
       return;
@@ -197,10 +214,11 @@ export function formatElementText(element: HTMLElement, content: string, positio
   }
 }
 
+// Insert text into element
 export function insertTextIntoElement(element: HTMLElement, prefix: string, suffix: string,
   originrange: Range = undefined,
   replace: boolean = false,
-  toggle: boolean = false) {
+  toggle: boolean = false): void {
   let range: Range = window.getSelection().rangeCount === 0 ? undefined : window.getSelection().getRangeAt(0);
   if (!checkSelectInsideElement(element)) {
     if (originrange) {
@@ -242,4 +260,89 @@ export function insertTextIntoElement(element: HTMLElement, prefix: string, suff
         });
     }
   }
+}
+
+function isSafari() {
+  if (navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function getCursorPositionInElement(element: HTMLElement): any {
+  if (!element || !element.parentElement) {
+    return;
+  }
+
+  const parentRect = element.parentElement.getBoundingClientRect();
+  const range = window.getSelection().getRangeAt(0);
+  const startNode = range.startContainer.childNodes[range.startOffset] as HTMLElement;
+
+  let cursorRect;
+  if (startNode) {
+    if (startNode.nodeType === 3 && startNode.textContent === "") {
+      cursorRect = startNode.nextElementSibling.getClientRects()[0];
+    } else if (startNode.getClientRects) {
+      cursorRect = startNode.getClientRects()[0];
+    } else if (startNode.parentElement) {
+      cursorRect = startNode.parentElement.getClientRects()[0];
+    }
+  } else {
+    const startOffset = range.startOffset;
+    if (isSafari()) {
+      range.setStart(range.startContainer, startOffset - 1);
+    }
+    cursorRect = range.getBoundingClientRect();
+    if (isSafari()) {
+      range.setStart(range.startContainer, startOffset);
+    }
+  }
+
+  return {
+    left: cursorRect.left - parentRect.left,
+    top: cursorRect.top - parentRect.top,
+  };
+}
+
+export function scrollToElementCenter(editorElement: HTMLElement) {
+  const cursorTop = getCursorPositionInElement(editorElement).top;
+  const center = editorElement.clientHeight / 2;
+  if (cursorTop > center) {
+    editorElement.scrollTop = editorElement.scrollTop + (cursorTop - center);
+  }
+}
+
+export function getCurrentLinePosition(position: IElementSelectionPosition, text: string): IElementSelectionPosition {
+  let start = position.start - 1;
+  let findStart = false;
+  let end = position.end;
+  let findEnd = false;
+
+  while (!findStart && start > -1) {
+    if (text.charAt(start) === '\n' && text.length !== start + 1) {
+      start++;
+      findStart = true;
+    } else if (start === 0) {
+      findStart = true;
+    } else {
+      start--;
+    }
+  }
+
+  while (!findEnd && end <= text.length) {
+    if (text.charAt(end) === '\n') {
+      end++;
+      findEnd = true;
+    } else if (end === text.length) {
+      findEnd = true;
+    } else {
+      end++;
+    }
+  }
+
+  return {
+    end: Math.min(end, text.length),
+    start: Math.max(0, start),
+  };
 }

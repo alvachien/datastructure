@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -8,63 +9,66 @@
  * File: Dictionary.ts
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Dictionary
  * Key: string
  * Value: Template X
  */
-export class Dictionary {
-    constructor() {
+var Dictionary = /** @class */ (function () {
+    function Dictionary() {
         this._data = {};
     }
-    has(key) {
+    Dictionary.prototype.has = function (key) {
         return key in this._data;
-    }
-    set(key, value) {
+    };
+    Dictionary.prototype.set = function (key, value) {
         this._data[key] = value;
-    }
-    remove(key) {
+    };
+    Dictionary.prototype.remove = function (key) {
         if (this.has(key)) {
             delete this._data[key];
             return true;
         }
         return false;
-    }
-    get(key) {
+    };
+    Dictionary.prototype.get = function (key) {
         return this.has(key) ? this._data[key] : undefined;
-    }
-    values() {
-        const ret = [];
-        for (let key in this._data) {
+    };
+    Dictionary.prototype.values = function () {
+        var ret = [];
+        for (var key in this._data) {
             if (this.has(key)) {
                 ret.push(this._data[key]);
             }
         }
         return ret;
-    }
-    keys() {
-        const ret = [];
-        for (let key in this._data) {
+    };
+    Dictionary.prototype.keys = function () {
+        var ret = [];
+        for (var key in this._data) {
             if (this.has(key)) {
                 ret.push(key);
             }
         }
         return ret;
-    }
-    clear() {
+    };
+    Dictionary.prototype.clear = function () {
         this._data = {};
-    }
-    size() {
+    };
+    Dictionary.prototype.size = function () {
         return Object.keys(this._data).length;
-    }
-    sizeLegacy() {
-        let count = 0;
-        for (let prop in this._data) {
+    };
+    Dictionary.prototype.sizeLegacy = function () {
+        var count = 0;
+        for (var prop in this._data) {
             if (this._data.hasOwnProperty(prop)) {
                 ++count;
             }
         }
         return count;
-    }
-}
+    };
+    return Dictionary;
+}());
+exports.Dictionary = Dictionary;
 //# sourceMappingURL=Dictionary.js.map

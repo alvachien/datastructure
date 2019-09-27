@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,20 +11,20 @@
  * Priority queue
  *
  */
-import { PriorityQueue } from '../../lib/subject/PriorityQueue';
-describe('Test PriorityQueue', () => {
-    let _seqQueue;
-    beforeEach(() => {
-        _seqQueue = new PriorityQueue();
+var PriorityQueue_1 = require("../../lib/subject/PriorityQueue");
+describe('Test PriorityQueue', function () {
+    var _seqQueue;
+    beforeEach(function () {
+        _seqQueue = new PriorityQueue_1.PriorityQueue();
     });
-    it("#1. Check init", () => {
+    it("#1. Check init", function () {
         expect(_seqQueue).toBeTruthy();
     });
-    it("#2. Check empty Queue.", () => {
+    it("#2. Check empty Queue.", function () {
         expect(_seqQueue.IsEmpty()).toBe(true);
         expect(_seqQueue.Length()).toBe(0);
     });
-    it("#3. Check enqueue on Queue.", () => {
+    it("#3. Check enqueue on Queue.", function () {
         _seqQueue.Enqueue(1, 2);
         expect(_seqQueue.IsEmpty()).toBe(false);
         expect(_seqQueue.Length()).toBe(1);

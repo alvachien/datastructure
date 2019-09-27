@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -10,4 +11,5 @@
  * This file provides a definition of tree.
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 //# sourceMappingURL=ITree.js.map

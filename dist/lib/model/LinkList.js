@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -8,139 +9,154 @@
  * File: LinkList.ts
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Node in Link list
  */
-export class LinkListNode {
+var LinkListNode = /** @class */ (function () {
     /**
      * Constructor
      */
-    constructor() {
+    function LinkListNode() {
         this._next = undefined;
     }
-    get Data() {
-        return this._data;
-    }
-    set Data(data) {
-        this._data = data;
-    }
-    get Next() {
-        return this._next;
-    }
-    set Next(next) {
-        this._next = next;
-    }
-}
+    Object.defineProperty(LinkListNode.prototype, "Data", {
+        get: function () {
+            return this._data;
+        },
+        set: function (data) {
+            this._data = data;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LinkListNode.prototype, "Next", {
+        get: function () {
+            return this._next;
+        },
+        set: function (next) {
+            this._next = next;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return LinkListNode;
+}());
+exports.LinkListNode = LinkListNode;
 /**
  * Link list
  */
-export class LinkList {
+var LinkList = /** @class */ (function () {
     /**
      * Constructor
      */
-    constructor() {
+    function LinkList() {
         this._length = 0;
     }
-    /**
-     * Head
-     */
-    get Head() {
-        return this._head;
-    }
+    Object.defineProperty(LinkList.prototype, "Head", {
+        /**
+         * Head
+         */
+        get: function () {
+            return this._head;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Initialize the list
      * @param hval Head value
      */
-    InitList(hval) {
+    LinkList.prototype.InitList = function (hval) {
         this._head = new LinkListNode();
         this._head.Data = hval;
         this._length = 1;
-    }
+    };
     /**
      * Length
      */
-    Length() {
+    LinkList.prototype.Length = function () {
         return this._length;
-    }
+    };
     /**
      * Is empty
      */
-    IsEmpty() {
+    LinkList.prototype.IsEmpty = function () {
         return this._length === 0;
-    }
+    };
     /**
      * Get element
      * @param index index of element
      */
-    GetElement(index) {
+    LinkList.prototype.GetElement = function (index) {
         if (this._length === 0
             || this._head === undefined
             || index < 0
             || index >= this._length) {
             return undefined;
         }
-        let cur = this._head;
-        let i = 0;
+        var cur = this._head;
+        var i = 0;
         while (cur !== undefined && i < index) {
             cur = cur.Next;
             i++;
         }
         return cur.Data;
-    }
+    };
     /**
      * Insert an element
      * @param index Index to insert
      * @param elem Element to insert
      */
-    InsertElement(index, elem) {
+    LinkList.prototype.InsertElement = function (index, elem) {
         if (index < 0 || index > this._length || this._head === undefined
             || elem === undefined) {
             return false;
         }
         if (index === 0) {
-            let nnode = new LinkListNode();
-            nnode.Data = elem;
-            nnode.Next = this._head;
-            this._head = nnode;
+            var nnode_1 = new LinkListNode();
+            nnode_1.Data = elem;
+            nnode_1.Next = this._head;
+            this._head = nnode_1;
             this._length++;
             return true;
         }
-        let cur = this._head;
-        let i = 1;
+        var cur = this._head;
+        var i = 1;
         while (cur !== undefined && i < index) {
             cur = cur.Next;
             i++;
         }
-        let nnode = new LinkListNode();
+        var nnode = new LinkListNode();
         nnode.Data = elem;
         nnode.Next = cur.Next;
         cur.Next = nnode;
         this._length++;
         return true;
-    }
+    };
     /**
      * Append element
      * @param elem Element to append
      */
-    AppendElement(elem) {
+    LinkList.prototype.AppendElement = function (elem) {
         if (this._head === undefined || this._length <= 0) {
             throw new Error('Invalid list');
         }
-        let cur = this._head;
+        var cur = this._head;
         while (cur.Next !== undefined) {
             cur = cur.Next;
         }
-        let newnode = new LinkListNode();
+        var newnode = new LinkListNode();
         newnode.Data = elem;
         newnode.Next = undefined;
         cur.Next = newnode;
         return ++this._length;
-    }
+    };
     /**
      * Delete an element
      * @param index Index to delete
      */
-    DeleteElement(index) {
+    LinkList.prototype.DeleteElement = function (index) {
         if (index < 0 || index > this._length || this._head === undefined) {
             return false;
         }
@@ -152,8 +168,8 @@ export class LinkList {
             }
             return true;
         }
-        let cur = this._head;
-        let i = 1;
+        var cur = this._head;
+        var i = 1;
         while (cur !== undefined && i < index) {
             cur = cur.Next;
             i++;
@@ -161,38 +177,38 @@ export class LinkList {
         cur.Next = cur.Next.Next;
         this._length--;
         return true;
-    }
+    };
     /**
      * Clear all elements
      */
-    ClearAll() {
+    LinkList.prototype.ClearAll = function () {
         this._head = undefined;
         this._length = 0;
         return true;
-    }
+    };
     /**
      * Print out full array
      * @param splitter Splitter
      */
-    Print(splitter) {
+    LinkList.prototype.Print = function (splitter) {
         if (this._length === 0 || this._head === undefined) {
             return '';
         }
-        let ar = [];
-        let cur = this._head;
+        var ar = [];
+        var cur = this._head;
         ar.push(cur.Data);
         while (cur.Next !== undefined) {
             cur = cur.Next;
             ar.push(cur.Data);
         }
         return ar.join(splitter);
-    }
+    };
     /**
      * Check the specified value existed or not
      * @param val Value for checking with existence
      */
-    IsExist(val) {
-        let cur = this._head;
+    LinkList.prototype.IsExist = function (val) {
+        var cur = this._head;
         if (cur.Data === val) {
             return true;
         }
@@ -203,6 +219,8 @@ export class LinkList {
             }
         }
         return false;
-    }
-}
+    };
+    return LinkList;
+}());
+exports.LinkList = LinkList;
 //# sourceMappingURL=LinkList.js.map

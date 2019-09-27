@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,12 +10,13 @@
  * Chinese Chess General Problem
  *
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Solution to CCGP, approach 2
  */
-export function CCGP_Solution2() {
-    let total = 81;
-    const rst = [];
+function CCGP_Solution2() {
+    var total = 81;
+    var rst = [];
     while (total--) {
         if (total / 9 % 3 === total % 9 / 3) {
             continue;
@@ -24,13 +26,14 @@ export function CCGP_Solution2() {
     }
     return rst;
 }
+exports.CCGP_Solution2 = CCGP_Solution2;
 /**
  * Solution to CCGP, approach 3
  */
-export function CCGP_Solution3() {
-    const rst = [];
-    for (let a = 1; a <= 9; a++) {
-        for (let b = 1; b <= 9; b++) {
+function CCGP_Solution3() {
+    var rst = [];
+    for (var a = 1; a <= 9; a++) {
+        for (var b = 1; b <= 9; b++) {
             if (a % 3 !== b % 3) {
                 // rst.push(`A = ${a}, B = ${b}`);
                 rst.push({ PositionA: a, PositionB: b });
@@ -39,4 +42,5 @@ export function CCGP_Solution3() {
     }
     return rst;
 }
+exports.CCGP_Solution3 = CCGP_Solution3;
 //# sourceMappingURL=ChineseChessGeneralProblem.js.map
