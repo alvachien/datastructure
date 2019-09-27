@@ -1,4 +1,4 @@
-# TypeScript Library for Data Structure and Algorithm
+# TypeScript Library for Data Structure, Algorithms and Utilities
 ## INTRODUCTION
 This project is target to build a library (abbrv: lib) for Data Structures and algorithms. 
 
@@ -44,6 +44,7 @@ The library in the project actually based the understanding when learning the bo
 
 ## CONTENT
 Folder **lib** (src\lib) contains the kernel part of the whole library. It consists with several sub folders, and it has been exported via index.ts respectively.
+Folder **dist** (dist) contains the compiled js files.
 
 ### UNIT TESTS
 Unit test is the mechanism to ensure the quality. It was supported by using Karam.
