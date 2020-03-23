@@ -29,6 +29,9 @@ export * from './LinkStack';
 // Queue
 export * from './IQueue';
 
+// Dictionary
+export * from './Dictionary';
+
 // Tree
 export * from './ITree';
 export * from './BinaryTree';

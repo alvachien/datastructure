@@ -67,7 +67,7 @@ describe('Test SequenceQueue', () => {
     expect(_seqQueue.Length()).toBe(0);
   });
 
-  it('#6. Check IsExist.', () => {
+  xit('#6. Check IsExist.', () => {
     // _seqQueue.InitList();
     // _seqQueue.AppendElement(1);
     // _seqQueue.AppendElement(2);
@@ -78,7 +78,7 @@ describe('Test SequenceQueue', () => {
     // expect(_seqQueue.IsExist(3)).toBe(false);
   });
 
-  it('#7. Check Print.', () => {
+  xit('#7. Check Print.', () => {
     // _seqQueue.InitList();
     // _seqQueue.AppendElement(1);
     // _seqQueue.AppendElement(2);

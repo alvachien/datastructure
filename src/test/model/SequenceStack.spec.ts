@@ -72,7 +72,7 @@ describe('Test SequenceStack', () => {
     expect(_seqStack.Length()).toBe(0);
   });
 
-  it('#6. Check IsExist.', () => {
+  xit('#6. Check IsExist.', () => {
     // _seqStack.InitList();
     // _seqStack.AppendElement(1);
     // _seqStack.AppendElement(2);
@@ -83,7 +83,7 @@ describe('Test SequenceStack', () => {
     // expect(_seqStack.IsExist(3)).toBe(false);
   });
 
-  it('#7. Check Print.', () => {
+  xit('#7. Check Print.', () => {
     // _seqStack.InitList();
     // _seqStack.AppendElement(1);
     // _seqStack.AppendElement(2);
