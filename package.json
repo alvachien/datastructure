@@ -5,7 +5,7 @@
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.4.9",
+  "version": "0.4.10",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -19,6 +19,7 @@
     "node": ">= 5.4.1 <= 10"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "build": "tsc",
     "test": "karma start karma.conf.ts",
     "devtest": "karma start karma.conf.ts --code-coverage",
@@ -38,7 +39,11 @@
     "karma-jasmine": "^3.1.1",
     "karma-jasmine-html-reporter": "^1.5.2",
     "karma-typescript": "^5.0.1",
+    "minimist": "^1.2.5",
     "ts-node": "^8.8.1",
     "tslint": "^6.1.0"
+  },
+  "resolutions": {
+    "minimist": "^1.2.5"
   }
 }
