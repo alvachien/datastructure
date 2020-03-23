@@ -7,4 +7,4 @@ branches:
   only:
     - master
 script:  
-  - npm run test-headless
+  - npm run test
