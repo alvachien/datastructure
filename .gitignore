@@ -4,6 +4,9 @@
 /tmp
 /out-tsc
 
+# Testing
+/coverage
+
 # dependencies
 /node_modules
 

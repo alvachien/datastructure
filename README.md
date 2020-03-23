@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/alvachien/datastructure.svg?branch=master)](https://travis-ci.com/alvachien/datastructure)
+
 # TypeScript Library for Data Structure, Algorithms and Utilities
 ## INTRODUCTION
 This project is target to build a library (abbrv: lib) for Data Structures, algorithms and Utilities. 
