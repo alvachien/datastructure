@@ -1,7 +1,7 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/2.0/config/configuration-file.html
 
-module.exports = (config: any) => {
+module.exports = function(config) {
   config.set({
 
     frameworks: ["jasmine", "karma-typescript"],
