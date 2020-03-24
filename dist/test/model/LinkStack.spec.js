@@ -55,7 +55,7 @@ describe('Test LinkStack', function () {
         _linkStack.ClearAll();
         expect(_linkStack.Length()).toBe(0);
     });
-    it('#6. Check IsExist.', function () {
+    xit('#6. Check IsExist.', function () {
         // _linkStack.InitList();
         // _linkStack.AppendElement(1);
         // _linkStack.AppendElement(2);
@@ -64,7 +64,7 @@ describe('Test LinkStack', function () {
         // expect(_linkStack.IsExist(2)).toBe(true);
         // expect(_linkStack.IsExist(3)).toBe(false);
     });
-    it('#7. Check Print.', function () {
+    xit('#7. Check Print.', function () {
         // _linkStack.InitList();
         // _linkStack.AppendElement(1);
         // _linkStack.AppendElement(2);

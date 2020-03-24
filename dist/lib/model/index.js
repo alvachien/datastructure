@@ -20,6 +20,8 @@ __export(require("./LinkList"));
 __export(require("./StaticLinkList"));
 __export(require("./SequenceStack"));
 __export(require("./LinkStack"));
+// Dictionary
+__export(require("./Dictionary"));
 __export(require("./BinaryTree"));
 __export(require("./BinarySearchTree"));
 __export(require("./BinaryThreadTree"));

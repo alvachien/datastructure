@@ -59,7 +59,7 @@ describe('Test SequenceStack', function () {
         _seqStack.ClearAll();
         expect(_seqStack.Length()).toBe(0);
     });
-    it('#6. Check IsExist.', function () {
+    xit('#6. Check IsExist.', function () {
         // _seqStack.InitList();
         // _seqStack.AppendElement(1);
         // _seqStack.AppendElement(2);
@@ -68,7 +68,7 @@ describe('Test SequenceStack', function () {
         // expect(_seqStack.IsExist(2)).toBe(true);
         // expect(_seqStack.IsExist(3)).toBe(false);
     });
-    it('#7. Check Print.', function () {
+    xit('#7. Check Print.', function () {
         // _seqStack.InitList();
         // _seqStack.AppendElement(1);
         // _seqStack.AppendElement(2);
