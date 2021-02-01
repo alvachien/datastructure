@@ -19,7 +19,7 @@ var LinkListNode = /** @class */ (function () {
      * Constructor
      */
     function LinkListNode() {
-        this._next = undefined;
+        this._next = null;
     }
     Object.defineProperty(LinkListNode.prototype, "Data", {
         get: function () {
@@ -52,6 +52,7 @@ var LinkList = /** @class */ (function () {
      * Constructor
      */
     function LinkList() {
+        this._head = null;
         this._length = 0;
     }
     Object.defineProperty(LinkList.prototype, "Head", {
@@ -91,14 +92,14 @@ var LinkList = /** @class */ (function () {
      */
     LinkList.prototype.GetElement = function (index) {
         if (this._length === 0
-            || this._head === undefined
+            || this._head === null
             || index < 0
             || index >= this._length) {
-            return undefined;
+            return null;
         }
         var cur = this._head;
         var i = 0;
-        while (cur !== undefined && i < index) {
+        while (cur !== null && i < index) {
             cur = cur.Next;
             i++;
         }
@@ -110,8 +111,8 @@ var LinkList = /** @class */ (function () {
      * @param elem Element to insert
      */
     LinkList.prototype.InsertElement = function (index, elem) {
-        if (index < 0 || index > this._length || this._head === undefined
-            || elem === undefined) {
+        if (index < 0 || index > this._length || this._head === null
+            || elem === null) {
             return false;
         }
         if (index === 0) {
@@ -124,7 +125,7 @@ var LinkList = /** @class */ (function () {
         }
         var cur = this._head;
         var i = 1;
-        while (cur !== undefined && i < index) {
+        while (cur !== null && i < index) {
             cur = cur.Next;
             i++;
         }
@@ -140,16 +141,16 @@ var LinkList = /** @class */ (function () {
      * @param elem Element to append
      */
     LinkList.prototype.AppendElement = function (elem) {
-        if (this._head === undefined || this._length <= 0) {
+        if (this._head === null || this._length <= 0) {
             throw new Error('Invalid list');
         }
         var cur = this._head;
-        while (cur.Next !== undefined) {
+        while (cur.Next !== null) {
             cur = cur.Next;
         }
         var newnode = new LinkListNode();
         newnode.Data = elem;
-        newnode.Next = undefined;
+        newnode.Next = null;
         cur.Next = newnode;
         return ++this._length;
     };
@@ -158,20 +159,20 @@ var LinkList = /** @class */ (function () {
      * @param index Index to delete
      */
     LinkList.prototype.DeleteElement = function (index) {
-        if (index < 0 || index > this._length || this._head === undefined) {
+        if (index < 0 || index > this._length || this._head === null) {
             return false;
         }
         if (index === 0) {
             this._head = this._head.Next;
             this._length--;
             if (this._length === 0) {
-                this._head = undefined;
+                this._head = null;
             }
             return true;
         }
         var cur = this._head;
         var i = 1;
-        while (cur !== undefined && i < index) {
+        while (cur !== null && i < index) {
             cur = cur.Next;
             i++;
         }
@@ -183,7 +184,7 @@ var LinkList = /** @class */ (function () {
      * Clear all elements
      */
     LinkList.prototype.ClearAll = function () {
-        this._head = undefined;
+        this._head = null;
         this._length = 0;
         return true;
     };
@@ -192,13 +193,13 @@ var LinkList = /** @class */ (function () {
      * @param splitter Splitter
      */
     LinkList.prototype.Print = function (splitter) {
-        if (this._length === 0 || this._head === undefined) {
+        if (this._length === 0 || this._head === null) {
             return '';
         }
         var ar = [];
         var cur = this._head;
         ar.push(cur.Data);
-        while (cur.Next !== undefined) {
+        while (cur.Next !== null) {
             cur = cur.Next;
             ar.push(cur.Data);
         }
@@ -213,7 +214,7 @@ var LinkList = /** @class */ (function () {
         if (cur.Data === val) {
             return true;
         }
-        while (cur.Next !== undefined) {
+        while (cur.Next !== null) {
             cur = cur.Next;
             if (cur.Data === val) {
                 return true;

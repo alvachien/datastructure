@@ -35,7 +35,7 @@ export declare class SequenceStack<T> implements IStack<T> {
      * Pop an element
      *
      */
-    Pop(): T | undefined;
+    Pop(): T | null;
     /**
      * Peek the stack
      */

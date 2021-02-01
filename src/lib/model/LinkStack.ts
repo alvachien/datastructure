@@ -13,10 +13,10 @@ import { IStack } from './IStack';
 
 export class LinkStackNode<T> {
   private _data: T;
-  private _next: LinkStackNode<T>;
+  private _next: LinkStackNode<T> | null;
 
-  constructore() {
-    this._next = undefined;
+  constructor() {
+    this._next = null;
   }
 
   get Data(): T {
@@ -25,26 +25,26 @@ export class LinkStackNode<T> {
   set Data(data: T) {
     this._data = data;
   }
-  get Next(): LinkStackNode<T> {
+  get Next(): LinkStackNode<T> | null {
     return this._next;
   }
-  set Next(next: LinkStackNode<T>) {
+  set Next(next: LinkStackNode<T> | null) {
     this._next = next;
   }
 }
 
 export class LinkStack<T> implements IStack<T> {
-  private _head: LinkStackNode<T>;
+  private _head: LinkStackNode<T> | null = null;
   private _length = 0;
 
   constructor() {
-    this._head = undefined;
+    this._head = null;
   }
 
   /**
    * Head
    */
-  get Head(): LinkStackNode<T> {
+  get Head(): LinkStackNode<T> | null {
     return this._head;
   }
 
@@ -67,7 +67,7 @@ export class LinkStack<T> implements IStack<T> {
    * @param elem Element to push
    */
   public Push(elem: T): number {
-    if (this._head === undefined) {
+    if (this._head === null) {
       this._head = new LinkStackNode<T>();
       this._head.Data = elem;
       return this._length++;
@@ -84,9 +84,9 @@ export class LinkStack<T> implements IStack<T> {
   /**
    * Pop an item out
    */
-  public Pop(): T | undefined {
-    if (this._head === undefined) {
-      return undefined;
+  public Pop(): T | null {
+    if (this._head === null) {
+      return null;
     }
 
     const pi: T = this._head.Data;
@@ -100,9 +100,9 @@ export class LinkStack<T> implements IStack<T> {
   /**
    * Peek the first element
    */
-  public Peek(): T | undefined {
-    if (this._head === undefined) {
-      return undefined;
+  public Peek(): T | null {
+    if (this._head === null) {
+      return null;
     }
 
     return this._head.Data;
@@ -112,7 +112,7 @@ export class LinkStack<T> implements IStack<T> {
    * Clear all
    */
   public ClearAll(): boolean {
-    this._head = undefined;
+    this._head = null;
     this._length = 0;
 
     return true;

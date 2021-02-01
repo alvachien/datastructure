@@ -21,8 +21,8 @@ export declare class LinkListNode<T> {
     constructor();
     get Data(): T;
     set Data(data: T);
-    get Next(): LinkListNode<T>;
-    set Next(next: LinkListNode<T>);
+    get Next(): LinkListNode<T> | null;
+    set Next(next: LinkListNode<T> | null);
 }
 /**
  * Link list
@@ -37,7 +37,7 @@ export declare class LinkList<T> implements IList<T> {
     /**
      * Head
      */
-    get Head(): LinkListNode<T>;
+    get Head(): LinkListNode<T> | null;
     /**
      * Initialize the list
      * @param hval Head value
@@ -55,7 +55,7 @@ export declare class LinkList<T> implements IList<T> {
      * Get element
      * @param index index of element
      */
-    GetElement(index: number): T | undefined;
+    GetElement(index: number): T | null;
     /**
      * Insert an element
      * @param index Index to insert

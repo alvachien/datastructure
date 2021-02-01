@@ -12,11 +12,11 @@ import { IStack } from './IStack';
 export declare class LinkStackNode<T> {
     private _data;
     private _next;
-    constructore(): void;
+    constructor();
     get Data(): T;
     set Data(data: T);
-    get Next(): LinkStackNode<T>;
-    set Next(next: LinkStackNode<T>);
+    get Next(): LinkStackNode<T> | null;
+    set Next(next: LinkStackNode<T> | null);
 }
 export declare class LinkStack<T> implements IStack<T> {
     private _head;
@@ -25,7 +25,7 @@ export declare class LinkStack<T> implements IStack<T> {
     /**
      * Head
      */
-    get Head(): LinkStackNode<T>;
+    get Head(): LinkStackNode<T> | null;
     /**
      * Length of the stack
      */
@@ -42,11 +42,11 @@ export declare class LinkStack<T> implements IStack<T> {
     /**
      * Pop an item out
      */
-    Pop(): T | undefined;
+    Pop(): T | null;
     /**
      * Peek the first element
      */
-    Peek(): T | undefined;
+    Peek(): T | null;
     /**
      * Clear all
      */

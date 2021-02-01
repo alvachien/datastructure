@@ -1,0 +1,46 @@
+/**
+ * UI mode
+ */
+export declare enum UIMode {
+    ListView = 0,
+    Create = 1,
+    Update = 2,
+    Display = 3,
+    Invalid = 9
+}
+export declare function isUIEditable(mode: UIMode): boolean;
+/**
+ * UI Detail page interface
+ */
+export interface IUIDetailPage {
+    IsUIEditable(): boolean;
+    currentUIMode(): UIMode;
+    currentUIModeString(): string;
+}
+/**
+ * Position of mouse event in Canvas
+ */
+export interface CanvasMousePositionInf {
+    x: number;
+    y: number;
+}
+/**
+ * Get canvas mouse event position
+ * @param canvas Canvas
+ * @param evt Event
+ */
+export declare function getCanvasMouseEventPosition(canvas: any, evt: MouseEvent): CanvasMousePositionInf;
+/**
+ * Cell position
+ */
+export interface CanvasCellPositionInf {
+    row: number;
+    column: number;
+}
+/**
+ * Get canvas cell position
+ * @param cavpos Position in the canvas
+ * @param cellWidth Width of each cell
+ * @param cellHeight Height of each cell
+ */
+export declare function getCanvasCellPosition(cavpos: CanvasMousePositionInf, cellWidth: number, cellHeight: number): CanvasCellPositionInf;

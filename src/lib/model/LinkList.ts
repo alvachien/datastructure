@@ -16,13 +16,13 @@ import { IList } from './IList';
  */
 export class LinkListNode<T> {
   private _data: T;
-  private _next: LinkListNode<T>;
+  private _next: LinkListNode<T> | null;
 
   /**
    * Constructor
    */
   constructor() {
-    this._next = undefined;
+    this._next = null;
   }
 
   get Data(): T {
@@ -31,10 +31,10 @@ export class LinkListNode<T> {
   set Data(data: T) {
     this._data = data;
   }
-  get Next(): LinkListNode<T> {
+  get Next(): LinkListNode<T> | null {
     return this._next;
   }
-  set Next(next: LinkListNode<T>) {
+  set Next(next: LinkListNode<T> | null) {
     this._next = next;
   }
 }
@@ -43,7 +43,7 @@ export class LinkListNode<T> {
  * Link list
  */
 export class LinkList<T> implements IList<T> {
-  private _head: LinkListNode<T>;
+  private _head: LinkListNode<T> | null = null;
   private _length = 0;
 
   /**
@@ -55,7 +55,7 @@ export class LinkList<T> implements IList<T> {
   /**
    * Head
    */
-  get Head(): LinkListNode<T> {
+  get Head(): LinkListNode<T> | null {
     return this._head;
   }
 
@@ -87,17 +87,17 @@ export class LinkList<T> implements IList<T> {
    * Get element
    * @param index index of element
    */
-  public GetElement(index: number): T | undefined {
+  public GetElement(index: number): T | null {
     if (this._length === 0
-      || this._head === undefined
+      || this._head === null
       || index < 0
       || index >= this._length) {
-      return undefined;
+      return null;
     }
 
     let cur = this._head;
     let i = 0;
-    while (cur !== undefined && i < index) {
+    while (cur !== null && i < index) {
       cur = cur.Next;
       i ++;
     }
@@ -111,8 +111,8 @@ export class LinkList<T> implements IList<T> {
    * @param elem Element to insert
    */
   public InsertElement(index: number, elem: T): boolean {
-    if (index < 0 || index > this._length || this._head === undefined
-      || elem === undefined) {
+    if (index < 0 || index > this._length || this._head === null
+      || elem === null) {
       return false;
     }
 
@@ -126,9 +126,9 @@ export class LinkList<T> implements IList<T> {
       return true;
     }
 
-    let cur: LinkListNode<T> = this._head;
+    let cur: LinkListNode<T> | null = this._head;
     let i = 1;
-    while (cur !== undefined && i < index) {
+    while (cur !== null && i < index) {
       cur = cur.Next;
       i ++;
     }
@@ -147,18 +147,18 @@ export class LinkList<T> implements IList<T> {
    * @param elem Element to append
    */
   public AppendElement(elem: T): number {
-    if (this._head === undefined || this._length <= 0) {
+    if (this._head === null || this._length <= 0) {
       throw new Error('Invalid list');
     }
 
-    let cur: LinkListNode<T> = this._head;
-    while (cur.Next !== undefined) {
+    let cur: LinkListNode<T> | null = this._head;
+    while (cur.Next !== null) {
       cur = cur.Next;
     }
 
     let newnode: LinkListNode<T> = new LinkListNode<T>();
     newnode.Data = elem;
-    newnode.Next = undefined;
+    newnode.Next = null;
 
     cur.Next = newnode;
 
@@ -170,7 +170,7 @@ export class LinkList<T> implements IList<T> {
    * @param index Index to delete
    */
   public DeleteElement(index: number): boolean {
-    if (index < 0 || index > this._length || this._head === undefined) {
+    if (index < 0 || index > this._length || this._head === null) {
       return false;
     }
 
@@ -179,7 +179,7 @@ export class LinkList<T> implements IList<T> {
       this._length--;
 
       if (this._length === 0) {
-        this._head = undefined;
+        this._head = null;
       }
 
       return true;
@@ -187,7 +187,7 @@ export class LinkList<T> implements IList<T> {
 
     let cur: LinkListNode<T> = this._head;
     let i = 1;
-    while (cur !== undefined && i < index) {
+    while (cur !== null && i < index) {
       cur = cur.Next;
       i ++;
     }
@@ -202,7 +202,7 @@ export class LinkList<T> implements IList<T> {
    * Clear all elements 
    */
   public ClearAll(): boolean {
-    this._head = undefined;
+    this._head = null;
     this._length = 0;
     return true;
   }
@@ -212,13 +212,13 @@ export class LinkList<T> implements IList<T> {
    * @param splitter Splitter
    */
   public Print(splitter?: string): string {
-    if (this._length === 0 || this._head === undefined) {
+    if (this._length === 0 || this._head === null) {
       return '';
     }
     let ar:T[] = [];
     let cur: LinkListNode<T> = this._head;
     ar.push(cur.Data);
-    while (cur.Next !== undefined) {
+    while (cur.Next !== null) {
       cur = cur.Next;
       ar.push(cur.Data);
     }
@@ -231,12 +231,12 @@ export class LinkList<T> implements IList<T> {
    * @param val Value for checking with existence
    */
   public IsExist(val: T): boolean {
-    let cur: LinkListNode<T> = this._head;
+    let cur: LinkListNode<T> | null = this._head;
     if (cur.Data === val) {
       return true;
     }
 
-    while (cur.Next !== undefined) {
+    while (cur.Next !== null) {
       cur = cur.Next;
       if (cur.Data === val) {
         return true;

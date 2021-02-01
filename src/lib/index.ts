@@ -8,3 +8,4 @@
 export * from './model';
 export * from './subject'
 export * from './utility';
+export * from './uimodel';

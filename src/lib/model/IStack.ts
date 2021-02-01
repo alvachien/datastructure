@@ -30,12 +30,12 @@ export interface IStack<T> {
   /**
    * Peek the top element without remove it, returns the top element.
    */
-  Peek(): T | undefined;
+  Peek(): T | null;
 
   /**
    * Pop the element and remove it from the stack, returns the poped element.
    */
-  Pop(): T | undefined;
+  Pop(): T | null;
 
   /**
    * Clear all elements, returns the result: true means suces

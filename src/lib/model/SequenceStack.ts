@@ -49,7 +49,7 @@ export class SequenceStack<T> implements IStack<T> {
    * Pop an element
    * 
    */
-  public Pop(): T | undefined {
+  public Pop(): T | null {
     if (this._data.length === 0) {
       return null;
     }

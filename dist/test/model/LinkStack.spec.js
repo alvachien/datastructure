@@ -43,7 +43,7 @@ describe('Test LinkStack', function () {
         expect(_linkStack.Length()).toBe(1);
         expect(_linkStack.Pop()).toBeTruthy();
         expect(_linkStack.Length()).toBe(0);
-        expect(_linkStack.Pop()).toBeFalsy();
+        expect(_linkStack.Pop()).toBeNull();
     });
     it('#5. Check empty stack.', function () {
         // _linkStack.InitList();
