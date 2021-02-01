@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -32,7 +32,7 @@ export class UIUtility {
   public static removeCssClass(element: HTMLElement, cssClassName: string): void {
     const classes: string[] = element.className.split(/\s+/g);
     while (true) {
-      const classIdx = classes.indexOf(name);
+      const classIdx = classes.indexOf(cssClassName);
       if (classIdx === -1) {
         break;
       }
@@ -44,7 +44,7 @@ export class UIUtility {
     const classes: string[] = element.className.split(/\s+/g);
     let needAdd = true;
     while (true) {
-      const classIdx = classes.indexOf(name);
+      const classIdx = classes.indexOf(cssClassName);
       if (classIdx === -1) {
         break;
       }
