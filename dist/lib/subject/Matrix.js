@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Matrix = void 0;
 /**
  * Matrix
  */
@@ -36,7 +37,7 @@ var Matrix = /** @class */ (function () {
         get: function () {
             return this._maxrow;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Matrix.prototype, "ColumnCount", {
@@ -46,7 +47,7 @@ var Matrix = /** @class */ (function () {
         get: function () {
             return this._maxcol;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Matrix.prototype, "isInited", {
@@ -56,7 +57,7 @@ var Matrix = /** @class */ (function () {
         get: function () {
             return this._inited;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**

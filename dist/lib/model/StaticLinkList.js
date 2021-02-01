@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StaticLinkList = exports.StaticLinkListNode = void 0;
 /**
  * Node in static link list
  */
@@ -27,7 +28,7 @@ var StaticLinkListNode = /** @class */ (function () {
         set: function (data) {
             this._data = data;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(StaticLinkListNode.prototype, "Cursor", {
@@ -37,7 +38,7 @@ var StaticLinkListNode = /** @class */ (function () {
         set: function (cur) {
             this._cursor = cur;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return StaticLinkListNode;

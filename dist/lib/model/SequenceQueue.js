@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SequenceQueue = void 0;
 /**
  * Sequence Queue
  */

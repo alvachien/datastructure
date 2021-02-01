@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Dictionary = void 0;
 /**
  * Dictionary
  * Key: string

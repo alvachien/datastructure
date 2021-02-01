@@ -10,6 +10,7 @@
  * Implements the polynomial.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Polynomial = exports.PolynomialTerm = void 0;
 var model_1 = require("../model");
 /**
  * Polynomial 多项式
@@ -33,7 +34,7 @@ var PolynomialTerm = /** @class */ (function () {
         set: function (coef) {
             this._coef = coef;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PolynomialTerm.prototype, "Exp", {
@@ -43,7 +44,7 @@ var PolynomialTerm = /** @class */ (function () {
         set: function (exp) {
             this._exp = exp;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return PolynomialTerm;

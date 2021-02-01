@@ -14,13 +14,17 @@ export declare class BinaryTreeNode<T> {
     private _left;
     private _right;
     constructore(): void;
-    Data: T;
-    Left: BinaryTreeNode<T>;
-    Right: BinaryTreeNode<T>;
+    get Data(): T;
+    set Data(data: T);
+    get Left(): BinaryTreeNode<T>;
+    set Left(left: BinaryTreeNode<T>);
+    get Right(): BinaryTreeNode<T>;
+    set Right(right: BinaryTreeNode<T>);
 }
 export declare class BinaryTree<T> {
     private _root;
-    Root: BinaryTreeNode<T>;
+    get Root(): BinaryTreeNode<T>;
+    set Root(root: BinaryTreeNode<T>);
     InorderTraversal(): Array<BinaryTreeNode<T>>;
     private InorderImpl;
     PreorderTraversal(): Array<BinaryTreeNode<T>>;

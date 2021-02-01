@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BinaryTree = exports.BinaryTreeNode = void 0;
 var BinaryTreeNode = /** @class */ (function () {
     function BinaryTreeNode() {
         this._left = null;
@@ -26,7 +27,7 @@ var BinaryTreeNode = /** @class */ (function () {
         set: function (data) {
             this._data = data;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinaryTreeNode.prototype, "Left", {
@@ -36,7 +37,7 @@ var BinaryTreeNode = /** @class */ (function () {
         set: function (left) {
             this._left = left;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinaryTreeNode.prototype, "Right", {
@@ -46,7 +47,7 @@ var BinaryTreeNode = /** @class */ (function () {
         set: function (right) {
             this._right = right;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return BinaryTreeNode;
@@ -63,7 +64,7 @@ var BinaryTree = /** @class */ (function () {
         set: function (root) {
             this._root = root;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     BinaryTree.prototype.InorderTraversal = function () {

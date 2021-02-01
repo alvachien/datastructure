@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BinaryThreadTree = exports.BinaryThreadTreeNode = exports.BinaryThreadTag = void 0;
 /**
  * Thread tag
  */
@@ -36,7 +37,7 @@ var BinaryThreadTreeNode = /** @class */ (function () {
         set: function (key) {
             this._key = key;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinaryThreadTreeNode.prototype, "data", {
@@ -46,7 +47,7 @@ var BinaryThreadTreeNode = /** @class */ (function () {
         set: function (data) {
             this._data = data;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinaryThreadTreeNode.prototype, "Left", {
@@ -56,7 +57,7 @@ var BinaryThreadTreeNode = /** @class */ (function () {
         set: function (left) {
             this._left = left;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinaryThreadTreeNode.prototype, "LeftTag", {
@@ -66,7 +67,7 @@ var BinaryThreadTreeNode = /** @class */ (function () {
         set: function (lt) {
             this._lefttag = lt;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinaryThreadTreeNode.prototype, "Right", {
@@ -76,7 +77,7 @@ var BinaryThreadTreeNode = /** @class */ (function () {
         set: function (right) {
             this._right = right;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinaryThreadTreeNode.prototype, "RightTag", {
@@ -86,7 +87,7 @@ var BinaryThreadTreeNode = /** @class */ (function () {
         set: function (rt) {
             this._righttag = rt;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return BinaryThreadTreeNode;
@@ -105,7 +106,7 @@ var BinaryThreadTree = /** @class */ (function () {
         set: function (root) {
             this._root = root;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     BinaryThreadTree.prototype.InorderTraversal = function () {

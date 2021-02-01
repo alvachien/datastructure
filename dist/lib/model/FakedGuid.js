@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FakedGuid = void 0;
 var FakedGuid = /** @class */ (function () {
     function FakedGuid() {
     }

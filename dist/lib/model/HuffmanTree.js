@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.HuffmanTree = void 0;
 var HuffmanTree = /** @class */ (function () {
     function HuffmanTree() {
     }

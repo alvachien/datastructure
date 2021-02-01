@@ -11,6 +11,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RPN = exports.rpn1 = exports.RPNGetOperatorResult = exports.RPNOperationPriority = exports.RPNOperators = void 0;
 // RPN(Reverse Polish Notation)
 exports.RPNOperators = [
     '+',
@@ -138,7 +139,7 @@ var RPN = /** @class */ (function () {
         get: function () {
             return this._arInputs;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**

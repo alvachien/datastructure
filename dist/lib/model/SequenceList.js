@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SequenceList = void 0;
 /**
  * Sequence List
  */

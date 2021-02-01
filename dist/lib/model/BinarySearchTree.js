@@ -10,6 +10,7 @@
  * Binary search tree
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BinarySearchTree = exports.BinarySearchTreeNode = void 0;
 // Binary search tree node
 var BinarySearchTreeNode = /** @class */ (function () {
     function BinarySearchTreeNode(key, data) {
@@ -29,7 +30,7 @@ var BinarySearchTreeNode = /** @class */ (function () {
         set: function (keynumber) {
             this._key = keynumber;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(BinarySearchTreeNode.prototype, "data", {
@@ -39,7 +40,7 @@ var BinarySearchTreeNode = /** @class */ (function () {
         set: function (value) {
             this._data = value;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return BinarySearchTreeNode;
@@ -53,7 +54,7 @@ var BinarySearchTree = /** @class */ (function () {
         get: function () {
             return this._root;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**

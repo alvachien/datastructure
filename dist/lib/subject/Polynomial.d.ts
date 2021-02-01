@@ -23,8 +23,10 @@ export declare class PolynomialTerm {
     private _coef;
     private _exp;
     constructor();
-    Coef: number;
-    Exp: number;
+    get Coef(): number;
+    set Coef(coef: number);
+    get Exp(): number;
+    set Exp(exp: number);
 }
 /**
  * Polynomial

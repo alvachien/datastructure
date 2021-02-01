@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MaximumSubArray = void 0;
 /**
  * MaximumSubArray: Find out the sub array which contains the maximum sum.
  * @param datalist: Data list

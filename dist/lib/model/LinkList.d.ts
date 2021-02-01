@@ -19,8 +19,10 @@ export declare class LinkListNode<T> {
      * Constructor
      */
     constructor();
-    Data: T;
-    Next: LinkListNode<T>;
+    get Data(): T;
+    set Data(data: T);
+    get Next(): LinkListNode<T>;
+    set Next(next: LinkListNode<T>);
 }
 /**
  * Link list
@@ -35,7 +37,7 @@ export declare class LinkList<T> implements IList<T> {
     /**
      * Head
      */
-    readonly Head: LinkListNode<T>;
+    get Head(): LinkListNode<T>;
     /**
      * Initialize the list
      * @param hval Head value

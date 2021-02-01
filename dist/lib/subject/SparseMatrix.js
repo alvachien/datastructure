@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SparseMatrix = exports.Trituple = void 0;
 var model_1 = require("../model");
 /**
  * Trituple
@@ -24,7 +25,7 @@ var Trituple = /** @class */ (function () {
         set: function (row) {
             this._row = row;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Trituple.prototype, "Column", {
@@ -34,7 +35,7 @@ var Trituple = /** @class */ (function () {
         set: function (cln) {
             this._column = cln;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Trituple.prototype, "Value", {
@@ -44,7 +45,7 @@ var Trituple = /** @class */ (function () {
         set: function (val) {
             this._val = val;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return Trituple;
@@ -75,7 +76,7 @@ var SparseMatrix = /** @class */ (function () {
         get: function () {
             return this._listTerms;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(SparseMatrix.prototype, "Row", {
@@ -85,7 +86,7 @@ var SparseMatrix = /** @class */ (function () {
         get: function () {
             return this._maxrow;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(SparseMatrix.prototype, "Column", {
@@ -95,7 +96,7 @@ var SparseMatrix = /** @class */ (function () {
         get: function () {
             return this._maxcol;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(SparseMatrix.prototype, "Rows", {
@@ -112,7 +113,7 @@ var SparseMatrix = /** @class */ (function () {
             }
             return sl;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(SparseMatrix.prototype, "Columns", {
@@ -129,7 +130,7 @@ var SparseMatrix = /** @class */ (function () {
             }
             return sl;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**

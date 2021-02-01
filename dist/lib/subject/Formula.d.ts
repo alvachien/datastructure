@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -24,8 +24,8 @@ export declare class FormulaOperator {
     private optype;
     private opnumber;
     constructor(typ: FormulaOperatorEnum, opnum: number);
-    readonly OperatorType: FormulaOperatorEnum;
-    readonly OperatorNumber: number;
+    get OperatorType(): FormulaOperatorEnum;
+    get OperatorNumber(): number;
 }
 /**
  * Formula Operator: Add
@@ -60,7 +60,8 @@ export declare const FormulaKeyword: string[];
  */
 export declare class FormulaParameter {
     private _par;
-    Parameter: string;
+    get Parameter(): string;
+    set Parameter(par: string);
 }
 /**
  * Token enum
@@ -86,9 +87,11 @@ export declare enum FormulaTokenEnum {
  */
 export declare class FormulaToken {
     private _tokenEnum;
-    TokenEnum: FormulaTokenEnum;
+    get TokenEnum(): FormulaTokenEnum;
+    set TokenEnum(te: FormulaTokenEnum);
     private _varName;
-    VariableName: string;
+    get VariableName(): string;
+    set VariableName(vn: string);
 }
 /**
  * Formula Parser

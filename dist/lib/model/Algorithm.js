@@ -25,6 +25,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.HeapSort = exports.MergeSort = exports.CountingSort = exports.SelectionSort = exports.QuickSort = exports.BubbleSort = exports.BinaryInsertSort = exports.InsertionSort = exports.KMP = exports.SwapElement = void 0;
 /* 1. Utility functions */
 /**
  * SwapElement: Unitity method, used to swap two elements in an array

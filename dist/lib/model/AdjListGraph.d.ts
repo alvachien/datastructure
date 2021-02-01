@@ -16,8 +16,10 @@ import { IGraph, IGraphVertex, IGraphEdge } from './IGraph';
 export declare class GraphAdjaceListVertex<X> implements IGraphVertex<X> {
     private _id;
     private _value;
-    id: number;
-    value: X;
+    get id(): number;
+    set id(id: number);
+    get value(): X;
+    set value(data: X);
 }
 /**
  * Edge of adjace list graph
@@ -26,9 +28,12 @@ export declare class GraphAdjaceListEdge<Y> implements IGraphEdge<Y> {
     private _from;
     private _to;
     private _weigth;
-    from: number;
-    to: number;
-    weight: Y;
+    get from(): number;
+    set from(from: number);
+    get to(): number;
+    set to(to: number);
+    get weight(): Y;
+    set weight(wght: Y);
 }
 /**
  * Graph with adjace list

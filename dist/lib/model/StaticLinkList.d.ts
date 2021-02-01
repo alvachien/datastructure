@@ -16,8 +16,10 @@ export declare class StaticLinkListNode<T> {
     private _data;
     private _cursor;
     constructore(): void;
-    Data: T;
-    Cursor: number;
+    get Data(): T;
+    set Data(data: T);
+    get Cursor(): number;
+    set Cursor(cur: number);
 }
 export declare class StaticLinkList<T> implements IList<T> {
     private _data;

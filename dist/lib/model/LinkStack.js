@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LinkStack = exports.LinkStackNode = void 0;
 var LinkStackNode = /** @class */ (function () {
     function LinkStackNode() {
     }
@@ -23,7 +24,7 @@ var LinkStackNode = /** @class */ (function () {
         set: function (data) {
             this._data = data;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(LinkStackNode.prototype, "Next", {
@@ -33,7 +34,7 @@ var LinkStackNode = /** @class */ (function () {
         set: function (next) {
             this._next = next;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return LinkStackNode;
@@ -51,7 +52,7 @@ var LinkStack = /** @class */ (function () {
         get: function () {
             return this._head;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**

@@ -11,6 +11,7 @@
  * Implements the graph with Adjacement Matrix.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Graph = exports.GraphEdge = exports.GraphVertex = void 0;
 /**
  * Vertext in the graph
  */
@@ -24,7 +25,7 @@ var GraphVertex = /** @class */ (function () {
         set: function (id) {
             this._id = id;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GraphVertex.prototype, "value", {
@@ -34,7 +35,7 @@ var GraphVertex = /** @class */ (function () {
         set: function (data) {
             this._value = data;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return GraphVertex;
@@ -53,7 +54,7 @@ var GraphEdge = /** @class */ (function () {
         set: function (wgt) {
             this._weight = wgt;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GraphEdge.prototype, "from", {
@@ -63,7 +64,7 @@ var GraphEdge = /** @class */ (function () {
         set: function (frm) {
             this._from = frm;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GraphEdge.prototype, "to", {
@@ -73,7 +74,7 @@ var GraphEdge = /** @class */ (function () {
         set: function (to) {
             this._to = to;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return GraphEdge;

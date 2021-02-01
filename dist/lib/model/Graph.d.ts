@@ -16,8 +16,10 @@ import { IGraph, IGraphVertex, IGraphEdge } from './IGraph';
 export declare class GraphVertex<T> implements IGraphVertex<T> {
     private _id;
     private _value;
-    id: number;
-    value: T;
+    get id(): number;
+    set id(id: number);
+    get value(): T;
+    set value(data: T);
 }
 /**
  * Edge in the graph
@@ -26,9 +28,12 @@ export declare class GraphEdge<T> implements IGraphEdge<T> {
     private _weight;
     private _from;
     private _to;
-    weight: T;
-    from: number;
-    to: number;
+    get weight(): T;
+    set weight(wgt: T);
+    get from(): number;
+    set from(frm: number);
+    get to(): number;
+    set to(to: number);
 }
 /**
  * Graph

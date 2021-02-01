@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LinkList = exports.LinkListNode = void 0;
 /**
  * Node in Link list
  */
@@ -27,7 +28,7 @@ var LinkListNode = /** @class */ (function () {
         set: function (data) {
             this._data = data;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(LinkListNode.prototype, "Next", {
@@ -37,7 +38,7 @@ var LinkListNode = /** @class */ (function () {
         set: function (next) {
             this._next = next;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return LinkListNode;
@@ -60,7 +61,7 @@ var LinkList = /** @class */ (function () {
         get: function () {
             return this._head;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**

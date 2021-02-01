@@ -36,7 +36,7 @@ export declare function rpn1(strinputs: string): number;
  */
 export declare class RPN {
     private _arInputs;
-    readonly InputArray: any[];
+    get InputArray(): any[];
     constructor();
     /**
      * Save to string

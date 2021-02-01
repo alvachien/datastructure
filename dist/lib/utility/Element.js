@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getCurrentLinePosition = exports.scrollToElementCenter = exports.getCursorPositionInElement = exports.insertTextIntoElement = exports.formatElementText = exports.getElementSelectionText = exports.getSelectPosition = exports.setSelectionByInlineText = exports.setSelectionByPosition = exports.resetSelectionRange = exports.checkSelectInsideElement = exports.readElementText = exports.replaceChar160ToSpace = void 0;
 // Replace char 160 to space
 function replaceChar160ToSpace(text) {
     return text.replace(/\u00a0/g, ' ');

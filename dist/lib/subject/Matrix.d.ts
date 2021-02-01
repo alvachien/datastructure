@@ -32,15 +32,15 @@ export declare class Matrix<T> {
     /**
      * Rows
      */
-    readonly RowCount: number;
+    get RowCount(): number;
     /**
      * Columns
      */
-    readonly ColumnCount: number;
+    get ColumnCount(): number;
     /**
      * Is inited
      */
-    readonly isInited: boolean;
+    get isInited(): boolean;
     /**
      * init
      * Initialize the current Matrix

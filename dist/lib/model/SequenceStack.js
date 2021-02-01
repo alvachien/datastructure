@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SequenceStack = void 0;
 /**
  * Sequence Stack
  */

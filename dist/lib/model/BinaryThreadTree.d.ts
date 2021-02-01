@@ -27,19 +27,26 @@ export declare class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
     private _lefttag;
     private _righttag;
     constructore(): void;
-    key: number;
-    data: T;
-    Left: BinaryThreadTreeNode<T>;
-    LeftTag: BinaryThreadTag;
-    Right: BinaryThreadTreeNode<T>;
-    RightTag: BinaryThreadTag;
+    get key(): number;
+    set key(key: number);
+    get data(): T;
+    set data(data: T);
+    get Left(): BinaryThreadTreeNode<T>;
+    set Left(left: BinaryThreadTreeNode<T>);
+    get LeftTag(): BinaryThreadTag;
+    set LeftTag(lt: BinaryThreadTag);
+    get Right(): BinaryThreadTreeNode<T>;
+    set Right(right: BinaryThreadTreeNode<T>);
+    get RightTag(): BinaryThreadTag;
+    set RightTag(rt: BinaryThreadTag);
 }
 /**
  * Binary Thread Tree
  */
 export declare class BinaryThreadTree<T> implements IBinaryTree<T> {
     private _root;
-    rootNode: BinaryThreadTreeNode<T>;
+    get rootNode(): BinaryThreadTreeNode<T>;
+    set rootNode(root: BinaryThreadTreeNode<T>);
     InorderTraversal(): Array<BinaryThreadTreeNode<T>>;
     private InorderImpl;
     PreorderTraversal(): Array<BinaryThreadTreeNode<T>>;

@@ -13,8 +13,10 @@ export declare class LinkStackNode<T> {
     private _data;
     private _next;
     constructore(): void;
-    Data: T;
-    Next: LinkStackNode<T>;
+    get Data(): T;
+    set Data(data: T);
+    get Next(): LinkStackNode<T>;
+    set Next(next: LinkStackNode<T>);
 }
 export declare class LinkStack<T> implements IStack<T> {
     private _head;
@@ -23,7 +25,7 @@ export declare class LinkStack<T> implements IStack<T> {
     /**
      * Head
      */
-    readonly Head: LinkStackNode<T>;
+    get Head(): LinkStackNode<T>;
     /**
      * Length of the stack
      */

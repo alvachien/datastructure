@@ -11,6 +11,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.baseConverter = exports.NumberBaseEnum = void 0;
 var SequenceStack_1 = require("../model/SequenceStack");
 /**
  * Number base

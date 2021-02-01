@@ -14,13 +14,15 @@ export declare class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
     rightNode: BinarySearchTreeNode<T>;
     private _key;
     private _data;
-    key: number;
-    data: T;
+    get key(): number;
+    set key(keynumber: number);
+    get data(): T;
+    set data(value: T);
     constructor(key?: number, data?: T);
 }
 export declare class BinarySearchTree<T> implements IBinarySearchTree<T> {
     protected _root: BinarySearchTreeNode<T>;
-    readonly rootNode: BinarySearchTreeNode<T>;
+    get rootNode(): BinarySearchTreeNode<T>;
     constructor();
     /**
      * Insert node

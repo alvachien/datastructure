@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -23,6 +23,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FormulaParser = exports.FormulaToken = exports.FormulaTokenEnum = exports.FormulaParameter = exports.FormulaKeyword = exports.FormulaOperationDivision = exports.FormulaOperationMultiplication = exports.FormulaOperationSbbtraction = exports.FormulaOperatorAddition = exports.FormulaOperator = exports.FormulaOperatorEnum = void 0;
 var model_1 = require("../model");
 /**
  * Basic formula operator
@@ -46,14 +47,14 @@ var FormulaOperator = /** @class */ (function () {
         get: function () {
             return this.optype;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(FormulaOperator.prototype, "OperatorNumber", {
         get: function () {
             return this.opnumber;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return FormulaOperator;
@@ -123,7 +124,7 @@ var FormulaParameter = /** @class */ (function () {
         set: function (par) {
             this._par = par;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return FormulaParameter;
@@ -162,7 +163,7 @@ var FormulaToken = /** @class */ (function () {
         set: function (te) {
             this._tokenEnum = te;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(FormulaToken.prototype, "VariableName", {
@@ -172,7 +173,7 @@ var FormulaToken = /** @class */ (function () {
         set: function (vn) {
             this._varName = vn;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return FormulaToken;

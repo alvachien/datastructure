@@ -16,9 +16,12 @@ export declare class Trituple<T> {
     private _row;
     private _column;
     private _val;
-    Row: number;
-    Column: number;
-    Value: T;
+    get Row(): number;
+    set Row(row: number);
+    get Column(): number;
+    set Column(cln: number);
+    get Value(): T;
+    set Value(val: T);
 }
 /**
  * Sparse Matrix: Matrix with lots of empty entities inside
@@ -36,23 +39,23 @@ export declare class SparseMatrix<T> {
     /**
      * Terms
      */
-    readonly Terms: SequenceList<Trituple<T>>;
+    get Terms(): SequenceList<Trituple<T>>;
     /**
      * Rows
      */
-    readonly Row: number;
+    get Row(): number;
     /**
      * Columns
      */
-    readonly Column: number;
+    get Column(): number;
     /**
      * Returns the list of actual rows
      */
-    readonly Rows: SequenceList<number>;
+    get Rows(): SequenceList<number>;
     /**
      * Returns the list of actual column
      */
-    readonly Columns: SequenceList<number>;
+    get Columns(): SequenceList<number>;
     /**
      * Retrieve an element at specified row and specified column
      * @param row Specified row

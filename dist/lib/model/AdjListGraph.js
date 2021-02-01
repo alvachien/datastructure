@@ -11,6 +11,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GraphAdjaceList = exports.GraphAdjaceListEdge = exports.GraphAdjaceListVertex = void 0;
 var SequenceList_1 = require("./SequenceList");
 var Dictionary_1 = require("./Dictionary");
 var LinkList_1 = require("./LinkList");
@@ -27,7 +28,7 @@ var GraphAdjaceListVertex = /** @class */ (function () {
         set: function (id) {
             this._id = id;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GraphAdjaceListVertex.prototype, "value", {
@@ -37,7 +38,7 @@ var GraphAdjaceListVertex = /** @class */ (function () {
         set: function (data) {
             this._value = data;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return GraphAdjaceListVertex;
@@ -56,7 +57,7 @@ var GraphAdjaceListEdge = /** @class */ (function () {
         set: function (from) {
             this._from = from;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GraphAdjaceListEdge.prototype, "to", {
@@ -66,7 +67,7 @@ var GraphAdjaceListEdge = /** @class */ (function () {
         set: function (to) {
             this._to = to;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(GraphAdjaceListEdge.prototype, "weight", {
@@ -76,7 +77,7 @@ var GraphAdjaceListEdge = /** @class */ (function () {
         set: function (wght) {
             this._weigth = wght;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return GraphAdjaceListEdge;

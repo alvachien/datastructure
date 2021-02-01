@@ -1,7 +1,7 @@
 "use strict";
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -10,6 +10,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UIUtility = void 0;
 var UIUtility = /** @class */ (function () {
     function UIUtility() {
     }
@@ -35,7 +36,7 @@ var UIUtility = /** @class */ (function () {
     UIUtility.removeCssClass = function (element, cssClassName) {
         var classes = element.className.split(/\s+/g);
         while (true) {
-            var classIdx = classes.indexOf(name);
+            var classIdx = classes.indexOf(cssClassName);
             if (classIdx === -1) {
                 break;
             }
@@ -47,7 +48,7 @@ var UIUtility = /** @class */ (function () {
         var classes = element.className.split(/\s+/g);
         var needAdd = true;
         while (true) {
-            var classIdx = classes.indexOf(name);
+            var classIdx = classes.indexOf(cssClassName);
             if (classIdx === -1) {
                 break;
             }
