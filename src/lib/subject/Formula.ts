@@ -6,7 +6,10 @@
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: Formula.ts
+ * 
  * Formula definition as well as calculation, using stack
+ * Math Expression Parser
+ * 
  */
 
 import { SequenceStack, SequenceList } from '../model';
@@ -157,6 +160,43 @@ export class FormulaParser {
 
     this._orgInput = input;
     return true;
+  }
+
+  /**
+   * Infix to Postfix
+   */
+  public infixToPostfix(): string {
+    const st: SequenceStack<any> = new SequenceStack<any>();
+    const listVar: SequenceList<string> = new SequenceList<string>();    
+    const listNumbers: SequenceList<number> = new SequenceList<number>();
+    const stkOpers: SequenceStack<string> = new SequenceStack<string>();
+
+    let bnum = false;
+    let snumbgn = -1;
+    let snumend = -1;
+
+    for(let i: number = 0; i < this._orgInput.length; i ++) {
+      // Is number?
+      if (this._orgInput[i] >= '0' && this._orgInput[i] <= '9') {
+        if (bnum) {
+          // Do nothing
+        } else {
+          bnum = true;
+          snumbgn = i;
+        }
+      } else {
+        if (bnum) {
+          bnum = false;
+          snumend = i;
+          listNumbers.AppendElement(+this._orgInput.substring(snumbgn, snumend));
+          stkOpers.Push(this._orgInput[i]);
+        } else {
+          throw new Error('Failed');
+        }
+      }
+    }
+
+    return this._orgInput;
   }
 
   private parse(): boolean {
