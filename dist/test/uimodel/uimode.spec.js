@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
@@ -9,22 +8,21 @@
  * File: GraphAdjaceList.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var uimodel_1 = require("../../lib/uimodel");
-describe('Test UIMode', function () {
-    beforeEach(function () {
+import { UIMode, isUIEditable, } from '../../lib/uimodel';
+describe('Test UIMode', () => {
+    beforeEach(() => {
     });
-    it('#1. Test UIModel.', function () {
-        var mode = uimodel_1.UIMode.Create;
-        expect(uimodel_1.isUIEditable(mode)).toBeTruthy();
-        mode = uimodel_1.UIMode.Update;
-        expect(uimodel_1.isUIEditable(mode)).toBeTruthy();
-        mode = uimodel_1.UIMode.Display;
-        expect(uimodel_1.isUIEditable(mode)).toBeFalsy();
-        mode = uimodel_1.UIMode.Invalid;
-        expect(uimodel_1.isUIEditable(mode)).toBeFalsy();
-        mode = uimodel_1.UIMode.ListView;
-        expect(uimodel_1.isUIEditable(mode)).toBeFalsy();
+    it('#1. Test UIModel.', () => {
+        let mode = UIMode.Create;
+        expect(isUIEditable(mode)).toBeTruthy();
+        mode = UIMode.Update;
+        expect(isUIEditable(mode)).toBeTruthy();
+        mode = UIMode.Display;
+        expect(isUIEditable(mode)).toBeFalsy();
+        mode = UIMode.Invalid;
+        expect(isUIEditable(mode)).toBeFalsy();
+        mode = UIMode.ListView;
+        expect(isUIEditable(mode)).toBeFalsy();
     });
 });
 //# sourceMappingURL=uimode.spec.js.map

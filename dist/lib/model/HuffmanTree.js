@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,12 +8,6 @@
  * File: HuffmanTree.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.HuffmanTree = void 0;
-var HuffmanTree = /** @class */ (function () {
-    function HuffmanTree() {
-    }
-    return HuffmanTree;
-}());
-exports.HuffmanTree = HuffmanTree;
+export class HuffmanTree {
+}
 //# sourceMappingURL=HuffmanTree.js.map

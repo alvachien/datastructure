@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,112 +8,92 @@
  * File: BinaryTree.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.BinaryTree = exports.BinaryTreeNode = void 0;
-var BinaryTreeNode = /** @class */ (function () {
-    function BinaryTreeNode() {
+export class BinaryTreeNode {
+    constructor() {
         this._left = null;
         this._right = null;
     }
-    BinaryTreeNode.prototype.constructore = function () {
+    constructore() {
         this._left = null;
         this._right = null;
-    };
-    Object.defineProperty(BinaryTreeNode.prototype, "Data", {
-        get: function () {
-            return this._data;
-        },
-        set: function (data) {
-            this._data = data;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(BinaryTreeNode.prototype, "Left", {
-        get: function () {
-            return this._left;
-        },
-        set: function (left) {
-            this._left = left;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(BinaryTreeNode.prototype, "Right", {
-        get: function () {
-            return this._right;
-        },
-        set: function (right) {
-            this._right = right;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return BinaryTreeNode;
-}());
-exports.BinaryTreeNode = BinaryTreeNode;
-var BinaryTree = /** @class */ (function () {
-    function BinaryTree() {
+    }
+    get Data() {
+        return this._data;
+    }
+    set Data(data) {
+        this._data = data;
+    }
+    get Left() {
+        return this._left;
+    }
+    set Left(left) {
+        this._left = left;
+    }
+    get Right() {
+        return this._right;
+    }
+    set Right(right) {
+        this._right = right;
+    }
+}
+export class BinaryTree {
+    constructor() {
         this._root = null;
     }
-    Object.defineProperty(BinaryTree.prototype, "Root", {
-        get: function () {
-            return this._root;
-        },
-        set: function (root) {
-            this._root = root;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    BinaryTree.prototype.InorderTraversal = function () {
-        var arRst = new Array();
+    get Root() {
+        return this._root;
+    }
+    set Root(root) {
+        this._root = root;
+    }
+    InorderTraversal() {
+        const arRst = new Array();
         if (this._root !== null) {
             this.InorderImpl(this._root, arRst);
         }
         return arRst;
-    };
-    BinaryTree.prototype.InorderImpl = function (curNode, arRst) {
+    }
+    InorderImpl(curNode, arRst) {
         if (curNode !== null) {
             this.InorderImpl(curNode.Left, arRst);
             arRst.push(curNode);
             this.InorderImpl(curNode.Right, arRst);
         }
-    };
-    BinaryTree.prototype.PreorderTraversal = function () {
-        var arRst = new Array();
+    }
+    PreorderTraversal() {
+        const arRst = new Array();
         if (this._root !== null) {
             this.PreorderImpl(this._root, arRst);
         }
         return arRst;
-    };
-    BinaryTree.prototype.PreorderImpl = function (curNode, arRst) {
+    }
+    PreorderImpl(curNode, arRst) {
         if (curNode !== null) {
             arRst.push(curNode);
             this.PreorderImpl(curNode.Left, arRst);
             this.PreorderImpl(curNode.Right, arRst);
         }
-    };
-    BinaryTree.prototype.PostorderTraversal = function () {
-        var arRst = new Array();
+    }
+    PostorderTraversal() {
+        const arRst = new Array();
         if (this._root !== null) {
             this.PostorderImpl(this._root, arRst);
         }
         return arRst;
-    };
-    BinaryTree.prototype.PostorderImpl = function (curNode, arRst) {
+    }
+    PostorderImpl(curNode, arRst) {
         if (curNode !== null) {
             this.PostorderImpl(curNode.Left, arRst);
             this.PostorderImpl(curNode.Right, arRst);
             arRst.push(curNode);
         }
-    };
-    BinaryTree.prototype.InsertNode = function (parNode, data) {
+    }
+    InsertNode(parNode, data) {
         if (parNode === null && this._root !== null) {
             return null;
         }
         if (parNode === null) {
-            var node = new BinaryTreeNode();
+            const node = new BinaryTreeNode();
             node.Data = data;
             this._root = node;
             return this._root;
@@ -123,7 +102,7 @@ var BinaryTree = /** @class */ (function () {
             // Parent node is full, cannot add!
             return null;
         }
-        var nnode = new BinaryTreeNode();
+        const nnode = new BinaryTreeNode();
         nnode.Data = data;
         if (parNode.Left === null) {
             parNode.Left = nnode;
@@ -132,20 +111,17 @@ var BinaryTree = /** @class */ (function () {
             parNode.Right = nnode;
         }
         return nnode;
-    };
-    BinaryTree.prototype.FindNode = function (elem) {
+    }
+    FindNode(elem) {
         if (this._root === null) {
             return null;
         }
-        var arNodes = this.PreorderTraversal();
-        for (var _i = 0, arNodes_1 = arNodes; _i < arNodes_1.length; _i++) {
-            var nod = arNodes_1[_i];
+        const arNodes = this.PreorderTraversal();
+        for (const nod of arNodes) {
             if (nod.Data === elem) {
                 return undefined;
             }
         }
-    };
-    return BinaryTree;
-}());
-exports.BinaryTree = BinaryTree;
+    }
+}
 //# sourceMappingURL=BinaryTree.js.map

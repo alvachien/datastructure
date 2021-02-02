@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
@@ -9,21 +8,17 @@
  * File: Element.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCurrentLinePosition = exports.scrollToElementCenter = exports.getCursorPositionInElement = exports.insertTextIntoElement = exports.formatElementText = exports.getElementSelectionText = exports.getSelectPosition = exports.setSelectionByInlineText = exports.setSelectionByPosition = exports.resetSelectionRange = exports.checkSelectInsideElement = exports.readElementText = exports.replaceChar160ToSpace = void 0;
 // Replace char 160 to space
-function replaceChar160ToSpace(text) {
+export function replaceChar160ToSpace(text) {
     return text.replace(/\u00a0/g, ' ');
 }
-exports.replaceChar160ToSpace = replaceChar160ToSpace;
 // Read element's text
-function readElementText(element) {
-    return replaceChar160ToSpace((element.textContent + "\n").replace(/\n\n$/, '\n'));
+export function readElementText(element) {
+    return replaceChar160ToSpace(`${element.textContent}\n`.replace(/\n\n$/, '\n'));
 }
-exports.readElementText = readElementText;
 // Check whether the range is i
-function checkSelectInsideElement(element, range) {
-    var isEditor = false;
+export function checkSelectInsideElement(element, range) {
+    let isEditor = false;
     if (!range) {
         if (window.getSelection().rangeCount === 0) {
             return isEditor;
@@ -32,7 +27,7 @@ function checkSelectInsideElement(element, range) {
             range = window.getSelection().getRangeAt(0);
         }
     }
-    var container = range.commonAncestorContainer;
+    let container = range.commonAncestorContainer;
     while (container) {
         if (element.isEqualNode(container)) {
             isEditor = true;
@@ -49,27 +44,25 @@ function checkSelectInsideElement(element, range) {
     }
     return isEditor;
 }
-exports.checkSelectInsideElement = checkSelectInsideElement;
 // Reset selection range
-function resetSelectionRange(range) {
-    var selection = window.getSelection();
+export function resetSelectionRange(range) {
+    const selection = window.getSelection();
     selection.removeAllRanges();
     selection.addRange(range);
 }
-exports.resetSelectionRange = resetSelectionRange;
-function setSelectionByPosition(editor, positoin) {
-    var charIndex = 0;
-    var line = 0;
-    var pNode = editor.childNodes[line];
-    var foundStart = false;
-    var stop = false;
-    var start = Math.max(0, positoin.start);
-    var end = Math.max(0, positoin.end);
-    var range = editor.ownerDocument.createRange();
+export function setSelectionByPosition(editor, positoin) {
+    let charIndex = 0;
+    let line = 0;
+    let pNode = editor.childNodes[line];
+    let foundStart = false;
+    let stop = false;
+    let start = Math.max(0, positoin.start);
+    let end = Math.max(0, positoin.end);
+    const range = editor.ownerDocument.createRange();
     range.setStart(pNode, 0);
     range.collapse(true);
     while (!stop && pNode) {
-        var nextCharIndex = charIndex + pNode.textContent.length;
+        const nextCharIndex = charIndex + pNode.textContent.length;
         if (!foundStart && start >= charIndex && start <= nextCharIndex) {
             if (start === 0) {
                 range.setStart(pNode, 0);
@@ -117,11 +110,10 @@ function setSelectionByPosition(editor, positoin) {
     resetSelectionRange(range);
     return range;
 }
-exports.setSelectionByPosition = setSelectionByPosition;
-function setSelectionByInlineText(text, childNodes) {
-    var offset = 0;
-    var startIndex = 0;
-    Array.from(childNodes).some(function (node, index) {
+export function setSelectionByInlineText(text, childNodes) {
+    let offset = 0;
+    let startIndex = 0;
+    Array.from(childNodes).some((node, index) => {
         startIndex = node.textContent.indexOf(text);
         if (startIndex > -1 && childNodes[index].childNodes[0].nodeType === 3) {
             offset = index;
@@ -131,15 +123,14 @@ function setSelectionByInlineText(text, childNodes) {
     if (startIndex < 0) {
         return;
     }
-    var range = document.createRange();
+    const range = document.createRange();
     range.setStart(childNodes[offset].childNodes[0], startIndex);
     range.setEnd(childNodes[offset].childNodes[0], startIndex + text.length);
     resetSelectionRange(range);
 }
-exports.setSelectionByInlineText = setSelectionByInlineText;
 // Get selection position
-function getSelectPosition(element, range) {
-    var position = {
+export function getSelectPosition(element, range) {
+    const position = {
         end: 0,
         start: 0,
     };
@@ -150,7 +141,7 @@ function getSelectPosition(element, range) {
         range = window.getSelection().getRangeAt(0);
     }
     if (checkSelectInsideElement(element, range)) {
-        var preSelectionRange = range.cloneRange();
+        const preSelectionRange = range.cloneRange();
         if (element.childNodes[0] && element.childNodes[0].childNodes[0]) {
             preSelectionRange.setStart(element.childNodes[0].childNodes[0], 0);
         }
@@ -168,8 +159,7 @@ function getSelectPosition(element, range) {
     }
     return position;
 }
-exports.getSelectPosition = getSelectPosition;
-function getElementSelectionText(element, range) {
+export function getElementSelectionText(element, range) {
     if (!range) {
         if (window.getSelection().rangeCount === 0) {
             return '';
@@ -183,17 +173,16 @@ function getElementSelectionText(element, range) {
     }
     return '';
 }
-exports.getElementSelectionText = getElementSelectionText;
-function formatElementText(element, content, position) {
-    var textList = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
-    var newLine = "<span><br><span style=\"display: none\">\n</span></span>";
-    var html = '';
-    textList.forEach(function (text, index) {
+export function formatElementText(element, content, position) {
+    const textList = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+    const newLine = `<span><br><span style="display: none">\n</span></span>`;
+    let html = '';
+    textList.forEach((text, index) => {
         if (index === textList.length - 1 && text === '') {
             return;
         }
         if (text) {
-            html += "<span>" + replaceChar160ToSpace(text.replace(/&/g, '&amp;').replace(/</g, '&lt;')) + "</span>" + newLine;
+            html += `<span>${replaceChar160ToSpace(text.replace(/&/g, '&amp;').replace(/</g, '&lt;'))}</span>${newLine}`;
         }
         else {
             html += newLine;
@@ -204,13 +193,9 @@ function formatElementText(element, content, position) {
         setSelectionByPosition(element, position);
     }
 }
-exports.formatElementText = formatElementText;
 // Insert text into element
-function insertTextIntoElement(element, prefix, suffix, originrange, replace, toggle) {
-    if (originrange === void 0) { originrange = undefined; }
-    if (replace === void 0) { replace = false; }
-    if (toggle === void 0) { toggle = false; }
-    var range = window.getSelection().rangeCount === 0 ? undefined : window.getSelection().getRangeAt(0);
+export function insertTextIntoElement(element, prefix, suffix, originrange = undefined, replace = false, toggle = false) {
+    let range = window.getSelection().rangeCount === 0 ? undefined : window.getSelection().getRangeAt(0);
     if (!checkSelectInsideElement(element)) {
         if (originrange) {
             range = originrange;
@@ -221,18 +206,18 @@ function insertTextIntoElement(element, prefix, suffix, originrange, replace, to
             range.collapse(true);
         }
     }
-    var position = getSelectPosition(element, range);
-    var content = readElementText(element);
+    const position = getSelectPosition(element, range);
+    const content = readElementText(element);
     // select none || select something and need replace
     if (range.collapsed || (!range.collapsed && replace)) {
-        var text = prefix + suffix;
+        const text = prefix + suffix;
         formatElementText(element, content.substring(0, position.start) + text + content.substring(position.end), {
             end: position.start + prefix.length,
             start: position.start + prefix.length,
         });
     }
     else {
-        var selectText = content.substring(position.start, position.end);
+        const selectText = content.substring(position.start, position.end);
         if (toggle && content.substring(position.start - prefix.length, position.start) === prefix
             && content.substring(position.end, position.end + suffix.length) === suffix) {
             formatElementText(element, content.substring(0, position.start - prefix.length)
@@ -242,7 +227,7 @@ function insertTextIntoElement(element, prefix, suffix, originrange, replace, to
             });
         }
         else {
-            var text = prefix + selectText + suffix;
+            const text = prefix + selectText + suffix;
             formatElementText(element, content.substring(0, position.start) + text + content.substring(position.end), {
                 end: position.start + prefix.length + selectText.length,
                 start: position.start + prefix.length,
@@ -250,7 +235,6 @@ function insertTextIntoElement(element, prefix, suffix, originrange, replace, to
         }
     }
 }
-exports.insertTextIntoElement = insertTextIntoElement;
 function isSafari() {
     if (navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') === -1) {
         return true;
@@ -259,14 +243,14 @@ function isSafari() {
         return false;
     }
 }
-function getCursorPositionInElement(element) {
+export function getCursorPositionInElement(element) {
     if (!element || !element.parentElement) {
         return;
     }
-    var parentRect = element.parentElement.getBoundingClientRect();
-    var range = window.getSelection().getRangeAt(0);
-    var startNode = range.startContainer.childNodes[range.startOffset];
-    var cursorRect;
+    const parentRect = element.parentElement.getBoundingClientRect();
+    const range = window.getSelection().getRangeAt(0);
+    const startNode = range.startContainer.childNodes[range.startOffset];
+    let cursorRect;
     if (startNode) {
         if (startNode.nodeType === 3 && startNode.textContent === "") {
             cursorRect = startNode.nextElementSibling.getClientRects()[0];
@@ -279,7 +263,7 @@ function getCursorPositionInElement(element) {
         }
     }
     else {
-        var startOffset = range.startOffset;
+        const startOffset = range.startOffset;
         if (isSafari()) {
             range.setStart(range.startContainer, startOffset - 1);
         }
@@ -293,20 +277,18 @@ function getCursorPositionInElement(element) {
         top: cursorRect.top - parentRect.top,
     };
 }
-exports.getCursorPositionInElement = getCursorPositionInElement;
-function scrollToElementCenter(editorElement) {
-    var cursorTop = getCursorPositionInElement(editorElement).top;
-    var center = editorElement.clientHeight / 2;
+export function scrollToElementCenter(editorElement) {
+    const cursorTop = getCursorPositionInElement(editorElement).top;
+    const center = editorElement.clientHeight / 2;
     if (cursorTop > center) {
         editorElement.scrollTop = editorElement.scrollTop + (cursorTop - center);
     }
 }
-exports.scrollToElementCenter = scrollToElementCenter;
-function getCurrentLinePosition(position, text) {
-    var start = position.start - 1;
-    var findStart = false;
-    var end = position.end;
-    var findEnd = false;
+export function getCurrentLinePosition(position, text) {
+    let start = position.start - 1;
+    let findStart = false;
+    let end = position.end;
+    let findEnd = false;
     while (!findStart && start > -1) {
         if (text.charAt(start) === '\n' && text.length !== start + 1) {
             start++;
@@ -336,5 +318,4 @@ function getCurrentLinePosition(position, text) {
         start: Math.max(0, start),
     };
 }
-exports.getCurrentLinePosition = getCurrentLinePosition;
 //# sourceMappingURL=Element.js.map

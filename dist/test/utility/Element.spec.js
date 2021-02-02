@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,17 +8,16 @@
  * File: Element.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var Element_1 = require("../../lib/utility/Element");
-describe('Test Utility Text', function () {
-    beforeEach(function () {
+import { replaceChar160ToSpace } from '../../lib/utility/Element';
+describe('Test Utility Text', () => {
+    beforeEach(() => {
     });
-    it("#1. Check replaceChar160ToSpace", function () {
-        var rst = Element_1.replaceChar160ToSpace('92-');
+    it("#1. Check replaceChar160ToSpace", () => {
+        let rst = replaceChar160ToSpace('92-');
         expect(rst).toBe('92-');
-        rst = Element_1.replaceChar160ToSpace('');
+        rst = replaceChar160ToSpace('');
         expect(rst).toBe('');
-        rst = Element_1.replaceChar160ToSpace("\u00A0");
+        rst = replaceChar160ToSpace(`\u00a0`);
         expect(rst).toBe(' ');
     });
 });

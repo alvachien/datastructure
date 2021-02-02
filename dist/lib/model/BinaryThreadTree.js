@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,154 +8,118 @@
  * File: BinaryThreadTree.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.BinaryThreadTree = exports.BinaryThreadTreeNode = exports.BinaryThreadTag = void 0;
 /**
  * Thread tag
  */
-var BinaryThreadTag;
+export var BinaryThreadTag;
 (function (BinaryThreadTag) {
     BinaryThreadTag[BinaryThreadTag["Link"] = 0] = "Link";
     BinaryThreadTag[BinaryThreadTag["Thread"] = 1] = "Thread";
-})(BinaryThreadTag = exports.BinaryThreadTag || (exports.BinaryThreadTag = {}));
+})(BinaryThreadTag || (BinaryThreadTag = {}));
 ;
 /**
  * Thread Tree Node
  */
-var BinaryThreadTreeNode = /** @class */ (function () {
-    function BinaryThreadTreeNode() {
-    }
-    BinaryThreadTreeNode.prototype.constructore = function () {
+export class BinaryThreadTreeNode {
+    constructore() {
         this._left = undefined;
         this._right = undefined;
-    };
-    Object.defineProperty(BinaryThreadTreeNode.prototype, "key", {
-        get: function () {
-            return this._key;
-        },
-        set: function (key) {
-            this._key = key;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(BinaryThreadTreeNode.prototype, "data", {
-        get: function () {
-            return this._data;
-        },
-        set: function (data) {
-            this._data = data;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(BinaryThreadTreeNode.prototype, "Left", {
-        get: function () {
-            return this._left;
-        },
-        set: function (left) {
-            this._left = left;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(BinaryThreadTreeNode.prototype, "LeftTag", {
-        get: function () {
-            return this._lefttag;
-        },
-        set: function (lt) {
-            this._lefttag = lt;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(BinaryThreadTreeNode.prototype, "Right", {
-        get: function () {
-            return this._right;
-        },
-        set: function (right) {
-            this._right = right;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(BinaryThreadTreeNode.prototype, "RightTag", {
-        get: function () {
-            return this._righttag;
-        },
-        set: function (rt) {
-            this._righttag = rt;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return BinaryThreadTreeNode;
-}());
-exports.BinaryThreadTreeNode = BinaryThreadTreeNode;
+    }
+    get key() {
+        return this._key;
+    }
+    set key(key) {
+        this._key = key;
+    }
+    get data() {
+        return this._data;
+    }
+    set data(data) {
+        this._data = data;
+    }
+    get Left() {
+        return this._left;
+    }
+    set Left(left) {
+        this._left = left;
+    }
+    get LeftTag() {
+        return this._lefttag;
+    }
+    set LeftTag(lt) {
+        this._lefttag = lt;
+    }
+    get Right() {
+        return this._right;
+    }
+    set Right(right) {
+        this._right = right;
+    }
+    get RightTag() {
+        return this._righttag;
+    }
+    set RightTag(rt) {
+        this._righttag = rt;
+    }
+}
 /**
  * Binary Thread Tree
  */
-var BinaryThreadTree = /** @class */ (function () {
-    function BinaryThreadTree() {
+export class BinaryThreadTree {
+    get rootNode() {
+        return this._root;
     }
-    Object.defineProperty(BinaryThreadTree.prototype, "rootNode", {
-        get: function () {
-            return this._root;
-        },
-        set: function (root) {
-            this._root = root;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    BinaryThreadTree.prototype.InorderTraversal = function () {
-        var arRst = new Array();
+    set rootNode(root) {
+        this._root = root;
+    }
+    InorderTraversal() {
+        const arRst = new Array();
         if (this._root !== null) {
             this.InorderImpl(this._root, arRst);
         }
         return arRst;
-    };
-    BinaryThreadTree.prototype.InorderImpl = function (curNode, arRst) {
+    }
+    InorderImpl(curNode, arRst) {
         if (curNode !== null) {
             this.InorderImpl(curNode.Left, arRst);
             arRst.push(curNode);
             this.InorderImpl(curNode.Right, arRst);
         }
-    };
-    BinaryThreadTree.prototype.PreorderTraversal = function () {
-        var arRst = new Array();
+    }
+    PreorderTraversal() {
+        const arRst = new Array();
         if (this._root !== null) {
             this.PreorderImpl(this._root, arRst);
         }
         return arRst;
-    };
-    BinaryThreadTree.prototype.PreorderImpl = function (curNode, arRst) {
+    }
+    PreorderImpl(curNode, arRst) {
         if (curNode !== null) {
             arRst.push(curNode);
             this.PreorderImpl(curNode.Left, arRst);
             this.PreorderImpl(curNode.Right, arRst);
         }
-    };
-    BinaryThreadTree.prototype.PostorderTraversal = function () {
-        var arRst = new Array();
+    }
+    PostorderTraversal() {
+        const arRst = new Array();
         if (this._root !== null) {
             this.PostorderImpl(this._root, arRst);
         }
         return arRst;
-    };
-    BinaryThreadTree.prototype.PostorderImpl = function (curNode, arRst) {
+    }
+    PostorderImpl(curNode, arRst) {
         if (curNode !== null) {
             this.PostorderImpl(curNode.Left, arRst);
             this.PostorderImpl(curNode.Right, arRst);
             arRst.push(curNode);
         }
-    };
-    BinaryThreadTree.prototype.InsertNode = function (parNode, key, data) {
+    }
+    InsertNode(parNode, key, data) {
         if (parNode === null && this._root !== null) {
             return null;
         }
         if (parNode === null) {
-            var node = new BinaryThreadTreeNode();
+            const node = new BinaryThreadTreeNode();
             node.data = data;
             this._root = node;
             return this._root;
@@ -165,7 +128,7 @@ var BinaryThreadTree = /** @class */ (function () {
             // Parent node is full, cannot add!
             return null;
         }
-        var nnode = new BinaryThreadTreeNode();
+        const nnode = new BinaryThreadTreeNode();
         nnode.data = data;
         if (parNode.Left === null) {
             parNode.Left = nnode;
@@ -174,20 +137,17 @@ var BinaryThreadTree = /** @class */ (function () {
             parNode.Right = nnode;
         }
         return nnode;
-    };
-    BinaryThreadTree.prototype.FindNode = function (elem) {
+    }
+    FindNode(elem) {
         if (this._root === null) {
             return null;
         }
-        var arNodes = this.PreorderTraversal();
-        for (var _i = 0, arNodes_1 = arNodes; _i < arNodes_1.length; _i++) {
-            var nod = arNodes_1[_i];
+        const arNodes = this.PreorderTraversal();
+        for (const nod of arNodes) {
             if (nod.data === elem) {
                 return nod;
             }
         }
-    };
-    return BinaryThreadTree;
-}());
-exports.BinaryThreadTree = BinaryThreadTree;
+    }
+}
 //# sourceMappingURL=BinaryThreadTree.js.map

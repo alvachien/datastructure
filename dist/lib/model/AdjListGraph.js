@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -10,180 +9,150 @@
  * Implements the graph with Adjacement List.
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.GraphAdjaceList = exports.GraphAdjaceListEdge = exports.GraphAdjaceListVertex = void 0;
-var SequenceList_1 = require("./SequenceList");
-var Dictionary_1 = require("./Dictionary");
-var LinkList_1 = require("./LinkList");
+import { SequenceList } from './SequenceList';
+import { Dictionary } from './Dictionary';
+import { LinkList } from './LinkList';
 /**
  * Vertex of adjace list graph
  */
-var GraphAdjaceListVertex = /** @class */ (function () {
-    function GraphAdjaceListVertex() {
+export class GraphAdjaceListVertex {
+    get id() {
+        return this._id;
     }
-    Object.defineProperty(GraphAdjaceListVertex.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (id) {
-            this._id = id;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(GraphAdjaceListVertex.prototype, "value", {
-        get: function () {
-            return this._value;
-        },
-        set: function (data) {
-            this._value = data;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return GraphAdjaceListVertex;
-}());
-exports.GraphAdjaceListVertex = GraphAdjaceListVertex;
+    set id(id) {
+        this._id = id;
+    }
+    get value() {
+        return this._value;
+    }
+    set value(data) {
+        this._value = data;
+    }
+}
 /**
  * Edge of adjace list graph
  */
-var GraphAdjaceListEdge = /** @class */ (function () {
-    function GraphAdjaceListEdge() {
+export class GraphAdjaceListEdge {
+    get from() {
+        return this._from;
     }
-    Object.defineProperty(GraphAdjaceListEdge.prototype, "from", {
-        get: function () {
-            return this._from;
-        },
-        set: function (from) {
-            this._from = from;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(GraphAdjaceListEdge.prototype, "to", {
-        get: function () {
-            return this._to;
-        },
-        set: function (to) {
-            this._to = to;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(GraphAdjaceListEdge.prototype, "weight", {
-        get: function () {
-            return this._weigth;
-        },
-        set: function (wght) {
-            this._weigth = wght;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return GraphAdjaceListEdge;
-}());
-exports.GraphAdjaceListEdge = GraphAdjaceListEdge;
+    set from(from) {
+        this._from = from;
+    }
+    get to() {
+        return this._to;
+    }
+    set to(to) {
+        this._to = to;
+    }
+    get weight() {
+        return this._weigth;
+    }
+    set weight(wght) {
+        this._weigth = wght;
+    }
+}
 /**
  * Graph with adjace list
  * X: generic type of Vertex
  * Y: generic type of Edge
  */
-var GraphAdjaceList = /** @class */ (function () {
-    function GraphAdjaceList() {
-        this._vertex = new SequenceList_1.SequenceList();
-        this._adjList = new Dictionary_1.Dictionary();
+export class GraphAdjaceList {
+    constructor() {
+        this._vertex = new SequenceList();
+        this._adjList = new Dictionary();
     }
     /**
      * Number of vertext
      */
-    GraphAdjaceList.prototype.VertexNumber = function () {
+    VertexNumber() {
         return this._vertex.Length();
-    };
+    }
     /**
      * Number of edge
      */
-    GraphAdjaceList.prototype.EdgeNumber = function () {
-        var en = 0;
-        for (var i = 0; i < this._vertex.Length(); i++) {
+    EdgeNumber() {
+        let en = 0;
+        for (let i = 0; i < this._vertex.Length(); i++) {
             en += this._adjList.get(this._vertex.GetElement(i).id.toString()).Length();
         }
         return en;
-    };
+    }
     /**
      * Vertex
      */
-    GraphAdjaceList.prototype.Vertexs = function () {
-        var rst = [];
-        for (var i = 0; i < this._vertex.Length(); i++) {
-            var elem = this._vertex.GetElement(i);
+    Vertexs() {
+        const rst = [];
+        for (let i = 0; i < this._vertex.Length(); i++) {
+            const elem = this._vertex.GetElement(i);
             rst.push(elem);
         }
         return rst;
-    };
-    GraphAdjaceList.prototype.IsVertexExist = function (id) {
-        for (var i = 0; i < this._vertex.Length(); i++) {
+    }
+    IsVertexExist(id) {
+        for (let i = 0; i < this._vertex.Length(); i++) {
             if (this._vertex.GetElement(i).id === id) {
                 return true;
             }
         }
         return false;
-    };
+    }
     /**
      * Edges
      */
-    GraphAdjaceList.prototype.Edges = function () {
-        var rst = [];
+    Edges() {
+        const rst = [];
         if (this._adjList.size() > 0) {
-            var vers = this._adjList.values();
-            for (var i = 0; i < vers.length; i++) {
-                var edges = vers[i];
-                for (var j = 0; j < edges.Length(); j++) {
+            const vers = this._adjList.values();
+            for (let i = 0; i < vers.length; i++) {
+                const edges = vers[i];
+                for (let j = 0; j < edges.Length(); j++) {
                     rst.push(edges.GetElement(j));
                 }
             }
         }
         return rst;
-    };
-    GraphAdjaceList.prototype.IsEdgeExist = function (from, to) {
+    }
+    IsEdgeExist(from, to) {
         if (this.IsVertexExist(from) && this.IsVertexExist(to)) {
-            var llist = this._adjList.get(from.toString());
-            for (var i = 0; i < llist.Length(); i++) {
+            const llist = this._adjList.get(from.toString());
+            for (let i = 0; i < llist.Length(); i++) {
                 if (llist.GetElement(i).to === to) {
                     return true;
                 }
             }
         }
         return false;
-    };
+    }
     /**
      * Add Vertex
      */
-    GraphAdjaceList.prototype.AddVertex = function (id, data) {
+    AddVertex(id, data) {
         if (id <= 0 || this.IsVertexExist(id)) {
             return -1;
         }
-        var vetx = new GraphAdjaceListVertex();
+        const vetx = new GraphAdjaceListVertex();
         vetx.value = data;
         vetx.id = id;
         this._vertex.AppendElement(vetx);
-        this._adjList.set(id.toString(), new LinkList_1.LinkList());
+        this._adjList.set(id.toString(), new LinkList());
         return id;
-    };
+    }
     /**
      * Add Edge
      */
-    GraphAdjaceList.prototype.AddEdge = function (frm, to, weight) {
+    AddEdge(frm, to, weight) {
         if (frm <= 0 || to <= 0 || !this.IsVertexExist(frm) || !this.IsVertexExist(to)) {
             return false;
         }
         if (this.IsEdgeExist(frm, to)) {
             return false;
         }
-        var nedge = new GraphAdjaceListEdge();
+        const nedge = new GraphAdjaceListEdge();
         nedge.from = frm;
         nedge.to = to;
         nedge.weight = weight;
-        var llist = this._adjList.get(frm.toString());
+        const llist = this._adjList.get(frm.toString());
         if (llist.Length() === 0) {
             llist.InitList(nedge);
         }
@@ -195,20 +164,18 @@ var GraphAdjaceList = /** @class */ (function () {
         // nedge.Weight = weight;
         // this._adjList.get(to.toString()).AppendElement(nedge);
         return true;
-    };
+    }
     /**
      * DFS: Depth First Search
      */
-    GraphAdjaceList.prototype.DFS = function () {
+    DFS() {
         return [];
-    };
+    }
     /**
      * BFS: Breadth First Search
      */
-    GraphAdjaceList.prototype.BFS = function () {
+    BFS() {
         return [];
-    };
-    return GraphAdjaceList;
-}());
-exports.GraphAdjaceList = GraphAdjaceList;
+    }
+}
 //# sourceMappingURL=AdjListGraph.js.map

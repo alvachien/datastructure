@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,14 +8,13 @@
  * File: Dictionary.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var Dictionary_1 = require("../../lib/model/Dictionary");
-describe('Test Dictionary', function () {
-    var _dict;
-    beforeEach(function () {
-        _dict = new Dictionary_1.Dictionary();
+import { Dictionary } from '../../lib/model/Dictionary';
+describe('Test Dictionary', () => {
+    let _dict;
+    beforeEach(() => {
+        _dict = new Dictionary();
     });
-    it('#1. Test set, values, has and size()', function () {
+    it('#1. Test set, values, has and size()', () => {
         expect(_dict).toBeTruthy();
         _dict.set('test1', 'test1');
         _dict.set('test2', 'test2');
@@ -25,12 +23,12 @@ describe('Test Dictionary', function () {
         expect(_dict.sizeLegacy()).toBe(3);
         expect(_dict.has('test1')).toBe(true);
         expect(_dict.has('test4')).toBe(false);
-        var vals = _dict.values();
+        let vals = _dict.values();
         expect(vals.length).toBe(3);
         vals = _dict.keys();
         expect(vals.length).toBe(3);
     });
-    it('#2. Test remove()', function () {
+    it('#2. Test remove()', () => {
         expect(_dict).toBeTruthy();
         _dict.set('test1', 'test1');
         _dict.set('test2', 'test2');

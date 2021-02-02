@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,15 +8,12 @@
  * File: MaximumSubArray.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MaximumSubArray = void 0;
 /**
  * MaximumSubArray: Find out the sub array which contains the maximum sum.
  * @param datalist: Data list
  * @param low: From position
  * @param high: To position
  */
-function MaximumSubArray(datalist, low, high) {
+export function MaximumSubArray(datalist, low, high) {
 }
-exports.MaximumSubArray = MaximumSubArray;
 //# sourceMappingURL=MaximumSubArray.js.map

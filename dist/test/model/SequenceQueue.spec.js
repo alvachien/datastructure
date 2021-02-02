@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
@@ -9,21 +8,20 @@
  * File: SequenceQueue.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var SequenceQueue_1 = require("../../lib/model/SequenceQueue");
-describe('Test SequenceQueue', function () {
-    var _seqQueue;
-    beforeEach(function () {
-        _seqQueue = new SequenceQueue_1.SequenceQueue();
+import { SequenceQueue } from '../../lib/model/SequenceQueue';
+describe('Test SequenceQueue', () => {
+    let _seqQueue;
+    beforeEach(() => {
+        _seqQueue = new SequenceQueue();
     });
-    it('#1. Check init', function () {
+    it('#1. Check init', () => {
         expect(_seqQueue).toBeTruthy();
     });
-    it('#2. Check empty Queue.', function () {
+    it('#2. Check empty Queue.', () => {
         expect(_seqQueue.IsEmpty()).toBe(true);
         expect(_seqQueue.Length()).toBe(0);
     });
-    it('#3. Check enqueue on Queue.', function () {
+    it('#3. Check enqueue on Queue.', () => {
         _seqQueue.Enqueue(1);
         expect(_seqQueue.IsEmpty()).toBe(false);
         expect(_seqQueue.Length()).toBe(1);
@@ -31,7 +29,7 @@ describe('Test SequenceQueue', function () {
         expect(_seqQueue.IsEmpty()).toBe(false);
         expect(_seqQueue.Length()).toBe(2);
     });
-    it('#4. Check dequeue of Queue.', function () {
+    it('#4. Check dequeue of Queue.', () => {
         _seqQueue.Enqueue(1);
         _seqQueue.Enqueue(2);
         _seqQueue.Enqueue(3);
@@ -45,7 +43,7 @@ describe('Test SequenceQueue', function () {
         expect(_seqQueue.Length()).toBe(0);
         expect(_seqQueue.Dequeue()).toBeFalsy();
     });
-    it('#5. Check empty Queue.', function () {
+    it('#5. Check empty Queue.', () => {
         _seqQueue.Enqueue(1);
         _seqQueue.Enqueue(2);
         _seqQueue.Enqueue(3);
@@ -54,7 +52,7 @@ describe('Test SequenceQueue', function () {
         _seqQueue.ClearAll();
         expect(_seqQueue.Length()).toBe(0);
     });
-    xit('#6. Check IsExist.', function () {
+    xit('#6. Check IsExist.', () => {
         // _seqQueue.InitList();
         // _seqQueue.AppendElement(1);
         // _seqQueue.AppendElement(2);
@@ -63,7 +61,7 @@ describe('Test SequenceQueue', function () {
         // expect(_seqQueue.IsExist(2)).toBe(true);
         // expect(_seqQueue.IsExist(3)).toBe(false);
     });
-    xit('#7. Check Print.', function () {
+    xit('#7. Check Print.', () => {
         // _seqQueue.InitList();
         // _seqQueue.AppendElement(1);
         // _seqQueue.AppendElement(2);

@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,42 +8,26 @@
  * File: AVLTree.ts
  * AVL tree
  */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AVLTree = exports.AVLBalanceFactor = void 0;
-var BinarySearchTree_1 = require("./BinarySearchTree");
-var AVLBalanceFactor;
+import { BinarySearchTreeNode, BinarySearchTree } from './BinarySearchTree';
+export var AVLBalanceFactor;
 (function (AVLBalanceFactor) {
     AVLBalanceFactor[AVLBalanceFactor["UNBALANCED_RIGHT"] = 1] = "UNBALANCED_RIGHT";
     AVLBalanceFactor[AVLBalanceFactor["SLIGHTLY_UNBALANCED_RIGHT"] = 2] = "SLIGHTLY_UNBALANCED_RIGHT";
     AVLBalanceFactor[AVLBalanceFactor["BALANCED"] = 3] = "BALANCED";
     AVLBalanceFactor[AVLBalanceFactor["SLIGHTLY_UNBALANCED_LEFT"] = 4] = "SLIGHTLY_UNBALANCED_LEFT";
     AVLBalanceFactor[AVLBalanceFactor["UNBALANCED_LEFT"] = 5] = "UNBALANCED_LEFT";
-})(AVLBalanceFactor = exports.AVLBalanceFactor || (exports.AVLBalanceFactor = {}));
-var AVLTree = /** @class */ (function (_super) {
-    __extends(AVLTree, _super);
-    function AVLTree() {
-        return _super.call(this) || this;
+})(AVLBalanceFactor || (AVLBalanceFactor = {}));
+export class AVLTree extends BinarySearchTree {
+    constructor() {
+        super();
     }
     /**
      * Insert node
      * @param key Key of the node
      * @param data Data of the node
      */
-    AVLTree.prototype.insert = function (key, data) {
-        var newnode = new BinarySearchTree_1.BinarySearchTreeNode(key, data);
+    insert(key, data) {
+        const newnode = new BinarySearchTreeNode(key, data);
         if (this._root === undefined) {
             this._root = newnode;
         }
@@ -52,13 +35,13 @@ var AVLTree = /** @class */ (function (_super) {
             this.insertNode(this._root, newnode);
         }
         return newnode;
-    };
-    AVLTree.prototype.getNodeHeight = function (node) {
+    }
+    getNodeHeight(node) {
         if (!node) {
             return -1;
         }
         return Math.max(this.getNodeHeight(node.leftNode), this.getNodeHeight(node.rightNode)) + 1;
-    };
+    }
     /**
      * Left left case: rotate right
      *
@@ -70,12 +53,12 @@ var AVLTree = /** @class */ (function (_super) {
      *
      * @param node Node<T>
      */
-    AVLTree.prototype.rotationLL = function (node) {
-        var tmp = node.leftNode;
+    rotationLL(node) {
+        const tmp = node.leftNode;
         node.leftNode = tmp.rightNode;
         tmp.rightNode = node;
         return tmp;
-    };
+    }
     /**
      * Right right case: rotate left
      *
@@ -87,30 +70,30 @@ var AVLTree = /** @class */ (function (_super) {
      *
      * @param node Node<T>
      */
-    AVLTree.prototype.rotationRR = function (node) {
-        var tmp = node.rightNode;
+    rotationRR(node) {
+        const tmp = node.rightNode;
         node.rightNode = tmp.leftNode;
         tmp.leftNode = node;
         return tmp;
-    };
+    }
     /**
      * Left right case: rotate left then right
      * @param node Node<T>
      */
-    AVLTree.prototype.rotationLR = function (node) {
+    rotationLR(node) {
         node.leftNode = this.rotationRR(node.leftNode);
         return this.rotationLL(node);
-    };
+    }
     /**
      * Right left case: rotate right then left
      * @param node Node<T>
      */
-    AVLTree.prototype.rotationRL = function (node) {
+    rotationRL(node) {
         node.rightNode = this.rotationLL(node.rightNode);
         return this.rotationRR(node);
-    };
-    AVLTree.prototype.getBalanceFactor = function (node) {
-        var heightDifference = this.getNodeHeight(node.leftNode) - this.getNodeHeight(node.rightNode);
+    }
+    getBalanceFactor(node) {
+        const heightDifference = this.getNodeHeight(node.leftNode) - this.getNodeHeight(node.rightNode);
         switch (heightDifference) {
             case -2:
                 return AVLBalanceFactor.UNBALANCED_RIGHT;
@@ -123,8 +106,6 @@ var AVLTree = /** @class */ (function (_super) {
             default:
                 return AVLBalanceFactor.BALANCED;
         }
-    };
-    return AVLTree;
-}(BinarySearchTree_1.BinarySearchTree));
-exports.AVLTree = AVLTree;
+    }
+}
 //# sourceMappingURL=AVLTree.js.map

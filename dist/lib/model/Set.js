@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,104 +8,100 @@
  * File: Set.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Set = void 0;
 /**
  * Class Set.
  */
-var Set = /** @class */ (function () {
-    function Set() {
+export class Set {
+    constructor() {
         this._data = {};
     }
-    Set.prototype.has = function (val) {
+    has(val) {
         return this._data.hasOwnProperty(val);
-    };
-    Set.prototype.add = function (val) {
+    }
+    add(val) {
         if (!this.has(val)) {
             this._data[val] = val;
             return true;
         }
         return false;
-    };
-    Set.prototype.remove = function (val) {
+    }
+    remove(val) {
         if (this.has(val)) {
             delete this._data[val];
             return true;
         }
         return false;
-    };
-    Set.prototype.clear = function () {
+    }
+    clear() {
         this._data = {};
-    };
-    Set.prototype.size = function () {
+    }
+    size() {
         return Object.keys(this._data).length;
-    };
-    Set.prototype.sizeLegacy = function () {
-        var count = 0;
-        for (var prop in this._data) {
+    }
+    sizeLegacy() {
+        let count = 0;
+        for (let prop in this._data) {
             if (this._data.hasOwnProperty(prop)) {
                 ++count;
             }
         }
         return count;
-    };
-    Set.prototype.values = function () {
+    }
+    values() {
         return Object.keys(this._data);
-    };
-    Set.prototype.valuesLegacy = function () {
-        var keys = [];
-        for (var key in this._data) {
+    }
+    valuesLegacy() {
+        let keys = [];
+        for (let key in this._data) {
             keys.push(key);
         }
         return keys;
-    };
-    Set.prototype.union = function (otherSet) {
-        var unionSet = new Set();
-        var vals = this.values();
-        for (var i = 0; i < vals.length; i++) {
+    }
+    union(otherSet) {
+        let unionSet = new Set();
+        let vals = this.values();
+        for (let i = 0; i < vals.length; i++) {
             unionSet.add(vals[i]);
         }
         vals = otherSet.values();
-        for (var i = 0; i < vals.length; i++) {
+        for (let i = 0; i < vals.length; i++) {
             unionSet.add(vals[i]);
         }
         return unionSet;
-    };
-    Set.prototype.intersection = function (otherSet) {
-        var intersectionSet = new Set();
-        var vals = this.values();
-        for (var i = 0; i < vals.length; i++) {
+    }
+    intersection(otherSet) {
+        let intersectionSet = new Set();
+        let vals = this.values();
+        for (let i = 0; i < vals.length; i++) {
             if (otherSet.has(vals[i])) {
                 intersectionSet.add(vals[i]);
             }
         }
         return intersectionSet;
-    };
-    Set.prototype.difference = function (otherSet) {
-        var differenceSet = new Set();
-        var vals = this.values();
-        for (var i = 0; i < vals.length; i++) {
+    }
+    difference(otherSet) {
+        let differenceSet = new Set();
+        let vals = this.values();
+        for (let i = 0; i < vals.length; i++) {
             if (!otherSet.has(vals[i])) {
                 differenceSet.add(vals[i]);
             }
         }
         return differenceSet;
-    };
-    Set.prototype.subset = function (otherSet) {
+    }
+    subset(otherSet) {
         if (this.size > otherSet.size) {
             return false;
         }
         else {
-            var vals = this.values();
-            for (var i = 0; i < vals.length; i++) {
+            let vals = this.values();
+            for (let i = 0; i < vals.length; i++) {
                 if (!otherSet.has(vals[i])) {
                     return false;
                 }
             }
         }
         return true;
-    };
-    return Set;
-}());
-exports.Set = Set;
+    }
+}
 //# sourceMappingURL=Set.js.map

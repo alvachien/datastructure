@@ -9,3 +9,4 @@
  */
 export * from './Element';
 export * from './UIUtility';
+export * from './DateUtility';

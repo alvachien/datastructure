@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,5 +8,5 @@
  * File: IList.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
+export {};
 //# sourceMappingURL=IList.js.map

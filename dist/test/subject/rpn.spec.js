@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,21 +8,20 @@
  * File: rpn.spec.ts
  *
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-var rpn_1 = require("../../lib/subject/rpn");
-describe('Test rpn', function () {
-    beforeEach(function () {
+import { rpn1 } from '../../lib/subject/rpn';
+describe('Test rpn', () => {
+    beforeEach(() => {
     });
-    it("#1. Check rpn1, part I", function () {
-        var rst = rpn_1.rpn1('12+');
+    it("#1. Check rpn1, part I", () => {
+        let rst = rpn1('12+');
         expect(rst).toBe(3);
-        rst = rpn_1.rpn1('92-');
+        rst = rpn1('92-');
         expect(rst).toBe(7);
     });
-    it("#2. Check rpn1, part II", function () {
-        var rst = rpn_1.rpn1('12+');
+    it("#2. Check rpn1, part II", () => {
+        let rst = rpn1('12+');
         expect(rst).toBe(3);
-        rst = rpn_1.rpn1('92-');
+        rst = rpn1('92-');
         expect(rst).toBe(7);
     });
 });

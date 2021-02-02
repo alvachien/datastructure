@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
-    "module": "commonjs",
+    "module": "es2020",
     "target": "es2015",
     "baseUrl": "",
     "types": [

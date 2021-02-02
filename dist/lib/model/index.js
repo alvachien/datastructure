@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @license
  * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
@@ -9,44 +8,33 @@
  * File: index.ts
  *
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 // Faked Guid
-__exportStar(require("./FakedGuid"), exports);
+export * from './FakedGuid';
 // Iterator
-__exportStar(require("./IIterator"), exports);
+export * from './IIterator';
 // List
-__exportStar(require("./IList"), exports);
-__exportStar(require("./SequenceList"), exports);
-__exportStar(require("./LinkList"), exports);
-__exportStar(require("./StaticLinkList"), exports);
+export * from './IList';
+export * from './SequenceList';
+export * from './LinkList';
+export * from './StaticLinkList';
 // Stack
-__exportStar(require("./IStack"), exports);
-__exportStar(require("./SequenceStack"), exports);
-__exportStar(require("./LinkStack"), exports);
+export * from './IStack';
+export * from './SequenceStack';
+export * from './LinkStack';
 // Queue
-__exportStar(require("./IQueue"), exports);
+export * from './IQueue';
 // Dictionary
-__exportStar(require("./Dictionary"), exports);
+export * from './Dictionary';
 // Tree
-__exportStar(require("./ITree"), exports);
-__exportStar(require("./BinaryTree"), exports);
-__exportStar(require("./BinarySearchTree"), exports);
-__exportStar(require("./BinaryThreadTree"), exports);
-__exportStar(require("./HuffmanTree"), exports);
+export * from './ITree';
+export * from './BinaryTree';
+export * from './BinarySearchTree';
+export * from './BinaryThreadTree';
+export * from './HuffmanTree';
 // Graph
-__exportStar(require("./IGraph"), exports);
-__exportStar(require("./Graph"), exports);
-__exportStar(require("./AdjListGraph"), exports);
+export * from './IGraph';
+export * from './Graph';
+export * from './AdjListGraph';
 // Algorithm
-__exportStar(require("./Algorithm"), exports);
+export * from './Algorithm';
 //# sourceMappingURL=index.js.map

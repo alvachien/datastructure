@@ -1,7 +1,7 @@
 /**
  * @license
  * index.ts
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
  *
  */
 export * from './model';
