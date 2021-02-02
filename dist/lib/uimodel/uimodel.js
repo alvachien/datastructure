@@ -1,4 +1,14 @@
 "use strict";
+/**
+ * @license
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
+ *
+ * File: UIUtility.ts
+ *
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCanvasCellPosition = exports.getCanvasMouseEventPosition = exports.isUIEditable = exports.UIMode = void 0;
 /**
