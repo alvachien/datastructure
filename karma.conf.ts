@@ -7,17 +7,36 @@ module.exports = function(config) {
     frameworks: ["jasmine", "karma-typescript"],
 
     files: [
-        { pattern: "src/**/*.ts" }
+      { pattern: "src/lib/**/*.ts" },
+      { pattern: "src/test/**/*.ts" }
     ],
 
     preprocessors: {
-        "**/*.ts": ["karma-typescript"]
+      "src/lib/**/*.ts": ["karma-typescript", "coverage"],
+      "src/test/**/*.ts": ["karma-typescript"]
     },
 
-    reporters: ["dots", "karma-typescript"],
+    karmaTypescriptConfig: {
+      compilerOptions: {
+        sourceMap: true,
+      },
+    },
+    reporters: ["progress", "karma-typescript", "coverage"],
 
-    browsers: ["ChromeHeadless"],
+    browsers: ["ChromeHeadless", "Chrome_with_debugging"],
 
-    singleRun: true
+    customLaunchers: {
+      Chrome_with_debugging: {
+        base: 'Chrome',
+        flags: ['--remote-debugging-port=9333'],
+        debug: true
+      }
+    },
+    
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    }    
+    // singleRun: true
   });
 };

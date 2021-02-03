@@ -12,7 +12,8 @@
  * 
  */
 
-import { SequenceStack, SequenceList } from '../model';
+import { SequenceStack, SequenceList, BinaryTree, SequenceQueue, BinaryTreeNode, } from '../model';
+import { RPNOperationPriority } from './rpn';
 
 /**
  * Basic formula operator
@@ -33,7 +34,7 @@ export class FormulaOperator {
 
   constructor(typ: FormulaOperatorEnum, opnum: number) {
     this.optype = typ;
-    this.opnumber = 2;
+    this.opnumber = opnum;
   }
 
   get OperatorType(): FormulaOperatorEnum {
@@ -165,38 +166,76 @@ export class FormulaParser {
   /**
    * Infix to Postfix
    */
-  public infixToPostfix(): string {
-    const st: SequenceStack<any> = new SequenceStack<any>();
-    const listVar: SequenceList<string> = new SequenceList<string>();    
-    const listNumbers: SequenceList<number> = new SequenceList<number>();
+  public infixToPostfix(listStrings: SequenceList<string>): BinaryTree<string> {
     const stkOpers: SequenceStack<string> = new SequenceStack<string>();
+    const reversePolish: SequenceQueue<string> = new SequenceQueue<string>();
+    const tree: BinaryTree<string> = new BinaryTree<string>();
 
-    let bnum = false;
-    let snumbgn = -1;
-    let snumend = -1;
-
-    for(let i: number = 0; i < this._orgInput.length; i ++) {
-      // Is number?
-      if (this._orgInput[i] >= '0' && this._orgInput[i] <= '9') {
-        if (bnum) {
-          // Do nothing
-        } else {
-          bnum = true;
-          snumbgn = i;
-        }
+    for(let i = 0; i < listStrings.Length(); i ++) {
+      let str = listStrings.GetElement(i);
+      if (!isNaN(+str)) {
+        // Numbers
+        reversePolish.Enqueue(str);
       } else {
-        if (bnum) {
-          bnum = false;
-          snumend = i;
-          listNumbers.AppendElement(+this._orgInput.substring(snumbgn, snumend));
-          stkOpers.Push(this._orgInput[i]);
+        // Operators
+        if (str === '(') {
+          stkOpers.Push(str);
+        } else if (str === ')') {
+          while(!stkOpers.IsEmpty()){						
+						const op = stkOpers.Peek();
+						if(op === '(') {
+              // When reach (, the ends
+              stkOpers.Pop();
+							break;							
+						} else{
+              reversePolish.Enqueue(stkOpers.Pop());
+						}
+					}
         } else {
-          throw new Error('Failed');
+          if (!stkOpers.IsEmpty()) {
+            while(!stkOpers.IsEmpty()){
+              let curop = stkOpers.Peek();
+              if(curop === '(') {
+                stkOpers.Push(str);
+                break;
+              } else if(RPNOperationPriority(curop) > RPNOperationPriority(str)) {              
+                reversePolish.Enqueue(curop);              
+              } else if(RPNOperationPriority(str) > RPNOperationPriority(curop)) {
+                stkOpers.Push(str);
+                break;
+              }
+            }  
+          } else {
+            stkOpers.Push(str);
+          }
         }
       }
     }
 
-    return this._orgInput;
+    while(!stkOpers.IsEmpty()){			
+			reversePolish.Enqueue(stkOpers.Pop());
+    }
+
+    let treenodes: SequenceStack<BinaryTreeNode<string>> = new SequenceStack<BinaryTreeNode<string>>();
+    while(!reversePolish.IsEmpty()){
+			
+      let node: BinaryTreeNode<string> = new BinaryTreeNode<string>();
+      node.Data = reversePolish.Dequeue();
+			
+			if(!isNaN(+node.Data)) {
+        treenodes.Push(node);
+			} else {				
+				let rightNode = treenodes.Pop();
+        let leftNode = treenodes.Pop();
+        node.Left = leftNode;
+        node.Right = rightNode;
+
+        treenodes.Push(node);
+			}			
+    }
+    tree.Root = treenodes.Pop();
+
+    return tree;
   }
 
   private parse(): boolean {

@@ -5,7 +5,7 @@
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.4.20",
+  "version": "0.4.22",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -20,7 +20,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "karma start karma.conf.ts"
+    "test": "karma --single-run --browsers ChromeHeadless start karma.conf.ts",
+    "debugtest": "karma --browsers Chrome_with_debugging start karma.conf.ts"
   },
   "dependencies": {
     "typescript": "^4.0.5"
@@ -29,8 +30,9 @@
     "@types/jasmine": "^3.6.3",
     "@types/node": "^14.14.22",
     "jasmine-core": "^3.6.0",
-    "karma": "^6.0.3",
+    "karma": "^6.1.0",
     "karma-chrome-launcher": "^3.1.0",
+    "karma-coverage": "^2.0.3",
     "karma-jasmine": "^4.0.1",
     "karma-typescript": "^5.2.0"
   }

@@ -30,7 +30,7 @@ export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
   private _lefttag: BinaryThreadTag;
   private _righttag: BinaryThreadTag;
 
-  constructore() {
+  constructor() {
     this._left = undefined;
     this._right = undefined;
   }

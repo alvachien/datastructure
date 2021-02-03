@@ -16,7 +16,7 @@ export class BinaryTreeNode<T>  {
   private _left: BinaryTreeNode<T> = null;
   private _right: BinaryTreeNode<T> = null;
 
-  constructore() {
+  constructor() {
     this._left = null;
     this._right = null;
   }

@@ -53,6 +53,19 @@ Unit test is the mechanism to ensure the quality. It was supported by using Kara
 
 Run 'npm test' to trigger the unit tests.
 
+#### HOW TO DEBUG UNIT TESTS
+
+There ar two steps away to debug unit tests in VS Code.
+
+- Step 1. Start the Karma Runner via the command below
+
+```PowerShell
+npm run debugtest
+```
+
+- Step 2. In VS Code, click 'Debug Unit Tests'.
+VS Code now attach to the Chrome window and debugging is waiting.
+
 
 ### DEMO APP
 Demo app was located in another [repository](https://www.github.com/alvachien/datastructure-demo/).
@@ -115,9 +128,13 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **SparseMatrix** defines the Sparse Matrix object.
 - The subject **ChineseChessGeneralsProblem** provides several solutions to the Generals issue in Chinese Chess.
 - The subject **PanCakeSort** provides the solution to sort the pan cakes.
-- The subject **Formula** provides the defintion of the formula.
+- The subject **Formula** provides the Math Expression Parser.
+- The subject **RPN** provides the support of Reverse Polish Notation.
 - More to come.
 
+### UTILITIES
+- The utility **DateUtility** provides some helpful methods on Date part, including days between, serialize/deserialize with string, etc.
+- The uitlity **UIUtility** provides some helpful methods operation on HTML element, including add/remove CSS classes, etc.
 
 ### PROGRESS
 The progress of the project shown in the table below.

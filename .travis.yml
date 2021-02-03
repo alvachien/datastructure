@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 11
 addons:
-    chrome: stable
+  chrome: stable
 branches:
   only:
     - master

@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "attach",
+            "name": "Debug Unit Tests",
+            "address": "localhost",
+            "port": 9333,
+            "pathMapping": {
+                "/": "${workspaceRoot}/",
+                "/base/": "${workspaceRoot}/"
+            },
+            // "webRoot": "${workspaceRoot}",
+            "sourceMaps": true,
+            //"preLaunchTask": "karma_debug_test"
+        }
+    ]
+}
