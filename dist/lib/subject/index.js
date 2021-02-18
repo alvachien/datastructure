@@ -16,4 +16,5 @@ export * from './ChineseChessGeneralProblem';
 export * from './PanCakeSorting';
 export * from './Formula';
 export * from './rpn';
+export * from './FinanceMethods';
 //# sourceMappingURL=index.js.map

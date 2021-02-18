@@ -6,8 +6,12 @@
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: Formula.ts
+ *
  * Formula definition as well as calculation, using stack
+ * Math Expression Parser
+ *
  */
+import { SequenceList, BinaryTree } from '../model';
 /**
  * Basic formula operator
  */
@@ -98,7 +102,12 @@ export declare class FormulaToken {
  */
 export declare class FormulaParser {
     private _orgInput;
+    private _listInput;
     constructor();
     init(input: string): boolean;
+    /**
+     * Infix to Postfix
+     */
+    infixToPostfix(listStrings: SequenceList<string>): BinaryTree<string>;
     private parse;
 }

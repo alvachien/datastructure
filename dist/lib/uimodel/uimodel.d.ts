@@ -19,6 +19,9 @@ export declare enum UIMode {
     Invalid = 9
 }
 export declare function isUIEditable(mode: UIMode): boolean;
+export declare function isCreateMode(mode: UIMode): boolean;
+export declare function isDisplayMode(mode: UIMode): boolean;
+export declare function isUpdateMode(mode: UIMode): boolean;
 /**
  * UI Detail page interface
  */

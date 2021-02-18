@@ -26,7 +26,7 @@ export declare class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
     private _right;
     private _lefttag;
     private _righttag;
-    constructore(): void;
+    constructor();
     get key(): number;
     set key(key: number);
     get data(): T;

@@ -130,11 +130,14 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **PanCakeSort** provides the solution to sort the pan cakes.
 - The subject **Formula** provides the Math Expression Parser.
 - The subject **RPN** provides the support of Reverse Polish Notation.
+- The subject **FinanceMethods** provides the support of methods used in Finance area, including FV, PV, etc.
 - More to come.
 
 ### UTILITIES
 - The utility **DateUtility** provides some helpful methods on Date part, including days between, serialize/deserialize with string, etc.
 - The uitlity **UIUtility** provides some helpful methods operation on HTML element, including add/remove CSS classes, etc.
+- The uitlity **StringUtility** provides some helpful methods operation on strings, including check password length, check duplications, etc.
+- The uitlity **NumberUtility** provides some helpful methods operation on numbers, including adding prefixes, rounding with specified digitals, etc.
 
 ### PROGRESS
 The progress of the project shown in the table below.
@@ -170,6 +173,7 @@ The progress of the project shown in the table below.
 27|Radix sort|n/a|n/a|Not started yet|
 28|Bucket sort|n/a|n/a|Not started yet|
 40|Formula|**In Process**|n/a|n/a|
+41|Finance Methods|**In Process**|n/a|n/a|
 
 
 # CONTRIBUTORS

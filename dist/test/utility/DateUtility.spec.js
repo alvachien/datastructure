@@ -1,14 +1,14 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: Element.spec.ts
+ * File: DateUtility.spec.ts
  *
  */
-import { DateUtility } from '../../lib/utility/DateUtility';
+import { DateUtility } from '../../lib/utility';
 describe('Unit test for DateUtility in Model', () => {
     beforeEach(() => {
         // Do nothing here

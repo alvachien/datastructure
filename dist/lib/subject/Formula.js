@@ -6,9 +6,13 @@
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: Formula.ts
+ *
  * Formula definition as well as calculation, using stack
+ * Math Expression Parser
+ *
  */
-import { SequenceStack, SequenceList } from '../model';
+import { SequenceStack, SequenceList, BinaryTree, SequenceQueue, BinaryTreeNode, } from '../model';
+import { RPNOperationPriority } from './rpn';
 /**
  * Basic formula operator
  */
@@ -25,7 +29,7 @@ export var FormulaOperatorEnum;
 export class FormulaOperator {
     constructor(typ, opnum) {
         this.optype = typ;
-        this.opnumber = 2;
+        this.opnumber = opnum;
     }
     get OperatorType() {
         return this.optype;
@@ -132,7 +136,91 @@ export class FormulaParser {
             return false;
         }
         this._orgInput = input;
+        this._listInput = new SequenceList();
+        let lidx = -1;
+        for (let i = 0; i < this._orgInput.length; i++) {
+            if ((this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
+                || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z')) {
+            }
+            if (this._orgInput[i] === '(') {
+            }
+        }
         return true;
+    }
+    /**
+     * Infix to Postfix
+     */
+    infixToPostfix(listStrings) {
+        const stkOpers = new SequenceStack();
+        const reversePolish = new SequenceQueue();
+        const tree = new BinaryTree();
+        for (let i = 0; i < listStrings.Length(); i++) {
+            let str = listStrings.GetElement(i);
+            if (!isNaN(+str)) {
+                // Numbers
+                reversePolish.Enqueue(str);
+            }
+            else {
+                // Operators
+                if (str === '(') {
+                    stkOpers.Push(str);
+                }
+                else if (str === ')') {
+                    while (!stkOpers.IsEmpty()) {
+                        const op = stkOpers.Peek();
+                        if (op === '(') {
+                            // When reach (, the ends
+                            stkOpers.Pop();
+                            break;
+                        }
+                        else {
+                            reversePolish.Enqueue(stkOpers.Pop());
+                        }
+                    }
+                }
+                else {
+                    if (!stkOpers.IsEmpty()) {
+                        while (!stkOpers.IsEmpty()) {
+                            let curop = stkOpers.Peek();
+                            if (curop === '(') {
+                                stkOpers.Push(str);
+                                break;
+                            }
+                            else if (RPNOperationPriority(curop) > RPNOperationPriority(str)) {
+                                reversePolish.Enqueue(curop);
+                            }
+                            else if (RPNOperationPriority(str) > RPNOperationPriority(curop)) {
+                                stkOpers.Push(str);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        stkOpers.Push(str);
+                    }
+                }
+            }
+        }
+        while (!stkOpers.IsEmpty()) {
+            reversePolish.Enqueue(stkOpers.Pop());
+        }
+        let treenodes = new SequenceStack();
+        while (!reversePolish.IsEmpty()) {
+            let node = new BinaryTreeNode();
+            node.Data = reversePolish.Dequeue();
+            if (!isNaN(+node.Data)) {
+                treenodes.Push(node);
+            }
+            else {
+                let rightNode = treenodes.Pop();
+                let leftNode = treenodes.Pop();
+                node.Left = leftNode;
+                node.Right = rightNode;
+                treenodes.Push(node);
+            }
+        }
+        tree.Root = treenodes.Pop();
+        return tree;
     }
     parse() {
         if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {

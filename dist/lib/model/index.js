@@ -23,6 +23,7 @@ export * from './SequenceStack';
 export * from './LinkStack';
 // Queue
 export * from './IQueue';
+export * from './SequenceQueue';
 // Dictionary
 export * from './Dictionary';
 // Tree

@@ -19,6 +19,16 @@ export class NumberUtility {
   }
 
   /**
+   * Round a number to specified digit places
+   * @param num Number to do the rounding
+   * @param decimalPlaces Decimal places
+   */
+  public static Round2Any(num: number, decimalPlaces = 2): number {
+    const mulnum = Math.pow(10, decimalPlaces);
+    return Math.round(num * mulnum) / mulnum;
+  }
+
+  /**
    * Provide a number with prefix
    * @param num Number to be work
    * @param length Length specified in prefix

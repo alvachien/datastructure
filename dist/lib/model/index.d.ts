@@ -18,6 +18,7 @@ export * from './IStack';
 export * from './SequenceStack';
 export * from './LinkStack';
 export * from './IQueue';
+export * from './SequenceQueue';
 export * from './Dictionary';
 export * from './ITree';
 export * from './BinaryTree';

@@ -5,10 +5,9 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
- * File: index.ts
+ * File: Finance.spec.ts
+ *
+ * Finance methods
+ *
  */
-export * from './Element';
-export * from './UIUtility';
-export * from './DateUtility';
-export * from './StringUtility';
-export * from './NumberUtility';
+export {};

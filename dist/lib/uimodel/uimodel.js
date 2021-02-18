@@ -22,6 +22,15 @@ export var UIMode;
 export function isUIEditable(mode) {
     return mode === UIMode.Create || mode === UIMode.Update;
 }
+export function isCreateMode(mode) {
+    return mode === UIMode.Create;
+}
+export function isDisplayMode(mode) {
+    return mode === UIMode.Display;
+}
+export function isUpdateMode(mode) {
+    return mode === UIMode.Update;
+}
 /**
  * Get canvas mouse event position
  * @param canvas Canvas

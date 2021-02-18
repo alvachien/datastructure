@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: RPN.ts
- * Contains the logic for Revers Polish Notation
+ * Contains the logic for Reverse Polish Notation
  *
  */
 // RPN(Reverse Polish Notation)

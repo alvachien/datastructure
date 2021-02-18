@@ -12,8 +12,6 @@ export class BinaryTreeNode {
     constructor() {
         this._left = null;
         this._right = null;
-    }
-    constructore() {
         this._left = null;
         this._right = null;
     }

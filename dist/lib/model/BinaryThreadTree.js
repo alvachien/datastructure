@@ -21,7 +21,7 @@ export var BinaryThreadTag;
  * Thread Tree Node
  */
 export class BinaryThreadTreeNode {
-    constructore() {
+    constructor() {
         this._left = undefined;
         this._right = undefined;
     }

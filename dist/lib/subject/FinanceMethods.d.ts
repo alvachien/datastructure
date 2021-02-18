@@ -1,0 +1,32 @@
+/**
+ * @license
+ * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
+ *
+ * File: FinanceMethods.ts
+ *
+ * Finance methods
+ *
+ */
+export declare class FinanceMethods {
+    /**
+     * Calculate the FV
+     * @param amount PV
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Amount of FV
+     */
+    static FV(amount: number, rate: number, numberOfPeriods: number, decimalPlaces?: number): number;
+    /**
+     * Calculate the PV
+     * @param amount FV
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Amount of PV
+     */
+    static PV(amount: number, rate: number, numberOfPeriods: number, decimalPlaces?: number): number;
+}

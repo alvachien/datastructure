@@ -13,7 +13,7 @@ export declare class BinaryTreeNode<T> {
     private _data;
     private _left;
     private _right;
-    constructore(): void;
+    constructor();
     get Data(): T;
     set Data(data: T);
     get Left(): BinaryTreeNode<T>;
