@@ -150,6 +150,7 @@ export class FormulaToken {
  */
 export class FormulaParser {
   private _orgInput: string;
+  private _listInput: SequenceList<string>;
 
   constructor() {
   }
@@ -160,6 +161,18 @@ export class FormulaParser {
     }
 
     this._orgInput = input;
+    this._listInput = new SequenceList<string>();
+
+    let lidx = -1;
+
+    for(let i: number = 0; i < this._orgInput.length; i ++) {
+      if ( (this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
+        || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z') ) {
+      }
+      if (this._orgInput[i] === '(') {
+      }
+    }
+
     return true;
   }
 

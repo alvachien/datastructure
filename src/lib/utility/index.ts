@@ -11,3 +11,6 @@
 export * from './Element';
 export * from './UIUtility';
 export * from './DateUtility';
+export * from './StringUtility';
+export * from './NumberUtility';
+

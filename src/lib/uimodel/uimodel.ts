@@ -25,6 +25,18 @@ export function isUIEditable(mode: UIMode): boolean {
   return mode === UIMode.Create || mode === UIMode.Update;
 }
 
+export function isCreateMode(mode: UIMode): boolean {
+  return mode === UIMode.Create;
+}
+
+export function isDisplayMode(mode: UIMode): boolean {
+  return mode === UIMode.Display;
+}
+
+export function isUpdateMode(mode: UIMode): boolean {
+  return mode === UIMode.Update;
+}
+
 /**
  * UI Detail page interface
  */

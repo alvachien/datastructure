@@ -5,7 +5,7 @@
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.4.22",
+  "version": "0.4.23",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 5.4.1 <= 12"
+    "node": ">= 5.4.1 <= 14"
   },
   "scripts": {
     "build": "tsc",
