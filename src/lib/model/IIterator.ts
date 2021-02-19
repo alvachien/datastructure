@@ -9,11 +9,5 @@
  *
  */
 
- /**
-  * Interface of Iterator
-  */
-export interface IIterator<T> {
-  hasNext(): boolean;
-  next(): T;
-  remove(): void;
-}
+export type IIterator<T> = IteratorResult<T>;
+ 

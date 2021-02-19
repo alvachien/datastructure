@@ -85,5 +85,42 @@ describe('Test LinkList', () => {
         expect(_linkList.Print('-')).toBe('1-2-3');
         expect(_linkList.Print()).toBe('1,2,3');
     });
+    it('#9. Check Iterator.', () => {
+        _linkList.InitList(1);
+        _linkList.AppendElement(2);
+        _linkList.AppendElement(3);
+        let i = 0;
+        for (const elem of _linkList) {
+            switch (i) {
+                case 0:
+                    expect(elem).toEqual(1);
+                    break;
+                case 1:
+                    expect(elem).toEqual(2);
+                    break;
+                case 2:
+                    expect(elem).toEqual(3);
+                    break;
+                default: break;
+            }
+            i++;
+        }
+        i = 0;
+        for (const elem of _linkList) {
+            switch (i) {
+                case 0:
+                    expect(elem).toEqual(1);
+                    break;
+                case 1:
+                    expect(elem).toEqual(2);
+                    break;
+                case 2:
+                    expect(elem).toEqual(3);
+                    break;
+                default: break;
+            }
+            i++;
+        }
+    });
 });
 //# sourceMappingURL=LinkList.spec.js.map

@@ -17,6 +17,34 @@ export class SequenceList {
      */
     constructor() {
         this._data = [];
+        this._cursor = -1; // For iterator
+    }
+    next(...args) {
+        if (this._cursor === -1) {
+            this._cursor = 0;
+        }
+        if (this._cursor < this._data.length) {
+            return {
+                done: false,
+                value: this._data[this._cursor++]
+            };
+        }
+        else {
+            this._cursor = -1;
+            return {
+                done: true,
+                value: undefined
+            };
+        }
+    }
+    [Symbol.iterator]() {
+        return this;
+    }
+    return(value) {
+        throw new Error('Method not implemented.');
+    }
+    throw(e) {
+        throw new Error('Method not implemented.');
     }
     /**
      * Initialize the whole list

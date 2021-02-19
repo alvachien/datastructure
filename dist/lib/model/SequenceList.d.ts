@@ -14,10 +14,15 @@ import { IList } from './IList';
  */
 export declare class SequenceList<T> implements IList<T> {
     private _data;
+    private _cursor;
     /**
      * Constructor
      */
     constructor();
+    next(...args: [] | [T]): IteratorResult<T>;
+    [Symbol.iterator](): IterableIterator<T>;
+    return?(value?: any): IteratorResult<T, any>;
+    throw?(e?: any): IteratorResult<T, any>;
     /**
      * Initialize the whole list
      */

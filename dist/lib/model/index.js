@@ -8,8 +8,6 @@
  * File: index.ts
  *
  */
-// Faked Guid
-export * from './FakedGuid';
 // Iterator
 export * from './IIterator';
 // List

@@ -12,7 +12,7 @@
 /**
  * Interface of List
  */
-export interface IList<T> {
+export interface IList<T> extends IterableIterator<T> {
   /**
    * The length of the whole list
    */

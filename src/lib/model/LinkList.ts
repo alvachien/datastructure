@@ -45,11 +45,43 @@ export class LinkListNode<T> {
 export class LinkList<T> implements IList<T> {
   private _head: LinkListNode<T> | null = null;
   private _length = 0;
+  private _cursor: LinkListNode<T> | null | undefined = undefined;
 
   /**
    * Constructor
    */
   constructor() {
+  }
+
+  next(...args: [] | [T]): IteratorResult<T> {
+    if (this._cursor === undefined) {
+      this._cursor = this._head;
+    }
+
+    if (this._cursor !== null) {
+      let rtn = {
+        done: false,
+        value: this._cursor.Data
+      };
+      this._cursor = this._cursor.Next;
+      return rtn;
+    } else {
+      this._cursor = undefined;
+      return {
+        done: true,
+        value: undefined
+      };
+    }
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this;
+  }
+  return?(value?: any): IteratorResult<T, any> {
+    throw new Error('Method not implemented.');
+  }
+  throw?(e?: any): IteratorResult<T, any> {
+    throw new Error('Method not implemented.');
   }
 
   /**

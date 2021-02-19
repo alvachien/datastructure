@@ -30,10 +30,15 @@ export declare class LinkListNode<T> {
 export declare class LinkList<T> implements IList<T> {
     private _head;
     private _length;
+    private _cursor;
     /**
      * Constructor
      */
     constructor();
+    next(...args: [] | [T]): IteratorResult<T>;
+    [Symbol.iterator](): IterableIterator<T>;
+    return?(value?: any): IteratorResult<T, any>;
+    throw?(e?: any): IteratorResult<T, any>;
     /**
      * Head
      */

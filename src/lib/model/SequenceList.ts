@@ -16,11 +16,41 @@ import { IList } from './IList';
  */
 export class SequenceList<T> implements IList<T> {
   private _data: T[] = [];
+  private _cursor = -1; // For iterator
 
   /**
    * Constructor
    */
   constructor() {
+  }
+
+  next(...args: [] | [T]): IteratorResult<T> {
+    if (this._cursor === -1) {
+      this._cursor = 0;
+    }
+
+    if (this._cursor < this._data.length) {
+      return {
+        done: false,
+        value: this._data[this._cursor++]
+      };
+    } else {
+      this._cursor = -1;
+      return {
+        done: true,
+        value: undefined
+      };
+    }
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this;
+  }
+  return?(value?: any): IteratorResult<T, any> {
+    throw new Error('Method not implemented.');
+  }
+  throw?(e?: any): IteratorResult<T, any> {
+    throw new Error('Method not implemented.');
   }
 
   /**

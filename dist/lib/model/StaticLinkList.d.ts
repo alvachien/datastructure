@@ -23,6 +23,11 @@ export declare class StaticLinkListNode<T> {
 }
 export declare class StaticLinkList<T> implements IList<T> {
     private _data;
+    private _cursor;
+    next(...args: [] | [T]): IteratorResult<T>;
+    [Symbol.iterator](): IterableIterator<T>;
+    return?(value?: any): IteratorResult<T, any>;
+    throw?(e?: any): IteratorResult<T, any>;
     /**
      * Constructor
      */

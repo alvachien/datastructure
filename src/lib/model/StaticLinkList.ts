@@ -38,6 +38,31 @@ export class StaticLinkListNode<T> {
 
 export class StaticLinkList<T> implements IList<T> {
   private _data: Array<StaticLinkListNode<T>>;
+  private _cursor: StaticLinkListNode<T>;
+
+  next(...args: [] | [T]): IteratorResult<T> {
+    if (this._cursor.Cursor !== -1) {
+      return {
+        done: false,
+        value: this._cursor.Data
+      };
+    } else {
+      return {
+        done: true,
+        value: undefined
+      };
+    }
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this;
+  }
+  return?(value?: any): IteratorResult<T, any> {
+    throw new Error('Method not implemented.');
+  }
+  throw?(e?: any): IteratorResult<T, any> {
+    throw new Error('Method not implemented.');
+  }
 
   /**
    * Constructor

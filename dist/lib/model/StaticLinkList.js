@@ -38,6 +38,29 @@ export class StaticLinkList {
     constructor() {
         this._data = new Array(200);
     }
+    next(...args) {
+        if (this._cursor.Cursor !== -1) {
+            return {
+                done: false,
+                value: this._cursor.Data
+            };
+        }
+        else {
+            return {
+                done: true,
+                value: undefined
+            };
+        }
+    }
+    [Symbol.iterator]() {
+        return this;
+    }
+    return(value) {
+        throw new Error('Method not implemented.');
+    }
+    throw(e) {
+        throw new Error('Method not implemented.');
+    }
     Length() {
         let j = 0;
         for (const it of this._data) {

@@ -91,5 +91,66 @@ describe('Test SequenceList', () => {
         expect(_seqList.Print('-')).toBe('1-2-3');
         expect(_seqList.Print()).toBe('1,2,3');
     });
+    it('#9. Check Iterator.', () => {
+        _seqList.InitList();
+        _seqList.AppendElement(1);
+        _seqList.AppendElement(2);
+        _seqList.AppendElement(3);
+        let i = 0;
+        for (const elem of _seqList) {
+            switch (i) {
+                case 0:
+                    expect(elem).toEqual(1);
+                    break;
+                case 1:
+                    expect(elem).toEqual(2);
+                    break;
+                case 2:
+                    expect(elem).toEqual(3);
+                    break;
+                default: break;
+            }
+            i++;
+        }
+    });
+    it('#10. Check Iterator, II.', () => {
+        _seqList.InitList();
+        _seqList.AppendElement(1);
+        _seqList.AppendElement(2);
+        _seqList.AppendElement(3);
+        let i = 0;
+        for (const elem of _seqList) {
+            switch (i) {
+                case 0:
+                    expect(elem).toEqual(1);
+                    break;
+                case 1:
+                    expect(elem).toEqual(2);
+                    break;
+                case 2:
+                    expect(elem).toEqual(3);
+                    break;
+                default: break;
+            }
+            i++;
+        }
+        // Re-iteration
+        i = 0;
+        for (const elem of _seqList) {
+            switch (i) {
+                case 0:
+                    expect(elem).toEqual(1);
+                    break;
+                case 1:
+                    expect(elem).toEqual(2);
+                    break;
+                case 2:
+                    expect(elem).toEqual(3);
+                    break;
+                default: break;
+            }
+            i++;
+        }
+    });
 });
 //# sourceMappingURL=SequenceList.spec.js.map

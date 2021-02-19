@@ -41,6 +41,36 @@ export class LinkList {
     constructor() {
         this._head = null;
         this._length = 0;
+        this._cursor = undefined;
+    }
+    next(...args) {
+        if (this._cursor === undefined) {
+            this._cursor = this._head;
+        }
+        if (this._cursor !== null) {
+            let rtn = {
+                done: false,
+                value: this._cursor.Data
+            };
+            this._cursor = this._cursor.Next;
+            return rtn;
+        }
+        else {
+            this._cursor = undefined;
+            return {
+                done: true,
+                value: undefined
+            };
+        }
+    }
+    [Symbol.iterator]() {
+        return this;
+    }
+    return(value) {
+        throw new Error('Method not implemented.');
+    }
+    throw(e) {
+        throw new Error('Method not implemented.');
     }
     /**
      * Head

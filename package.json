@@ -5,7 +5,7 @@
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.4.24",
+  "version": "0.4.25",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -34,6 +34,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^2.0.3",
     "karma-jasmine": "^4.0.1",
-    "karma-typescript": "^5.2.0"
+    "karma-typescript": "^5.4.0",
+    "karma-typescript-es6-transform": "^5.4.0"
   }
 }
