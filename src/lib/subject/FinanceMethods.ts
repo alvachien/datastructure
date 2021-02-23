@@ -37,4 +37,17 @@ export class FinanceMethods {
     public static PV(amount: number, rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
         return NumberUtility.Round2Any(amount * Math.pow((1 + rate), -1 * numberOfPeriods), decimalPlaces);
     }
+
+    /**
+     * Calculate the Present Value of Ordinary Annuity
+     * @param amount FV
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Amount of PV
+     */
+    public static PVofOrdinaryAnnity(amount: number, rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
+        const factor = NumberUtility.Round2Any((1 - Math.pow(1 + rate, -1 * numberOfPeriods)) / rate, decimalPlaces);
+        return NumberUtility.Round2Any(amount * factor, decimalPlaces);
+    }
 }
