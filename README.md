@@ -6,9 +6,10 @@ This project is target to build a library (abbrv: lib) for Data Structures, algo
 
 - The Data Structure part, including List, Tree, Graph, and others. 
 - The Algorithm part, including sorting, searching and others. 
-- The Utility part, including string replacement, reading text from HTML element, etc.
+- The Utility part, including finance methods, string utility, number utility, HTML element related methods, etc.
 
 The library written with TypeScript.
+
 
 ## HOW TO USE
 To use this library in your package, simply run following NPM command:
@@ -17,21 +18,34 @@ To use this library in your package, simply run following NPM command:
 
 to add this library into your own topic.
 
-Code snippet 1: show the way to use the Matrix:
+Code snippet 1: calculate the FV (further value) with interest rate 1% and 12 periods:
 
-```javascript
+```typescript
+import { FinanceMethods } from 'actslib';
+
+const rst = FinanceMethods.FV(100, 0.01, 12);
+expect(rst).toEqual(112.68); // FV is 112.68
+```
+
+
+Code snippet 2: show the way to use the Matrix:
+
+```typescript
 import { Matrix, MatrixPosIntf } from 'actslib';
+
 let matrix: Matrix = new Matrix(10, 10);
 let arpos = matrix.getSlashOutputPos();
 ```
 
-Code snippet 2: show the way to use the Quick-Sorting algorithm:
+Code snippet 3: show the way to use the Quick-Sorting algorithm:
 
-```javascript
+```typescript
 import { QuickSort } from 'actslib';
+
 let arArray: number[] = [10, 3, 26, 1, 35];
 QuickSort(arArray);
 ```
+
 
 
 ## REFERENCE
