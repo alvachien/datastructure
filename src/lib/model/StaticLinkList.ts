@@ -40,7 +40,7 @@ export class StaticLinkList<T> implements IList<T> {
   private _data: Array<StaticLinkListNode<T>>;
   private _cursor: StaticLinkListNode<T>;
 
-  next(...args: [] | [T]): IteratorResult<T> {
+  next(...args: [] | [undefined]): IteratorResult<T> {
     if (this._cursor.Cursor !== -1) {
       return {
         done: false,

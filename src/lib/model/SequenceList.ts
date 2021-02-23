@@ -24,7 +24,7 @@ export class SequenceList<T> implements IList<T> {
   constructor() {
   }
 
-  next(...args: [] | [T]): IteratorResult<T> {
+  next(...args: [] | [undefined]): IteratorResult<T> {
     if (this._cursor === -1) {
       this._cursor = 0;
     }
