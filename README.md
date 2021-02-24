@@ -144,7 +144,7 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **PanCakeSort** provides the solution to sort the pan cakes.
 - The subject **Formula** provides the Math Expression Parser.
 - The subject **RPN** provides the support of Reverse Polish Notation.
-- The subject **FinanceMethods** provides the support of methods used in Finance area, including FV, PV, etc.
+- The subject **FinanceMethods** provides the support of methods used in Finance area, including FV, PV, FV of Annity, etc.
 - More to come.
 
 ### UTILITIES
@@ -187,7 +187,7 @@ The progress of the project shown in the table below.
 27|Radix sort|n/a|n/a|Not started yet|
 28|Bucket sort|n/a|n/a|Not started yet|
 40|Formula|**In Process**|n/a|n/a|
-41|Finance Methods|**In Process**|n/a|n/a|
+41|Finance Methods|**In Process**|n/a|FV, PV, FV of ordinary annity; n/a|
 
 
 # CONTRIBUTORS
