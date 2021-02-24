@@ -53,7 +53,7 @@ export class LinkList<T> implements IList<T> {
   constructor() {
   }
 
-  next(...args: [] | [T]): IteratorResult<T> {
+  next(...args: [] | [undefined]): IteratorResult<T> {
     if (this._cursor === undefined) {
       this._cursor = this._head;
     }

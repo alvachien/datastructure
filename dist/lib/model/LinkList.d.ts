@@ -35,7 +35,7 @@ export declare class LinkList<T> implements IList<T> {
      * Constructor
      */
     constructor();
-    next(...args: [] | [T]): IteratorResult<T>;
+    next(...args: [] | [undefined]): IteratorResult<T>;
     [Symbol.iterator](): IterableIterator<T>;
     return?(value?: any): IteratorResult<T, any>;
     throw?(e?: any): IteratorResult<T, any>;

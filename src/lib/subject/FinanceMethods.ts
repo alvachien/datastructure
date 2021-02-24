@@ -15,6 +15,17 @@ import { NumberUtility } from '../utility';
 
 export class FinanceMethods {
     /**
+     * Calculate the Future Value Interest Factor, FVIF
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Future Value Interest Factor, FVIF
+     */
+    public static FVIF(rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
+        return NumberUtility.Round2Any(Math.pow((1 + rate), numberOfPeriods), decimalPlaces);
+    }
+
+    /**
      * Calculate the FV
      * @param amount PV
      * @param rate Interest rate per periods
@@ -23,7 +34,19 @@ export class FinanceMethods {
      * @returns Amount of FV
      */
     public static FV(amount: number, rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
-        return NumberUtility.Round2Any(amount * Math.pow((1 + rate), numberOfPeriods), decimalPlaces);
+        const decplace = Math.round(Math.log10(amount)) + 2;
+        return NumberUtility.Round2Any(amount * FinanceMethods.FVIF(rate, numberOfPeriods, decplace), decimalPlaces);
+    }
+
+    /**
+     * Calculate the Present Value Interest Factor, PVIF
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Present Value Interest Factor, PVIF
+     */
+    public static PVIF(rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
+        return NumberUtility.Round2Any(Math.pow((1 + rate), -1 * numberOfPeriods), decimalPlaces);
     }
 
     /**
@@ -35,7 +58,8 @@ export class FinanceMethods {
      * @returns Amount of PV
      */
     public static PV(amount: number, rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
-        return NumberUtility.Round2Any(amount * Math.pow((1 + rate), -1 * numberOfPeriods), decimalPlaces);
+        const decplace = Math.round(Math.log10(amount)) + 2;
+        return NumberUtility.Round2Any(amount * FinanceMethods.PVIF(rate, numberOfPeriods, decplace), decimalPlaces);
     }
 
     /**
@@ -61,5 +85,33 @@ export class FinanceMethods {
         const decplace = Math.round(Math.log10(amount)) + 1;
         const factor = FinanceMethods.PVFactorofOrdinaryAnnity(rate, numberOfPeriods, decplace);
         return NumberUtility.Round2Any(amount * factor, decimalPlaces);
+    }
+
+    /**
+     * Calculate the Present Value of Annuity in Advance
+     * @param amount FV
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Amount of PV
+     */
+    public static PVofAnnityInAdvance(amount: number, rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
+        // const decplace = Math.round(Math.log10(amount)) + 1;
+        const pva = FinanceMethods.PVofOrdinaryAnnity(amount, rate, numberOfPeriods, 4);
+        return NumberUtility.Round2Any(pva * (1 + rate), decimalPlaces);
+    }
+
+    /**
+     * Calculate the Present Value of Deferred Annuity
+     * @param amount FV
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param deferredPeriods Deferred of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Amount of PV
+     */
+    public static PVofDeferredAnnity(amount: number, rate: number, numberOfPeriods: number, deferredPeriods: number, decimalPlaces = 2): number {        
+        const pva = FinanceMethods.PVofOrdinaryAnnity(amount, rate, numberOfPeriods, decimalPlaces);
+        return FinanceMethods.PV(pva, rate, deferredPeriods, decimalPlaces);
     }
 }
