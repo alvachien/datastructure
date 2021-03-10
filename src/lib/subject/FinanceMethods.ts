@@ -63,6 +63,28 @@ export class FinanceMethods {
     }
 
     /**
+     * Calculate the Future Value Interest Factors for Annuity
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Interest factor
+     */
+    public static FVIFA(rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
+        return NumberUtility.Round2Any((FinanceMethods.FVIF(rate, numberOfPeriods, decimalPlaces + 2) - 1)/ rate, decimalPlaces);
+    }
+
+    /**
+     * Calculate the Present Value Interest Factors for Annuity
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Interest factor
+     */
+    public static PVIFA(rate: number, numberOfPeriods: number, decimalPlaces = 2): number {
+        return NumberUtility.Round2Any((1- FinanceMethods.PVIF(rate, numberOfPeriods, decimalPlaces + 2))/ rate, decimalPlaces);
+    }
+
+    /**
      * Calculate the Present Value Factor of Ordinary Annuity 
      * @param rate Interest rate per periods
      * @param numberOfPeriods Number of periods

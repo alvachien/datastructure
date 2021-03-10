@@ -46,6 +46,22 @@ export declare class FinanceMethods {
      */
     static PV(amount: number, rate: number, numberOfPeriods: number, decimalPlaces?: number): number;
     /**
+     * Calculate the Future Value Interest Factors for Annuity
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Interest factor
+     */
+    static FVIFA(rate: number, numberOfPeriods: number, decimalPlaces?: number): number;
+    /**
+     * Calculate the Present Value Interest Factors for Annuity
+     * @param rate Interest rate per periods
+     * @param numberOfPeriods Number of periods
+     * @param decimalPlaces Decimal places of the return value
+     * @returns Interest factor
+     */
+    static PVIFA(rate: number, numberOfPeriods: number, decimalPlaces?: number): number;
+    /**
      * Calculate the Present Value Factor of Ordinary Annuity
      * @param rate Interest rate per periods
      * @param numberOfPeriods Number of periods
