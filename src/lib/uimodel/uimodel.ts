@@ -47,6 +47,15 @@ export interface IUIDetailPage {
 }
 
 /**
+ * UI Display string
+ */
+ export class UIDisplayString {
+  public value: any;
+  public i18nterm: string;
+  public displaystring: string;
+}
+
+/**
  * Position of mouse event in Canvas
  */
 export interface CanvasMousePositionInf {

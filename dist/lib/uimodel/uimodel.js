@@ -32,6 +32,11 @@ export function isUpdateMode(mode) {
     return mode === UIMode.Update;
 }
 /**
+ * UI Display string
+ */
+export class UIDisplayString {
+}
+/**
  * Get canvas mouse event position
  * @param canvas Canvas
  * @param evt Event
