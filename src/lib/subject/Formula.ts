@@ -12,7 +12,7 @@
  * 
  */
 
-import { SequenceStack, SequenceList, BinaryTree, SequenceQueue, BinaryTreeNode, } from '../model';
+import { SequenceStack, SequenceList, BinaryTree, SequenceQueue, BinaryTreeNode, IStack, } from '../model';
 import { RPNOperationPriority } from './rpn';
 
 /**
@@ -161,17 +161,6 @@ export class FormulaParser {
     }
 
     this._orgInput = input;
-    this._listInput = new SequenceList<string>();
-
-    let lidx = -1;
-
-    for(let i: number = 0; i < this._orgInput.length; i ++) {
-      if ( (this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
-        || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z') ) {
-      }
-      if (this._orgInput[i] === '(') {
-      }
-    }
 
     return true;
   }
@@ -389,6 +378,93 @@ export class FormulaParser {
       }
     }
     while (syn !== 0);
+  }
+
+  private operatorPriority(c: string): number {
+    if (c === '+' || c === '-') {
+        return 1;
+    } else if (c === '*' || c === '/') {
+        return 2;
+    }
+
+    return 0;
+  }
+
+  private cal(rightNum: number, leftNum: number, op: string): number {
+    if (op === '+') {
+        return leftNum + rightNum;
+    } else if (op === '-') {
+        return leftNum - rightNum;
+    } else if (op === '*') {
+        return leftNum * rightNum;
+    } else if (op === '/') {
+      if(rightNum === 0){
+          throw new Error("Cannot Divid Zero");
+      } else {
+          return leftNum / rightNum;
+      }
+    }
+    throw new Error(`Operation ${op} not supported`);
+  }
+
+  public evaulate(): number {
+    if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
+      throw new Error('Invalid Input');
+    }
+
+    let numStack: IStack<number> = new SequenceStack<number>();
+    let operStack: IStack<string> = new SequenceStack<string>();
+
+    let nNum = 0;
+    let flagNum = false;
+
+    for(let i: number = 0; i < this._orgInput.length; i ++) {
+      if (this._orgInput.charAt(i) >= '0' && this._orgInput[i] <= '9') {
+        nNum = 10 * nNum + Number.parseInt(this._orgInput[i]);
+        flagNum = true;
+      } else {
+        if (flagNum) {
+          numStack.Push(nNum);
+          nNum = 0;
+          flagNum = false;
+        }
+
+        if(this._orgInput[i] === '('){
+          operStack.Push(this._orgInput[i]);
+        } else if(this._orgInput[i] === ')'){
+          while (operStack.Peek() != '('){
+            let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+            numStack.Push(rst);
+          }
+          operStack.Pop(); // Remove '('
+        } else if (this.operatorPriority(this._orgInput[i]) > 0) {
+          if (operStack.IsEmpty()) {
+            operStack.Push(this._orgInput[i]);
+          } else {
+            if (this.operatorPriority(operStack.Peek()) >= this.operatorPriority(this._orgInput[i])) {
+              let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+              numStack.Push(rst);
+            }
+            operStack.Push(this._orgInput[i]);
+          }
+        }        
+      }
+    }
+
+    if (flagNum) { // Last number
+      numStack.Push(nNum);
+    }
+
+    while (!operStack.IsEmpty()) {
+      let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+      numStack.Push(rst);
+    }
+
+    if (numStack.Length() > 1) {
+      throw new Error('Invalid');
+    }
+
+    return numStack.Pop();
   }
 }
 

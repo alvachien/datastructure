@@ -110,4 +110,7 @@ export declare class FormulaParser {
      */
     infixToPostfix(listStrings: SequenceList<string>): BinaryTree<string>;
     private parse;
+    private operatorPriority;
+    private cal;
+    evaulate(): number;
 }

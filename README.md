@@ -81,27 +81,28 @@ npm run debugtest
 VS Code now attach to the Chrome window and debugging is waiting.
 
 
-### DEMO APP
+### DEMO APP   
+
 Demo app was located in another [repository](https://www.github.com/alvachien/datastructure-demo/).
 
 Try the demo app online now via a single [click](https://alvachien.github.io/datastructure-demo/).
 
 
-### DATA STRUCTURE
-#### LIST
+### DATA STRUCTURE    
+#### LIST   
 Interface **IList** defines the generic operations supported by List.
 
 - Class **SequenceList** implements the Sequence List.
 - Class **LinkList** implements the Link List.
 - Class **StaticLinkList** implements the static link list.
 
-#### STACK AND QUEUE
+#### STACK AND QUEUE   
 Interface **IStack** and **IQueue** defines the generic operations for Stack and Queue respectively.
 
 - Class **SequenceStack** implements the Sequence Stack.
 - Class **LinkStack** implements the Link Stack.
-
-#### TREE
+  
+#### TREE    
 Interface **ITree** defines the generic operations and attributes supported by Tree.
 
 Interface **IBinaryTree** define the generic operations and attributes for Binary Tree.
@@ -111,7 +112,7 @@ Interface **IBinaryTree** define the generic operations and attributes for Binar
 - Class **BinaryThreadTree** implements the Binary Thread Tree.
 - More to come.
 
-#### GRAPH
+#### GRAPH   
 Interface **IGraph** defines the generic operations and attributes supported by Graph, such as DFS, BFS, and so on.
 
 Interface **IGraphVertex** defines the interface for Vertex in the graph.
@@ -122,7 +123,7 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - Class **GraphAdjaceList** defines the implementation for the Graph with Adjact List.
 - More to come.
 
-### ALGORITHM
+### ALGORITHM    
 - The algorithm **KMP** which offer the functionality to search source string from the target string.
 - The algorithm **InsertionSort** using the insertion sort upon the array.
 - The algorithm **BinaryInsertSort** based on **InsertionSort** but improves the way to search for suitable position to insert.
@@ -186,7 +187,7 @@ The progress of the project shown in the table below.
 26|Floyd-Warshall Algorithm|n/a|n/a|Not started yet|
 27|Radix sort|n/a|n/a|Not started yet|
 28|Bucket sort|n/a|n/a|Not started yet|
-40|Formula|**In Process**|n/a|n/a|
+40|Formula|**DONE**|**DONE**|Formula.evaluate can be used to workout the figures|
 41|Finance Methods|**In Process**|n/a|FV, FVIF, PV, PVIF, FV of ordinary annity; FV of deferred annity; FV of annity in advance; n/a|
 
 

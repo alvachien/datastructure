@@ -136,15 +136,6 @@ export class FormulaParser {
             return false;
         }
         this._orgInput = input;
-        this._listInput = new SequenceList();
-        let lidx = -1;
-        for (let i = 0; i < this._orgInput.length; i++) {
-            if ((this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
-                || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z')) {
-            }
-            if (this._orgInput[i] === '(') {
-            }
-        }
         return true;
     }
     /**
@@ -351,6 +342,90 @@ export class FormulaParser {
                     break;
             }
         } while (syn !== 0);
+    }
+    operatorPriority(c) {
+        if (c === '+' || c === '-') {
+            return 1;
+        }
+        else if (c === '*' || c === '/') {
+            return 2;
+        }
+        return 0;
+    }
+    cal(rightNum, leftNum, op) {
+        if (op === '+') {
+            return leftNum + rightNum;
+        }
+        else if (op === '-') {
+            return leftNum - rightNum;
+        }
+        else if (op === '*') {
+            return leftNum * rightNum;
+        }
+        else if (op === '/') {
+            if (rightNum === 0) {
+                throw new Error("Cannot Divid Zero");
+            }
+            else {
+                return leftNum / rightNum;
+            }
+        }
+        throw new Error(`Operation ${op} not supported`);
+    }
+    evaulate() {
+        if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
+            throw new Error('Invalid Input');
+        }
+        let numStack = new SequenceStack();
+        let operStack = new SequenceStack();
+        let nNum = 0;
+        let flagNum = false;
+        for (let i = 0; i < this._orgInput.length; i++) {
+            if (this._orgInput.charAt(i) >= '0' && this._orgInput[i] <= '9') {
+                nNum = 10 * nNum + Number.parseInt(this._orgInput[i]);
+                flagNum = true;
+            }
+            else {
+                if (flagNum) {
+                    numStack.Push(nNum);
+                    nNum = 0;
+                    flagNum = false;
+                }
+                if (this._orgInput[i] === '(') {
+                    operStack.Push(this._orgInput[i]);
+                }
+                else if (this._orgInput[i] === ')') {
+                    while (operStack.Peek() != '(') {
+                        let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+                        numStack.Push(rst);
+                    }
+                    operStack.Pop(); // Remove '('
+                }
+                else if (this.operatorPriority(this._orgInput[i]) > 0) {
+                    if (operStack.IsEmpty()) {
+                        operStack.Push(this._orgInput[i]);
+                    }
+                    else {
+                        if (this.operatorPriority(operStack.Peek()) >= this.operatorPriority(this._orgInput[i])) {
+                            let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+                            numStack.Push(rst);
+                        }
+                        operStack.Push(this._orgInput[i]);
+                    }
+                }
+            }
+        }
+        if (flagNum) { // Last number
+            numStack.Push(nNum);
+        }
+        while (!operStack.IsEmpty()) {
+            let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+            numStack.Push(rst);
+        }
+        if (numStack.Length() > 1) {
+            throw new Error('Invalid');
+        }
+        return numStack.Pop();
     }
 }
 //# sourceMappingURL=Formula.js.map
