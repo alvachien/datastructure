@@ -61,7 +61,7 @@ export class StringUtility {
    * @returns true indicates duplicated entries exist
    */
   public static hasDuplicatesInStringArray(strarray: string): boolean {
-    const valuesSoFar: any = Object.create(undefined);
+    const valuesSoFar: any = Object.create(null);
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < strarray.length; ++i) {
       const value: any = strarray[i];

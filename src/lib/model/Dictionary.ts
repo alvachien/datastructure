@@ -44,7 +44,7 @@ export class Dictionary<X> {
 
   public values(): X[] {
     const ret: any[] = [];
-    for (let key in this._data) {
+    for (const key in this._data) {
       if (this.has(key)) {
         ret.push(this._data[key]);
       }
@@ -55,7 +55,7 @@ export class Dictionary<X> {
 
   public keys(): string[] {
     const ret: any[] = [];
-    for (let key in this._data) {
+    for (const key in this._data) {
       if (this.has(key)) {
         ret.push(key);
       }
@@ -74,7 +74,7 @@ export class Dictionary<X> {
 
   public sizeLegacy(): number {
     let count = 0;
-    for (let prop in this._data) {
+    for (const prop in this._data) {
       if (this._data.hasOwnProperty(prop)) {
         ++ count;
       }

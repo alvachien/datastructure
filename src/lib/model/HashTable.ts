@@ -10,13 +10,13 @@
  */
 
 export class HashTable {
-  private _table = [];
+  private _table: any[] = [];
 
   constructor() {    
   }
 
   public put(key: string, value: any) {
-    let pos = this.generateLoseHashCode(key);
+    const pos = this.generateLoseHashCode(key);
     this._table[pos] = value;
   }
 

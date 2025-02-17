@@ -14,8 +14,8 @@ import { InsertionSort, QuickSort, BubbleSort } from '../../lib/model/Algorithm'
 
 describe('Test Algorithm', () => {
   class TestObject {
-    seq: number;
-    name: string;
+    seq = 0;
+    name = '';
   }
   let orgNumArray: number[] = [];
   let orgStringArray: string[] = [];

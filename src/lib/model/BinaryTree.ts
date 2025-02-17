@@ -12,9 +12,9 @@
 import { IBinaryTreeNode, IBinaryTree } from './ITree';
 
 export class BinaryTreeNode<T>  {
-  private _data: T;
-  private _left: BinaryTreeNode<T> = null;
-  private _right: BinaryTreeNode<T> = null;
+  private _data!: T;
+  private _left: BinaryTreeNode<T> | null = null;
+  private _right: BinaryTreeNode<T> | null = null;
 
   constructor() {
     this._left = null;
@@ -27,14 +27,14 @@ export class BinaryTreeNode<T>  {
   set Data(data: T) {
     this._data = data;
   }
-  get Left(): BinaryTreeNode<T> {
+  get Left(): BinaryTreeNode<T> | null {
     return this._left;
   }
   set Left(left: BinaryTreeNode<T>) {
     this._left = left;
   }
 
-  get Right(): BinaryTreeNode<T> {
+  get Right(): BinaryTreeNode<T> | null {
     return this._right;
   }
   set Right(right: BinaryTreeNode<T>) {
@@ -43,9 +43,9 @@ export class BinaryTreeNode<T>  {
 }
 
 export class BinaryTree<T> {
-  private _root: BinaryTreeNode<T> = null;
+  private _root: BinaryTreeNode<T> | null = null;
 
-  get Root(): BinaryTreeNode<T> {
+  get Root(): BinaryTreeNode<T> | null {
     return this._root;
   }
   set Root(root: BinaryTreeNode<T>) {
@@ -65,9 +65,9 @@ export class BinaryTree<T> {
   private InorderImpl(curNode: BinaryTreeNode<T>, arRst: Array<BinaryTreeNode<T>>) {
     if (curNode !== null) {
 
-      this.InorderImpl(curNode.Left, arRst);
+      this.InorderImpl(curNode.Left!, arRst);
       arRst.push(curNode);
-      this.InorderImpl(curNode.Right, arRst);
+      this.InorderImpl(curNode.Right!, arRst);
     }
   }
 
@@ -85,8 +85,8 @@ export class BinaryTree<T> {
     if (curNode !== null) {
       arRst.push(curNode);
 
-      this.PreorderImpl(curNode.Left, arRst);
-      this.PreorderImpl(curNode.Right, arRst);
+      this.PreorderImpl(curNode.Left!, arRst);
+      this.PreorderImpl(curNode.Right!, arRst);
     }
   }
 
@@ -102,13 +102,13 @@ export class BinaryTree<T> {
 
   private PostorderImpl(curNode: BinaryTreeNode<T>, arRst: Array<BinaryTreeNode<T>>) {
     if (curNode !== null) {
-      this.PostorderImpl(curNode.Left, arRst);
-      this.PostorderImpl(curNode.Right, arRst);
+      this.PostorderImpl(curNode.Left!, arRst);
+      this.PostorderImpl(curNode.Right!, arRst);
       arRst.push(curNode);
     }
   }
 
-  public InsertNode(parNode: BinaryTreeNode<T>, data: T): BinaryTreeNode<T> {
+  public InsertNode(parNode: BinaryTreeNode<T>, data: T): BinaryTreeNode<T> | null {
     if (parNode === null && this._root !== null) {
       return null;
     }
@@ -137,7 +137,7 @@ export class BinaryTree<T> {
     return nnode;
   }
 
-  public FindNode(elem: T): IBinaryTreeNode<T> {
+  public FindNode(elem: T): IBinaryTreeNode<T> | null {
     if (this._root === null) {
       return null;
     }
@@ -145,8 +145,10 @@ export class BinaryTree<T> {
     const arNodes: Array<BinaryTreeNode<T>> = this.PreorderTraversal();
     for (const nod of arNodes) {
       if (nod.Data === elem) {
-        return undefined;
+        return null;
       }
     }
+
+    return null;
   }
 }

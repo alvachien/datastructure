@@ -13,10 +13,10 @@ import { IBinaryTreeNode, IBinarySearchTree, BinarySearchTreeCallback } from './
 
 // Binary search tree node
 export class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
-  public leftNode: BinarySearchTreeNode<T>;
-  public rightNode: BinarySearchTreeNode<T>;
-  private _key: number;
-  private _data: T;
+  public leftNode!: BinarySearchTreeNode<T>;
+  public rightNode!: BinarySearchTreeNode<T>;
+  private _key!: number;
+  private _data!: T;
 
   get key(): number {
     return this._key;
@@ -46,7 +46,7 @@ export class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
 
 // Binary search tree
 export class BinarySearchTree<T> implements IBinarySearchTree<T> {
-  protected _root: BinarySearchTreeNode<T>;
+  protected _root!: BinarySearchTreeNode<T>;
   get rootNode(): BinarySearchTreeNode<T> {
     return this._root;
   }
@@ -75,8 +75,8 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * Search
    * @param key Key to search
    */
-  public search(key: number): BinarySearchTreeNode<T> {
-    return this.searchNode(this._root, key);
+  public search(key: number): BinarySearchTreeNode<T>  {
+    return this.searchNode(this._root, key)!;
   }
 
   /**
@@ -106,14 +106,14 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   /**
    * Minimum node 
    */
-  public min(): BinarySearchTreeNode<T> {
+  public min(): BinarySearchTreeNode<T> | undefined {
     return this.minNode(this._root);
   }
 
   /**
    * Maximum node 
    */
-  public max(): BinarySearchTreeNode<T> {
+  public max(): BinarySearchTreeNode<T> | undefined {
     return this.maxNode(this._root);
   }
 
@@ -170,7 +170,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Minuimum Node
    */
-  protected minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+  protected minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
     if (node !== undefined) {
       while (node !== undefined && node.leftNode !== undefined) {
         node = node.leftNode;
@@ -186,7 +186,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Maximum Node
    */
-  protected maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+  protected maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
     if (node !== undefined) {
       while (node !== undefined && node.rightNode !== undefined) {
         node = node.rightNode;
@@ -223,7 +223,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Search Node
    */
-  protected searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> {
+  protected searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> | undefined {
     if (node === undefined) {
       return undefined;
     }
@@ -241,16 +241,16 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Remove Node
    */
-  protected removeNode(node: BinarySearchTreeNode<T>, key: number) {
+  protected removeNode(node: BinarySearchTreeNode<T> | undefined, key: number) {
     if (node === undefined) {
       return undefined;
     }
 
     if (key < node.key) {
-      node.leftNode = this.removeNode(node.leftNode, key);
+      node.leftNode = this.removeNode(node.leftNode, key)!;
       return node;
     } else if (key > node.key) {
-      node.rightNode = this.removeNode(node.rightNode, key);
+      node.rightNode = this.removeNode(node.rightNode, key)!;
       return node;
     } else {
       if (node.leftNode === undefined && node.rightNode === undefined) {
@@ -266,9 +266,9 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
         return node;
       }
 
-      const aux: BinarySearchTreeNode<T> = this.minNode(node.rightNode);
+      const aux: BinarySearchTreeNode<T> = this.minNode(node.rightNode)!;
       node.key = aux.key;
-      node.rightNode = this.removeNode(node.rightNode, aux.key);
+      node.rightNode = this.removeNode(node.rightNode, aux.key)!;
       return node;
     }
   }

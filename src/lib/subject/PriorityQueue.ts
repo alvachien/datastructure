@@ -47,7 +47,7 @@ export class PriorityQueue<T> {
    * @param elem the element to be inserted.
    */
   public Enqueue(elem: T, pri: number): boolean {
-    let item = new PriorityQueueItem<T>(elem, pri);
+    const item = new PriorityQueueItem<T>(elem, pri);
 
     if (this._data.length === 0) {
       this._data.push(item);
@@ -73,7 +73,7 @@ export class PriorityQueue<T> {
   /**
    * Peek the top element without remove it, returns the top element.
    */
-  public Peek(): T {
+  public Peek(): T | undefined {
     if (this._data.length === 0) {
       return undefined;
     }
@@ -84,12 +84,12 @@ export class PriorityQueue<T> {
   /**
    * Return the first element and remove it from the queue, returns the poped element.
    */
-  public Dequeue(): T {
+  public Dequeue(): T | undefined {
     if (this._data.length === 0) {
       return undefined;
     }
 
-    return this._data.shift().data;
+    return this._data.shift()!.data;
   }
 
   /**

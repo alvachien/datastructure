@@ -12,14 +12,14 @@
 import { IStack } from './IStack';
 
 export class LinkStackNode<T> {
-  private _data: T;
+  private _data: T | null = null;
   private _next: LinkStackNode<T> | null;
 
   constructor() {
     this._next = null;
   }
 
-  get Data(): T {
+  get Data(): T | null{
     return this._data;
   }
   set Data(data: T) {
@@ -89,7 +89,7 @@ export class LinkStack<T> implements IStack<T> {
       return null;
     }
 
-    const pi: T = this._head.Data;
+    const pi: T = this._head.Data!;
 
     this._head = this._head.Next;
     this._length --;

@@ -35,7 +35,7 @@ describe('Test BinarySearchTree', () => {
     expect(nnode).toBeTruthy();
   });
 
-  let buildTestTree = () => {
+  const buildTestTree = () => {
     _bsTree.insert(11, '11');
     _bsTree.insert(7, '7');
     _bsTree.insert(15, '15');
@@ -107,7 +107,7 @@ describe('Test BinarySearchTree', () => {
 
     const minnode = _bsTree.min();
     expect(minnode).toBeTruthy();
-    expect(minnode.key).toBe(3);
+    expect(minnode!.key).toBe(3);
   });
 
   it('#7. Test max', () => {
@@ -116,7 +116,7 @@ describe('Test BinarySearchTree', () => {
 
     const maxnode = _bsTree.max();
     expect(maxnode).toBeTruthy();
-    expect(maxnode.key).toBe(25);
+    expect(maxnode!.key).toBe(25);
   });
 
   it('#8. Test search', () => {

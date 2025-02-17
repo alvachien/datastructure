@@ -305,6 +305,8 @@ export function SelectionSort<T>(datalist: T[], compareFn?: (a: T, b: T) => numb
       SwapElement(datalist, min, i);
     }
   }
+
+  return false;
 }
 
 /**

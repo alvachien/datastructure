@@ -19,8 +19,8 @@ import { LinkList } from './LinkList';
  * Vertex of adjace list graph
  */
 export class GraphAdjaceListVertex<X> implements IGraphVertex<X> {
-  private _id: number;
-  private _value: X;
+  private _id = 0;
+  private _value!: X;
 
   get id(): number {
     return this._id;
@@ -41,9 +41,9 @@ export class GraphAdjaceListVertex<X> implements IGraphVertex<X> {
  * Edge of adjace list graph
  */
 export class GraphAdjaceListEdge<Y> implements IGraphEdge<Y> {
-  private _from: number;
-  private _to: number;
-  private _weigth: Y;
+  private _from!: number;
+  private _to!: number;
+  private _weigth!: Y;
 
   get from(): number {
     return this._from;
@@ -92,7 +92,7 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
   public EdgeNumber(): number {
     let en = 0;
     for (let i = 0; i < this._vertex.Length(); i ++) {
-      en += this._adjList.get(this._vertex.GetElement(i).id.toString()).Length();
+      en += this._adjList.get(this._vertex.GetElement(i)!.id.toString()).Length();
     }
 
     return en;
@@ -105,7 +105,7 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     const rst: GraphAdjaceListVertex<X>[] = [];
     for (let i = 0; i < this._vertex.Length(); i ++) {
       const elem = this._vertex.GetElement(i);
-      rst.push(elem);
+      rst.push(elem!);
     }
 
     return rst;
@@ -113,7 +113,7 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
 
   IsVertexExist(id: number): boolean {
     for (let i = 0; i < this._vertex.Length(); i ++) {
-      if (this._vertex.GetElement(i).id === id) {
+      if (this._vertex.GetElement(i)!.id === id) {
         return true;
       }
     }
@@ -132,7 +132,7 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
       for (let i = 0; i < vers.length; i ++) {
         const edges = vers[i];
         for (let j = 0; j < edges.Length(); j++) {
-          rst.push(edges.GetElement(j));
+          rst.push(edges.GetElement(j)!);
         }
       }
     }
@@ -144,7 +144,7 @@ export class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     if (this.IsVertexExist(from) && this.IsVertexExist(to)) {
       const llist = this._adjList.get(from.toString());
       for (let i = 0; i < llist.Length(); i ++) {
-        if (llist.GetElement(i).to === to) {
+        if (llist.GetElement(i)!.to === to) {
           return true;
         }
       }

@@ -11,7 +11,7 @@
 
 export class UIUtility {
   public static getDocumentHead(doc?: any): any {
-    let docinuse = doc || document;
+    const docinuse = doc || document;
 
     return docinuse.head || docinuse.getElementsByTagName('head')[0] || docinuse.documentElement;
   }
@@ -67,8 +67,8 @@ export class UIUtility {
   }
   public static hasCssString(id: string, doc?: HTMLDocument): boolean {
     let index = 0, sheets;
-    let docinuse: HTMLDocument = doc || document;
-    let existingStyles = docinuse.getElementsByTagName('style');
+    const docinuse: HTMLDocument = doc || document;
+    const existingStyles = docinuse.getElementsByTagName('style');
 
     while (index < existingStyles.length) {
       if (existingStyles[index++].id === id) {
@@ -103,7 +103,7 @@ export class UIUtility {
   //   }
   // }
   public static importCssStylsheet(uri: string) {
-    var link = UIUtility.createElement('link') as HTMLLinkElement;
+    const link = UIUtility.createElement('link') as HTMLLinkElement;
     link.rel = 'stylesheet';
     link.href = uri;
 

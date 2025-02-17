@@ -16,8 +16,8 @@ import { IGraph, IGraphVertex, IGraphEdge } from './IGraph';
  * Vertext in the graph
  */
 export class GraphVertex<T> implements IGraphVertex<T> {
-  private _id: number;
-  private _value: T;
+  private _id!: number;
+  private _value!: T;
 
   get id(): number {
     return this._id;
@@ -38,9 +38,9 @@ export class GraphVertex<T> implements IGraphVertex<T> {
  * Edge in the graph
  */
 export class GraphEdge<T> implements IGraphEdge<T> {
-  private _weight: T;
-  private _from: number; // From node
-  private _to: number;
+  private _weight!: T;
+  private _from!: number; // From node
+  private _to!: number;
 
   get weight(): T {
     return this._weight;
@@ -182,7 +182,7 @@ export class Graph<X, Y> implements IGraph<X, Y> {
     for (let i = 0; i < this._edge.length; i++) {
       if (this._edge[i].from === vex.id) {
         // Get the to
-        let tonode: GraphVertex<X> = null;
+        let tonode: GraphVertex<X> | null = null;
         for (let j = 0; j < this._vertex.length; j++) {
           if (this._vertex[j].id === this._edge[i].to) {
             tonode = this._vertex[j];
@@ -190,7 +190,7 @@ export class Graph<X, Y> implements IGraph<X, Y> {
           }
         }
 
-        this.DFSImpl(tonode, visited, rst);
+        this.DFSImpl(tonode!, visited, rst);
       }
       // Not necessary??
       // else if (this._edge[i].To === vex.ID) {

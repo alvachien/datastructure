@@ -15,9 +15,9 @@ import { SequenceList } from '../model';
  * Trituple
  */
 export class Trituple<T> {
-  private _row: number;
-  private _column: number;
-  private _val: T;
+  private _row!: number;
+  private _column!: number;
+  private _val!: T;
 
   get Row(): number {
     return this._row;
@@ -92,8 +92,8 @@ export class SparseMatrix<T> {
 
     for (let i = 0; i < this._listTerms.Length(); i++) {
       const elem = this._listTerms.GetElement(i);
-      if (!sl.IsExist(elem.Row)) {
-        sl.AppendElement(elem.Row);
+      if (!sl.IsExist(elem!.Row)) {
+        sl.AppendElement(elem!.Row);
       }
     }
 
@@ -108,8 +108,8 @@ export class SparseMatrix<T> {
 
     for (let i = 0; i < this._listTerms.Length(); i++) {
       const elem = this._listTerms.GetElement(i);
-      if (!sl.IsExist(elem.Column)) {
-        sl.AppendElement(elem.Column);
+      if (!sl.IsExist(elem!.Column)) {
+        sl.AppendElement(elem!.Column);
       }
     }
 
@@ -128,9 +128,9 @@ export class SparseMatrix<T> {
     }
 
     for (let i = 0; i < this._listTerms.Length(); i++) {
-      if (row === this._listTerms.GetElement(i).Row
-        && col === this._listTerms.GetElement(i).Column) {
-        return this._listTerms.GetElement(i).Value;
+      if (row === this._listTerms.GetElement(i)!.Row
+        && col === this._listTerms.GetElement(i)!.Column) {
+        return this._listTerms.GetElement(i)!.Value;
       }
     }
 
@@ -149,8 +149,8 @@ export class SparseMatrix<T> {
     }
 
     for (let i = 0; i < this._listTerms.Length(); i++) {
-      if (row === this._listTerms.GetElement(i).Row
-        && col === this._listTerms.GetElement(i).Column) {
+      if (row === this._listTerms.GetElement(i)!.Row
+        && col === this._listTerms.GetElement(i)!.Column) {
         return true;
       }
     }
@@ -192,7 +192,7 @@ export class SparseMatrix<T> {
 
     for (let i = 0; i < this._listTerms.Length(); i++) {
       const it2: Trituple<T> = new Trituple<T>();
-      const it = this._listTerms.GetElement(i);
+      const it = this._listTerms.GetElement(i)!;
       it2.Column = it.Row;
       it2.Row = it.Column;
       it2.Value = it.Value;
@@ -206,7 +206,7 @@ export class SparseMatrix<T> {
    * Add another matrix
    * @param other matrix which used to add
    */
-  public Add(other: SparseMatrix<T>): SparseMatrix<T> {
+  public Add(other: SparseMatrix<T>): SparseMatrix<T> | null {
     return null;
   }
 
@@ -214,7 +214,7 @@ export class SparseMatrix<T> {
    * Multipy another matrix
    * @param other matrix which used to multiply
    */
-  public Multiply(other: number | SparseMatrix<T>): SparseMatrix<T> {
+  public Multiply(other: number | SparseMatrix<T>): SparseMatrix<T> | null {
     return null;
   }
 }

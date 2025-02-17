@@ -15,17 +15,17 @@ import { IList } from './IList';
  * Node in static link list
  */
 export class StaticLinkListNode<T> {
-  private _data: T;
+  private _data: T | null = null;
   private _cursor: number = -1;
 
   constructore() {
     this._cursor = -1;
   }
 
-  get Data(): T {
+  get Data(): T | null {
     return this._data;
   }
-  set Data(data: T) {
+  set Data(data: T | null) {
     this._data = data;
   }
   get Cursor(): number {
@@ -38,13 +38,13 @@ export class StaticLinkListNode<T> {
 
 export class StaticLinkList<T> implements IList<T> {
   private _data: Array<StaticLinkListNode<T>>;
-  private _cursor: StaticLinkListNode<T>;
+  private _cursor!: StaticLinkListNode<T>;
 
   next(...args: [] | [undefined]): IteratorResult<T> {
     if (this._cursor.Cursor !== -1) {
       return {
         done: false,
-        value: this._cursor.Data
+        value: this._cursor.Data!
       };
     } else {
       return {

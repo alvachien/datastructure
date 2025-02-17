@@ -30,7 +30,7 @@ export class AVLTree<T> extends BinarySearchTree<T> {
    * @param key Key of the node
    * @param data Data of the node
    */
-  public insert(key: number, data: T): BinarySearchTreeNode<T> {
+  public override insert(key: number, data: T): BinarySearchTreeNode<T> {
     const newnode: BinarySearchTreeNode<T> = new BinarySearchTreeNode<T>(key, data);
 
     if (this._root === undefined) {

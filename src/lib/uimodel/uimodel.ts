@@ -51,8 +51,8 @@ export interface IUIDetailPage {
  */
  export class UIDisplayString {
   public value: any;
-  public i18nterm: string;
-  public displaystring: string;
+  public i18nterm!: string;
+  public displaystring!: string;
 }
 
 /**

@@ -17,9 +17,9 @@ describe('Test BinarySearchTree', () => {
   });
 
   it('#1. Test creation', () => {
-    let nid = FakedGuid.newGuid();
+    const nid = FakedGuid.newGuid();
     expect(nid).toBeTruthy();
-    let nid2 = FakedGuid.newGuid();
+    const nid2 = FakedGuid.newGuid();
     expect(nid2).toBeTruthy();
   });
 });

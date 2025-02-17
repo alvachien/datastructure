@@ -5,17 +5,17 @@
     "baseUrl": "src",
     "sourceMap": true,
     "declaration": true,
-    "strict": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
     "experimentalDecorators": true,
-    "target": "es2015",
-    "module": "es2020",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "moduleResolution": "bundler",
+    "emitDecoratorMetadata": true,
+    "target": "ES2022",
+    "module": "ES2022",
     "lib": [
-      "es2018",
+      "ES2022",
       "dom"
     ]
   },

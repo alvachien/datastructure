@@ -23,12 +23,12 @@ export enum BinaryThreadTag {
  * Thread Tree Node
  */
 export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
-  private _key: number;
-  private _data: T;
-  private _left: BinaryThreadTreeNode<T>;
-  private _right: BinaryThreadTreeNode<T>;
-  private _lefttag: BinaryThreadTag;
-  private _righttag: BinaryThreadTag;
+  private _key!: number;
+  private _data!: T;
+  private _left: BinaryThreadTreeNode<T> | undefined;
+  private _right: BinaryThreadTreeNode<T> | undefined;
+  private _lefttag!: BinaryThreadTag;
+  private _righttag!: BinaryThreadTag;
 
   constructor() {
     this._left = undefined;
@@ -47,7 +47,7 @@ export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
   set data(data: T) {
     this._data = data;
   }
-  get Left(): BinaryThreadTreeNode<T> {
+  get Left(): BinaryThreadTreeNode<T>| undefined {
     return this._left;
   }
   set Left(left: BinaryThreadTreeNode<T>) {
@@ -61,7 +61,7 @@ export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
     this._lefttag = lt;
   }
 
-  get Right(): BinaryThreadTreeNode<T> {
+  get Right(): BinaryThreadTreeNode<T>| undefined {
     return this._right;
   }
   set Right(right: BinaryThreadTreeNode<T>) {
@@ -80,7 +80,7 @@ export class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
  * Binary Thread Tree
  */
 export class BinaryThreadTree<T> implements IBinaryTree<T> {
-  private _root: BinaryThreadTreeNode<T>;
+  private _root!: BinaryThreadTreeNode<T>;
 
   get rootNode(): BinaryThreadTreeNode<T> {
     return this._root;
@@ -102,9 +102,9 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
   private InorderImpl(curNode: BinaryThreadTreeNode<T>, arRst: Array<BinaryThreadTreeNode<T>>) {
     if (curNode !== null) {
 
-      this.InorderImpl(curNode.Left, arRst);
+      this.InorderImpl(curNode.Left!, arRst);
       arRst.push(curNode);
-      this.InorderImpl(curNode.Right, arRst);
+      this.InorderImpl(curNode.Right!, arRst);
     }
   }
 
@@ -122,8 +122,8 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
     if (curNode !== null) {
       arRst.push(curNode);
 
-      this.PreorderImpl(curNode.Left, arRst);
-      this.PreorderImpl(curNode.Right, arRst);
+      this.PreorderImpl(curNode.Left!, arRst);
+      this.PreorderImpl(curNode.Right!, arRst);
     }
   }
 
@@ -139,13 +139,13 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
 
   private PostorderImpl(curNode: BinaryThreadTreeNode<T>, arRst: Array<BinaryThreadTreeNode<T>>) {
     if (curNode !== null) {
-      this.PostorderImpl(curNode.Left, arRst);
-      this.PostorderImpl(curNode.Right, arRst);
+      this.PostorderImpl(curNode.Left!, arRst);
+      this.PostorderImpl(curNode.Right!, arRst);
       arRst.push(curNode);
     }
   }
 
-  public InsertNode(parNode: BinaryThreadTreeNode<T>, key: number, data: T): BinaryThreadTreeNode<T> {
+  public InsertNode(parNode: BinaryThreadTreeNode<T>, key: number, data: T): BinaryThreadTreeNode<T> | null {
     if (parNode === null && this._root !== null) {
       return null;
     }
@@ -174,7 +174,7 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
     return nnode;
   }
 
-  public FindNode(elem: T): IBinaryTreeNode<T> {
+  public FindNode(elem: T): IBinaryTreeNode<T> | null {
     if (this._root === null) {
       return null;
     }
@@ -185,5 +185,7 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
         return nod;
       }
     }
+
+    return null;
   }
 }

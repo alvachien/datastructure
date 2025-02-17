@@ -46,7 +46,7 @@ export class SequenceQueue<T> implements IQueue<T> {
   /**
    * Peek the top element without remove it, returns the top element.
    */
-  public Peek(): T {
+  public Peek(): T | undefined {
     if (this._data.length === 0) {
       return undefined;
     }
@@ -57,7 +57,7 @@ export class SequenceQueue<T> implements IQueue<T> {
   /**
    * Return the first element and remove it from the queue, returns the poped element.
    */
-  public Dequeue(): T {
+  public Dequeue(): T | undefined {
     if (this._data.length === 0) {
       return undefined;
     }

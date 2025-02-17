@@ -107,7 +107,7 @@ export class Matrix<T> {
    * Get element
    * @param pos Position
    */
-  public getElement(pos: MatrixPosIntf): T {
+  public getElement(pos: MatrixPosIntf): T | undefined {
     if (!this.isValidPosition(pos)) {
       return undefined;
     }

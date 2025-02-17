@@ -79,8 +79,8 @@ export class Polynomial {
    */
   public Coef(e: number): number | null {
     for (let i = 0; i < this._term.Length(); ++i) {
-      if (this._term.GetElement(i).Exp === e) {
-        return this._term.GetElement(i).Coef;
+      if (this._term.GetElement(i)!.Exp === e) {
+        return this._term.GetElement(i)!.Coef;
       }
     }
     return null;
@@ -96,7 +96,7 @@ export class Polynomial {
 
     let exp = 0;
     for (let i = 0; i < this._term.Length(); ++i) {
-      const texp = this._term.GetElement(i).Exp;
+      const texp = this._term.GetElement(i)!.Exp;
       if (exp < texp) {
         exp = texp;
       }
@@ -119,7 +119,7 @@ export class Polynomial {
    */
   public NewTerm(coef: number, exp: number): boolean {
     for (let i = 0; i < this._term.Length(); ++i) {
-      if (this._term.GetElement(i).Exp === exp) {
+      if (this._term.GetElement(i)!.Exp === exp) {
         return false;
       }
     }
@@ -147,9 +147,9 @@ export class Polynomial {
     const visoth: SequenceList<number> = new SequenceList<number>();
     const rst: Polynomial = new Polynomial();
     for (let i = 0; i < this._term.Length(); ++i) {
-      const elem = this._term.GetElement(i);
+      const elem = this._term.GetElement(i)!;
       for (let j = 0; j < othlen; ++j) {
-        const elemj = other.Terms().GetElement(j);
+        const elemj = other.Terms().GetElement(j)!;
         if (elem.Exp === elemj.Exp) {
           if (elem.Coef + elemj.Coef !== 0) {
             // When the Coef's addition meets zero,
@@ -162,7 +162,7 @@ export class Polynomial {
     }
     if (othlen > visoth.Length()) {
       for (let j = 0; j < othlen; ++j) {
-        const elemj = other.Terms().GetElement(j);
+        const elemj = other.Terms().GetElement(j)!;
         if (visoth.IsExist(elemj.Exp)) {
           continue;
         }
@@ -178,19 +178,19 @@ export class Polynomial {
    * Multiply two polynomials
    * @param other polynomial which apply to multiply
    */
-  public Multiply(other: Polynomial): Polynomial {
+  public Multiply(other: Polynomial): Polynomial | null {
     if (other === null
       || other === undefined
       || other.TermLength() === 0) {
       return null;
     }
 
-    let rst: Polynomial = null;
+    let rst: Polynomial | null = null;
     for (let i = 0; i < this._term.Length(); ++i) {
-      const elem = this._term.GetElement(i);
-      let subitem: Polynomial = new Polynomial();
+      const elem = this._term.GetElement(i)!;
+      const subitem: Polynomial = new Polynomial();
       for (let j = 0; j < other.TermLength(); ++j) {
-        const elem2 = other.Terms().GetElement(j);
+        const elem2 = other.Terms().GetElement(j)!;
         subitem.NewTerm(Math.round(elem.Coef * elem2.Coef), Math.round(elem.Exp + elem2.Exp));
       }
 
@@ -211,7 +211,7 @@ export class Polynomial {
   public Eval(val: number): number {
     let rst = 0;
     for (let i = 0; i < this._term.Length(); ++i) {
-      const elem = this._term.GetElement(i);
+      const elem = this._term.GetElement(i)!;
 
       rst += elem.Coef * Math.pow(val, elem.Exp);
     }
@@ -231,7 +231,7 @@ export class Polynomial {
 
     const arexp: number[] = [];
     for (let i = 0; i < this._term.Length(); ++i) {
-      arexp.push(this._term.GetElement(i).Exp);
+      arexp.push(this._term.GetElement(i)!.Exp);
     }
     if (arexp.length === 0) {
       return '';
@@ -244,13 +244,13 @@ export class Polynomial {
     let bfirst = false;
     for (let i: number = arexp.length - 1; i >= 0; --i) {
       for (let j = 0; j < this._term.Length(); j++) {
-        if (this._term.GetElement(j).Exp === arexp[i]) {
+        if (this._term.GetElement(j)!.Exp === arexp[i]) {
           if (!bfirst) {
             bfirst = true;
           } else {
             rst += '+';
           }
-          rst += this._term.GetElement(j).Coef.toString();
+          rst += this._term.GetElement(j)!.Coef.toString();
           if (arexp[i] !== 0) {
             rst += 'X' + supbgn + arexp[i].toString() + supend;
           }

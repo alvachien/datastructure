@@ -29,14 +29,14 @@ export function readElementText(element: HTMLElement) {
 export function checkSelectInsideElement(element: HTMLElement, range?: Range): boolean {
   let isEditor = false;
   if (!range) {
-    if (window.getSelection().rangeCount === 0) {
+    if (window.getSelection()!.rangeCount === 0) {
       return isEditor;
     } else {
-      range = window.getSelection().getRangeAt(0);
+      range = window.getSelection()!.getRangeAt(0);
     }
   }
 
-  let container = range.commonAncestorContainer;
+  let container: any = range.commonAncestorContainer;
   while (container) {
     if (element.isEqualNode(container)) {
       isEditor = true;
@@ -58,8 +58,8 @@ export function checkSelectInsideElement(element: HTMLElement, range?: Range): b
 // Reset selection range
 export function resetSelectionRange(range: Range): void {
   const selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.addRange(range);
+  selection!.removeAllRanges();
+  selection!.addRange(range);
 }
 
 export function setSelectionByPosition(editor: HTMLElement, positoin: IElementSelectionPosition): Range {
@@ -68,15 +68,15 @@ export function setSelectionByPosition(editor: HTMLElement, positoin: IElementSe
   let pNode = editor.childNodes[line];
   let foundStart = false;
   let stop = false;
-  let start = Math.max(0, positoin.start);
-  let end = Math.max(0, positoin.end);
+  const start = Math.max(0, positoin.start);
+  const end = Math.max(0, positoin.end);
 
   const range = editor.ownerDocument.createRange();
   range.setStart(pNode, 0);
   range.collapse(true);
 
   while (!stop && pNode) {
-    const nextCharIndex = charIndex + pNode.textContent.length;
+    const nextCharIndex = charIndex + pNode.textContent!.length;
     if (!foundStart && start >= charIndex && start <= nextCharIndex) {
       if (start === 0) {
         range.setStart(pNode, 0);
@@ -124,12 +124,13 @@ export function setSelectionByPosition(editor: HTMLElement, positoin: IElementSe
 export function setSelectionByInlineText(text: string, childNodes: NodeListOf<ChildNode>): void {
   let offset = 0;
   let startIndex = 0;
-  Array.from(childNodes).some((node: HTMLElement, index: number) => {
-    startIndex = node.textContent.indexOf(text);
+  Array.from(childNodes).some((node: any, index: any) => {
+    startIndex = node.textContent!.indexOf(text);
     if (startIndex > -1 && childNodes[index].childNodes[0].nodeType === 3) {
       offset = index;
       return true;
     }
+    return false;
   });
   if (startIndex < 0) {
     return;
@@ -149,10 +150,10 @@ export function getSelectPosition(element: HTMLElement, range?: Range): IElement
   };
 
   if (!range) {
-    if (window.getSelection().rangeCount === 0) {
+    if (window.getSelection()!.rangeCount === 0) {
       return position;
     }
-    range = window.getSelection().getRangeAt(0);
+    range = window.getSelection()!.getRangeAt(0);
   }
 
   if (checkSelectInsideElement(element, range)) {
@@ -162,7 +163,7 @@ export function getSelectPosition(element: HTMLElement, range?: Range): IElement
     } else {
       preSelectionRange.selectNodeContents(element);
     }
-    if (range.startContainer.childNodes.length === 1 && range.startContainer.textContent.trim() === '') {
+    if (range.startContainer.childNodes.length === 1 && range.startContainer!.textContent!.trim() === '') {
       preSelectionRange.setEnd(element.childNodes[0].childNodes[0], 0);
     } else {
       preSelectionRange.setEnd(range.startContainer, range.startOffset);
@@ -176,15 +177,15 @@ export function getSelectPosition(element: HTMLElement, range?: Range): IElement
 
 export function getElementSelectionText(element: HTMLElement, range?: Range): string {
   if (!range) {
-    if (window.getSelection().rangeCount === 0) {
+    if (window.getSelection()!.rangeCount === 0) {
       return '';
     } else {
-      range = window.getSelection().getRangeAt(0);
+      range = window.getSelection()!.getRangeAt(0);
     }
   }
 
   if (checkSelectInsideElement(element, range)) {
-    return window.getSelection().toString();
+    return window.getSelection()!.toString();
   }
   return '';
 }
@@ -216,10 +217,10 @@ export function formatElementText(element: HTMLElement, content: string, positio
 
 // Insert text into element
 export function insertTextIntoElement(element: HTMLElement, prefix: string, suffix: string,
-  originrange: Range = undefined,
+  originrange: Range | undefined = undefined,
   replace: boolean = false,
   toggle: boolean = false): void {
-  let range: Range = window.getSelection().rangeCount === 0 ? undefined : window.getSelection().getRangeAt(0);
+  let range = window.getSelection()!.rangeCount === 0 ? undefined : window.getSelection()!.getRangeAt(0);
   if (!checkSelectInsideElement(element)) {
     if (originrange) {
       range = originrange;
@@ -234,7 +235,7 @@ export function insertTextIntoElement(element: HTMLElement, prefix: string, suff
   const content = readElementText(element);
 
   // select none || select something and need replace
-  if (range.collapsed || (!range.collapsed && replace)) {
+  if (range!.collapsed || (!range!.collapsed && replace)) {
     const text = prefix + suffix;
     formatElementText(element, content.substring(0, position.start) + text + content.substring(position.end),
       {
@@ -276,13 +277,13 @@ export function getCursorPositionInElement(element: HTMLElement): any {
   }
 
   const parentRect = element.parentElement.getBoundingClientRect();
-  const range = window.getSelection().getRangeAt(0);
+  const range = window.getSelection()!.getRangeAt(0);
   const startNode = range.startContainer.childNodes[range.startOffset] as HTMLElement;
 
   let cursorRect;
   if (startNode) {
     if (startNode.nodeType === 3 && startNode.textContent === "") {
-      cursorRect = startNode.nextElementSibling.getClientRects()[0];
+      cursorRect = startNode.nextElementSibling!.getClientRects()[0];
     } else if (startNode.getClientRects) {
       cursorRect = startNode.getClientRects()[0];
     } else if (startNode.parentElement) {
@@ -300,8 +301,8 @@ export function getCursorPositionInElement(element: HTMLElement): any {
   }
 
   return {
-    left: cursorRect.left - parentRect.left,
-    top: cursorRect.top - parentRect.top,
+    left: cursorRect!.left - parentRect.left,
+    top: cursorRect!.top - parentRect.top,
   };
 }
 

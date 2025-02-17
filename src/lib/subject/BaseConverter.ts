@@ -44,7 +44,7 @@ export function baseConverter(decNumber: number, base: NumberBaseEnum): string {
   }
 
   while (!objStack.IsEmpty()) {
-    baseString += digits[objStack.Pop()];
+    baseString += digits[objStack.Pop()!];
   }
 
   return baseString;

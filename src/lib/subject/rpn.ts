@@ -82,11 +82,11 @@ export function rpn1(strinputs: string): number {
 
   // Split into array of tokens
   // let arinputs: any[] = strinputs.split(/\s+/);
-  let arinputs: any[] = strinputs.split(/(\d)/);
-  let stack = [];
+  const arinputs: any[] = strinputs.split(/(\d)/);
+  const stack: any[] = [];
 
-  for (var i = 0; i < arinputs.length; i++) {    
-    let token = arinputs[i];
+  for (let i = 0; i < arinputs.length; i++) {    
+    const token = arinputs[i];
     if (arinputs[i] === '') {
       continue;
     }
@@ -103,8 +103,8 @@ export function rpn1(strinputs: string): number {
 
       // Pop two items from the top of the stack and push the result of the
       // operation onto the stack.
-      let y = stack.pop();
-      let x = stack.pop();
+      const y = stack.pop();
+      const x = stack.pop();
       /* eslint no-eval: 0 */
       stack.push(eval(x + token + ' ' + y));
     }
@@ -142,12 +142,12 @@ export class RPN {
    */
   public buildExpress(exp: string) {
 
-    let skOp = new Array();
+    const skOp: any[] = [];
     const operations = "+-*/";
     let digit = "";
 
     for (let i = 0; i < exp.length; i++) {
-      let token = exp.charAt(i);
+      const token = exp.charAt(i);
       if (!Number.isNaN(+token)) // Digitials
       {
         digit += token;
@@ -159,7 +159,7 @@ export class RPN {
         }
 
         while (skOp.length > 0) {
-          var opInStack = skOp.pop();
+          let opInStack = skOp.pop()!;
           if (opInStack === '(' || RPNOperationPriority(opInStack) < RPNOperationPriority(token)) {
             skOp.push(opInStack);
             break;
@@ -204,17 +204,17 @@ export class RPN {
    * Workout the final result
    */
   public WorkoutResult(): number {
-    let stack = new Array();
+    const stack = [];
     let result = 0;
 
     for (let i = 0; i < this._arInputs.length; i++) {
-      let c = this._arInputs[i];
+      const c = this._arInputs[i];
       if (!Number.isNaN(+c)) {
         stack.push(c);
       }
       else if (c === '+' || c === '-' || c === '*' || c === '/') {
-        var nextNum = parseFloat(stack.pop());
-        var prevNum = parseFloat(stack.pop());
+        const nextNum = parseFloat(stack.pop());
+        const prevNum = parseFloat(stack.pop());
         result = RPNGetOperatorResult(prevNum, nextNum, c);
         stack.push(result);
       }
@@ -226,18 +226,18 @@ export class RPN {
   // fraction
   // decimal fraction
   public VerifyResult(allowNegative: boolean, allowDecimal: boolean): boolean {
-    let stack = new Array();
+    const stack = [];
     let result = 0;
 
     for (let i = 0; i < this._arInputs.length; i++) {
-      let c = this._arInputs[i];
+      const c = this._arInputs[i];
 
       if (!Number.isNaN(+c)) {
         stack.push(c);
       }
 
       else if (c === '+' || c === '-' || c === '*' || c === '/') {
-        let nextNum = parseFloat(stack.pop());
+        const nextNum = parseFloat(stack.pop());
         if (!Number.isInteger(nextNum) && !allowDecimal) {
           return false;
         }
@@ -245,7 +245,7 @@ export class RPN {
           return false;
         }
 
-        let prevNum = parseFloat(stack.pop());
+        const prevNum = parseFloat(stack.pop());
         if (!Number.isInteger(prevNum) && !allowDecimal) {
           return false;
         }

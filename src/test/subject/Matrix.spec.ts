@@ -56,7 +56,7 @@ describe('Test Matrix', () => {
     // [[3, 5]]
     // [[6]]
     
-    let arOut = _matrix.getSlashOutputPos();
+    const arOut = _matrix.getSlashOutputPos();
     expect(arOut.length).toBe(2 + 3 -1);
 
     // Row 0
@@ -116,7 +116,7 @@ describe('Test Matrix', () => {
     // [[4, 8]]
     // [[7]]
 
-    let arOut = _matrix.getBackSlashOutputPos();
+    const arOut = _matrix.getBackSlashOutputPos();
     expect(arOut.length).toBe(3 + 3 - 1);
 
     // Row 0

@@ -193,7 +193,6 @@ The progress of the project shown in the table below.
 
 # CONTRIBUTORS
 - **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;
-- **Lily Yao**
 
 # Licence
 MIT

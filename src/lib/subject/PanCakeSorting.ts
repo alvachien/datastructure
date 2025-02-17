@@ -29,7 +29,7 @@ function ArrayFlip<T>(arr: T[], i: number) {
 }
 
 function FindMax<T>(arr: T[], n: number) {
-  let max: number;
+  let max: number = 0;
   let i = 0;
 
   for (; i < n; i++) {

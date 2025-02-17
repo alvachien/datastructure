@@ -87,14 +87,14 @@ export interface IBinaryTree<T> {
    * Return false if the insertion is failed.
    * Return a reference to new created note if succeed.
    */
-  InsertNode(parNode: IBinaryTreeNode<T>, key: number, data: T): IBinaryTreeNode<T>;
+  InsertNode(parNode: IBinaryTreeNode<T>, key: number, data: T): IBinaryTreeNode<T> | null;
 
   /**
    * FindNode: Find the node
    * @param elem, the element with specified data
    * Return the node if found
    */
-  FindNode(elem: T): IBinaryTreeNode<T>;
+  FindNode(elem: T): IBinaryTreeNode<T> | null;
 }
 
 /**

@@ -15,7 +15,7 @@ import { IList } from './IList';
  * Node in Link list
  */
 export class LinkListNode<T> {
-  private _data: T;
+  private _data!: T;
   private _next: LinkListNode<T> | null;
 
   /**
@@ -59,7 +59,7 @@ export class LinkList<T> implements IList<T> {
     }
 
     if (this._cursor !== null) {
-      let rtn = {
+      const rtn = {
         done: false,
         value: this._cursor.Data
       };
@@ -130,7 +130,7 @@ export class LinkList<T> implements IList<T> {
     let cur = this._head;
     let i = 0;
     while (cur !== null && i < index) {
-      cur = cur.Next;
+      cur = cur.Next!;
       i ++;
     }
 
@@ -149,7 +149,7 @@ export class LinkList<T> implements IList<T> {
     }
 
     if (index === 0) {
-      let nnode: LinkListNode<T> = new LinkListNode<T>();
+      const nnode: LinkListNode<T> = new LinkListNode<T>();
       nnode.Data = elem;
       nnode.Next = this._head;
       this._head = nnode;
@@ -165,10 +165,10 @@ export class LinkList<T> implements IList<T> {
       i ++;
     }
 
-    let nnode: LinkListNode<T> = new LinkListNode<T>();
+    const nnode: LinkListNode<T> = new LinkListNode<T>();
     nnode.Data = elem;
-    nnode.Next = cur.Next;
-    cur.Next = nnode;
+    nnode.Next = cur!.Next;
+    cur!.Next = nnode;
     this._length++;
 
     return true;
@@ -188,7 +188,7 @@ export class LinkList<T> implements IList<T> {
       cur = cur.Next;
     }
 
-    let newnode: LinkListNode<T> = new LinkListNode<T>();
+    const newnode: LinkListNode<T> = new LinkListNode<T>();
     newnode.Data = elem;
     newnode.Next = null;
 
@@ -220,11 +220,11 @@ export class LinkList<T> implements IList<T> {
     let cur: LinkListNode<T> = this._head;
     let i = 1;
     while (cur !== null && i < index) {
-      cur = cur.Next;
+      cur = cur.Next!;
       i ++;
     }
 
-    cur.Next = cur.Next.Next;
+    cur.Next = cur.Next!.Next;
     this._length--;
 
     return true;
@@ -247,7 +247,7 @@ export class LinkList<T> implements IList<T> {
     if (this._length === 0 || this._head === null) {
       return '';
     }
-    let ar:T[] = [];
+    const ar:T[] = [];
     let cur: LinkListNode<T> = this._head;
     ar.push(cur.Data);
     while (cur.Next !== null) {
@@ -264,12 +264,12 @@ export class LinkList<T> implements IList<T> {
    */
   public IsExist(val: T): boolean {
     let cur: LinkListNode<T> | null = this._head;
-    if (cur.Data === val) {
+    if (cur!.Data === val) {
       return true;
     }
 
-    while (cur.Next !== null) {
-      cur = cur.Next;
+    while (cur!.Next !== null) {
+      cur = cur!.Next;
       if (cur.Data === val) {
         return true;
       }  

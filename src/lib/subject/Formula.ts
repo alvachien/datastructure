@@ -94,7 +94,7 @@ export const FormulaKeyword: string[] = [
  * Paremter in Formula
  */
 export class FormulaParameter {
-  private _par: string;
+  private _par!: string;
   get Parameter(): string {
     return this._par;
   }
@@ -128,7 +128,7 @@ export enum FormulaTokenEnum {
  * Token
  */
 export class FormulaToken {
-  private _tokenEnum: FormulaTokenEnum;
+  private _tokenEnum!: FormulaTokenEnum;
   get TokenEnum(): FormulaTokenEnum {
     return this._tokenEnum;
   }
@@ -136,7 +136,7 @@ export class FormulaToken {
     this._tokenEnum = te;
   }
 
-  private _varName: string;
+  private _varName!: string;
   get VariableName(): string {
     return this._varName;
   }
@@ -149,8 +149,8 @@ export class FormulaToken {
  * Formula Parser
  */
 export class FormulaParser {
-  private _orgInput: string;
-  private _listInput: SequenceList<string>;
+  private _orgInput!: string;
+  private _listInput!: SequenceList<string>;
 
   constructor() {
   }
@@ -174,7 +174,7 @@ export class FormulaParser {
     const tree: BinaryTree<string> = new BinaryTree<string>();
 
     for(let i = 0; i < listStrings.Length(); i ++) {
-      let str = listStrings.GetElement(i);
+      const str = listStrings.GetElement(i)!;
       if (!isNaN(+str)) {
         // Numbers
         reversePolish.Enqueue(str);
@@ -190,13 +190,13 @@ export class FormulaParser {
               stkOpers.Pop();
 							break;							
 						} else{
-              reversePolish.Enqueue(stkOpers.Pop());
+              reversePolish.Enqueue(stkOpers.Pop()!);
 						}
 					}
         } else {
           if (!stkOpers.IsEmpty()) {
             while(!stkOpers.IsEmpty()){
-              let curop = stkOpers.Peek();
+              const curop = stkOpers.Peek()!;
               if(curop === '(') {
                 stkOpers.Push(str);
                 break;
@@ -215,32 +215,32 @@ export class FormulaParser {
     }
 
     while(!stkOpers.IsEmpty()){			
-			reversePolish.Enqueue(stkOpers.Pop());
+			reversePolish.Enqueue(stkOpers.Pop()!);
     }
 
-    let treenodes: SequenceStack<BinaryTreeNode<string>> = new SequenceStack<BinaryTreeNode<string>>();
+    const treenodes: SequenceStack<BinaryTreeNode<string>> = new SequenceStack<BinaryTreeNode<string>>();
     while(!reversePolish.IsEmpty()){
 			
-      let node: BinaryTreeNode<string> = new BinaryTreeNode<string>();
-      node.Data = reversePolish.Dequeue();
+      const node: BinaryTreeNode<string> = new BinaryTreeNode<string>();
+      node.Data = reversePolish.Dequeue()!;
 			
 			if(!isNaN(+node.Data)) {
         treenodes.Push(node);
 			} else {				
-				let rightNode = treenodes.Pop();
-        let leftNode = treenodes.Pop();
-        node.Left = leftNode;
-        node.Right = rightNode;
+				const rightNode = treenodes.Pop();
+        const leftNode = treenodes.Pop();
+        node.Left = leftNode!;
+        node.Right = rightNode!;
 
         treenodes.Push(node);
 			}			
     }
-    tree.Root = treenodes.Pop();
+    tree.Root = treenodes.Pop()!;
 
     return tree;
   }
 
-  private parse(): boolean {
+  private parse(): any {
     if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
       return false;
     }
@@ -256,7 +256,7 @@ export class FormulaParser {
 
     //     }
     // }
-    let syn: number = 0;
+    const syn: number = 0;
     let p = 0;
     let ch: any;
     let sum = 0;
@@ -412,8 +412,8 @@ export class FormulaParser {
       throw new Error('Invalid Input');
     }
 
-    let numStack: IStack<number> = new SequenceStack<number>();
-    let operStack: IStack<string> = new SequenceStack<string>();
+    const numStack: IStack<number> = new SequenceStack<number>();
+    const operStack: IStack<string> = new SequenceStack<string>();
 
     let nNum = 0;
     let flagNum = false;
@@ -433,7 +433,7 @@ export class FormulaParser {
           operStack.Push(this._orgInput[i]);
         } else if(this._orgInput[i] === ')'){
           while (operStack.Peek() != '('){
-            let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+            const rst = this.cal(numStack.Pop()!, numStack.Pop()!, operStack.Pop()!);
             numStack.Push(rst);
           }
           operStack.Pop(); // Remove '('
@@ -441,8 +441,8 @@ export class FormulaParser {
           if (operStack.IsEmpty()) {
             operStack.Push(this._orgInput[i]);
           } else {
-            if (this.operatorPriority(operStack.Peek()) >= this.operatorPriority(this._orgInput[i])) {
-              let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+            if (this.operatorPriority(operStack.Peek()!) >= this.operatorPriority(this._orgInput[i])) {
+              const rst = this.cal(numStack.Pop()!, numStack.Pop()!, operStack.Pop()!);
               numStack.Push(rst);
             }
             operStack.Push(this._orgInput[i]);
@@ -456,7 +456,7 @@ export class FormulaParser {
     }
 
     while (!operStack.IsEmpty()) {
-      let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+      const rst = this.cal(numStack.Pop()!, numStack.Pop()!, operStack.Pop()!);
       numStack.Push(rst);
     }
 
@@ -464,7 +464,7 @@ export class FormulaParser {
       throw new Error('Invalid');
     }
 
-    return numStack.Pop();
+    return numStack.Pop()!;
   }
 }
 
