@@ -12,7 +12,7 @@
 
 import { FakedGuid } from '../../lib/model/FakedGuid';
 
-describe('Test BinarySearchTree', () => {
+describe('Test FakedGuid', () => {
   beforeEach(() => {
   });
 

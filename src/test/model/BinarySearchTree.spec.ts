@@ -23,6 +23,27 @@ describe('Test BinarySearchTree', () => {
     expect(_bsTree).toBeTruthy();
   });
 
+  it('#1a. search on an empty tree returns undefined (honest return type).', () => {
+    // Regression for issue 3.2: search returned searchNode(...)! , non-null-
+    // asserting away the undefined that an empty tree produces. The return type
+    // now honestly admits undefined.
+    expect(_bsTree.search(1)).toBeUndefined();
+  });
+
+  it('#1b. traversals on an empty tree must not throw.', () => {
+    // _root is undefined until the first insert; the traversal guards must
+    // short-circuit rather than recurse into an undefined node.
+    const cb = (n: { key: number }) => { throw new Error(`should not visit ${n.key}`); };
+    expect(() => _bsTree.inOrderTraverse(cb)).not.toThrow();
+    expect(() => _bsTree.preOrderTraverse(cb)).not.toThrow();
+    expect(() => _bsTree.postOrderTraverse(cb)).not.toThrow();
+  });
+
+  it('#1c. min/max on an empty tree return undefined (not throw).', () => {
+    expect(_bsTree.min()).toBeUndefined();
+    expect(_bsTree.max()).toBeUndefined();
+  });
+
   it('#2. Test insert', () => {
     // Insert
     let nnode = _bsTree.insert(1, 'A');
@@ -128,7 +149,88 @@ describe('Test BinarySearchTree', () => {
 
     node = _bsTree.search(8);
     expect(node).toBeTruthy();
-    expect(node.key).toBe(8);
+    expect(node!.key).toBe(8);
+  });
+
+  const inorderKeys = () => {
+    const arr: number[] = [];
+    _bsTree.inOrderTraverse((n) => arr.push(n.key));
+    return arr;
+  };
+
+  it('#9. Test remove: leaf node', () => {
+    // 3 is a leaf.
+    buildTestTree();
+    expect(_bsTree.remove(3)).toBe(true);
+    expect(_bsTree.search(3)).toBeFalsy();
+    expect(inorderKeys()).toEqual([5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 20, 25]);
+  });
+
+  it('#10. Test remove: node with one child', () => {
+    // 12 is the left child of 13 and has no children originally; insert a
+    // child under it to exercise the single-child deletion.
+    buildTestTree();
+    _bsTree.insert(11.5, '11.5'); // becomes left child of 12
+    // 12 now has one child (11.5). Remove 12.
+    expect(_bsTree.remove(12)).toBe(true);
+    expect(_bsTree.search(12)).toBeFalsy();
+    expect(_bsTree.search(11.5)).toBeTruthy();
+    const keys = inorderKeys();
+    expect(keys).not.toContain(12);
+    expect(keys).toContain(11.5);
+    // In-order still sorted.
+    const sorted = [...keys].sort((a, b) => a - b);
+    expect(keys).toEqual(sorted);
+  });
+
+  it('#11. Test remove: node with two children', () => {
+    // 9 has children 8 and 10.
+    buildTestTree();
+    expect(_bsTree.remove(9)).toBe(true);
+    expect(_bsTree.search(9)).toBeFalsy();
+    // 8 and 10 remain.
+    expect(_bsTree.search(8)).toBeTruthy();
+    expect(_bsTree.search(10)).toBeTruthy();
+    expect(inorderKeys()).toEqual([3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 18, 20, 25]);
+  });
+
+  it('#12. Test remove: root (two children)', () => {
+    buildTestTree();
+    expect(_bsTree.remove(11)).toBe(true);
+    expect(_bsTree.search(11)).toBeFalsy();
+    const keys = inorderKeys();
+    expect(keys).not.toContain(11);
+    expect(keys.length).toBe(14);
+    // BST property preserved (ascending).
+    const sorted = [...keys].sort((a, b) => a - b);
+    expect(keys).toEqual(sorted);
+    // Root replaced by in-order successor (12).
+    expect(_bsTree.rootNode.key).toBe(12);
+  });
+
+  it('#13. Test remove: not found', () => {
+    buildTestTree();
+    expect(_bsTree.remove(999)).toBe(false);
+    // Tree unchanged: 15 nodes, still sorted.
+    expect(inorderKeys().length).toBe(15);
+  });
+
+  it('#14. Test remove: empty tree', () => {
+    expect(_bsTree.remove(1)).toBe(false);
+  });
+
+  it('#15. Test remove: data replaced by successor (two-children case)', () => {
+    // Removing a node with two children must take the successor's data too,
+    // not just its key. Build a root with both children so the two-children
+    // branch is exercised.
+    _bsTree.insert(10, 'A');
+    _bsTree.insert(5, 'L');   // left child of root
+    _bsTree.insert(15, 'R');  // right child of root
+    _bsTree.insert(12, 'M'); // left of 15 -> successor of root (min of right subtree)
+    expect(_bsTree.remove(10)).toBe(true);
+    // Root replaced by in-order successor 12, including its data 'M'.
+    expect(_bsTree.rootNode.key).toBe(12);
+    expect(_bsTree.rootNode.data).toBe('M');
   });
 });
 

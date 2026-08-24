@@ -9,6 +9,8 @@
  *
  */
 export class LinkStackNode {
+    _data = null;
+    _next;
     constructor() {
         this._next = null;
     }
@@ -26,9 +28,9 @@ export class LinkStackNode {
     }
 }
 export class LinkStack {
+    _head = null;
+    _length = 0;
     constructor() {
-        this._head = null;
-        this._length = 0;
         this._head = null;
     }
     /**

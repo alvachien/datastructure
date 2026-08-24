@@ -12,14 +12,16 @@
  * Priority Queue
  */
 export class PriorityQueueItem {
+    data;
+    priority;
     constructor(data, priority) {
         this.data = data;
         this.priority = priority;
     }
 }
 export class PriorityQueue {
+    _data = [];
     constructor() {
-        this._data = [];
     }
     /**
      * The length of the whole stack
@@ -38,7 +40,7 @@ export class PriorityQueue {
      * @param elem the element to be inserted.
      */
     Enqueue(elem, pri) {
-        let item = new PriorityQueueItem(elem, pri);
+        const item = new PriorityQueueItem(elem, pri);
         if (this._data.length === 0) {
             this._data.push(item);
         }

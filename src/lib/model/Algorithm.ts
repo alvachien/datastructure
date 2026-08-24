@@ -282,7 +282,7 @@ function QuickSortImpl<T>(datalist: T[], left: number, right: number, compareFn?
  *
  * The idea for selection sort is, choose the min (or max) from un-sorted part, and append it to the sorted part
  */
-export function SelectionSort<T>(datalist: T[], compareFn?: (a: T, b: T) => number) {
+export function SelectionSort<T>(datalist: T[], compareFn?: (a: T, b: T) => number): boolean {
   if (datalist.length <= 0) {
     return false;
   }
@@ -306,7 +306,7 @@ export function SelectionSort<T>(datalist: T[], compareFn?: (a: T, b: T) => numb
     }
   }
 
-  return false;
+  return true;
 }
 
 /**
@@ -317,6 +317,11 @@ export function SelectionSort<T>(datalist: T[], compareFn?: (a: T, b: T) => numb
  * The idea behind is, build an array for all possible values, the element of the list are map to that huge array with correct position.
  */
 export function CountingSort(datalist: number[]) {
+  // Guard: an empty input has no min/max; bail out before indexing datalist[0].
+  if (datalist.length <= 0) {
+    return;
+  }
+
   const tmp: number[] = [];
   const out: number[] = [];
 
@@ -392,8 +397,10 @@ function MergeSortImpl2<T>(datalist: T[], begin: number, mid: number, end: numbe
 
   let idx = 0;
   for (idx = 0; lnow < lsize && rnow < rsize; idx++) {
+    // Pick the *smaller* element first so the merge yields ascending order,
+    // consistent with the rest of the library (InsertionSort/QuickSort/BubbleSort).
     if (compareFn !== undefined) {
-      if (compareFn(arLeft[lnow], arRight[rnow]) > 0) {
+      if (compareFn(arLeft[lnow], arRight[rnow]) <= 0) {
         datalist[begin + idx] = arLeft[lnow];
         lnow++;
       } else {
@@ -401,7 +408,7 @@ function MergeSortImpl2<T>(datalist: T[], begin: number, mid: number, end: numbe
         rnow++;
       }
     } else {
-      if (arLeft[lnow] > arRight[rnow]) {
+      if (arLeft[lnow] <= arRight[rnow]) {
         datalist[begin + idx] = arLeft[lnow];
         lnow++;
       } else {
@@ -437,7 +444,7 @@ export function HeapSort<T>(datalist: T[], compareFn?: (a: T, b: T) => number) {
   for (let i = datalist.length - 1; i >= 1; i--) {
     SwapElement(datalist, 0, i);
     heapsize = heapsize - 1;
-    Heapsort_MaxHeapify(datalist, 0, heapsize);
+    Heapsort_MaxHeapify(datalist, 0, heapsize, compareFn);
   }
 }
 
@@ -480,7 +487,11 @@ function Heapsort_MaxHeapify<T>(datalist: T[], i: number, size: number, compareF
   }
 }
 function Heapsort_BuildMaxHeap<T>(datalist: T[], compareFn?: (a: T, b: T) => number) {
-  const heapsize: number = datalist.length;
+  // `size` is the maximum valid index (the heapify guard is `child <= size`),
+  // so it must be length - 1, not length — otherwise heapify reads one past the
+  // end (index `length` === undefined), which throws for object compareFn and
+  // silently mis-sorts for numbers/strings.
+  const heapsize: number = datalist.length - 1;
   for (let i = Math.floor(heapsize / 2); i >= 0; i--) {
     Heapsort_MaxHeapify(datalist, i, heapsize, compareFn);
   }

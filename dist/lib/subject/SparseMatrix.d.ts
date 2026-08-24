@@ -83,10 +83,10 @@ export declare class SparseMatrix<T> {
      * Add another matrix
      * @param other matrix which used to add
      */
-    Add(other: SparseMatrix<T>): SparseMatrix<T>;
+    Add(other: SparseMatrix<T>): SparseMatrix<T> | null;
     /**
      * Multipy another matrix
      * @param other matrix which used to multiply
      */
-    Multiply(other: number | SparseMatrix<T>): SparseMatrix<T>;
+    Multiply(other: number | SparseMatrix<T>): SparseMatrix<T> | null;
 }

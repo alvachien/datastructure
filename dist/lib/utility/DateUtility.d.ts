@@ -17,10 +17,10 @@ export declare class DateUtility {
     static Date2String(dt: Date, dateSplitChar?: string): string;
     /**
      * Parse string to Date
-     * @param s string to parse
-     * @returns a new Date
+     * @param s string to parse, expected as `YYYY-MM-DD`
+     * @returns a new Date, or `null` if the string cannot be parsed into valid y/m/d numbers
      */
-    static String2Date(s: string, dateSplitChar?: string): Date;
+    static String2Date(s: string, dateSplitChar?: string): Date | null;
     /**
      * Workout the distance between two days
      * @param first First date

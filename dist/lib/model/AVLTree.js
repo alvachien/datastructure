@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -22,7 +22,7 @@ export class AVLTree extends BinarySearchTree {
         super();
     }
     /**
-     * Insert node
+     * Insert a node and rebalance the tree so the AVL height invariant holds.
      * @param key Key of the node
      * @param data Data of the node
      */
@@ -32,9 +32,62 @@ export class AVLTree extends BinarySearchTree {
             this._root = newnode;
         }
         else {
-            this.insertNode(this._root, newnode);
+            this._root = this.insertAVL(this._root, newnode);
         }
         return newnode;
+    }
+    /**
+     * Recursive AVL insert: descend to the insertion point, then rebalance on
+     * the way back up. Returns the (possibly new) root of the subtree.
+     */
+    insertAVL(node, newnode) {
+        if (newnode.key < node.key) {
+            if (node.leftNode === undefined) {
+                node.leftNode = newnode;
+            }
+            else {
+                node.leftNode = this.insertAVL(node.leftNode, newnode);
+            }
+        }
+        else if (newnode.key > node.key) {
+            if (node.rightNode === undefined) {
+                node.rightNode = newnode;
+            }
+            else {
+                node.rightNode = this.insertAVL(node.rightNode, newnode);
+            }
+        }
+        else {
+            // Duplicate key: no insertion.
+            return node;
+        }
+        // Rebalance this node if it became unbalanced.
+        return this.balance(node);
+    }
+    /**
+     * Rebalance a node according to its balance factor.
+     */
+    balance(node) {
+        const balanceState = this.getBalanceFactor(node);
+        if (balanceState === AVLBalanceFactor.UNBALANCED_LEFT) {
+            // Left subtree is too tall.
+            if (node.leftNode && this.getBalanceFactor(node.leftNode) === AVLBalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+                // Left-Right case.
+                return this.rotationLR(node);
+            }
+            // Left-Left case.
+            return this.rotationLL(node);
+        }
+        if (balanceState === AVLBalanceFactor.UNBALANCED_RIGHT) {
+            // Right subtree is too tall.
+            if (node.rightNode && this.getBalanceFactor(node.rightNode) === AVLBalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+                // Right-Left case.
+                return this.rotationRL(node);
+            }
+            // Right-Right case.
+            return this.rotationRR(node);
+        }
+        return node;
     }
     getNodeHeight(node) {
         if (!node) {

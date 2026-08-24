@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -13,8 +13,12 @@ import { IBinaryTreeNode, IBinarySearchTree, BinarySearchTreeCallback } from './
 
 // Binary search tree node
 export class BinarySearchTreeNode<T> implements IBinaryTreeNode<T> {
-  public leftNode!: BinarySearchTreeNode<T>;
-  public rightNode!: BinarySearchTreeNode<T>;
+  // Optional (`| undefined`): on a leaf, both are undefined. Declaring them
+  // with `!` definite-assignment hid the undefined-ness from the type system,
+  // forcing callers/recursions to rely on fragile `!== undefined` checks
+  // whose correctness was unverifiable. Optional makes the absence honest.
+  public leftNode?: BinarySearchTreeNode<T>;
+  public rightNode?: BinarySearchTreeNode<T>;
   private _key!: number;
   private _data!: T;
 
@@ -74,9 +78,10 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   /**
    * Search
    * @param key Key to search
+   * @returns the node if found, `undefined` otherwise (including an empty tree)
    */
-  public search(key: number): BinarySearchTreeNode<T>  {
-    return this.searchNode(this._root, key)!;
+  public search(key: number): BinarySearchTreeNode<T> | undefined {
+    return this.searchNode(this._root, key);
   }
 
   /**
@@ -118,17 +123,28 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   /**
-   * Remove a node 
+   * Remove a node by key.
    * @param key Key of the node to be deleted
+   * @returns true if a node was removed, false if the key was not found
    */
-  public remove(key: number) {
+  public remove(key: number): boolean {
+    if (this._root === undefined) {
+      return false;
+    }
+
+    if (!this.searchNode(this._root, key)) {
+      return false;
+    }
+
+    this._root = this.removeNode(this._root, key)!;
+    return true;
   }
 
   /**
    * @protected
    * In-Order Traverse Node
    */
-  protected inOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+  protected inOrderTraverseNode(node: BinarySearchTreeNode<T> | undefined, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       this.inOrderTraverseNode(node.leftNode, callback);
       if (callback !== undefined) {
@@ -142,7 +158,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Pre-Order Traverse Node
    */
-  protected preOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+  protected preOrderTraverseNode(node: BinarySearchTreeNode<T> | undefined, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       if (callback !== undefined) {
         callback(node);
@@ -156,7 +172,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Post-Order Traverse Node
    */
-  protected postOrderTraverseNode(node: BinarySearchTreeNode<T>, callback: BinarySearchTreeCallback<T>) {
+  protected postOrderTraverseNode(node: BinarySearchTreeNode<T> | undefined, callback: BinarySearchTreeCallback<T>) {
     if (node !== undefined) {
       this.postOrderTraverseNode(node.leftNode, callback);
       this.postOrderTraverseNode(node.rightNode, callback);
@@ -170,7 +186,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Minuimum Node
    */
-  protected minNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
+  protected minNode(node: BinarySearchTreeNode<T> | undefined): BinarySearchTreeNode<T> | undefined {
     if (node !== undefined) {
       while (node !== undefined && node.leftNode !== undefined) {
         node = node.leftNode;
@@ -186,7 +202,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Maximum Node
    */
-  protected maxNode(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
+  protected maxNode(node: BinarySearchTreeNode<T> | undefined): BinarySearchTreeNode<T> | undefined {
     if (node !== undefined) {
       while (node !== undefined && node.rightNode !== undefined) {
         node = node.rightNode;
@@ -223,7 +239,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
    * @protected
    * Search Node
    */
-  protected searchNode(node: BinarySearchTreeNode<T>, key: number): BinarySearchTreeNode<T> | undefined {
+  protected searchNode(node: BinarySearchTreeNode<T> | undefined, key: number): BinarySearchTreeNode<T> | undefined {
     if (node === undefined) {
       return undefined;
     }
@@ -268,6 +284,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
 
       const aux: BinarySearchTreeNode<T> = this.minNode(node.rightNode)!;
       node.key = aux.key;
+      node.data = aux.data;
       node.rightNode = this.removeNode(node.rightNode, aux.key)!;
       return node;
     }

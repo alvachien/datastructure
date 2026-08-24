@@ -1,23 +1,28 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
  *
  * File: StaticLinkList.ts
  *
+ * A static (array-backed) linked list. A fixed-size array of nodes is used;
+ * each node carries a `Cursor` that points to the index of the next node.
+ *
+ * Convention (common for static link lists):
+ *   - `_data[0]` is the *free list* header; `_data[0].Cursor` is the index
+ *     of the first free slot (or -1 when the pool is exhausted).
+ *   - The list's logical head lives at `_data[1]`; `_data[1].Cursor` is the
+ *     index of the first real element (or -1 when the list is empty).
+ *   - Real elements occupy indices `[2 .. capacity-1]`.
  */
 /**
  * Node in static link list
  */
 export class StaticLinkListNode {
-    constructor() {
-        this._cursor = -1;
-    }
-    constructore() {
-        this._cursor = -1;
-    }
+    _data = null;
+    _cursor = -1;
     get Data() {
         return this._data;
     }
@@ -32,95 +37,186 @@ export class StaticLinkListNode {
     }
 }
 export class StaticLinkList {
+    static HeaderIndex = 0; // free-list header
+    static HeadIndex = 1; // logical list head
+    static DefaultCapacity = 200;
+    _data;
+    _length = 0;
+    _cursor = -1; // iterator position (-1 = not started)
+    constructor(capacity = StaticLinkList.DefaultCapacity) {
+        // Need at least the two header slots + one element slot.
+        const cap = Math.max(capacity, StaticLinkList.HeadIndex + 1);
+        this._data = new Array(cap);
+        for (let i = 0; i < cap; i++) {
+            this._data[i] = new StaticLinkListNode();
+        }
+        this.initFreeList();
+    }
+    initFreeList() {
+        const cap = this._data.length;
+        // Free list: [0] -> 2 -> 3 -> ... -> cap-1 -> -1.
+        // Index HeadIndex (1) is reserved as the list head.
+        this._data[StaticLinkList.HeaderIndex].Cursor = StaticLinkList.HeadIndex + 1;
+        for (let i = StaticLinkList.HeadIndex + 1; i < cap - 1; i++) {
+            this._data[i].Cursor = i + 1;
+        }
+        this._data[cap - 1].Cursor = -1;
+        // Empty list: head's cursor is -1.
+        this._data[StaticLinkList.HeadIndex].Cursor = -1;
+        this._length = 0;
+    }
     /**
-     * Constructor
+     * Allocate a node index from the free list. Returns -1 if the pool is
+     * exhausted.
      */
-    constructor() {
-        this._data = new Array(200);
+    malloc() {
+        const freeHead = this._data[StaticLinkList.HeaderIndex].Cursor;
+        if (freeHead === -1) {
+            return -1;
+        }
+        const idx = freeHead;
+        this._data[StaticLinkList.HeaderIndex].Cursor = this._data[idx].Cursor;
+        this._data[idx].Cursor = -1;
+        return idx;
+    }
+    /**
+     * Return a node index to the free list.
+     */
+    free(idx) {
+        this._data[idx].Data = null;
+        this._data[idx].Cursor = this._data[StaticLinkList.HeaderIndex].Cursor;
+        this._data[StaticLinkList.HeaderIndex].Cursor = idx;
     }
     next(...args) {
-        if (this._cursor.Cursor !== -1) {
-            return {
-                done: false,
-                value: this._cursor.Data
-            };
+        if (this._cursor === -1) {
+            // Start at the first real element.
+            const head = this._data[StaticLinkList.HeadIndex].Cursor;
+            this._cursor = head;
         }
         else {
-            return {
-                done: true,
-                value: undefined
-            };
+            this._cursor = this._data[this._cursor].Cursor;
         }
+        if (this._cursor === -1) {
+            return { done: true, value: undefined };
+        }
+        const value = this._data[this._cursor].Data;
+        return { done: false, value };
     }
     [Symbol.iterator]() {
         return this;
     }
     return(value) {
-        throw new Error('Method not implemented.');
+        this._cursor = -1;
+        return { done: true, value: value };
     }
     throw(e) {
-        throw new Error('Method not implemented.');
+        throw e;
     }
     Length() {
-        let j = 0;
-        for (const it of this._data) {
-            if (it.Cursor !== -1) {
-                j++;
-            }
-        }
-        return j;
+        return this._length;
     }
     IsEmpty() {
-        return this.Length() === 0;
+        return this._length === 0;
     }
     ClearAll() {
-        for (const it of this._data) {
-            it.Cursor = -1;
-            it.Data = null;
-        }
+        this.initFreeList();
         return true;
     }
+    /**
+     * Get the element at the specified zero-based position; null if out of range.
+     * @param index zero-based position
+     */
     GetElement(index) {
-        if (this._data.length === 0) {
+        if (index < 0 || index >= this._length) {
             return null;
         }
-        // if (index >= 0 && index < this._data.length) {
-        //     return this._data[index];
-        // }
-        return null;
+        let cur = this._data[StaticLinkList.HeadIndex].Cursor;
+        let i = 0;
+        while (cur !== -1 && i < index) {
+            cur = this._data[cur].Cursor;
+            i++;
+        }
+        return cur === -1 ? null : this._data[cur].Data;
     }
+    /**
+     * Insert the element at the specified zero-based index; index === length
+     * appends to the tail. Returns false if the index is out of range or the
+     * pool is exhausted.
+     * @param index zero-based position
+     * @param elem element to insert
+     */
     InsertElement(index, elem) {
-        // if (index < 0 || index >= this._data.length) {
-        //     return false;
-        // }
-        // if (index < this._data.length) {
-        //     for(let i = this._data.length - 1; i >= index; i --) {
-        //         this._data[i + 1] = this._data[i];
-        //     }
-        //     this._data[index] = elem;
-        // }
+        if (index < 0 || index > this._length) {
+            return false;
+        }
+        const newNode = this.malloc();
+        if (newNode === -1) {
+            return false;
+        }
+        this._data[newNode].Data = elem;
+        // Walk to the node that should precede the new one. The head slot acts as
+        // a sentinel preceding index 0, so inserting at position `index` means
+        // splicing after the node reached by walking `index` steps from the head.
+        let prev = StaticLinkList.HeadIndex;
+        let i = 0;
+        while (i < index) {
+            prev = this._data[prev].Cursor;
+            i++;
+        }
+        this._data[newNode].Cursor = this._data[prev].Cursor;
+        this._data[prev].Cursor = newNode;
+        this._length++;
         return true;
     }
+    /**
+     * Append the element to the tail of the list. Returns the new length, or
+     * -1 if the pool is exhausted.
+     */
     AppendElement(elem) {
-        // return this._data.push(elem);
-        return -1;
+        if (!this.InsertElement(this._length, elem)) {
+            return -1;
+        }
+        return this._length;
     }
+    /**
+     * Remove the element at the specified zero-based position.
+     * @param index zero-based position
+     */
     DeleteElement(index) {
-        // if (index < 0 || index >= this._data.length) {
-        //     return false;
-        // }
-        // if (index < this._data.length - 1) {
-        //     for(let k = index; k < this._data.length; k++) {
-        //         this._data[k-1] = this._data[k];
-        //     }
-        // }
-        // delete this._data[this._data.length - 1];
-        // return true;
-        return false;
+        if (index < 0 || index >= this._length) {
+            return false;
+        }
+        // Walk to the predecessor of the node to delete.
+        let prev = StaticLinkList.HeadIndex;
+        let i = 0;
+        while (i < index) {
+            prev = this._data[prev].Cursor;
+            i++;
+        }
+        const target = this._data[prev].Cursor;
+        if (target === -1) {
+            return false;
+        }
+        this._data[prev].Cursor = this._data[target].Cursor;
+        this.free(target);
+        this._length--;
+        return true;
     }
-    Print() {
-        // TBD
-        return '';
+    /**
+     * Print all elements joined by `splitter` (default ',').
+     */
+    Print(splitter) {
+        const sep = splitter === undefined ? ',' : splitter;
+        const ar = [];
+        let cur = this._data[StaticLinkList.HeadIndex].Cursor;
+        while (cur !== -1) {
+            const d = this._data[cur].Data;
+            if (d !== null) {
+                ar.push(d);
+            }
+            cur = this._data[cur].Cursor;
+        }
+        return ar.join(sep);
     }
 }
 //# sourceMappingURL=StaticLinkList.js.map

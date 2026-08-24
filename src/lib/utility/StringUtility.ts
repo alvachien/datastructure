@@ -60,11 +60,10 @@ export class StringUtility {
    * @param strarray Array to be check
    * @returns true indicates duplicated entries exist
    */
-  public static hasDuplicatesInStringArray(strarray: string): boolean {
-    const valuesSoFar: any = Object.create(null);
-    // tslint:disable-next-line:prefer-for-of
+  public static hasDuplicatesInStringArray(strarray: string[]): boolean {
+    const valuesSoFar: Record<string, boolean> = Object.create(null);
     for (let i = 0; i < strarray.length; ++i) {
-      const value: any = strarray[i];
+      const value: string = strarray[i];
       if (value in valuesSoFar) {
         return true;
       }

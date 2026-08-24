@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -16,6 +16,8 @@ import { LinkList } from './LinkList';
  * Vertex of adjace list graph
  */
 export class GraphAdjaceListVertex {
+    _id = 0;
+    _value;
     get id() {
         return this._id;
     }
@@ -33,6 +35,9 @@ export class GraphAdjaceListVertex {
  * Edge of adjace list graph
  */
 export class GraphAdjaceListEdge {
+    _from;
+    _to;
+    _weigth;
     get from() {
         return this._from;
     }
@@ -58,6 +63,8 @@ export class GraphAdjaceListEdge {
  * Y: generic type of Edge
  */
 export class GraphAdjaceList {
+    _vertex;
+    _adjList;
     constructor() {
         this._vertex = new SequenceList();
         this._adjList = new Dictionary();
@@ -74,7 +81,10 @@ export class GraphAdjaceList {
     EdgeNumber() {
         let en = 0;
         for (let i = 0; i < this._vertex.Length(); i++) {
-            en += this._adjList.get(this._vertex.GetElement(i).id.toString()).Length();
+            const adj = this._adjList.get(this._vertex.GetElement(i).id.toString());
+            if (adj) {
+                en += adj.Length();
+            }
         }
         return en;
     }
@@ -116,9 +126,11 @@ export class GraphAdjaceList {
     IsEdgeExist(from, to) {
         if (this.IsVertexExist(from) && this.IsVertexExist(to)) {
             const llist = this._adjList.get(from.toString());
-            for (let i = 0; i < llist.Length(); i++) {
-                if (llist.GetElement(i).to === to) {
-                    return true;
+            if (llist) {
+                for (let i = 0; i < llist.Length(); i++) {
+                    if (llist.GetElement(i).to === to) {
+                        return true;
+                    }
                 }
             }
         }
@@ -153,6 +165,9 @@ export class GraphAdjaceList {
         nedge.to = to;
         nedge.weight = weight;
         const llist = this._adjList.get(frm.toString());
+        if (!llist) {
+            return false;
+        }
         if (llist.Length() === 0) {
             llist.InitList(nedge);
         }
@@ -167,15 +182,87 @@ export class GraphAdjaceList {
     }
     /**
      * DFS: Depth First Search
+     *
+     * Directed (follows out-edges only, consistent with `Graph.DFS`). Visits
+     * every vertex; disconnected components are reached by starting a DFS at
+     * each not-yet-visited vertex in insertion order.
      */
     DFS() {
-        return [];
+        if (this._vertex.Length() <= 0) {
+            return [];
+        }
+        const visited = [];
+        const rst = [];
+        for (let i = 0; i < this._vertex.Length(); i++) {
+            const start = this._vertex.GetElement(i);
+            this.DFSImpl(start.id, visited, rst);
+        }
+        return rst;
+    }
+    DFSImpl(vertexId, visited, rst) {
+        if (visited.indexOf(vertexId) >= 0) {
+            return;
+        }
+        const vex = this.findVertex(vertexId);
+        if (!vex) {
+            return;
+        }
+        visited.push(vertexId);
+        rst.push(vex);
+        const adj = this._adjList.get(vertexId.toString());
+        if (adj) {
+            for (let i = 0; i < adj.Length(); i++) {
+                const edge = adj.GetElement(i);
+                this.DFSImpl(edge.to, visited, rst);
+            }
+        }
     }
     /**
      * BFS: Breadth First Search
+     *
+     * Directed (follows out-edges only). Seeds the queue with each not-yet-
+     * visited vertex in insertion order so disconnected components are reached.
      */
     BFS() {
-        return [];
+        if (this._vertex.Length() <= 0) {
+            return [];
+        }
+        const visited = [];
+        const rst = [];
+        for (let i = 0; i < this._vertex.Length(); i++) {
+            const start = this._vertex.GetElement(i);
+            if (visited.indexOf(start.id) >= 0) {
+                continue;
+            }
+            const queue = [start];
+            while (queue.length > 0) {
+                const vex = queue.shift();
+                if (visited.indexOf(vex.id) >= 0) {
+                    continue;
+                }
+                visited.push(vex.id);
+                rst.push(vex);
+                const adj = this._adjList.get(vex.id.toString());
+                if (adj) {
+                    for (let j = 0; j < adj.Length(); j++) {
+                        const successor = this.findVertex(adj.GetElement(j).to);
+                        if (successor && visited.indexOf(successor.id) < 0) {
+                            queue.push(successor);
+                        }
+                    }
+                }
+            }
+        }
+        return rst;
+    }
+    findVertex(id) {
+        for (let i = 0; i < this._vertex.Length(); i++) {
+            const v = this._vertex.GetElement(i);
+            if (v && v.id === id) {
+                return v;
+            }
+        }
+        return null;
     }
 }
 //# sourceMappingURL=AdjListGraph.js.map

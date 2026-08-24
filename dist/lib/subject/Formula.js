@@ -27,6 +27,8 @@ export var FormulaOperatorEnum;
  * Formula operator
  */
 export class FormulaOperator {
+    optype;
+    opnumber;
     constructor(typ, opnum) {
         this.optype = typ;
         this.opnumber = opnum;
@@ -81,6 +83,7 @@ export const FormulaKeyword = [
  * Paremter in Formula
  */
 export class FormulaParameter {
+    _par;
     get Parameter() {
         return this._par;
     }
@@ -112,12 +115,14 @@ export var FormulaTokenEnum;
  * Token
  */
 export class FormulaToken {
+    _tokenEnum;
     get TokenEnum() {
         return this._tokenEnum;
     }
     set TokenEnum(te) {
         this._tokenEnum = te;
     }
+    _varName;
     get VariableName() {
         return this._varName;
     }
@@ -129,6 +134,8 @@ export class FormulaToken {
  * Formula Parser
  */
 export class FormulaParser {
+    _orgInput;
+    _listInput;
     constructor() {
     }
     init(input) {
@@ -146,7 +153,7 @@ export class FormulaParser {
         const reversePolish = new SequenceQueue();
         const tree = new BinaryTree();
         for (let i = 0; i < listStrings.Length(); i++) {
-            let str = listStrings.GetElement(i);
+            const str = listStrings.GetElement(i);
             if (!isNaN(+str)) {
                 // Numbers
                 reversePolish.Enqueue(str);
@@ -172,7 +179,7 @@ export class FormulaParser {
                 else {
                     if (!stkOpers.IsEmpty()) {
                         while (!stkOpers.IsEmpty()) {
-                            let curop = stkOpers.Peek();
+                            const curop = stkOpers.Peek();
                             if (curop === '(') {
                                 stkOpers.Push(str);
                                 break;
@@ -195,16 +202,16 @@ export class FormulaParser {
         while (!stkOpers.IsEmpty()) {
             reversePolish.Enqueue(stkOpers.Pop());
         }
-        let treenodes = new SequenceStack();
+        const treenodes = new SequenceStack();
         while (!reversePolish.IsEmpty()) {
-            let node = new BinaryTreeNode();
+            const node = new BinaryTreeNode();
             node.Data = reversePolish.Dequeue();
             if (!isNaN(+node.Data)) {
                 treenodes.Push(node);
             }
             else {
-                let rightNode = treenodes.Pop();
-                let leftNode = treenodes.Pop();
+                const rightNode = treenodes.Pop();
+                const leftNode = treenodes.Pop();
                 node.Left = leftNode;
                 node.Right = rightNode;
                 treenodes.Push(node);
@@ -226,7 +233,7 @@ export class FormulaParser {
         //     if (this._orgInput[i] === '(') {
         //     }
         // }
-        let syn = 0;
+        const syn = 0;
         let p = 0;
         let ch;
         let sum = 0;
@@ -372,12 +379,12 @@ export class FormulaParser {
         }
         throw new Error(`Operation ${op} not supported`);
     }
-    evaulate() {
+    evaluate() {
         if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
             throw new Error('Invalid Input');
         }
-        let numStack = new SequenceStack();
-        let operStack = new SequenceStack();
+        const numStack = new SequenceStack();
+        const operStack = new SequenceStack();
         let nNum = 0;
         let flagNum = false;
         for (let i = 0; i < this._orgInput.length; i++) {
@@ -396,7 +403,7 @@ export class FormulaParser {
                 }
                 else if (this._orgInput[i] === ')') {
                     while (operStack.Peek() != '(') {
-                        let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+                        const rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
                         numStack.Push(rst);
                     }
                     operStack.Pop(); // Remove '('
@@ -406,8 +413,16 @@ export class FormulaParser {
                         operStack.Push(this._orgInput[i]);
                     }
                     else {
-                        if (this.operatorPriority(operStack.Peek()) >= this.operatorPriority(this._orgInput[i])) {
-                            let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+                        // Left-associative draining: pop every stacked operator whose
+                        // precedence is >= the incoming operator's before pushing it. The
+                        // old code popped only a single operator, so an equal-precedence
+                        // operator left on the stack was applied during the final LIFO
+                        // drain in the wrong order — e.g. "1-2*3+4" yielded -9 (1-(6+4))
+                        // instead of -1 ((1-6)+4). Draining here mirrors RPN.buildExpress.
+                        // `(` has priority 0, so the loop naturally stops at an open paren.
+                        while (!operStack.IsEmpty()
+                            && this.operatorPriority(operStack.Peek()) >= this.operatorPriority(this._orgInput[i])) {
+                            const rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
                             numStack.Push(rst);
                         }
                         operStack.Push(this._orgInput[i]);
@@ -419,7 +434,7 @@ export class FormulaParser {
             numStack.Push(nNum);
         }
         while (!operStack.IsEmpty()) {
-            let rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
+            const rst = this.cal(numStack.Pop(), numStack.Pop(), operStack.Pop());
             numStack.Push(rst);
         }
         if (numStack.Length() > 1) {

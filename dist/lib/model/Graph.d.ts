@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -67,7 +67,12 @@ export declare class Graph<X, Y> implements IGraph<X, Y> {
     DFS(): GraphVertex<X>[];
     private DFSImpl;
     /**
-     * BFS
+     * BFS: Breadth First Search
+     *
+     * Treats the graph as directed (follows out-edges only, consistent with
+     * `DFS`). Visits every vertex; disconnected components are reached by
+     * seeding the queue with each not-yet-visited vertex in insertion order.
      */
     BFS(): GraphVertex<X>[];
+    private findVertex;
 }

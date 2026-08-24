@@ -35,11 +35,11 @@ export declare class PriorityQueue<T> {
     /**
      * Peek the top element without remove it, returns the top element.
      */
-    Peek(): T;
+    Peek(): T | undefined;
     /**
      * Return the first element and remove it from the queue, returns the poped element.
      */
-    Dequeue(): T;
+    Dequeue(): T | undefined;
     /**
      * Clear all elements, returns the result: true means suces
      */

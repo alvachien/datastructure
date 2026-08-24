@@ -5,7 +5,7 @@
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.5.70",
+  "version": "0.6.80",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -16,28 +16,24 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 20.0"
+    "node": ">= 24.0"
   },
   "scripts": {
     "build": "tsc",
-    "test": "karma --single-run --browsers ChromeHeadless start karma.conf.ts",
-    "debugtest": "karma --browsers Chrome_with_debugging start karma.conf.ts",
+    "test": "node --import tsx ./node_modules/jasmine/bin/jasmine.js --config=jasmine.json",
     "publish-npm": "npm publish --registry=https://registry.npmjs.org",
     "eslint": "npx eslint ."
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
     "@types/jasmine": "^5.1.6",
-    "@types/node": "^22.13.4",
+    "@types/node": "^24.0.0",
     "eslint": "^9.20.1",
-    "jasmine-core": "^5.6.0",
-    "karma": "^6.4.4",
-    "karma-chrome-launcher": "^3.2.0",
-    "karma-coverage": "^2.2.1",
-    "karma-jasmine": "^5.1.0",
-    "karma-typescript": "^5.5.4",
+    "jasmine": "^7.0.0",
+    "jasmine-core": "^4.6.0",
     "prettier": "^3.5.1",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.0"
+    "tsx": "^4.23.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.67.0"
   }
 }

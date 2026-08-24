@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -42,7 +42,7 @@ export declare class SequenceList<T> implements IList<T> {
     GetElement(index: number): T | null;
     /**
      * Insert the element at the specified index
-     * @param index Specified index for insert
+     * @param index Specified index for insert; index === length appends to the tail
      * @param elem New element for insert
      */
     InsertElement(index: number, elem: T): boolean;

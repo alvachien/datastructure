@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/alvachien/datastructure.svg?branch=master)](https://travis-ci.com/alvachien/datastructure)
+[![Build and Test](https://github.com/alvachien/datastructure/actions/workflows/build-test.yml/badge.svg)](https://github.com/alvachien/datastructure/actions/workflows/build-test.yml)
 
 # TypeScript Library for Data Structure, Algorithms and Utilities
 ## INTRODUCTION
@@ -63,22 +63,22 @@ Folder **lib** (src\lib) contains the kernel part of the whole library. It consi
 Folder **dist** (dist) contains the compiled js files.
 
 ### UNIT TESTS
-Unit test is the mechanism to ensure the quality. It was supported by using Karam.
+Unit tests are the mechanism to ensure the quality. They are run in **Node** through [jasmine](https://jasmine.github.io/) (config in `jasmine.json`, spec dir `src/test`), with [tsx](https://github.com/privatenumber/tsx) providing on-the-fly TypeScript transpilation via `node --import tsx`.
 
 Run 'npm test' to trigger the unit tests.
 
-#### HOW TO DEBUG UNIT TESTS
-
-There ar two steps away to debug unit tests in VS Code.
-
-- Step 1. Start the Karma Runner via the command below
-
-```PowerShell
-npm run debugtest
+```bash
+npm test
 ```
 
-- Step 2. In VS Code, click 'Debug Unit Tests'.
-VS Code now attach to the Chrome window and debugging is waiting.
+To run a single spec file, pass a filter matching the top-level `describe()` name:
+
+```bash
+node --import tsx ./node_modules/jasmine/bin/jasmine.js --config=jasmine.json --filter=BinaryTree
+```
+
+> Note: `npm test` transpiles via tsx and does NOT type-check. Run `npm run build` (which runs `tsc`) separately to catch type errors.
+> jasmine 7 rejects duplicate top-level `describe()` names, so each spec file's top suite name must be unique.
 
 
 ### DEMO APP   
@@ -97,10 +97,11 @@ Interface **IList** defines the generic operations supported by List.
 - Class **StaticLinkList** implements the static link list.
 
 #### STACK AND QUEUE   
-Interface **IStack** and **IQueue** defines the generic operations for Stack and Queue respectively.
+Interface **IStack** and **IQueue** define the generic operations for Stack and Queue respectively.
 
 - Class **SequenceStack** implements the Sequence Stack.
 - Class **LinkStack** implements the Link Stack.
+- Class **SequenceQueue** implements the Sequence Queue.
   
 #### TREE    
 Interface **ITree** defines the generic operations and attributes supported by Tree.
@@ -110,6 +111,8 @@ Interface **IBinaryTree** define the generic operations and attributes for Binar
 - Class **BinaryTree** implements the Binary Tree.
 - Class **BinarySearchTree** implements the Binary Search Tree.
 - Class **BinaryThreadTree** implements the Binary Thread Tree.
+- Class **AVLTree** implements the self-balancing AVL Tree (extends **BinarySearchTree**).
+- Class **HuffmanTree** implements the Huffman (optimal) coding Tree.
 - More to come.
 
 #### GRAPH   
@@ -122,6 +125,11 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - Class **Graph** defines the implementation for the Graph with Adjace Matrix.
 - Class **GraphAdjaceList** defines the implementation for the Graph with Adjact List.
 - More to come.
+
+#### SET, DICTIONARY AND HASH TABLE
+- Class **Set** implements the generic Set data structure.
+- Class **Dictionary** implements the Dictionary (key-value) structure.
+- Class **HashTable** implements the Hash Table.
 
 ### ALGORITHM    
 - The algorithm **KMP** which offer the functionality to search source string from the target string.
@@ -146,6 +154,7 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **Formula** provides the Math Expression Parser.
 - The subject **RPN** provides the support of Reverse Polish Notation.
 - The subject **FinanceMethods** provides the support of methods used in Finance area, including Further Value, Present Value, FV of Annity, etc.
+- The subject **BaseConverter** provides the solution to convert numbers between different bases.
 - More to come.
 
 ### UTILITIES
@@ -153,46 +162,69 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The uitlity **UIUtility** provides some helpful methods operation on HTML element, including add/remove CSS classes, etc.
 - The uitlity **StringUtility** provides some helpful methods operation on strings, including check password length, check duplications, etc.
 - The uitlity **NumberUtility** provides some helpful methods operation on numbers, including adding prefixes, rounding with specified digitals, etc.
+- The utility **EnumUtility** provides helpful methods to operate on TypeScript enums, including parsing and value retrieval, etc.
+- The utility **Element** provides a wrapper for HTML elements used by **UIUtility**.
 
 ### PROGRESS
-The progress of the project shown in the table below.
-
+The progress of the project shown in the table below. Unit-test status reflects the current `npm test` run (250 specs, 0 failures, 7 pending).
 
 #|Content|Status|UT Status|Comment
 ----:|:----|:-----|:-----|:-----
 1|**SequenceList**|**Finished**|**Passed**|Question left: search?
 2|**LinkList**|**Finished**|**Passed**|Question left: search?
-3|**SequenceStack**|**In Process**|**Passed**|Question left: search?
-4|**Matrix**|**Finished**|**Passed**|Question left: search?
-5|**Set**|**Finished**|**2 Cases failed**|Question left: search?
-6|**SequenceQueue**|**Finished**|**Passed**|Question left: search?
-7|**PriorityQueue**|**Finished**|**Passed**|Question left: search?
-8|**Dictionary**|**Finished**|**Passed**|Question left: search?
-10|**Graph**|**In Process**|**In Process**|Question left: how to demonstrate the Graph for demo?
-11|**Graph with Adjace List**|**In Process**|**In Process**|Question left: how to demonstrate the Graph for demo?
-12|Binary Search Tree|n/a|n/a|Not started yet
-13|B Tree|n/a|n/a|Not started yet|
-14|Red Black Tree|n/a|n/a|Not started yet|
-15|Strassen Algorithm|n/a|n/a|Not started yet|
-16|Birthday Theory|n/a|n/a|Not started yet|
-17|Ball and Box|n/a|n/a|Not started yet|
-18|Hire on-line|n/a|n/a|Not started yet|
-19|Priority Queue|n/a|n/a|Not started yet|
-20|Hash algorithms|n/a|n/a|Not started yet|
-21|van Emde Boas Tree|n/a|n/a|Not started yet|
-22|Kruskal Algorithm|n/a|n/a|Not started yet|
-23|Prim Algorithm|n/a|n/a|Not started yet
-24|Bellman-Ford Algorithm|n/a|n/a|Not started yet|
-25|Dijkstra Algorithm|n/a|n/a|Not started yet|
-26|Floyd-Warshall Algorithm|n/a|n/a|Not started yet|
-27|Radix sort|n/a|n/a|Not started yet|
-28|Bucket sort|n/a|n/a|Not started yet|
-40|Formula|**DONE**|**DONE**|Formula.evaluate can be used to workout the figures|
-41|Finance Methods|**In Process**|n/a|FV, FVIF, PV, PVIF, FV of ordinary annity; FV of deferred annity; FV of annity in advance; n/a|
+3|**StaticLinkList**|**Finished**|**Passed**|
+4|**SequenceStack**|**Finished**|**Passed**|Pending: Print, IsExist (xit)
+5|**LinkStack**|**Finished**|**Passed**|Pending: Print, IsExist (xit)
+6|**SequenceQueue**|**Finished**|**Passed**|Pending: Print, IsExist (xit)
+7|**Set**|**Finished**|**Passed**|
+8|**Dictionary**|**Finished**|**Passed**|
+9|**HashTable**|**Finished**|**Passed**|
+10|**Graph** (Adjace Matrix)|**Finished**|**Passed**|Question left: how to demonstrate the Graph for demo?
+11|**GraphAdjaceList** (Adjact List)|**Finished**|**Passed**|Question left: how to demonstrate the Graph for demo?
+12|**BinaryTree**|**Finished**|**Passed**|
+13|**BinarySearchTree**|**Finished**|**Passed**|
+14|**BinaryThreadTree**|**Finished**|**Passed**|
+15|**AVLTree**|**Finished**|**Passed**|Self-balancing; extends BinarySearchTree
+16|**HuffmanTree**|**Finished**|**Passed**|
+17|**Matrix**|**Finished**|**Passed**|Question left: search?
+18|**SparseMatrix**|**Finished**|**Passed**|
+19|**Polynomial**|**Finished**|**Passed**|
+20|**PriorityQueue**|**Finished**|**Passed**|Question left: search?
+21|**MaximumSubArray**|**Finished**|**Passed**|
+22|**ChineseChessGeneralProblem**|**Finished**|**Passed**|
+23|**PanCakeSorting**|**Finished**|**Passed**|
+24|**BaseConverter**|**Finished**|**Passed**|
+25|**Formula**|**Finished**|**Passed**|Formula.evaluate can be used to work out the figures
+26|**RPN**|**Finished**|**Passed**|Reverse Polish Notation
+27|**FinanceMethods**|**Finished**|**Passed**|Pending: PV of annuity in advance (xit); FV, FVIF, PV, PVIF, FVIFA, PVIFA, PV of ordinary annity, PV of deferred annity, PV of annuity in advance
+28|**Algorithm** (sorts + KMP)|**Finished**|**Passed**|InsertionSort, BinaryInsertSort, BubbleSort, QuickSort, SelectionSort, CountingSort, MergeSort, HeapSort, KMP
+29|**FakedGuid**|**Finished**|**Passed**|
+30|**DateUtility**|**Finished**|**Passed**|
+31|**StringUtility**|**Finished**|**Passed**|
+32|**NumberUtility**|**Finished**|**Passed**|
+33|**EnumUtility**|**Finished**|**Passed**|
+34|**UIUtility / Element**|**Finished**|**Passed**|
+35|B Tree|n/a|n/a|Not started yet
+36|Red Black Tree|n/a|n/a|Not started yet
+37|Strassen Algorithm|n/a|n/a|Not started yet
+38|Birthday Theory|n/a|n/a|Not started yet
+39|Ball and Box|n/a|n/a|Not started yet
+40|Hire on-line|n/a|n/a|Not started yet
+41|van Emde Boas Tree|n/a|n/a|Not started yet
+42|Kruskal Algorithm|n/a|n/a|Not started yet
+43|Prim Algorithm|n/a|n/a|Not started yet
+44|Bellman-Ford Algorithm|n/a|n/a|Not started yet
+45|Dijkstra Algorithm|n/a|n/a|Not started yet
+46|Floyd-Warshall Algorithm|n/a|n/a|Not started yet
+47|Radix sort|n/a|n/a|Not started yet
+48|Bucket sort|n/a|n/a|Not started yet
 
 
 # CONTRIBUTORS
-- **Alva Chien(Hongjun Qian) | 钱红俊** Contact me via Mailbox: alvachien@163.com if necessary;
+
+**Alva Chien(Hongjun Qian) | 钱红俊** 
+
+Contact me via Mailbox: alvachien@163.com if necessary;
 
 # Licence
 MIT

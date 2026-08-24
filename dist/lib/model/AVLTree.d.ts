@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -19,11 +19,20 @@ export declare enum AVLBalanceFactor {
 export declare class AVLTree<T> extends BinarySearchTree<T> {
     constructor();
     /**
-     * Insert node
+     * Insert a node and rebalance the tree so the AVL height invariant holds.
      * @param key Key of the node
      * @param data Data of the node
      */
     insert(key: number, data: T): BinarySearchTreeNode<T>;
+    /**
+     * Recursive AVL insert: descend to the insertion point, then rebalance on
+     * the way back up. Returns the (possibly new) root of the subtree.
+     */
+    private insertAVL;
+    /**
+     * Rebalance a node according to its balance factor.
+     */
+    private balance;
     private getNodeHeight;
     /**
      * Left left case: rotate right

@@ -1,13 +1,25 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/spec",
+    "outDir": "./out-tsc/spec",
     "module": "ES2022",
     "target": "ES2022",
-    "baseUrl": "",
+    "sourceMap": true,
+    "declaration": false,
+    "noEmitOnError": false,
     "types": [
       "jasmine",
       "node"
     ]
-  }
+  },
+  "include": [
+    "src/lib/**/*.ts",
+    "src/test/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "karma.conf.ts",
+    "karma.conf.cjs",
+    "dist"
+  ]
 }

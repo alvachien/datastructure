@@ -55,7 +55,7 @@ export declare class Matrix<T> {
      * Get element
      * @param pos Position
      */
-    getElement(pos: MatrixPosIntf): T;
+    getElement(pos: MatrixPosIntf): T | undefined;
     /**
      * Set element
      * @param pos Position

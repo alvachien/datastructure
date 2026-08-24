@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -26,7 +26,7 @@ export class AVLTree<T> extends BinarySearchTree<T> {
   }
 
   /**
-   * Insert node
+   * Insert a node and rebalance the tree so the AVL height invariant holds.
    * @param key Key of the node
    * @param data Data of the node
    */
@@ -36,13 +36,68 @@ export class AVLTree<T> extends BinarySearchTree<T> {
     if (this._root === undefined) {
       this._root = newnode;
     } else {
-      this.insertNode(this._root, newnode);
+      this._root = this.insertAVL(this._root, newnode);
     }
 
     return newnode;
   }
 
-  private getNodeHeight(node: BinarySearchTreeNode<T>): number {
+  /**
+   * Recursive AVL insert: descend to the insertion point, then rebalance on
+   * the way back up. Returns the (possibly new) root of the subtree.
+   */
+  private insertAVL(node: BinarySearchTreeNode<T>, newnode: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    if (newnode.key < node.key) {
+      if (node.leftNode === undefined) {
+        node.leftNode = newnode;
+      } else {
+        node.leftNode = this.insertAVL(node.leftNode, newnode);
+      }
+    } else if (newnode.key > node.key) {
+      if (node.rightNode === undefined) {
+        node.rightNode = newnode;
+      } else {
+        node.rightNode = this.insertAVL(node.rightNode, newnode);
+      }
+    } else {
+      // Duplicate key: no insertion.
+      return node;
+    }
+
+    // Rebalance this node if it became unbalanced.
+    return this.balance(node);
+  }
+
+  /**
+   * Rebalance a node according to its balance factor.
+   */
+  private balance(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    const balanceState = this.getBalanceFactor(node);
+
+    if (balanceState === AVLBalanceFactor.UNBALANCED_LEFT) {
+      // Left subtree is too tall.
+      if (node.leftNode && this.getBalanceFactor(node.leftNode) === AVLBalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+        // Left-Right case.
+        return this.rotationLR(node);
+      }
+      // Left-Left case.
+      return this.rotationLL(node);
+    }
+
+    if (balanceState === AVLBalanceFactor.UNBALANCED_RIGHT) {
+      // Right subtree is too tall.
+      if (node.rightNode && this.getBalanceFactor(node.rightNode) === AVLBalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+        // Right-Left case.
+        return this.rotationRL(node);
+      }
+      // Right-Right case.
+      return this.rotationRR(node);
+    }
+
+    return node;
+  }
+
+  private getNodeHeight(node: BinarySearchTreeNode<T> | undefined): number {
     if (!node) {
       return -1;
     }
@@ -61,8 +116,8 @@ export class AVLTree<T> extends BinarySearchTree<T> {
    *
    * @param node Node<T>
    */
-  private rotationLL(node: BinarySearchTreeNode<T>) {
-    const tmp = node.leftNode;
+  private rotationLL(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    const tmp = node.leftNode!;
     node.leftNode = tmp.rightNode;
     tmp.rightNode = node;
     return tmp;
@@ -79,8 +134,8 @@ export class AVLTree<T> extends BinarySearchTree<T> {
    *
    * @param node Node<T>
    */
-  private rotationRR(node: BinarySearchTreeNode<T>) {
-    const tmp = node.rightNode;
+  private rotationRR(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    const tmp = node.rightNode!;
     node.rightNode = tmp.leftNode;
     tmp.leftNode = node;
     return tmp;
@@ -90,8 +145,8 @@ export class AVLTree<T> extends BinarySearchTree<T> {
    * Left right case: rotate left then right
    * @param node Node<T>
    */
-  private rotationLR(node: BinarySearchTreeNode<T>) {
-    node.leftNode = this.rotationRR(node.leftNode);
+  private rotationLR(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    node.leftNode = this.rotationRR(node.leftNode!);
     return this.rotationLL(node);
   }
 
@@ -99,12 +154,12 @@ export class AVLTree<T> extends BinarySearchTree<T> {
    * Right left case: rotate right then left
    * @param node Node<T>
    */
-  private rotationRL(node: BinarySearchTreeNode<T>) {
-    node.rightNode = this.rotationLL(node.rightNode);
+  private rotationRL(node: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> {
+    node.rightNode = this.rotationLL(node.rightNode!);
     return this.rotationRR(node);
   }
 
-  private getBalanceFactor(node: BinarySearchTreeNode<T>) {
+  private getBalanceFactor(node: BinarySearchTreeNode<T>): AVLBalanceFactor {
     const heightDifference = this.getNodeHeight(node.leftNode) - this.getNodeHeight(node.rightNode);
     switch (heightDifference) {
       case -2:
@@ -119,106 +174,4 @@ export class AVLTree<T> extends BinarySearchTree<T> {
         return AVLBalanceFactor.BALANCED;
     }
   }
-
-  // protected insertNode(node: Node<T>, key: T) {
-  //   if (node == null) {
-  //     return new Node(key);
-  //   } else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
-  //     node.left = this.insertNode(node.left, key);
-  //   } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
-  //     node.right = this.insertNode(node.right, key);
-  //   } else {
-  //     return node; // duplicated key
-  //   }
-
-  //   // verify if tree is balanced
-  //   const balanceState = this.getBalanceFactor(node);
-
-  //   if (balanceState === BalanceFactor.UNBALANCED_LEFT) {
-  //     if (this.compareFn(key, node.left.key) === Compare.LESS_THAN) {
-  //       // Left left case
-  //       node = this.rotationLL(node);
-  //     } else {
-  //       // Left right case
-  //       return this.rotationLR(node);
-  //     }
-  //   }
-
-  //   if (balanceState === BalanceFactor.UNBALANCED_RIGHT) {
-  //     if (this.compareFn(key, node.right.key) === Compare.BIGGER_THAN) {
-  //       // Right right case
-  //       node = this.rotationRR(node);
-  //     } else {
-  //       // Right left case
-  //       return this.rotationRL(node);
-  //     }
-  //   }
-
-  //   return node;
-  // }
-
-  // protected removeNode(node: Node<T>, key: T) {
-  //   if (node == null) {
-  //     return null;
-  //   }
-
-  //   if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
-  //     // The key to be deleted is in the left sub-tree
-  //     node.left = this.removeNode(node.left, key);
-  //   } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
-  //     // The key to be deleted is in the right sub-tree
-  //     node.right = this.removeNode(node.right, key);
-  //   } else {
-  //     // node is the node to be deleted
-  //     if (node.left == null && node.right == null) {
-  //       node = null;
-  //     } else if (node.left == null && node.right != null) {
-  //       node = node.right;
-  //     } else if (node.left != null && node.right == null) {
-  //       node = node.left;
-  //     } else {
-  //       // node has 2 children, get the in-order successor
-  //       const inOrderSuccessor = this.minNode(node.right);
-  //       node.key = inOrderSuccessor.key;
-  //       node.right = this.removeNode(node.right, inOrderSuccessor.key);
-  //     }
-  //   }
-
-  //   if (node == null) {
-  //     return node;
-  //   }
-
-  //   // verify if tree is balanced
-  //   const balanceState = this.getBalanceFactor(node);
-
-  //   if (balanceState === BalanceFactor.UNBALANCED_LEFT) {
-  //     // Left left case
-  //     if (
-  //       this.getBalanceFactor(node.left) === BalanceFactor.BALANCED ||
-  //       this.getBalanceFactor(node.left) === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
-  //     ) {
-  //       return this.rotationLL(node);
-  //     }
-  //     // Left right case
-  //     if (this.getBalanceFactor(node.left) === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
-  //       return this.rotationLR(node.left);
-  //     }
-  //   }
-
-  //   if (balanceState === BalanceFactor.UNBALANCED_RIGHT) {
-  //     // Right right case
-  //     if (
-  //       this.getBalanceFactor(node.right) === BalanceFactor.BALANCED ||
-  //       this.getBalanceFactor(node.right) === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
-  //     ) {
-  //       return this.rotationRR(node);
-  //     }
-  //     // Right left case
-  //     if (this.getBalanceFactor(node.right) === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
-  //       return this.rotationRL(node.right);
-  //     }
-  //   }
-
-  //   return node;
-  // }  
 }

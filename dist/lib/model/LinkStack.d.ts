@@ -13,7 +13,7 @@ export declare class LinkStackNode<T> {
     private _data;
     private _next;
     constructor();
-    get Data(): T;
+    get Data(): T | null;
     set Data(data: T);
     get Next(): LinkStackNode<T> | null;
     set Next(next: LinkStackNode<T> | null);

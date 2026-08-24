@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -51,14 +51,8 @@ export function RPNGetOperatorResult(x: number, y: number, operator: any): numbe
     case '+': rst = x + y; break;
     case '-': rst = x - y; break;
     case '*': rst = x * y; break;
-    case '/':
-      try {
-        rst = x / y;
-      }
-      catch (ex) {
-        throw ex;
-      }
-      break;
+    // Division by zero yields Infinity/NaN in JavaScript; it never throws.
+    case '/': rst = x / y; break;
 
     default:
       throw new Error('Operation has no result');
@@ -102,11 +96,12 @@ export function rpn1(strinputs: string): number {
       }
 
       // Pop two items from the top of the stack and push the result of the
-      // operation onto the stack.
+      // operation onto the stack. Note the operand order: `y` was pushed
+      // after `x`, so the expression is `x <op> y` (e.g. for "92-" → x=9, y=2
+      // → 9 - 2 = 7).
       const y = stack.pop();
       const x = stack.pop();
-      /* eslint no-eval: 0 */
-      stack.push(eval(x + token + ' ' + y));
+      stack.push(RPNGetOperatorResult(x, y, token));
     }
   }
 
@@ -159,7 +154,7 @@ export class RPN {
         }
 
         while (skOp.length > 0) {
-          let opInStack = skOp.pop()!;
+          const opInStack = skOp.pop()!;
           if (opInStack === '(' || RPNOperationPriority(opInStack) < RPNOperationPriority(token)) {
             skOp.push(opInStack);
             break;

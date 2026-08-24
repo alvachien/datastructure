@@ -407,7 +407,7 @@ export class FormulaParser {
     throw new Error(`Operation ${op} not supported`);
   }
 
-  public evaulate(): number {
+  public evaluate(): number {
     if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
       throw new Error('Invalid Input');
     }
@@ -441,7 +441,15 @@ export class FormulaParser {
           if (operStack.IsEmpty()) {
             operStack.Push(this._orgInput[i]);
           } else {
-            if (this.operatorPriority(operStack.Peek()!) >= this.operatorPriority(this._orgInput[i])) {
+            // Left-associative draining: pop every stacked operator whose
+            // precedence is >= the incoming operator's before pushing it. The
+            // old code popped only a single operator, so an equal-precedence
+            // operator left on the stack was applied during the final LIFO
+            // drain in the wrong order — e.g. "1-2*3+4" yielded -9 (1-(6+4))
+            // instead of -1 ((1-6)+4). Draining here mirrors RPN.buildExpress.
+            // `(` has priority 0, so the loop naturally stops at an open paren.
+            while (!operStack.IsEmpty()
+              && this.operatorPriority(operStack.Peek()!) >= this.operatorPriority(this._orgInput[i])) {
               const rst = this.cal(numStack.Pop()!, numStack.Pop()!, operStack.Pop()!);
               numStack.Push(rst);
             }

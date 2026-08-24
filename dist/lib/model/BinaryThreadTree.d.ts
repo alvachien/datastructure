@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -31,11 +31,11 @@ export declare class BinaryThreadTreeNode<T> implements IBinaryTreeNode<T> {
     set key(key: number);
     get data(): T;
     set data(data: T);
-    get Left(): BinaryThreadTreeNode<T>;
+    get Left(): BinaryThreadTreeNode<T> | undefined;
     set Left(left: BinaryThreadTreeNode<T>);
     get LeftTag(): BinaryThreadTag;
     set LeftTag(lt: BinaryThreadTag);
-    get Right(): BinaryThreadTreeNode<T>;
+    get Right(): BinaryThreadTreeNode<T> | undefined;
     set Right(right: BinaryThreadTreeNode<T>);
     get RightTag(): BinaryThreadTag;
     set RightTag(rt: BinaryThreadTag);
@@ -53,6 +53,6 @@ export declare class BinaryThreadTree<T> implements IBinaryTree<T> {
     private PreorderImpl;
     PostorderTraversal(): Array<BinaryThreadTreeNode<T>>;
     private PostorderImpl;
-    InsertNode(parNode: BinaryThreadTreeNode<T>, key: number, data: T): BinaryThreadTreeNode<T>;
-    FindNode(elem: T): IBinaryTreeNode<T>;
+    InsertNode(parNode: BinaryThreadTreeNode<T> | null, key: number, data: T): BinaryThreadTreeNode<T> | null;
+    FindNode(elem: T): IBinaryTreeNode<T> | null;
 }

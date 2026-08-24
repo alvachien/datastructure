@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -76,18 +76,18 @@ export interface IBinaryTree<T> {
      * Return false if the insertion is failed.
      * Return a reference to new created note if succeed.
      */
-    InsertNode(parNode: IBinaryTreeNode<T>, key: number, data: T): IBinaryTreeNode<T>;
+    InsertNode(parNode: IBinaryTreeNode<T> | null, key: number, data: T): IBinaryTreeNode<T> | null;
     /**
      * FindNode: Find the node
      * @param elem, the element with specified data
      * Return the node if found
      */
-    FindNode(elem: T): IBinaryTreeNode<T>;
+    FindNode(elem: T): IBinaryTreeNode<T> | null;
 }
 /**
  * Callback type for IBinarySearchTree
  */
-export declare type BinarySearchTreeCallback<T> = (node: IBinaryTreeNode<T>) => void;
+export type BinarySearchTreeCallback<T> = (node: IBinaryTreeNode<T>) => void;
 /**
  * Binary search tree
  */
@@ -121,7 +121,7 @@ export interface IBinarySearchTree<T> {
     /**
      * search: Find the node
      * @param key, the key to search
-     * Return the node if found
+     * Return the node if found, or `undefined` if the key is absent (including an empty tree)
      */
-    search(key: number): IBinaryTreeNode<T>;
+    search(key: number): IBinaryTreeNode<T> | undefined;
 }

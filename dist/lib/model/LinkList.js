@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -12,6 +12,8 @@
  * Node in Link list
  */
 export class LinkListNode {
+    _data;
+    _next;
     /**
      * Constructor
      */
@@ -35,20 +37,20 @@ export class LinkListNode {
  * Link list
  */
 export class LinkList {
+    _head = null;
+    _length = 0;
+    _cursor = undefined;
     /**
      * Constructor
      */
     constructor() {
-        this._head = null;
-        this._length = 0;
-        this._cursor = undefined;
     }
     next(...args) {
         if (this._cursor === undefined) {
             this._cursor = this._head;
         }
         if (this._cursor !== null) {
-            let rtn = {
+            const rtn = {
                 done: false,
                 value: this._cursor.Data
             };
@@ -129,7 +131,7 @@ export class LinkList {
             return false;
         }
         if (index === 0) {
-            let nnode = new LinkListNode();
+            const nnode = new LinkListNode();
             nnode.Data = elem;
             nnode.Next = this._head;
             this._head = nnode;
@@ -142,7 +144,7 @@ export class LinkList {
             cur = cur.Next;
             i++;
         }
-        let nnode = new LinkListNode();
+        const nnode = new LinkListNode();
         nnode.Data = elem;
         nnode.Next = cur.Next;
         cur.Next = nnode;
@@ -161,7 +163,7 @@ export class LinkList {
         while (cur.Next !== null) {
             cur = cur.Next;
         }
-        let newnode = new LinkListNode();
+        const newnode = new LinkListNode();
         newnode.Data = elem;
         newnode.Next = null;
         cur.Next = newnode;
@@ -172,7 +174,10 @@ export class LinkList {
      * @param index Index to delete
      */
     DeleteElement(index) {
-        if (index < 0 || index > this._length || this._head === null) {
+        // Guard with `>=` so deleting at index === length (one past the end) is
+        // rejected; previously `>` permitted it and then `cur.Next!.Next`
+        // dereferenced null on the trailing node.
+        if (index < 0 || index >= this._length || this._head === null) {
             return false;
         }
         if (index === 0) {
@@ -189,6 +194,8 @@ export class LinkList {
             cur = cur.Next;
             i++;
         }
+        // `cur` is the node *before* the one to delete. cur.Next is the target;
+        // it is guaranteed non-null because index < length was checked above.
         cur.Next = cur.Next.Next;
         this._length--;
         return true;
@@ -209,7 +216,7 @@ export class LinkList {
         if (this._length === 0 || this._head === null) {
             return '';
         }
-        let ar = [];
+        const ar = [];
         let cur = this._head;
         ar.push(cur.Data);
         while (cur.Next !== null) {
@@ -224,14 +231,11 @@ export class LinkList {
      */
     IsExist(val) {
         let cur = this._head;
-        if (cur.Data === val) {
-            return true;
-        }
-        while (cur.Next !== null) {
-            cur = cur.Next;
+        while (cur !== null) {
             if (cur.Data === val) {
                 return true;
             }
+            cur = cur.Next;
         }
         return false;
     }

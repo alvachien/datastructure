@@ -12,8 +12,8 @@
  * Sequence Queue
  */
 export class SequenceQueue {
+    _data = [];
     constructor() {
-        this._data = [];
     }
     /**
      * The length of the whole stack

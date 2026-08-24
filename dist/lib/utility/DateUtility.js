@@ -27,14 +27,14 @@ export class DateUtility {
     }
     /**
      * Parse string to Date
-     * @param s string to parse
-     * @returns a new Date
+     * @param s string to parse, expected as `YYYY-MM-DD`
+     * @returns a new Date, or `null` if the string cannot be parsed into valid y/m/d numbers
      */
     static String2Date(s, dateSplitChar = '-') {
         if (!s) {
-            return new Date();
+            return null;
         }
-        const ss = (s.split(dateSplitChar));
+        const ss = s.split(dateSplitChar);
         const y = parseInt(ss[0], 10);
         const m = parseInt(ss[1], 10);
         const d = parseInt(ss[2], 10);
@@ -42,7 +42,7 @@ export class DateUtility {
             return new Date(y, m - 1, d);
         }
         else {
-            return new Date();
+            return null;
         }
     }
     /**

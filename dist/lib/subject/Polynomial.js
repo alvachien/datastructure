@@ -20,6 +20,8 @@ import { SequenceList, QuickSort } from '../model';
  * Term in Polynomial
  */
 export class PolynomialTerm {
+    _coef;
+    _exp;
     constructor() {
         this._coef = 0;
         this._exp = 0;
@@ -41,6 +43,7 @@ export class PolynomialTerm {
  * Polynomial
  */
 export class Polynomial {
+    _term;
     /**
      * Constructor
      */
@@ -160,7 +163,7 @@ export class Polynomial {
         let rst = null;
         for (let i = 0; i < this._term.Length(); ++i) {
             const elem = this._term.GetElement(i);
-            let subitem = new Polynomial();
+            const subitem = new Polynomial();
             for (let j = 0; j < other.TermLength(); ++j) {
                 const elem2 = other.Terms().GetElement(j);
                 subitem.NewTerm(Math.round(elem.Coef * elem2.Coef), Math.round(elem.Exp + elem2.Exp));

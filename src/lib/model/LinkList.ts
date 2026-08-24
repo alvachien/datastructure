@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -202,7 +202,10 @@ export class LinkList<T> implements IList<T> {
    * @param index Index to delete
    */
   public DeleteElement(index: number): boolean {
-    if (index < 0 || index > this._length || this._head === null) {
+    // Guard with `>=` so deleting at index === length (one past the end) is
+    // rejected; previously `>` permitted it and then `cur.Next!.Next`
+    // dereferenced null on the trailing node.
+    if (index < 0 || index >= this._length || this._head === null) {
       return false;
     }
 
@@ -217,14 +220,16 @@ export class LinkList<T> implements IList<T> {
       return true;
     }
 
-    let cur: LinkListNode<T> = this._head;
+    let cur: LinkListNode<T> | null = this._head;
     let i = 1;
     while (cur !== null && i < index) {
-      cur = cur.Next!;
+      cur = cur.Next;
       i ++;
     }
 
-    cur.Next = cur.Next!.Next;
+    // `cur` is the node *before* the one to delete. cur.Next is the target;
+    // it is guaranteed non-null because index < length was checked above.
+    cur!.Next = cur!.Next!.Next;
     this._length--;
 
     return true;
@@ -264,15 +269,11 @@ export class LinkList<T> implements IList<T> {
    */
   public IsExist(val: T): boolean {
     let cur: LinkListNode<T> | null = this._head;
-    if (cur!.Data === val) {
-      return true;
-    }
-
-    while (cur!.Next !== null) {
-      cur = cur!.Next;
+    while (cur !== null) {
       if (cur.Data === val) {
         return true;
-      }  
+      }
+      cur = cur.Next;
     }
 
     return false;

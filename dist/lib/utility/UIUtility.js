@@ -10,7 +10,7 @@
  */
 export class UIUtility {
     static getDocumentHead(doc) {
-        let docinuse = doc || document;
+        const docinuse = doc || document;
         return docinuse.head || docinuse.getElementsByTagName('head')[0] || docinuse.documentElement;
     }
     static createElement(tag, ns = 'http://www.w3.org/1999/xhtml') {
@@ -65,8 +65,8 @@ export class UIUtility {
     }
     static hasCssString(id, doc) {
         let index = 0, sheets;
-        let docinuse = doc || document;
-        let existingStyles = docinuse.getElementsByTagName('style');
+        const docinuse = doc || document;
+        const existingStyles = docinuse.getElementsByTagName('style');
         while (index < existingStyles.length) {
             if (existingStyles[index++].id === id) {
                 return true;
@@ -95,7 +95,7 @@ export class UIUtility {
     //   }
     // }
     static importCssStylsheet(uri) {
-        var link = UIUtility.createElement('link');
+        const link = UIUtility.createElement('link');
         link.rel = 'stylesheet';
         link.href = uri;
         UIUtility.getDocumentHead().appendChild(link);

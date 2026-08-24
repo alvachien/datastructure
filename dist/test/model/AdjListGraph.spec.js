@@ -102,5 +102,70 @@ describe('Test AdjListGraph', () => {
         brst = _graph.IsEdgeExist(1, 2);
         expect(brst).toBe(true);
     });
+    /**
+     * Directed graph:
+     *   A -> B, A -> C, A -> D, B -> D
+     *
+     * Vertices inserted as A(1), B(2), C(3), D(4).
+     * Edges added in order: 1->2, 1->3, 1->4, 2->4.
+     */
+    const buildDirectedGraph = () => {
+        _graph.AddVertex(1, 'A');
+        _graph.AddVertex(2, 'B');
+        _graph.AddVertex(3, 'C');
+        _graph.AddVertex(4, 'D');
+        _graph.AddEdge(1, 2, 5);
+        _graph.AddEdge(1, 3, 2);
+        _graph.AddEdge(1, 4, 6);
+        _graph.AddEdge(2, 4, 4);
+    };
+    it('#5. Test DFS visits every reachable vertex.', () => {
+        buildDirectedGraph();
+        const rst = _graph.DFS().map(v => v.value);
+        expect(rst.length).toBe(4);
+        expect(rst).toContain('A');
+        expect(rst).toContain('B');
+        expect(rst).toContain('C');
+        expect(rst).toContain('D');
+    });
+    it('#6. Test DFS starts at the first-inserted vertex.', () => {
+        buildDirectedGraph();
+        const rst = _graph.DFS().map(v => v.value);
+        expect(rst[0]).toBe('A');
+    });
+    it('#7. Test BFS visits every reachable vertex and starts at A.', () => {
+        buildDirectedGraph();
+        const rst = _graph.BFS().map(v => v.value);
+        expect(rst.length).toBe(4);
+        expect(rst[0]).toBe('A');
+        expect(rst.slice(1).sort()).toEqual(['B', 'C', 'D']);
+    });
+    it('#8. Test DFS and BFS on empty graph return [].', () => {
+        expect(_graph.DFS()).toEqual([]);
+        expect(_graph.BFS()).toEqual([]);
+    });
+    it('#9. Test DFS and BFS reach disconnected components.', () => {
+        _graph.AddVertex(1, 'A');
+        _graph.AddVertex(2, 'B'); // no edges
+        expect(_graph.DFS().map(v => v.value).length).toBe(2);
+        expect(_graph.BFS().map(v => v.value).length).toBe(2);
+    });
+    it('#10. Test BFS does not double-visit a vertex reachable via multiple paths.', () => {
+        // A->B, A->C, B->D, C->D : D reachable two ways, must appear once.
+        _graph.AddVertex(1, 'A');
+        _graph.AddVertex(2, 'B');
+        _graph.AddVertex(3, 'C');
+        _graph.AddVertex(4, 'D');
+        _graph.AddEdge(1, 2, 1);
+        _graph.AddEdge(1, 3, 1);
+        _graph.AddEdge(2, 4, 1);
+        _graph.AddEdge(3, 4, 1);
+        const rst = _graph.BFS().map(v => v.value);
+        expect(rst.length).toBe(4);
+        expect(rst.filter(v => v === 'D').length).toBe(1);
+        const dfsRst = _graph.DFS().map(v => v.value);
+        expect(dfsRst.length).toBe(4);
+        expect(dfsRst.filter(v => v === 'D').length).toBe(1);
+    });
 });
 //# sourceMappingURL=AdjListGraph.spec.js.map

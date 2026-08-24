@@ -56,8 +56,8 @@ export function setSelectionByPosition(editor, positoin) {
     let pNode = editor.childNodes[line];
     let foundStart = false;
     let stop = false;
-    let start = Math.max(0, positoin.start);
-    let end = Math.max(0, positoin.end);
+    const start = Math.max(0, positoin.start);
+    const end = Math.max(0, positoin.end);
     const range = editor.ownerDocument.createRange();
     range.setStart(pNode, 0);
     range.collapse(true);
@@ -119,6 +119,7 @@ export function setSelectionByInlineText(text, childNodes) {
             offset = index;
             return true;
         }
+        return false;
     });
     if (startIndex < 0) {
         return;

@@ -28,9 +28,18 @@ describe('Unit test for StringUtility in Model', () => {
         expect(StringUtility.CheckStringLength(str, 1, 3)).toBeFalse();
     });
 
-    xit('#8. hasDuplicatesInStringArray', () => {
-        expect(StringUtility.hasDuplicatesInStringArray('adsdae')).toBeTrue();
-        expect(StringUtility.hasDuplicatesInStringArray('abcewf')).toBeFalse();
+    it('#8. hasDuplicatesInStringArray detects array duplicates', () => {
+        // No duplicates
+        expect(StringUtility.hasDuplicatesInStringArray(['a', 'b', 'c'])).toBeFalse();
+        expect(StringUtility.hasDuplicatesInStringArray([])).toBeFalse();
+        expect(StringUtility.hasDuplicatesInStringArray(['solo'])).toBeFalse();
+        // Duplicates present
+        expect(StringUtility.hasDuplicatesInStringArray(['a', 'b', 'a'])).toBeTrue();
+        expect(StringUtility.hasDuplicatesInStringArray(['dup', 'dup'])).toBeTrue();
+        // First-position duplicate (guard catches on second occurrence)
+        expect(StringUtility.hasDuplicatesInStringArray(['x', 'x', 'y'])).toBeTrue();
+        // Last-position duplicate
+        expect(StringUtility.hasDuplicatesInStringArray(['y', 'z', 'z'])).toBeTrue();
     });
 });
 

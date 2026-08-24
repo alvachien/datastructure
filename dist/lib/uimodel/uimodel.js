@@ -35,6 +35,9 @@ export function isUpdateMode(mode) {
  * UI Display string
  */
 export class UIDisplayString {
+    value;
+    i18nterm;
+    displaystring;
 }
 /**
  * Get canvas mouse event position

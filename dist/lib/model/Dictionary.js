@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -14,6 +14,7 @@
  * Value: Template X
  */
 export class Dictionary {
+    _data;
     constructor() {
         this._data = {};
     }
@@ -33,9 +34,21 @@ export class Dictionary {
     get(key) {
         return this.has(key) ? this._data[key] : undefined;
     }
+    /**
+     * Get the value for a key, asserting it exists.
+     * @param key Key
+     * @returns The value, or undefined if the key is absent
+     * @deprecated Prefer `get` and handle the `undefined` case explicitly.
+     */
+    getOrThrow(key) {
+        if (!this.has(key)) {
+            throw new Error(`Key not found: ${key}`);
+        }
+        return this._data[key];
+    }
     values() {
         const ret = [];
-        for (let key in this._data) {
+        for (const key in this._data) {
             if (this.has(key)) {
                 ret.push(this._data[key]);
             }
@@ -44,7 +57,7 @@ export class Dictionary {
     }
     keys() {
         const ret = [];
-        for (let key in this._data) {
+        for (const key in this._data) {
             if (this.has(key)) {
                 ret.push(key);
             }
@@ -59,7 +72,7 @@ export class Dictionary {
     }
     sizeLegacy() {
         let count = 0;
-        for (let prop in this._data) {
+        for (const prop in this._data) {
             if (this._data.hasOwnProperty(prop)) {
                 ++count;
             }

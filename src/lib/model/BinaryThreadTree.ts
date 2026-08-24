@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -92,61 +92,60 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
   public InorderTraversal(): Array<BinaryThreadTreeNode<T>> {
     const arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
 
-    if (this._root !== null) {
+    if (this._root) {
       this.InorderImpl(this._root, arRst);
     }
 
     return arRst;
   }
 
-  private InorderImpl(curNode: BinaryThreadTreeNode<T>, arRst: Array<BinaryThreadTreeNode<T>>) {
-    if (curNode !== null) {
-
-      this.InorderImpl(curNode.Left!, arRst);
+  private InorderImpl(curNode: BinaryThreadTreeNode<T> | undefined, arRst: Array<BinaryThreadTreeNode<T>>) {
+    if (curNode) {
+      this.InorderImpl(curNode.Left, arRst);
       arRst.push(curNode);
-      this.InorderImpl(curNode.Right!, arRst);
+      this.InorderImpl(curNode.Right, arRst);
     }
   }
 
   public PreorderTraversal(): Array<BinaryThreadTreeNode<T>> {
     const arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
 
-    if (this._root !== null) {
+    if (this._root) {
       this.PreorderImpl(this._root, arRst);
     }
 
     return arRst;
   }
 
-  private PreorderImpl(curNode: BinaryThreadTreeNode<T>, arRst: Array<BinaryThreadTreeNode<T>>) {
-    if (curNode !== null) {
+  private PreorderImpl(curNode: BinaryThreadTreeNode<T> | undefined, arRst: Array<BinaryThreadTreeNode<T>>) {
+    if (curNode) {
       arRst.push(curNode);
 
-      this.PreorderImpl(curNode.Left!, arRst);
-      this.PreorderImpl(curNode.Right!, arRst);
+      this.PreorderImpl(curNode.Left, arRst);
+      this.PreorderImpl(curNode.Right, arRst);
     }
   }
 
   public PostorderTraversal(): Array<BinaryThreadTreeNode<T>> {
     const arRst: Array<BinaryThreadTreeNode<T>> = new Array<BinaryThreadTreeNode<T>>();
 
-    if (this._root !== null) {
+    if (this._root) {
       this.PostorderImpl(this._root, arRst);
     }
 
     return arRst;
   }
 
-  private PostorderImpl(curNode: BinaryThreadTreeNode<T>, arRst: Array<BinaryThreadTreeNode<T>>) {
-    if (curNode !== null) {
-      this.PostorderImpl(curNode.Left!, arRst);
-      this.PostorderImpl(curNode.Right!, arRst);
+  private PostorderImpl(curNode: BinaryThreadTreeNode<T> | undefined, arRst: Array<BinaryThreadTreeNode<T>>) {
+    if (curNode) {
+      this.PostorderImpl(curNode.Left, arRst);
+      this.PostorderImpl(curNode.Right, arRst);
       arRst.push(curNode);
     }
   }
 
-  public InsertNode(parNode: BinaryThreadTreeNode<T>, key: number, data: T): BinaryThreadTreeNode<T> | null {
-    if (parNode === null && this._root !== null) {
+  public InsertNode(parNode: BinaryThreadTreeNode<T> | null, key: number, data: T): BinaryThreadTreeNode<T> | null {
+    if (parNode === null && this._root) {
       return null;
     }
 
@@ -158,16 +157,16 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
       return this._root;
     }
 
-    if (parNode.Left !== null && parNode.Right !== null) {
+    if (parNode.Left && parNode.Right) {
       // Parent node is full, cannot add!
       return null;
     }
 
     const nnode: BinaryThreadTreeNode<T> = new BinaryThreadTreeNode<T>();
     nnode.data = data;
-    if (parNode.Left === null) {
+    if (!parNode.Left) {
       parNode.Left = nnode;
-    } else if (parNode.Right === null) {
+    } else if (!parNode.Right) {
       parNode.Right = nnode;
     }
 
@@ -175,7 +174,7 @@ export class BinaryThreadTree<T> implements IBinaryTree<T> {
   }
 
   public FindNode(elem: T): IBinaryTreeNode<T> | null {
-    if (this._root === null) {
+    if (!this._root) {
       return null;
     }
 

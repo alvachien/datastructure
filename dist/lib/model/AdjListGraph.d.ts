@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -72,10 +72,19 @@ export declare class GraphAdjaceList<X, Y> implements IGraph<X, Y> {
     AddEdge(frm: number, to: number, weight: Y): boolean;
     /**
      * DFS: Depth First Search
+     *
+     * Directed (follows out-edges only, consistent with `Graph.DFS`). Visits
+     * every vertex; disconnected components are reached by starting a DFS at
+     * each not-yet-visited vertex in insertion order.
      */
     DFS(): IGraphVertex<X>[];
+    private DFSImpl;
     /**
      * BFS: Breadth First Search
+     *
+     * Directed (follows out-edges only). Seeds the queue with each not-yet-
+     * visited vertex in insertion order so disconnected components are reached.
      */
     BFS(): IGraphVertex<X>[];
+    private findVertex;
 }

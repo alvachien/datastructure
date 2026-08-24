@@ -71,17 +71,17 @@ export declare class FormulaParameter {
  * Token enum
  */
 export declare enum FormulaTokenEnum {
-    Add = 0,
-    Sub = 1,
-    Multi = 2,
-    Div = 3,
-    Equal = 4,
-    LessThan = 5,
-    GreatThean = 6,
-    LessEqual = 7,
-    GreatEqual = 8,
-    OpenParenthesis = 9,
-    CloseParenthesis = 10,
+    Add = 0,// +
+    Sub = 1,// -
+    Multi = 2,// *
+    Div = 3,// /
+    Equal = 4,// =
+    LessThan = 5,// <
+    GreatThean = 6,// >
+    LessEqual = 7,// <=
+    GreatEqual = 8,// >=
+    OpenParenthesis = 9,// (
+    CloseParenthesis = 10,// )
     Variable = 11,
     Digit = 12,
     PI = 21
@@ -112,5 +112,5 @@ export declare class FormulaParser {
     private parse;
     private operatorPriority;
     private cal;
-    evaulate(): number;
+    evaluate(): number;
 }

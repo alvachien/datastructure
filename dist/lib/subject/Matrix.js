@@ -12,6 +12,10 @@
  * Matrix
  */
 export class Matrix {
+    _cells;
+    _maxcol;
+    _maxrow;
+    _inited;
     /**
      * Constructor
      * @param rowcount: Count of rows

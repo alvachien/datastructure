@@ -12,11 +12,11 @@
  * Sequence Stack
  */
 export class SequenceStack {
+    _data = [];
     /**
      * Constructor
      */
     constructor() {
-        this._data = [];
     }
     /**
      * Length

@@ -29,22 +29,22 @@ export class DateUtility {
 
     /**
      * Parse string to Date
-     * @param s string to parse
-     * @returns a new Date
+     * @param s string to parse, expected as `YYYY-MM-DD`
+     * @returns a new Date, or `null` if the string cannot be parsed into valid y/m/d numbers
      */
-    public static String2Date(s: string, dateSplitChar = '-'): Date {
+    public static String2Date(s: string, dateSplitChar = '-'): Date | null {
         if (!s) {
-            return new Date();
+            return null;
         }
 
-        const ss: any = (s.split(dateSplitChar));
+        const ss: string[] = s.split(dateSplitChar);
         const y: number = parseInt(ss[0], 10);
         const m: number = parseInt(ss[1], 10);
         const d: number = parseInt(ss[2], 10);
         if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
             return new Date(y, m - 1, d);
         } else {
-            return new Date();
+            return null;
         }
     }
 

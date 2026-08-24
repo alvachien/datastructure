@@ -8,4 +8,4 @@
  * File: IIterator.ts
  *
  */
-export declare type IIterator<T> = IteratorResult<T>;
+export type IIterator<T> = IteratorResult<T>;

@@ -24,7 +24,7 @@ function ArrayFlip(arr, i) {
     }
 }
 function FindMax(arr, n) {
-    let max;
+    let max = 0;
     let i = 0;
     for (; i < n; i++) {
         if (arr[i] > arr[max]) {
@@ -43,6 +43,8 @@ export function PanCakeSorting(arr, n) {
     }
 }
 export class PanCakeAlgorithm {
+    _cakecount;
+    _maxswap;
     constructor() {
         this._cakecount = 0;
         this._maxswap = 0;

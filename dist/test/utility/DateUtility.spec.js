@@ -27,6 +27,29 @@ describe('Unit test for DateUtility in Model', () => {
         expect(ndate.getMonth()).toBe(1);
         expect(ndate.getDate()).toBe(14);
     });
+    it('#2a. DateUtility.String2Date() with custom separator', () => {
+        const ndate = DateUtility.String2Date('2018/02/14', '/');
+        expect(ndate.getFullYear()).toBe(2018);
+        expect(ndate.getMonth()).toBe(1);
+        expect(ndate.getDate()).toBe(14);
+    });
+    it('#2b. DateUtility.String2Date() returns null on unparseable input', () => {
+        // Empty string
+        expect(DateUtility.String2Date('')).toBeNull();
+        // Non-numeric fields
+        expect(DateUtility.String2Date('abcd-ef-gh')).toBeNull();
+        expect(DateUtility.String2Date('2018-xx-14')).toBeNull();
+        // Missing parts
+        expect(DateUtility.String2Date('2018-02')).toBeNull();
+        // Empty input string short-circuits to null (not today's date)
+        expect(DateUtility.String2Date('')).not.toBeInstanceOf(Date);
+    });
+    it('#2c. DateUtility.String2Date() parses single-digit month/day', () => {
+        const ndate = DateUtility.String2Date('2018-2-7');
+        expect(ndate.getFullYear()).toBe(2018);
+        expect(ndate.getMonth()).toBe(1);
+        expect(ndate.getDate()).toBe(7);
+    });
     it('#3. DateUtility.getYearMonthDisplayString()', () => {
         const strResult = DateUtility.getYearMonthDisplayString(2018, 8);
         expect(strResult).toBe('2018-08');

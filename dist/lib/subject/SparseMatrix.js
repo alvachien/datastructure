@@ -13,6 +13,9 @@ import { SequenceList } from '../model';
  * Trituple
  */
 export class Trituple {
+    _row;
+    _column;
+    _val;
     get Row() {
         return this._row;
     }
@@ -36,6 +39,9 @@ export class Trituple {
  * Sparse Matrix: Matrix with lots of empty entities inside
  */
 export class SparseMatrix {
+    _listTerms;
+    _maxcol;
+    _maxrow;
     /**
      * Constructor
      * @param rowcount: Count of rows

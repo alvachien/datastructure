@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -66,13 +66,9 @@ export function RPNGetOperatorResult(x, y, operator) {
         case '*':
             rst = x * y;
             break;
+        // Division by zero yields Infinity/NaN in JavaScript; it never throws.
         case '/':
-            try {
-                rst = x / y;
-            }
-            catch (ex) {
-                throw ex;
-            }
+            rst = x / y;
             break;
         default:
             throw new Error('Operation has no result');
@@ -93,10 +89,10 @@ export function rpn1(strinputs) {
     }
     // Split into array of tokens
     // let arinputs: any[] = strinputs.split(/\s+/);
-    let arinputs = strinputs.split(/(\d)/);
-    let stack = [];
-    for (var i = 0; i < arinputs.length; i++) {
-        let token = arinputs[i];
+    const arinputs = strinputs.split(/(\d)/);
+    const stack = [];
+    for (let i = 0; i < arinputs.length; i++) {
+        const token = arinputs[i];
         if (arinputs[i] === '') {
             continue;
         }
@@ -110,11 +106,12 @@ export function rpn1(strinputs) {
                 throw new Error('Insufficient values in expression.');
             }
             // Pop two items from the top of the stack and push the result of the
-            // operation onto the stack.
-            let y = stack.pop();
-            let x = stack.pop();
-            /* eslint no-eval: 0 */
-            stack.push(eval(x + token + ' ' + y));
+            // operation onto the stack. Note the operand order: `y` was pushed
+            // after `x`, so the expression is `x <op> y` (e.g. for "92-" → x=9, y=2
+            // → 9 - 2 = 7).
+            const y = stack.pop();
+            const x = stack.pop();
+            stack.push(RPNGetOperatorResult(x, y, token));
         }
     }
     if (stack.length > 1) {
@@ -126,11 +123,11 @@ export function rpn1(strinputs) {
  * Class for RPN
  */
 export class RPN {
-    constructor() {
-        this._arInputs = [];
-    }
+    _arInputs = [];
     get InputArray() {
         return this._arInputs;
+    }
+    constructor() {
     }
     /**
      * Save to string
@@ -143,11 +140,11 @@ export class RPN {
      * @param exp Express string, like 3*(4+5)
      */
     buildExpress(exp) {
-        let skOp = new Array();
+        const skOp = [];
         const operations = "+-*/";
         let digit = "";
         for (let i = 0; i < exp.length; i++) {
-            let token = exp.charAt(i);
+            const token = exp.charAt(i);
             if (!Number.isNaN(+token)) // Digitials
              {
                 digit += token;
@@ -158,7 +155,7 @@ export class RPN {
                     digit = "";
                 }
                 while (skOp.length > 0) {
-                    var opInStack = skOp.pop();
+                    const opInStack = skOp.pop();
                     if (opInStack === '(' || RPNOperationPriority(opInStack) < RPNOperationPriority(token)) {
                         skOp.push(opInStack);
                         break;
@@ -201,16 +198,16 @@ export class RPN {
      * Workout the final result
      */
     WorkoutResult() {
-        let stack = new Array();
+        const stack = [];
         let result = 0;
         for (let i = 0; i < this._arInputs.length; i++) {
-            let c = this._arInputs[i];
+            const c = this._arInputs[i];
             if (!Number.isNaN(+c)) {
                 stack.push(c);
             }
             else if (c === '+' || c === '-' || c === '*' || c === '/') {
-                var nextNum = parseFloat(stack.pop());
-                var prevNum = parseFloat(stack.pop());
+                const nextNum = parseFloat(stack.pop());
+                const prevNum = parseFloat(stack.pop());
                 result = RPNGetOperatorResult(prevNum, nextNum, c);
                 stack.push(result);
             }
@@ -221,22 +218,22 @@ export class RPN {
     // fraction
     // decimal fraction
     VerifyResult(allowNegative, allowDecimal) {
-        let stack = new Array();
+        const stack = [];
         let result = 0;
         for (let i = 0; i < this._arInputs.length; i++) {
-            let c = this._arInputs[i];
+            const c = this._arInputs[i];
             if (!Number.isNaN(+c)) {
                 stack.push(c);
             }
             else if (c === '+' || c === '-' || c === '*' || c === '/') {
-                let nextNum = parseFloat(stack.pop());
+                const nextNum = parseFloat(stack.pop());
                 if (!Number.isInteger(nextNum) && !allowDecimal) {
                     return false;
                 }
                 if (nextNum < 0 && !allowNegative) {
                     return false;
                 }
-                let prevNum = parseFloat(stack.pop());
+                const prevNum = parseFloat(stack.pop());
                 if (!Number.isInteger(prevNum) && !allowDecimal) {
                     return false;
                 }

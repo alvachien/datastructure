@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -9,9 +9,10 @@
  *
  */
 export class BinaryTreeNode {
+    _data;
+    _left = null;
+    _right = null;
     constructor() {
-        this._left = null;
-        this._right = null;
         this._left = null;
         this._right = null;
     }
@@ -35,9 +36,7 @@ export class BinaryTreeNode {
     }
 }
 export class BinaryTree {
-    constructor() {
-        this._root = null;
-    }
+    _root = null;
     get Root() {
         return this._root;
     }
@@ -117,9 +116,10 @@ export class BinaryTree {
         const arNodes = this.PreorderTraversal();
         for (const nod of arNodes) {
             if (nod.Data === elem) {
-                return undefined;
+                return nod;
             }
         }
+        return null;
     }
 }
 //# sourceMappingURL=BinaryTree.js.map

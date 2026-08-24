@@ -28,5 +28,5 @@ export declare class StringUtility {
      * @param strarray Array to be check
      * @returns true indicates duplicated entries exist
      */
-    static hasDuplicatesInStringArray(strarray: string): boolean;
+    static hasDuplicatesInStringArray(strarray: string[]): boolean;
 }

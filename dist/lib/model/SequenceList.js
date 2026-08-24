@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -12,12 +12,12 @@
  * Sequence List
  */
 export class SequenceList {
+    _data = [];
+    _cursor = -1; // For iterator
     /**
      * Constructor
      */
     constructor() {
-        this._data = [];
-        this._cursor = -1; // For iterator
     }
     next(...args) {
         if (this._cursor === -1) {
@@ -80,20 +80,14 @@ export class SequenceList {
     }
     /**
      * Insert the element at the specified index
-     * @param index Specified index for insert
+     * @param index Specified index for insert; index === length appends to the tail
      * @param elem New element for insert
      */
     InsertElement(index, elem) {
-        if (index < 0 || index >= this._data.length || index === undefined || index === null
-            || elem === undefined || elem === null) {
+        if (index < 0 || index > this._data.length) {
             return false;
         }
-        if (index < this._data.length) {
-            for (let i = this._data.length - 1; i >= index; i--) {
-                this._data[i + 1] = this._data[i];
-            }
-            this._data[index] = elem;
-        }
+        this._data.splice(index, 0, elem);
         return true;
     }
     /**
@@ -111,13 +105,7 @@ export class SequenceList {
         if (index < 0 || index >= this._data.length) {
             return false;
         }
-        if (index < this._data.length - 1) {
-            for (let k = index; k < this._data.length - 1; k++) {
-                this._data[k] = this._data[k + 1];
-            }
-        }
-        delete this._data[this._data.length - 1];
-        this._data.length--;
+        this._data.splice(index, 1);
         return true;
     }
     /**

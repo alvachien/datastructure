@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -13,6 +13,8 @@
  * Vertext in the graph
  */
 export class GraphVertex {
+    _id;
+    _value;
     get id() {
         return this._id;
     }
@@ -30,6 +32,9 @@ export class GraphVertex {
  * Edge in the graph
  */
 export class GraphEdge {
+    _weight;
+    _from; // From node
+    _to;
     get weight() {
         return this._weight;
     }
@@ -55,6 +60,8 @@ export class GraphEdge {
  * Y: Weight of edge
  */
 export class Graph {
+    _vertex;
+    _edge;
     constructor() {
         this._vertex = [];
         this._edge = [];
@@ -175,13 +182,51 @@ export class Graph {
         }
     }
     /**
-     * BFS
+     * BFS: Breadth First Search
+     *
+     * Treats the graph as directed (follows out-edges only, consistent with
+     * `DFS`). Visits every vertex; disconnected components are reached by
+     * seeding the queue with each not-yet-visited vertex in insertion order.
      */
     BFS() {
-        // if (this._vertex.length <= 0) {
-        //   return [];
-        // }
-        return [];
+        if (this._vertex.length <= 0) {
+            return [];
+        }
+        const visited = [];
+        const rst = [];
+        for (let i = 0; i < this._vertex.length; i++) {
+            const start = this._vertex[i];
+            if (visited.indexOf(start.id) >= 0) {
+                continue;
+            }
+            const queue = [start];
+            while (queue.length > 0) {
+                const vex = queue.shift();
+                if (visited.indexOf(vex.id) >= 0) {
+                    continue;
+                }
+                visited.push(vex.id);
+                rst.push(vex);
+                // Enqueue every direct successor (out-edge), in edge order.
+                for (let e = 0; e < this._edge.length; e++) {
+                    if (this._edge[e].from === vex.id) {
+                        const successor = this.findVertex(this._edge[e].to);
+                        if (successor && visited.indexOf(successor.id) < 0) {
+                            queue.push(successor);
+                        }
+                    }
+                }
+            }
+        }
+        return rst;
+    }
+    findVertex(id) {
+        for (let i = 0; i < this._vertex.length; i++) {
+            if (this._vertex[i].id === id) {
+                return this._vertex[i];
+            }
+        }
+        return null;
     }
 }
 //# sourceMappingURL=Graph.js.map

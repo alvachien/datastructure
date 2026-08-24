@@ -73,7 +73,7 @@ export declare class Polynomial {
      * Multiply two polynomials
      * @param other polynomial which apply to multiply
      */
-    Multiply(other: Polynomial): Polynomial;
+    Multiply(other: Polynomial): Polynomial | null;
     /**
      * Eval will evaluate the whole polynomial when variable x contains value @param val
      * @param val The value of variable x

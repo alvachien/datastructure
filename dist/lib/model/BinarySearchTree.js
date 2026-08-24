@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2019. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -10,16 +10,14 @@
  */
 // Binary search tree node
 export class BinarySearchTreeNode {
-    constructor(key, data) {
-        if ((key === undefined && data !== undefined)
-            || (key !== undefined && data === undefined)) {
-            throw new Error('invalid input');
-        }
-        if (key !== undefined && data !== undefined) {
-            this._key = key;
-            this._data = data;
-        }
-    }
+    // Optional (`| undefined`): on a leaf, both are undefined. Declaring them
+    // with `!` definite-assignment hid the undefined-ness from the type system,
+    // forcing callers/recursions to rely on fragile `!== undefined` checks
+    // whose correctness was unverifiable. Optional makes the absence honest.
+    leftNode;
+    rightNode;
+    _key;
+    _data;
     get key() {
         return this._key;
     }
@@ -32,13 +30,24 @@ export class BinarySearchTreeNode {
     set data(value) {
         this._data = value;
     }
+    constructor(key, data) {
+        if ((key === undefined && data !== undefined)
+            || (key !== undefined && data === undefined)) {
+            throw new Error('invalid input');
+        }
+        if (key !== undefined && data !== undefined) {
+            this._key = key;
+            this._data = data;
+        }
+    }
 }
 // Binary search tree
 export class BinarySearchTree {
-    constructor() {
-    }
+    _root;
     get rootNode() {
         return this._root;
+    }
+    constructor() {
     }
     /**
      * Insert node
@@ -58,6 +67,7 @@ export class BinarySearchTree {
     /**
      * Search
      * @param key Key to search
+     * @returns the node if found, `undefined` otherwise (including an empty tree)
      */
     search(key) {
         return this.searchNode(this._root, key);
@@ -96,10 +106,19 @@ export class BinarySearchTree {
         return this.maxNode(this._root);
     }
     /**
-     * Remove a node
+     * Remove a node by key.
      * @param key Key of the node to be deleted
+     * @returns true if a node was removed, false if the key was not found
      */
     remove(key) {
+        if (this._root === undefined) {
+            return false;
+        }
+        if (!this.searchNode(this._root, key)) {
+            return false;
+        }
+        this._root = this.removeNode(this._root, key);
+        return true;
     }
     /**
      * @protected
@@ -237,6 +256,7 @@ export class BinarySearchTree {
             }
             const aux = this.minNode(node.rightNode);
             node.key = aux.key;
+            node.data = aux.data;
             node.rightNode = this.removeNode(node.rightNode, aux.key);
             return node;
         }

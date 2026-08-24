@@ -21,7 +21,7 @@ export declare function setSelectionByInlineText(text: string, childNodes: NodeL
 export declare function getSelectPosition(element: HTMLElement, range?: Range): IElementSelectionPosition;
 export declare function getElementSelectionText(element: HTMLElement, range?: Range): string;
 export declare function formatElementText(element: HTMLElement, content: string, position?: IElementSelectionPosition): void;
-export declare function insertTextIntoElement(element: HTMLElement, prefix: string, suffix: string, originrange?: Range, replace?: boolean, toggle?: boolean): void;
+export declare function insertTextIntoElement(element: HTMLElement, prefix: string, suffix: string, originrange?: Range | undefined, replace?: boolean, toggle?: boolean): void;
 export declare function getCursorPositionInElement(element: HTMLElement): any;
 export declare function scrollToElementCenter(editorElement: HTMLElement): void;
 export declare function getCurrentLinePosition(position: IElementSelectionPosition, text: string): IElementSelectionPosition;

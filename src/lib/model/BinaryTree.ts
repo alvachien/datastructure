@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2018. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -8,8 +8,6 @@
  * File: BinaryTree.ts
  *
  */
-
-import { IBinaryTreeNode, IBinaryTree } from './ITree';
 
 export class BinaryTreeNode<T>  {
   private _data!: T;
@@ -108,7 +106,7 @@ export class BinaryTree<T> {
     }
   }
 
-  public InsertNode(parNode: BinaryTreeNode<T>, data: T): BinaryTreeNode<T> | null {
+  public InsertNode(parNode: BinaryTreeNode<T> | null, data: T): BinaryTreeNode<T> | null {
     if (parNode === null && this._root !== null) {
       return null;
     }
@@ -137,7 +135,7 @@ export class BinaryTree<T> {
     return nnode;
   }
 
-  public FindNode(elem: T): IBinaryTreeNode<T> | null {
+  public FindNode(elem: T): BinaryTreeNode<T> | null {
     if (this._root === null) {
       return null;
     }
@@ -145,7 +143,7 @@ export class BinaryTree<T> {
     const arNodes: Array<BinaryTreeNode<T>> = this.PreorderTraversal();
     for (const nod of arNodes) {
       if (nod.Data === elem) {
-        return null;
+        return nod;
       }
     }
 
