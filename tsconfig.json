@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist",
-    "baseUrl": "src",
+    "rootDir": "./src",
     "sourceMap": true,
     "declaration": true,
     "strict": true,
@@ -12,11 +12,15 @@
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
-    "target": "ES2022",
+    "target": "ES2025",
     "module": "ES2022",
     "lib": [
-      "ES2022",
+      "ES2025",
       "dom"
+    ],
+    "types": [
+      "jasmine",
+      "node"
     ]
   },
   "exclude": [

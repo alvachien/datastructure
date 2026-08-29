@@ -46,6 +46,34 @@ let arArray: number[] = [10, 3, 26, 1, 35];
 QuickSort(arArray);
 ```
 
+Code snippet 4: show the way to filter a list with a nested filter definition:
+
+```typescript
+import { FilterUtility, FilterJoinType, FilterOperation } from 'actslib';
+
+const staff = [
+  { name: 'Alice', age: 30, department: 'Engineering' },
+  { name: 'Bob', age: 25, department: 'Sales' },
+  { name: 'Alicia', age: 35 },
+];
+
+// age BETWEEN 25 AND 30 AND (department BEGINSWITH 'Eng' OR name = 'Bob')
+const result = FilterUtility.FilterList(staff, {
+  join: FilterJoinType.AND,
+  conditions: [
+    { property: 'age', operation: FilterOperation.Between, lowValue: 25, highValue: 30 },
+    {
+      join: FilterJoinType.OR,
+      conditions: [
+        { property: 'department', operation: FilterOperation.BeginsWith, lowValue: 'Eng' },
+        { property: 'name', operation: FilterOperation.Equal, lowValue: 'Bob' },
+      ],
+    },
+  ],
+});
+// result: Alice and Bob
+```
+
 
 
 ## REFERENCE
@@ -155,6 +183,7 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The subject **RPN** provides the support of Reverse Polish Notation.
 - The subject **FinanceMethods** provides the support of methods used in Finance area, including Further Value, Present Value, FV of Annity, etc.
 - The subject **BaseConverter** provides the solution to convert numbers between different bases.
+- The subject **FisherYatesShuffle** provides the unbiased O(n) Fisher-Yates (Knuth) array shuffling, returning a shuffled copy of the input.
 - More to come.
 
 ### UTILITIES
@@ -162,11 +191,16 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The uitlity **UIUtility** provides some helpful methods operation on HTML element, including add/remove CSS classes, etc.
 - The uitlity **StringUtility** provides some helpful methods operation on strings, including check password length, check duplications, etc.
 - The uitlity **NumberUtility** provides some helpful methods operation on numbers, including adding prefixes, rounding with specified digitals, etc.
-- The utility **EnumUtility** provides helpful methods to operate on TypeScript enums, including parsing and value retrieval, etc.
+- The utility **EnumUtility** provides helpful methods to operate on TypeScript enums, including **enumerateKeys** (member names), **EnumerateValues** (member values, numeric-enum reverse mapping stripped) and **IsEnumMember** (membership check, used by **FilterUtility**'s enum validation).
 - The utility **Element** provides a wrapper for HTML elements used by **UIUtility**.
+- The utility **FilterUtility** provides condition-based filtering over a list. A filter is a search with strict definition: conditions joined by AND / OR, nestable to arbitrary depth (like SQL `a AND (b OR c)`). Each condition specifies a property, an operation and the value(s); the property kind is detected from its runtime value:
+  - **number / date**: `<`, `<=`, `=`, `>=`, `>`, `Between`; a missing number is treated as 0.
+  - **string**: all of the above plus `BeginsWith`, `EndsWith`, `Contains` (case-sensitive).
+  - Only `Between` examines both `lowValue` and `highValue` (inclusive); the other operations use `lowValue` alone.
+  - **enum**: no special handling needed — TypeScript erases enums at runtime, so a numeric-enum property filters as a number and a string-enum property as a string; enum members can be used directly as condition values (e.g. `lowValue: Priority.High`). Set the condition's `enumValues` to the enum object to enable validation: the item's property value and the bound values must be real enum members (so a stray `priority = 7` never matches), while `BeginsWith`/`EndsWith`/`Contains` patterns are exempt from the bound check.
 
 ### PROGRESS
-The progress of the project shown in the table below. Unit-test status reflects the current `npm test` run (250 specs, 0 failures, 7 pending).
+The progress of the project shown in the table below. Unit-test status reflects the current `npm test` run (270 specs, 0 failures, 7 pending).
 
 #|Content|Status|UT Status|Comment
 ----:|:----|:-----|:-----|:-----
@@ -200,24 +234,26 @@ The progress of the project shown in the table below. Unit-test status reflects 
 28|**Algorithm** (sorts + KMP)|**Finished**|**Passed**|InsertionSort, BinaryInsertSort, BubbleSort, QuickSort, SelectionSort, CountingSort, MergeSort, HeapSort, KMP
 29|**FakedGuid**|**Finished**|**Passed**|
 30|**DateUtility**|**Finished**|**Passed**|
-31|**StringUtility**|**Finished**|**Passed**|
-32|**NumberUtility**|**Finished**|**Passed**|
-33|**EnumUtility**|**Finished**|**Passed**|
+31|**StringUtility**|**Finished**|**Passed**|CheckStringLength, GetPasswordStrengthLevel, hasDuplicatesInStringArray
+32|**NumberUtility**|**Finished**|**Passed**|Round2Two, Round2Any, prefixInteger
+33|**EnumUtility**|**Finished**|**Passed**|enumerateKeys, EnumerateValues, IsEnumMember (numeric-enum reverse mapping handled)
 34|**UIUtility / Element**|**Finished**|**Passed**|
-35|B Tree|n/a|n/a|Not started yet
-36|Red Black Tree|n/a|n/a|Not started yet
-37|Strassen Algorithm|n/a|n/a|Not started yet
-38|Birthday Theory|n/a|n/a|Not started yet
-39|Ball and Box|n/a|n/a|Not started yet
-40|Hire on-line|n/a|n/a|Not started yet
-41|van Emde Boas Tree|n/a|n/a|Not started yet
-42|Kruskal Algorithm|n/a|n/a|Not started yet
-43|Prim Algorithm|n/a|n/a|Not started yet
-44|Bellman-Ford Algorithm|n/a|n/a|Not started yet
-45|Dijkstra Algorithm|n/a|n/a|Not started yet
-46|Floyd-Warshall Algorithm|n/a|n/a|Not started yet
-47|Radix sort|n/a|n/a|Not started yet
-48|Bucket sort|n/a|n/a|Not started yet
+35|**FilterUtility**|**Finished**|**Passed**|Condition-based list filtering with AND/OR nesting, Between, string/number/date operations
+36|**FisherYatesShuffle**|**Finished**|**Passed**|Unbiased O(n) shuffle, returns a shuffled copy
+37|B Tree|n/a|n/a|Not started yet
+38|Red Black Tree|n/a|n/a|Not started yet
+39|Strassen Algorithm|n/a|n/a|Not started yet
+40|Birthday Theory|n/a|n/a|Not started yet
+41|Ball and Box|n/a|n/a|Not started yet
+42|Hire on-line|n/a|n/a|Not started yet
+43|van Emde Boas Tree|n/a|n/a|Not started yet
+44|Kruskal Algorithm|n/a|n/a|Not started yet
+45|Prim Algorithm|n/a|n/a|Not started yet
+46|Bellman-Ford Algorithm|n/a|n/a|Not started yet
+47|Dijkstra Algorithm|n/a|n/a|Not started yet
+48|Floyd-Warshall Algorithm|n/a|n/a|Not started yet
+49|Radix sort|n/a|n/a|Not started yet
+50|Bucket sort|n/a|n/a|Not started yet
 
 
 # CONTRIBUTORS

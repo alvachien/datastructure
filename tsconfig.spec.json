@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "module": "ES2022",
-    "target": "ES2022",
+    "target": "ES2025",
     "sourceMap": true,
     "declaration": false,
     "noEmitOnError": false,

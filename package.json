@@ -5,7 +5,7 @@
     "name": "Hongjun Qian(Alva Chien)",
     "email": "alvachien@163.com"
   },
-  "version": "0.6.80",
+  "version": "0.6.81",
   "private": false,
   "main": "dist/lib/index",
   "homepage": "https://github.com/alvachien/datastructure",
@@ -33,7 +33,7 @@
     "jasmine-core": "^4.6.0",
     "prettier": "^3.5.1",
     "tsx": "^4.23.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.67.0"
   }
 }

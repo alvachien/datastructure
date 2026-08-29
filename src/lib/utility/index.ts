@@ -1,6 +1,6 @@
 /**
  * @license
- * (C) Alva Chien, 2017 - 2021. All Rights Reserved.
+ * (C) Alva Chien, 2017 - 2026. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://github.com/alvachien/datastructure/blob/master/LICENSE
@@ -14,3 +14,4 @@ export * from './DateUtility';
 export * from './StringUtility';
 export * from './NumberUtility';
 export * from './EnumUtility';
+export * from './FilterUtility';

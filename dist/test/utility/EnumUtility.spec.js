@@ -29,5 +29,25 @@ describe('Unit test for EnumUtility in Model', () => {
         expect(arst.findIndex(val => val === 'ShortAnswer')).not.toEqual(-1);
         expect(arst.findIndex(val => val === 'EssayQuestions')).not.toEqual(-1);
     });
+    let TaskStatus;
+    (function (TaskStatus) {
+        TaskStatus["Open"] = "OPEN";
+        TaskStatus["InProgress"] = "IN_PROGRESS";
+        TaskStatus["Done"] = "DONE";
+    })(TaskStatus || (TaskStatus = {}));
+    it('EnumerateValues', () => {
+        // numeric enum: reverse-mapped keys are filtered out
+        expect(EnumUtility.EnumerateValues(ExerciseItemType)).toEqual([0, 1, 2, 3, 4]);
+        // string enum: member values in declaration order
+        expect(EnumUtility.EnumerateValues(TaskStatus)).toEqual(['OPEN', 'IN_PROGRESS', 'DONE']);
+    });
+    it('IsEnumMember', () => {
+        expect(EnumUtility.IsEnumMember(2, ExerciseItemType)).toBeTrue();
+        expect(EnumUtility.IsEnumMember(7, ExerciseItemType)).toBeFalse();
+        expect(EnumUtility.IsEnumMember('Question', ExerciseItemType)).toBeFalse(); // name is not a value
+        expect(EnumUtility.IsEnumMember('OPEN', TaskStatus)).toBeTrue();
+        expect(EnumUtility.IsEnumMember('Open', TaskStatus)).toBeFalse();
+        expect(EnumUtility.IsEnumMember(undefined, TaskStatus)).toBeFalse();
+    });
 });
 //# sourceMappingURL=EnumUtility.spec.js.map

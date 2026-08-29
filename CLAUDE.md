@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-`actslib` is a TypeScript library of data structures, algorithms, and utilities, published to npm (`npm install actslib`). Targets Node >= 24 and ES2022.
+`actslib` is a TypeScript library of data structures, algorithms, and utilities, published to npm (`npm install actslib`). Targets Node >= 24 and ES2025 (TypeScript 6's default target).
 
 ## Common Commands
 
@@ -33,8 +33,8 @@ src/lib/
 ```
 
 - **`model/`** — Each data structure has an `I*` interface (e.g. `IList`, `IStack`, `IQueue`, `ITree`, `IBinaryTree`, `IGraph`) plus concrete implementations (`SequenceList`, `LinkList`, `StaticLinkList`, `SequenceStack`, `LinkStack`, `SequenceQueue`, `BinaryTree`, `BinarySearchTree`, `BinaryThreadTree`, `HuffmanTree`, `AVLTree`, `Graph`, `AdjListGraph`, `Dictionary`, `HashTable`, `Set`). `Algorithm.ts` holds free sorting functions (`InsertionSort`, `BubbleSort`, `QuickSort`, `SelectionSort`, `CountingSort`, `MergeSort`, `HeapSort`) plus `KMP` and `SwapElement`.
-- **`subject/`** — Composite/domain topics: `Matrix`, `SparseMatrix`, `Polynomial`, `PriorityQueue`, `MaximumSubArray`, `Formula` (math expression parser), `rpn` (reverse Polish notation), `FinanceMethods`, `ChineseChessGeneralProblem`, `PanCakeSorting`, `BaseConverter`.
-- **`utility/`** — Pure helpers: `DateUtility`, `StringUtility`, `NumberUtility`, `EnumUtility`, `UIUtility`, `Element`.
+- **`subject/`** — Composite/domain topics: `Matrix`, `SparseMatrix`, `Polynomial`, `PriorityQueue`, `MaximumSubArray`, `Formula` (math expression parser), `rpn` (reverse Polish notation), `FinanceMethods`, `ChineseChessGeneralProblem`, `PanCakeSorting`, `BaseConverter`, `FisherYatesShuffle`.
+- **`utility/`** — Pure helpers: `DateUtility`, `StringUtility`, `NumberUtility`, `EnumUtility`, `UIUtility`, `Element`, `FilterUtility` (condition-based filtering over lists: AND/OR-joined conditions nestable to arbitrary depth like SQL `a AND (b OR c)`; typed by each property's runtime kind — number/date support `< <= = >= > Between`, strings add `BeginsWith/EndsWith/Contains`; only `Between` uses both low/high values).
 
 ## Key Conventions
 
@@ -43,7 +43,7 @@ src/lib/
 - **Sort functions accept an optional `compareFn?: (a: T, b: T) => number`** and fall back to native `<`/`>` comparison when omitted.
 - **`IList<T>` extends `IterableIterator<T>`** — list implementations carry iterator state (`_cursor`) and a `next()` method.
 - **License header block** at the top of each source file (Alva Chien, MIT).
-- `tsconfig.json` uses `strict`, `noImplicitOverride`, `noPropertyAccessFromIndexSignature`, `noImplicitReturns`, `declaration`, `moduleResolution: bundler`, `target/module: ES2022`.
+- `tsconfig.json` uses `strict`, `noImplicitOverride`, `noPropertyAccessFromIndexSignature`, `noImplicitReturns`, `declaration`, `moduleResolution: bundler`, `target: ES2025`, `module: ES2022` (module format stays at ES2022 — no newer module syntax exists), `rootDir: ./src`, and an explicit `types: ["jasmine", "node"]` (TS 6 no longer auto-includes `@types/*`).
 - Formatting (prettier): single quotes, semicolons, 2-space indent, 100 max line length (`.editorconfig`); `.prettierignore` excludes `dist`.
 
 ## Publishing
