@@ -66,7 +66,7 @@ export class UIUtility {
     }
   }
   public static hasCssString(id: string, doc?: HTMLDocument): boolean {
-    let index = 0, sheets;
+    let index = 0;
     const docinuse: HTMLDocument = doc || document;
     const existingStyles = docinuse.getElementsByTagName('style');
 

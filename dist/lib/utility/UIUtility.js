@@ -64,7 +64,7 @@ export class UIUtility {
         }
     }
     static hasCssString(id, doc) {
-        let index = 0, sheets;
+        let index = 0;
         const docinuse = doc || document;
         const existingStyles = docinuse.getElementsByTagName('style');
         while (index < existingStyles.length) {

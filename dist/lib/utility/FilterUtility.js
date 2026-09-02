@@ -47,6 +47,10 @@ export var FilterOperation;
  * IFilterDefinition acts like a parenthesized group). Each condition
  * specifies a property, an operation and the value(s) to compare against.
  *
+ * A filter handed to **FilterList** / **MatchFilter** is one of three
+ * shapes (the taxonomy of {@link FilterRoot}): empty (`{ conditions: [] }`,
+ * matches everything), a single bare condition, or a group tree.
+ *
  * Notes:
  * - The property kind (number / string / date) is detected from the runtime
  *   value of the property; a missing (null/undefined) property is typed by
@@ -72,23 +76,29 @@ export var FilterOperation;
  */
 export class FilterUtility {
     /**
-     * Filter a list of items with the given filter definition.
+     * Filter a list of items with the given filter.
      * @param list The list to filter
-     * @param filter A filter definition, or just the list of members (joined by AND)
+     * @param filter A filter root — a group definition or a bare condition —
+     * or just the list of members (joined by AND)
      * @returns A new array holding all items that match the filter
      */
     static FilterList(list, filter) {
-        const definition = Array.isArray(filter) ? { conditions: filter } : filter;
+        const definition = Array.isArray(filter)
+            ? { conditions: filter }
+            : FilterUtility.ToDefinition(filter);
         return list.filter((item) => FilterUtility.MatchFilter(item, definition));
     }
     /**
-     * Check whether an item matches the whole filter definition.
+     * Check whether an item matches the whole filter.
      * @param item The item to check
-     * @param filter The filter definition
+     * @param filter A filter root — a group definition or a bare condition —
+     * or just the list of members (joined by AND)
      * @returns true if the item matches (an empty definition matches everything)
      */
     static MatchFilter(item, filter) {
-        const definition = Array.isArray(filter) ? { conditions: filter } : filter;
+        const definition = Array.isArray(filter)
+            ? { conditions: filter }
+            : FilterUtility.ToDefinition(filter);
         if (!definition.conditions || definition.conditions.length === 0) {
             return true;
         }
@@ -105,6 +115,32 @@ export class FilterUtility {
             }
         }
         return !joinedByOR;
+    }
+    /**
+     * Normalize a filter root into the group-definition shape.
+     * A bare condition (case 1) becomes the equivalent 1-member group
+     * `{ conditions: [c] }`; a definition is returned unchanged.
+     * @param filter The filter root
+     * @returns The filter as an IFilterDefinition
+     */
+    static ToDefinition(filter) {
+        return FilterUtility.IsCondition(filter) ? { conditions: [filter] } : filter;
+    }
+    /**
+     * Reduce a filter definition to its minimal root shape (the inverse of
+     * **ToDefinition** at the root): a 1-member group becomes its single
+     * member — a bare condition in the usual case (the `join` of a 1-member
+     * group never affects the result) — while an empty or >= 2-member group
+     * is returned unchanged. Only the root is unwrapped, once; nested groups
+     * are left as they are, since pruning those is the caller's policy, not
+     * the semantics.
+     * @param definition The filter definition to simplify
+     * @returns The minimal equivalent filter root
+     */
+    static Simplify(definition) {
+        return definition.conditions && definition.conditions.length === 1
+            ? definition.conditions[0]
+            : definition;
     }
     /**
      * Check whether an item matches a single filter condition.

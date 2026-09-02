@@ -245,8 +245,6 @@ export class FormulaParser {
       return false;
     }
 
-    const st: SequenceStack<any> = new SequenceStack<any>();
-    const listVar: SequenceList<string> = new SequenceList<string>();
     // for(let i: number = 0; i < this._orgInput.length; i ++) {
     //     if ( (this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
     //         || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z') ) {
@@ -259,7 +257,6 @@ export class FormulaParser {
     const syn: number = 0;
     let p = 0;
     let ch: any;
-    let sum = 0;
     let m = 0;
 
     do {
@@ -306,8 +303,7 @@ export class FormulaParser {
         while ((ch >= '0' && ch <= '9')) {
           ch = this._orgInput[p++];
         }
-        // Number
-        sum = parseFloat(this._orgInput.substr(m, ch - m - 1));
+        // Number (parsed value not consumed yet, see Todo below)
         p--;
         // Todo, how to handle the .?
 

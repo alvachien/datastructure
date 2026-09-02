@@ -88,7 +88,7 @@ export class Dictionary<X> {
   public sizeLegacy(): number {
     let count = 0;
     for (const prop in this._data) {
-      if (this._data.hasOwnProperty(prop)) {
+      if (Object.hasOwn(this._data, prop)) {
         ++ count;
       }
     }

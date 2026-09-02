@@ -175,7 +175,7 @@ export class RPN {
         }
 
         while (skOp.length > 0) {
-          var opInStack = skOp.pop();
+          const opInStack = skOp.pop();
           if (opInStack === '(') {
             break;
           }
@@ -189,7 +189,7 @@ export class RPN {
       this._arInputs.push(digit);
     }
     while (skOp.length > 0) {
-      var opInStack = skOp.pop();
+      const opInStack = skOp.pop();
       this._arInputs.push(opInStack);
     }
     return this._arInputs.toString();

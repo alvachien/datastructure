@@ -9,7 +9,6 @@
  *
  */
 
-import { BinarySearchTreeCallback } from '../../lib/model/ITree';
 import { BinarySearchTree } from '../../lib/model/BinarySearchTree';
 
 describe('Test BinarySearchTree', () => {

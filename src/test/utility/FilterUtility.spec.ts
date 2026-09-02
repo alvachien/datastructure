@@ -12,7 +12,10 @@
 import {
   FilterUtility,
   FilterJoinType,
+  FilterMember,
   FilterOperation,
+  FilterRoot,
+  IFilterCondition,
   IFilterDefinition,
 } from '../../lib/utility';
 
@@ -357,5 +360,87 @@ describe('Unit test for FilterUtility in Model', () => {
     ).toEqual(['T2']);
 
     // member-value helpers live in EnumUtility (see EnumUtility.spec.ts)
+  });
+
+  it('#14. Bare-condition root (case 1), equal to the 1-member wrapper', () => {
+    const cond: IFilterCondition = {
+      property: 'age',
+      operation: FilterOperation.GreaterThan,
+      lowValue: 26,
+    };
+
+    // FilterList / MatchFilter accept a bare condition as the whole filter
+    expect(FilterUtility.MatchFilter(staff[0], cond)).toBeTrue();
+    expect(FilterUtility.MatchFilter(staff[1], cond)).toBeFalse();
+    expect(FilterUtility.FilterList(staff, cond).map((e) => e.name)).toEqual(['Alice', 'Alicia']);
+
+    // identical to { conditions: [c] } no matter what join the wrapper carries
+    const wrapperAnd: IFilterDefinition = { join: FilterJoinType.AND, conditions: [cond] };
+    const wrapperOr: IFilterDefinition = { join: FilterJoinType.OR, conditions: [cond] };
+    for (const person of staff) {
+      expect(FilterUtility.MatchFilter(person, cond)).toEqual(
+        FilterUtility.MatchFilter(person, wrapperAnd)
+      );
+      expect(FilterUtility.MatchFilter(person, cond)).toEqual(
+        FilterUtility.MatchFilter(person, wrapperOr)
+      );
+    }
+
+    // a bare condition also works nested inside a group tree (case 2)
+    const nested: IFilterDefinition = {
+      join: FilterJoinType.OR,
+      conditions: [cond, { property: 'name', operation: FilterOperation.Equal, lowValue: 'Bob' }],
+    };
+    expect(FilterUtility.FilterList(staff, nested).map((e) => e.name)).toEqual([
+      'Alice',
+      'Bob',
+      'Alicia',
+    ]);
+
+    // discrimination: an object carrying BOTH `property` and `conditions`
+    // is treated as a condition (same precedence as for members)
+    const hybrid: FilterRoot = { ...cond, conditions: [] } as FilterMember;
+    for (const person of staff) {
+      expect(FilterUtility.MatchFilter(person, hybrid)).toEqual(
+        FilterUtility.MatchFilter(person, cond)
+      );
+    }
+  });
+
+  it('#15. ToDefinition / Simplify round-trip', () => {
+    const cond: IFilterCondition = {
+      property: 'name',
+      operation: FilterOperation.Equal,
+      lowValue: 'Bob',
+    };
+
+    // ToDefinition wraps a bare condition, passes a definition through
+    expect(FilterUtility.ToDefinition(cond)).toEqual({ conditions: [cond] });
+    const def: IFilterDefinition = {
+      join: FilterJoinType.OR,
+      conditions: [cond, { property: 'age', operation: FilterOperation.LessThan, lowValue: 20 }],
+    };
+    expect(FilterUtility.ToDefinition(def)).toBe(def);
+
+    // Simplify unwraps a 1-member root to the bare condition...
+    expect(FilterUtility.Simplify({ conditions: [cond] })).toEqual(cond);
+    // ...but leaves the empty (case 0) and >= 2-member (case 2) shapes alone
+    expect(FilterUtility.Simplify({ conditions: [] })).toEqual({ conditions: [] });
+    expect(FilterUtility.Simplify(def)).toBe(def);
+
+    // only the root is unwrapped — once, not recursively: a 1-member root
+    // holding a 1-member group sheds the outer layer, the inner group stays
+    const nestedOne: IFilterDefinition = {
+      conditions: [{ conditions: [cond] }],
+    };
+    expect(FilterUtility.Simplify(nestedOne)).toEqual({ conditions: [cond] });
+
+    // round-trip: ToDefinition(Simplify(x)) matches like x for every item
+    const wrapper: IFilterDefinition = { join: FilterJoinType.OR, conditions: [cond] };
+    for (const person of staff) {
+      expect(FilterUtility.MatchFilter(person, wrapper)).toEqual(
+        FilterUtility.MatchFilter(person, FilterUtility.ToDefinition(FilterUtility.Simplify(wrapper)))
+      );
+    }
   });
 });

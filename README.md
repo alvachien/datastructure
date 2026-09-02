@@ -74,6 +74,26 @@ const result = FilterUtility.FilterList(staff, {
 // result: Alice and Bob
 ```
 
+Code snippet 5: show the three shapes a filter can take (the `FilterRoot` taxonomy):
+
+```typescript
+import { FilterUtility, FilterJoinType, FilterOperation, FilterRoot, IFilterCondition } from 'actslib';
+
+const c: IFilterCondition = { property: 'age', operation: FilterOperation.GreaterThan, lowValue: 26 };
+
+const empty: FilterRoot = { conditions: [] };  // case 0: matches everything
+const oneNode: FilterRoot = c;                 // case 1: bare condition, no wrapper needed
+const tree: FilterRoot = {                     // case 2: group tree, mixed members allowed
+  join: FilterJoinType.AND,
+  conditions: [c, { join: FilterJoinType.OR, conditions: [c, c] }],
+};
+
+// FilterList / MatchFilter accept all three; case 1 matches identically to
+// its 1-member wrapper { conditions: [c] } — ToDefinition / Simplify convert
+// between the two spellings. (staff defined in snippet 4)
+const result = FilterUtility.FilterList(staff, oneNode);
+```
+
 
 
 ## REFERENCE
@@ -193,14 +213,18 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
 - The uitlity **NumberUtility** provides some helpful methods operation on numbers, including adding prefixes, rounding with specified digitals, etc.
 - The utility **EnumUtility** provides helpful methods to operate on TypeScript enums, including **enumerateKeys** (member names), **EnumerateValues** (member values, numeric-enum reverse mapping stripped) and **IsEnumMember** (membership check, used by **FilterUtility**'s enum validation).
 - The utility **Element** provides a wrapper for HTML elements used by **UIUtility**.
-- The utility **FilterUtility** provides condition-based filtering over a list. A filter is a search with strict definition: conditions joined by AND / OR, nestable to arbitrary depth (like SQL `a AND (b OR c)`). Each condition specifies a property, an operation and the value(s); the property kind is detected from its runtime value:
+- The utility **FilterUtility** provides condition-based filtering over a list. A filter is a search with strict definition: conditions joined by AND / OR, nestable to arbitrary depth (like SQL `a AND (b OR c)`). A whole filter is exactly one of **three shapes** (the `FilterRoot` type):
+  - **Case 0 — empty**: `{ conditions: [] }` — matches everything (the cleared-filter state).
+  - **Case 1 — one node**: a bare `IFilterCondition`, or equivalently the 1-member group `{ conditions: [c] }` whose `join` is irrelevant — the whole filter is a single condition. **FilterList** / **MatchFilter** accept either spelling (semantics are identical), so case-1 filters can be stored without a wrapper; `ToDefinition` wraps a bare condition into a group, `Simplify` unwraps a 1-member group back to its single member (root only, once).
+  - **Case 2 — group tree**: a definition with >= 2 members, nested groups allowed; leaves are conditions, every internal group branches with >= 2 children. A group may mix condition leaves and nested sub-groups side by side.
+  Each condition specifies a property, an operation and the value(s); the property kind is detected from its runtime value:
   - **number / date**: `<`, `<=`, `=`, `>=`, `>`, `Between`; a missing number is treated as 0.
   - **string**: all of the above plus `BeginsWith`, `EndsWith`, `Contains` (case-sensitive).
   - Only `Between` examines both `lowValue` and `highValue` (inclusive); the other operations use `lowValue` alone.
   - **enum**: no special handling needed — TypeScript erases enums at runtime, so a numeric-enum property filters as a number and a string-enum property as a string; enum members can be used directly as condition values (e.g. `lowValue: Priority.High`). Set the condition's `enumValues` to the enum object to enable validation: the item's property value and the bound values must be real enum members (so a stray `priority = 7` never matches), while `BeginsWith`/`EndsWith`/`Contains` patterns are exempt from the bound check.
 
 ### PROGRESS
-The progress of the project shown in the table below. Unit-test status reflects the current `npm test` run (270 specs, 0 failures, 7 pending).
+The progress of the project shown in the table below. Unit-test status reflects the current `npm test` run (272 specs, 0 failures, 7 pending).
 
 #|Content|Status|UT Status|Comment
 ----:|:----|:-----|:-----|:-----
@@ -238,7 +262,7 @@ The progress of the project shown in the table below. Unit-test status reflects 
 32|**NumberUtility**|**Finished**|**Passed**|Round2Two, Round2Any, prefixInteger
 33|**EnumUtility**|**Finished**|**Passed**|enumerateKeys, EnumerateValues, IsEnumMember (numeric-enum reverse mapping handled)
 34|**UIUtility / Element**|**Finished**|**Passed**|
-35|**FilterUtility**|**Finished**|**Passed**|Condition-based list filtering with AND/OR nesting, Between, string/number/date operations
+35|**FilterUtility**|**Finished**|**Passed**|Condition-based list filtering with AND/OR nesting, Between, string/number/date operations; bare-condition root (FilterRoot)
 36|**FisherYatesShuffle**|**Finished**|**Passed**|Unbiased O(n) shuffle, returns a shuffled copy
 37|B Tree|n/a|n/a|Not started yet
 38|Red Black Tree|n/a|n/a|Not started yet

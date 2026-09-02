@@ -74,6 +74,17 @@ export interface IFilterCondition {
  * nesting, e.g. `condA AND (condB OR condC)`).
  *
  * An empty member list matches everything.
+ *
+ * A whole filter is exactly one of three shapes (see {@link FilterRoot}):
+ * - **Case 0 — empty**: `{ conditions: [] }` — matches everything.
+ * - **Case 1 — one node**: a bare `IFilterCondition`, or equivalently a
+ *   1-member group `{ conditions: [c] }` whose `join` is irrelevant — the
+ *   whole filter is a single condition. Use {@link FilterUtility.ToDefinition}
+ *   / {@link FilterUtility.Simplify} to switch between the two spellings.
+ * - **Case 2 — group tree**: a definition with >= 2 members, nested groups
+ *   allowed. Leaves are conditions; every internal (nested) group branches
+ *   with >= 2 children. A group may mix condition leaves and nested
+ *   sub-groups side by side — mixed members are valid.
  */
 export interface IFilterDefinition {
     /** How the members are connected, defaults to FilterJoinType.AND */
@@ -84,12 +95,25 @@ export interface IFilterDefinition {
 /** One member of a filter definition: a leaf condition or a nested group. */
 export type FilterMember = IFilterCondition | IFilterDefinition;
 /**
+ * The root of a filter: a group definition (case 0 — empty, or case 2 —
+ * >= 2 members) or a bare condition (case 1 — the whole filter is one
+ * condition). **FilterList** and **MatchFilter** accept both shapes; a
+ * bare condition matches exactly like the 1-member wrapper
+ * `{ conditions: [c] }`, so the two spellings of case 1 are
+ * interchangeable and either may be persisted.
+ */
+export type FilterRoot = IFilterCondition | IFilterDefinition;
+/**
  * Utility for filtering over a list of items.
  *
  * A filter is a search with a strict definition: it consists of conditions
  * joined by AND / OR, possibly nested to arbitrary depth (each nested
  * IFilterDefinition acts like a parenthesized group). Each condition
  * specifies a property, an operation and the value(s) to compare against.
+ *
+ * A filter handed to **FilterList** / **MatchFilter** is one of three
+ * shapes (the taxonomy of {@link FilterRoot}): empty (`{ conditions: [] }`,
+ * matches everything), a single bare condition, or a group tree.
  *
  * Notes:
  * - The property kind (number / string / date) is detected from the runtime
@@ -116,19 +140,41 @@ export type FilterMember = IFilterCondition | IFilterDefinition;
  */
 export declare class FilterUtility {
     /**
-     * Filter a list of items with the given filter definition.
+     * Filter a list of items with the given filter.
      * @param list The list to filter
-     * @param filter A filter definition, or just the list of members (joined by AND)
+     * @param filter A filter root — a group definition or a bare condition —
+     * or just the list of members (joined by AND)
      * @returns A new array holding all items that match the filter
      */
-    static FilterList<T>(list: T[], filter: IFilterDefinition | IFilterCondition[]): T[];
+    static FilterList<T>(list: T[], filter: FilterRoot | FilterRoot[]): T[];
     /**
-     * Check whether an item matches the whole filter definition.
+     * Check whether an item matches the whole filter.
      * @param item The item to check
-     * @param filter The filter definition
+     * @param filter A filter root — a group definition or a bare condition —
+     * or just the list of members (joined by AND)
      * @returns true if the item matches (an empty definition matches everything)
      */
-    static MatchFilter<T>(item: T, filter: IFilterDefinition | IFilterCondition[]): boolean;
+    static MatchFilter<T>(item: T, filter: FilterRoot | FilterRoot[]): boolean;
+    /**
+     * Normalize a filter root into the group-definition shape.
+     * A bare condition (case 1) becomes the equivalent 1-member group
+     * `{ conditions: [c] }`; a definition is returned unchanged.
+     * @param filter The filter root
+     * @returns The filter as an IFilterDefinition
+     */
+    static ToDefinition(filter: FilterRoot): IFilterDefinition;
+    /**
+     * Reduce a filter definition to its minimal root shape (the inverse of
+     * **ToDefinition** at the root): a 1-member group becomes its single
+     * member — a bare condition in the usual case (the `join` of a 1-member
+     * group never affects the result) — while an empty or >= 2-member group
+     * is returned unchanged. Only the root is unwrapped, once; nested groups
+     * are left as they are, since pruning those is the caller's policy, not
+     * the semantics.
+     * @param definition The filter definition to simplify
+     * @returns The minimal equivalent filter root
+     */
+    static Simplify(definition: IFilterDefinition): FilterRoot;
     /**
      * Check whether an item matches a single filter condition.
      * @param item The item to check

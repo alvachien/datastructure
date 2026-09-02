@@ -9,7 +9,6 @@
  * AVL tree
  */
 
-import { IBinaryTreeNode, IBinarySearchTree, BinarySearchTreeCallback } from './ITree';
 import { BinarySearchTreeNode, BinarySearchTree } from './BinarySearchTree';
 
 export enum AVLBalanceFactor {

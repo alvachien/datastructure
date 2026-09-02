@@ -9,7 +9,7 @@
  *
  */
 
-import { IElementSelectionPosition, replaceChar160ToSpace, readElementText, checkSelectInsideElement } from '../../lib/utility/Element';
+import { replaceChar160ToSpace } from '../../lib/utility/Element';
 
 describe('Test Utility Text', () => {
 

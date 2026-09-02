@@ -9,8 +9,6 @@
  *
  */
 
-import { SequenceList } from '../model';
-
 /**
  * Matrix position
  */

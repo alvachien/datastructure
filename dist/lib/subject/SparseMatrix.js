@@ -143,23 +143,18 @@ export class SparseMatrix {
      * @param val Value
      */
     InsertElement(row, col, val) {
-        try {
-            if (this.IsExist(row, col)) {
-                return false;
-            }
-            else {
-                const nt = new Trituple();
-                // Try the destructure, failed!!!
-                // let { nt.Row, nt.Column, nt.Value } = {row, col, val};
-                nt.Row = row;
-                nt.Column = col;
-                nt.Value = val;
-                this._listTerms.AppendElement(nt);
-                return true;
-            }
+        if (this.IsExist(row, col)) {
+            return false;
         }
-        catch (exp) {
-            throw exp;
+        else {
+            const nt = new Trituple();
+            // Try the destructure, failed!!!
+            // let { nt.Row, nt.Column, nt.Value } = {row, col, val};
+            nt.Row = row;
+            nt.Column = col;
+            nt.Value = val;
+            this._listTerms.AppendElement(nt);
+            return true;
         }
     }
     /**

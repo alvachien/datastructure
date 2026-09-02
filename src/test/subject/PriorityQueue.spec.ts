@@ -9,7 +9,7 @@
  * Priority queue
  *
  */
-import { PriorityQueueItem, PriorityQueue } from '../../lib/subject/PriorityQueue';
+import { PriorityQueue } from '../../lib/subject/PriorityQueue';
 
 describe('Test PriorityQueue', () => {
   let _seqQueue: PriorityQueue<number>;

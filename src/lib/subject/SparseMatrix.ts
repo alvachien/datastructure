@@ -165,22 +165,18 @@ export class SparseMatrix<T> {
    * @param val Value
    */
   public InsertElement(row: number, col: number, val: T): boolean {
-    try {
-      if (this.IsExist(row, col)) {
-        return false;
-      } else {
-        const nt: Trituple<T> = new Trituple<T>();
-        // Try the destructure, failed!!!
-        // let { nt.Row, nt.Column, nt.Value } = {row, col, val};
-        nt.Row = row;
-        nt.Column = col;
-        nt.Value = val;
-        this._listTerms.AppendElement(nt);
+    if (this.IsExist(row, col)) {
+      return false;
+    } else {
+      const nt: Trituple<T> = new Trituple<T>();
+      // Try the destructure, failed!!!
+      // let { nt.Row, nt.Column, nt.Value } = {row, col, val};
+      nt.Row = row;
+      nt.Column = col;
+      nt.Value = val;
+      this._listTerms.AppendElement(nt);
 
-        return true;
-      }
-    } catch (exp) {
-      throw exp;
+      return true;
     }
   }
 

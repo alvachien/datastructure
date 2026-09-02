@@ -9,7 +9,7 @@
  *
  */
 
-import { BinaryTree, BinaryTreeNode } from '../../lib/model/BinaryTree';
+import { BinaryTree } from '../../lib/model/BinaryTree';
 
 describe('Test BinaryTree', () => {
   let _tree: BinaryTree<string>;

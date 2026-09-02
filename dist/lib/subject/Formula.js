@@ -11,7 +11,7 @@
  * Math Expression Parser
  *
  */
-import { SequenceStack, SequenceList, BinaryTree, SequenceQueue, BinaryTreeNode, } from '../model';
+import { SequenceStack, BinaryTree, SequenceQueue, BinaryTreeNode, } from '../model';
 import { RPNOperationPriority } from './rpn';
 /**
  * Basic formula operator
@@ -224,8 +224,6 @@ export class FormulaParser {
         if (this._orgInput === null || this._orgInput === undefined || this._orgInput.length <= 0) {
             return false;
         }
-        const st = new SequenceStack();
-        const listVar = new SequenceList();
         // for(let i: number = 0; i < this._orgInput.length; i ++) {
         //     if ( (this._orgInput[i] >= 'a' && this._orgInput[i] <= 'z')
         //         || (this._orgInput[i] >= 'A' && this._orgInput[i] <= 'Z') ) {
@@ -236,7 +234,6 @@ export class FormulaParser {
         const syn = 0;
         let p = 0;
         let ch;
-        let sum = 0;
         let m = 0;
         do {
             ch = this._orgInput[p++];
@@ -280,8 +277,7 @@ export class FormulaParser {
                 while ((ch >= '0' && ch <= '9')) {
                     ch = this._orgInput[p++];
                 }
-                // Number
-                sum = parseFloat(this._orgInput.substr(m, ch - m - 1));
+                // Number (parsed value not consumed yet, see Todo below)
                 p--;
                 // Todo, how to handle the .?
                 // syn = 11;
