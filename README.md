@@ -220,11 +220,12 @@ Interface **IGraphEdge** defines the interface for the Edge in the graph.
   Each condition specifies a property, an operation and the value(s); the property kind is detected from its runtime value:
   - **number / date**: `<`, `<=`, `=`, `>=`, `>`, `Between`; a missing number is treated as 0.
   - **string**: all of the above plus `BeginsWith`, `EndsWith`, `Contains` (case-sensitive).
+  - **array** (`number[]`, `string[]`, `Date[]`): `Contains` / `NotContains` only — `lowValue` is the element to look for, and every element must be of the same kind (a mixed-kind or different-kind non-empty array never matches). An empty array — or a missing property under `NotContains` — contains nothing, so `Contains` is false and `NotContains` true for any target kind. Dates compare by time; string membership is case-sensitive.
   - Only `Between` examines both `lowValue` and `highValue` (inclusive); the other operations use `lowValue` alone.
-  - **enum**: no special handling needed — TypeScript erases enums at runtime, so a numeric-enum property filters as a number and a string-enum property as a string; enum members can be used directly as condition values (e.g. `lowValue: Priority.High`). Set the condition's `enumValues` to the enum object to enable validation: the item's property value and the bound values must be real enum members (so a stray `priority = 7` never matches), while `BeginsWith`/`EndsWith`/`Contains` patterns are exempt from the bound check.
+  - **enum**: no special handling needed — TypeScript erases enums at runtime, so a numeric-enum property filters as a number and a string-enum property as a string; enum members can be used directly as condition values (e.g. `lowValue: Priority.High`). Set the condition's `enumValues` to the enum object to enable validation: the item's property value and the bound values must be real enum members (so a stray `priority = 7` never matches), while `BeginsWith`/`EndsWith`/`Contains` patterns on a string property are exempt from the bound check. For an array property under `enumValues`, every element must be a member and so must `lowValue` (array `Contains`/`NotContains` compare values, not patterns).
 
 ### PROGRESS
-The progress of the project shown in the table below. Unit-test status reflects the current `npm test` run (272 specs, 0 failures, 7 pending).
+The progress of the project shown in the table below. Unit-test status reflects the current `npm test` run (277 specs, 0 failures, 7 pending).
 
 #|Content|Status|UT Status|Comment
 ----:|:----|:-----|:-----|:-----
@@ -262,7 +263,7 @@ The progress of the project shown in the table below. Unit-test status reflects 
 32|**NumberUtility**|**Finished**|**Passed**|Round2Two, Round2Any, prefixInteger
 33|**EnumUtility**|**Finished**|**Passed**|enumerateKeys, EnumerateValues, IsEnumMember (numeric-enum reverse mapping handled)
 34|**UIUtility / Element**|**Finished**|**Passed**|
-35|**FilterUtility**|**Finished**|**Passed**|Condition-based list filtering with AND/OR nesting, Between, string/number/date operations; bare-condition root (FilterRoot)
+35|**FilterUtility**|**Finished**|**Passed**|Condition-based list filtering with AND/OR nesting, Between, string/number/date operations, array Contains/NotContains; bare-condition root (FilterRoot)
 36|**FisherYatesShuffle**|**Finished**|**Passed**|Unbiased O(n) shuffle, returns a shuffled copy
 37|B Tree|n/a|n/a|Not started yet
 38|Red Black Tree|n/a|n/a|Not started yet

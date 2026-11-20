@@ -19,6 +19,14 @@ Tests run in **Node** through `jasmine` (config in `jasmine.json`, spec dir `src
 
 To run a single spec file: `node --import tsx ./node_modules/jasmine/bin/jasmine.js --config=jasmine.json --filter=BinaryTree`.
 
+## Development Workflow (TDD)
+
+All changes follow TDD — red, green, refactor:
+
+1. **Red**: write the failing spec first under `src/test/` (mirroring the source path); run just that suite with `--filter=<SuiteName>` and confirm it fails for the expected reason.
+2. **Green**: write the minimum implementation to make the spec pass.
+3. **Refactor**: clean up with the suite green, then finish with the full `npm test` and `npm run build` (tsx transpiles only — the build is the type-check).
+
 ## Architecture
 
 All source lives under `src/lib/` and is re-exported from `src/lib/index.ts`. Tests mirror the structure under `src/test/` as `.spec.ts` files.
@@ -34,7 +42,7 @@ src/lib/
 
 - **`model/`** — Each data structure has an `I*` interface (e.g. `IList`, `IStack`, `IQueue`, `ITree`, `IBinaryTree`, `IGraph`) plus concrete implementations (`SequenceList`, `LinkList`, `StaticLinkList`, `SequenceStack`, `LinkStack`, `SequenceQueue`, `BinaryTree`, `BinarySearchTree`, `BinaryThreadTree`, `HuffmanTree`, `AVLTree`, `Graph`, `AdjListGraph`, `Dictionary`, `HashTable`, `Set`). `Algorithm.ts` holds free sorting functions (`InsertionSort`, `BubbleSort`, `QuickSort`, `SelectionSort`, `CountingSort`, `MergeSort`, `HeapSort`) plus `KMP` and `SwapElement`.
 - **`subject/`** — Composite/domain topics: `Matrix`, `SparseMatrix`, `Polynomial`, `PriorityQueue`, `MaximumSubArray`, `Formula` (math expression parser), `rpn` (reverse Polish notation), `FinanceMethods`, `ChineseChessGeneralProblem`, `PanCakeSorting`, `BaseConverter`, `FisherYatesShuffle`.
-- **`utility/`** — Pure helpers: `DateUtility`, `StringUtility`, `NumberUtility`, `EnumUtility`, `UIUtility`, `Element`, `FilterUtility` (condition-based filtering over lists: AND/OR-joined conditions nestable to arbitrary depth like SQL `a AND (b OR c)`; typed by each property's runtime kind — number/date support `< <= = >= > Between`, strings add `BeginsWith/EndsWith/Contains`; only `Between` uses both low/high values. A filter root is one of three shapes — empty `{conditions: []}` (match-all), a bare condition, or a ≥2-member group tree; `FilterList`/`MatchFilter` accept any `FilterRoot` (bare condition ≡ 1-member wrapper), and `ToDefinition`/`Simplify` convert between the two case-1 spellings).
+- **`utility/`** — Pure helpers: `DateUtility`, `StringUtility`, `NumberUtility`, `EnumUtility`, `UIUtility`, `Element`, `FilterUtility` (condition-based filtering over lists: AND/OR-joined conditions nestable to arbitrary depth like SQL `a AND (b OR c)`; typed by each property's runtime kind — number/date support `< <= = >= > Between`, strings add `BeginsWith/EndsWith/Contains`; arrays (number[]/string[]/Date[]) support `Contains`/`NotContains` element membership; only `Between` uses both low/high values. A filter root is one of three shapes — empty `{conditions: []}` (match-all), a bare condition, or a ≥2-member group tree; `FilterList`/`MatchFilter` accept any `FilterRoot` (bare condition ≡ 1-member wrapper), and `ToDefinition`/`Simplify` convert between the two case-1 spellings).
 
 ## Key Conventions
 

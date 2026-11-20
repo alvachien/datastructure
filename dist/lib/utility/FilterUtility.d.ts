@@ -21,7 +21,9 @@ export declare enum FilterJoinType {
  *
  * - For number properties: LessThan, LessOrEqual, Equal, GreaterOrEqual, GreaterThan, Between
  * - For date properties: same as number
- * - For string properties: all of the above plus BeginsWith, EndsWith, Contains
+ * - For string properties: all of the above plus BeginsWith, EndsWith, Contains (substring)
+ * - For array properties (number[], string[], Date[]): Contains (element
+ *   membership) and NotContains only
  *
  * Only Between examines both `lowValue` and `highValue`; every other
  * operation compares against `lowValue` alone.
@@ -35,10 +37,13 @@ export declare enum FilterOperation {
     Between = "Between",
     BeginsWith = "BeginsWith",
     EndsWith = "EndsWith",
-    Contains = "Contains"
+    Contains = "Contains",
+    NotContains = "NotContains"
 }
 /**
- * Value types supported by a filter condition.
+ * Value types supported by a filter condition. A condition value is always
+ * a scalar; an array property holds elements of one of these types and is
+ * searched with Contains / NotContains.
  */
 export type FilterValue = number | string | Date;
 /**
@@ -53,7 +58,11 @@ export interface IFilterCondition {
     property: string;
     /** Operation applied to the property */
     operation: FilterOperation;
-    /** The value to compare against, or the low bound of a Between range */
+    /**
+     * The value to compare against, or the low bound of a Between range.
+     * For an array property, the element to look for (a single number,
+     * string or Date — never an array).
+     */
     lowValue?: FilterValue;
     /** High bound of a Between range; ignored by all other operations */
     highValue?: FilterValue;
@@ -62,9 +71,12 @@ export interface IFilterCondition {
      * When set, the condition performs enum validation: a match additionally
      * requires the item's property value AND every bound value used
      * (`lowValue`, plus `highValue` for Between) to be one of the enum's
-     * member values — except for BeginsWith/EndsWith/Contains, whose
-     * `lowValue` is a pattern and is not bound-checked. A missing
-     * (null/undefined) property never matches an enum-validated condition.
+     * member values — except for BeginsWith/EndsWith/Contains on a string
+     * property, whose `lowValue` is a pattern and is not bound-checked. For
+     * an array property every element must be a member, and `lowValue` must
+     * be one too (array Contains/NotContains compare values, not patterns).
+     * A missing (null/undefined) property never matches an enum-validated
+     * condition.
      */
     enumValues?: EnumLike;
 }
@@ -116,8 +128,8 @@ export type FilterRoot = IFilterCondition | IFilterDefinition;
  * matches everything), a single bare condition, or a group tree.
  *
  * Notes:
- * - The property kind (number / string / date) is detected from the runtime
- *   value of the property; a missing (null/undefined) property is typed by
+ * - The property kind (number / string / date / array) is detected from the
+ *   runtime value of the property; a missing (null/undefined) property is typed by
  *   the condition value, where an absent number is treated as 0 and an
  *   absent string is treated as ''. An absent date never matches.
  * - Enum properties need no special kind: TypeScript erases enums at
@@ -133,6 +145,14 @@ export type FilterRoot = IFilterCondition | IFilterDefinition;
  *   are exempt from the bound check).
  * - Number / date properties support <, <=, =, >=, >, Between; string
  *   properties additionally support BeginsWith, EndsWith, Contains.
+ * - Array properties (number[], string[] or Date[]) support Contains and
+ *   NotContains only: lowValue is the element to look for, and every
+ *   element must be of the same kind as lowValue (a mixed-kind or
+ *   different-kind non-empty array never matches). An empty array — or a
+ *   missing property under NotContains — contains nothing: Contains is
+ *   false and NotContains true for any target kind. Dates compare by
+ *   time, strings case-sensitively. Contains on a missing property keeps
+ *   the missing-value rule above.
  * - Only Between uses highValue (inclusive on both bounds); the other
  *   operations only look at lowValue.
  * - String comparisons are case-sensitive.
@@ -188,4 +208,5 @@ export declare class FilterUtility {
     private static MatchNumberCondition;
     private static MatchStringCondition;
     private static MatchDateCondition;
+    private static MatchArrayCondition;
 }

@@ -22,7 +22,9 @@ export var FilterJoinType;
  *
  * - For number properties: LessThan, LessOrEqual, Equal, GreaterOrEqual, GreaterThan, Between
  * - For date properties: same as number
- * - For string properties: all of the above plus BeginsWith, EndsWith, Contains
+ * - For string properties: all of the above plus BeginsWith, EndsWith, Contains (substring)
+ * - For array properties (number[], string[], Date[]): Contains (element
+ *   membership) and NotContains only
  *
  * Only Between examines both `lowValue` and `highValue`; every other
  * operation compares against `lowValue` alone.
@@ -38,6 +40,7 @@ export var FilterOperation;
     FilterOperation["BeginsWith"] = "BeginsWith";
     FilterOperation["EndsWith"] = "EndsWith";
     FilterOperation["Contains"] = "Contains";
+    FilterOperation["NotContains"] = "NotContains";
 })(FilterOperation || (FilterOperation = {}));
 /**
  * Utility for filtering over a list of items.
@@ -52,8 +55,8 @@ export var FilterOperation;
  * matches everything), a single bare condition, or a group tree.
  *
  * Notes:
- * - The property kind (number / string / date) is detected from the runtime
- *   value of the property; a missing (null/undefined) property is typed by
+ * - The property kind (number / string / date / array) is detected from the
+ *   runtime value of the property; a missing (null/undefined) property is typed by
  *   the condition value, where an absent number is treated as 0 and an
  *   absent string is treated as ''. An absent date never matches.
  * - Enum properties need no special kind: TypeScript erases enums at
@@ -69,6 +72,14 @@ export var FilterOperation;
  *   are exempt from the bound check).
  * - Number / date properties support <, <=, =, >=, >, Between; string
  *   properties additionally support BeginsWith, EndsWith, Contains.
+ * - Array properties (number[], string[] or Date[]) support Contains and
+ *   NotContains only: lowValue is the element to look for, and every
+ *   element must be of the same kind as lowValue (a mixed-kind or
+ *   different-kind non-empty array never matches). An empty array — or a
+ *   missing property under NotContains — contains nothing: Contains is
+ *   false and NotContains true for any target kind. Dates compare by
+ *   time, strings case-sensitively. Contains on a missing property keeps
+ *   the missing-value rule above.
  * - Only Between uses highValue (inclusive on both bounds); the other
  *   operations only look at lowValue.
  * - String comparisons are case-sensitive.
@@ -154,30 +165,47 @@ export class FilterUtility {
         }
         const rawValue = item[condition.property];
         // Enum validation: property value and all bound values must be enum members
-        if (condition.enumValues) {
+        const enumValues = condition.enumValues;
+        if (enumValues) {
             if (rawValue === null || rawValue === undefined) {
                 return false;
             }
-            if (!EnumUtility.IsEnumMember(rawValue, condition.enumValues)) {
-                return false;
+            if (Array.isArray(rawValue)) {
+                // Array property: every element must be a member, and so must
+                // lowValue — array Contains/NotContains compare values, not patterns
+                if (!rawValue.every((element) => EnumUtility.IsEnumMember(element, enumValues))) {
+                    return false;
+                }
+                if (!EnumUtility.IsEnumMember(condition.lowValue, enumValues)) {
+                    return false;
+                }
             }
-            // BeginsWith/EndsWith/Contains take a pattern, not an enum value, so
-            // only value-based operations must bound-check lowValue
-            if (condition.operation !== FilterOperation.BeginsWith &&
-                condition.operation !== FilterOperation.EndsWith &&
-                condition.operation !== FilterOperation.Contains &&
-                !EnumUtility.IsEnumMember(condition.lowValue, condition.enumValues)) {
-                return false;
-            }
-            if (condition.operation === FilterOperation.Between &&
-                !EnumUtility.IsEnumMember(condition.highValue, condition.enumValues)) {
-                return false;
+            else {
+                if (!EnumUtility.IsEnumMember(rawValue, enumValues)) {
+                    return false;
+                }
+                // BeginsWith/EndsWith/Contains take a pattern, not an enum value, so
+                // only value-based operations must bound-check lowValue
+                if (condition.operation !== FilterOperation.BeginsWith &&
+                    condition.operation !== FilterOperation.EndsWith &&
+                    condition.operation !== FilterOperation.Contains &&
+                    !EnumUtility.IsEnumMember(condition.lowValue, enumValues)) {
+                    return false;
+                }
+                if (condition.operation === FilterOperation.Between &&
+                    !EnumUtility.IsEnumMember(condition.highValue, enumValues)) {
+                    return false;
+                }
             }
         }
         let kind = FilterUtility.DetectKind(rawValue);
         if (kind === 'other') {
             // A missing value is typed by the condition value; anything else never matches
             if (rawValue === null || rawValue === undefined) {
+                // NotContains is array-only: a missing property acts as an empty array
+                if (condition.operation === FilterOperation.NotContains) {
+                    return FilterUtility.MatchArrayCondition([], condition);
+                }
                 kind = FilterUtility.DetectKind(condition.lowValue);
             }
             else {
@@ -191,6 +219,8 @@ export class FilterUtility {
                 return FilterUtility.MatchStringCondition(rawValue, condition);
             case 'date':
                 return FilterUtility.MatchDateCondition(rawValue, condition);
+            case 'array':
+                return FilterUtility.MatchArrayCondition(rawValue, condition);
             default:
                 return false;
         }
@@ -208,6 +238,9 @@ export class FilterUtility {
         }
         if (value instanceof Date) {
             return 'date';
+        }
+        if (Array.isArray(value)) {
+            return 'array';
         }
         return 'other';
     }
@@ -302,6 +335,41 @@ export class FilterUtility {
                 // BeginsWith / EndsWith / Contains are not allowed on dates
                 return false;
         }
+    }
+    static MatchArrayCondition(rawValue, condition) {
+        // Arrays support only Contains / NotContains (element membership)
+        if (condition.operation !== FilterOperation.Contains &&
+            condition.operation !== FilterOperation.NotContains) {
+            return false;
+        }
+        // lowValue is the element to look for: a single number, string or Date
+        const target = condition.lowValue;
+        const targetKind = FilterUtility.DetectKind(target);
+        if (targetKind !== 'number' && targetKind !== 'string' && targetKind !== 'date') {
+            return false;
+        }
+        if (targetKind === 'date' && isNaN(target.getTime())) {
+            return false;
+        }
+        // A non-empty array must be of the target's kind: number[], string[] or
+        // Date[]; a mixed-kind or different-kind array never matches. An empty
+        // array qualifies for any kind — it contains nothing, so Contains is
+        // false and NotContains true.
+        if (!rawValue.every((element) => FilterUtility.DetectKind(element) === targetKind)) {
+            return false;
+        }
+        let contains;
+        if (targetKind === 'date') {
+            const targetTime = target.getTime();
+            contains = rawValue.some((element) => {
+                const elementTime = element.getTime();
+                return !isNaN(elementTime) && elementTime === targetTime;
+            });
+        }
+        else {
+            contains = rawValue.some((element) => element === target);
+        }
+        return condition.operation === FilterOperation.Contains ? contains : !contains;
     }
 }
 //# sourceMappingURL=FilterUtility.js.map

@@ -44,12 +44,31 @@ interface Task {
   status: TaskStatus;
 }
 
+interface Project {
+  name: string;
+  scores?: number[];
+  tags?: string[];
+  milestones?: Date[];
+}
+
 describe('Unit test for FilterUtility in Model', () => {
   const staff: Employee[] = [
     { name: 'Alice', age: 30, department: 'Engineering', hired: new Date(2020, 0, 15) },
     { name: 'Bob', age: 25, department: 'Sales', hired: new Date(2021, 5, 1) },
     { name: 'Alicia', age: 35, hired: new Date(2019, 11, 31) },
     { name: 'Carl' }, // age/department undefined
+  ];
+
+  const projects: Project[] = [
+    {
+      name: 'P1',
+      scores: [1, 5, 9],
+      tags: ['alpha', 'beta'],
+      milestones: [new Date(2020, 0, 15), new Date(2021, 5, 1)],
+    },
+    { name: 'P2', scores: [2, 4], tags: ['Beta'], milestones: [new Date(2022, 2, 10)] },
+    { name: 'P3', scores: [], tags: [], milestones: [] },
+    { name: 'P4' }, // all array properties undefined
   ];
 
   it('#1. Number single value comparisons (highValue ignored)', () => {
@@ -442,5 +461,218 @@ describe('Unit test for FilterUtility in Model', () => {
         FilterUtility.MatchFilter(person, FilterUtility.ToDefinition(FilterUtility.Simplify(wrapper)))
       );
     }
+  });
+
+  it('#16. Number array: Contains / NotContains (element membership)', () => {
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'scores', operation: FilterOperation.Contains, lowValue: 5 },
+      ]).map((p) => p.name)
+    ).toEqual(['P1']);
+    // NotContains: P2 lacks 5; the empty array and the missing property act empty too
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'scores', operation: FilterOperation.NotContains, lowValue: 5 },
+      ]).map((p) => p.name)
+    ).toEqual(['P2', 'P3', 'P4']);
+    // highValue is ignored by array operations
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'scores', operation: FilterOperation.Contains, lowValue: 5, highValue: 9 },
+      ]).map((p) => p.name)
+    ).toEqual(['P1']);
+
+    // array conditions compose in group trees like any other condition
+    const nested: IFilterDefinition = {
+      join: FilterJoinType.AND,
+      conditions: [
+        { property: 'scores', operation: FilterOperation.Contains, lowValue: 5 },
+        { property: 'tags', operation: FilterOperation.Contains, lowValue: 'alpha' },
+      ],
+    };
+    expect(FilterUtility.FilterList(projects, nested).map((p) => p.name)).toEqual(['P1']);
+  });
+
+  it('#17. String array: Contains / NotContains are case-sensitive', () => {
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'tags', operation: FilterOperation.Contains, lowValue: 'beta' },
+      ]).map((p) => p.name)
+    ).toEqual(['P1']); // 'Beta' (P2) is a different string
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'tags', operation: FilterOperation.NotContains, lowValue: 'beta' },
+      ]).map((p) => p.name)
+    ).toEqual(['P2', 'P3', 'P4']);
+    // substring semantics do NOT apply to arrays: 'alph' is not an element
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'tags', operation: FilterOperation.Contains, lowValue: 'alph' },
+      ]).length
+    ).toEqual(0);
+  });
+
+  it('#18. Date array: membership compares by time, not identity', () => {
+    // a distinct Date instance with the same time matches
+    expect(
+      FilterUtility.FilterList(projects, [
+        {
+          property: 'milestones',
+          operation: FilterOperation.Contains,
+          lowValue: new Date(2021, 5, 1),
+        },
+      ]).map((p) => p.name)
+    ).toEqual(['P1']);
+    expect(
+      FilterUtility.FilterList(projects, [
+        {
+          property: 'milestones',
+          operation: FilterOperation.NotContains,
+          lowValue: new Date(2021, 5, 1),
+        },
+      ]).map((p) => p.name)
+    ).toEqual(['P2', 'P3', 'P4']);
+
+    // an invalid Date element never equals; an invalid lowValue never matches
+    const invalid: Array<{ name: string; milestones?: Date[] }> = [
+      { name: 'X', milestones: [new Date(NaN)] },
+      { name: 'Y', milestones: [new Date(2020, 0, 15)] },
+    ];
+    expect(
+      FilterUtility.FilterList(invalid, [
+        {
+          property: 'milestones',
+          operation: FilterOperation.Contains,
+          lowValue: new Date(2020, 0, 15),
+        },
+      ]).map((p) => p.name)
+    ).toEqual(['Y']);
+    expect(
+      FilterUtility.FilterList(invalid, [
+        {
+          property: 'milestones',
+          operation: FilterOperation.NotContains,
+          lowValue: new Date(2020, 0, 15),
+        },
+      ]).map((p) => p.name)
+    ).toEqual(['X']);
+    for (const op of [FilterOperation.Contains, FilterOperation.NotContains]) {
+      expect(
+        FilterUtility.FilterList(invalid, [
+          { property: 'milestones', operation: op, lowValue: new Date(NaN) },
+        ]).length
+      ).toEqual(0);
+    }
+  });
+
+  it('#19. Array kind rules: mismatched, mixed and disallowed never match', () => {
+    // a string value against a non-empty number array: kind mismatch never matches
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'scores', operation: FilterOperation.Contains, lowValue: '5' },
+      ]).length
+    ).toEqual(0);
+    // ...but empty/missing arrays contain nothing, so NotContains still holds
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'scores', operation: FilterOperation.NotContains, lowValue: '5' },
+      ]).map((p) => p.name)
+    ).toEqual(['P3', 'P4']);
+    // a mixed-kind array never matches
+    const mixed: Array<{ name: string; scores: number[] }> = [
+      { name: 'M', scores: [1, 'x' as unknown as number] },
+    ];
+    for (const op of [FilterOperation.Contains, FilterOperation.NotContains]) {
+      expect(
+        FilterUtility.FilterList(mixed, [{ property: 'scores', operation: op, lowValue: 1 }]).length
+      ).toEqual(0);
+    }
+    // operations other than Contains/NotContains are not allowed on arrays
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'scores', operation: FilterOperation.Equal, lowValue: 5 },
+      ]).length
+    ).toEqual(0);
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'tags', operation: FilterOperation.BeginsWith, lowValue: 'al' },
+      ]).length
+    ).toEqual(0);
+    // NotContains is array-only: on a string property it never matches
+    expect(
+      FilterUtility.FilterList(projects, [
+        { property: 'name', operation: FilterOperation.NotContains, lowValue: 'P' },
+      ]).length
+    ).toEqual(0);
+    // NotContains without a usable lowValue never matches, even on a missing property
+    expect(
+      FilterUtility.MatchCondition(
+        { name: 'Z' },
+        { property: 'scores', operation: FilterOperation.NotContains }
+      )
+    ).toBeFalse();
+  });
+
+  it('#20. Enum validation on array properties', () => {
+    const boards: Array<{ title: string; priorities?: Priority[]; statuses?: TaskStatus[] }> = [
+      {
+        title: 'E1',
+        priorities: [Priority.Low, Priority.High],
+        statuses: [TaskStatus.Open, TaskStatus.Done],
+      },
+      { title: 'E2', priorities: [Priority.Medium], statuses: [TaskStatus.InProgress] },
+      { title: 'Bad', priorities: [7 as Priority], statuses: ['NOPE' as TaskStatus] },
+      { title: 'None' },
+    ];
+
+    expect(
+      FilterUtility.FilterList(boards, [
+        {
+          property: 'priorities',
+          operation: FilterOperation.Contains,
+          lowValue: Priority.High,
+          enumValues: Priority,
+        },
+      ]).map((b) => b.title)
+    ).toEqual(['E1']);
+    // 'Bad' holds a non-member element and 'None' is missing: neither matches
+    expect(
+      FilterUtility.FilterList(boards, [
+        {
+          property: 'priorities',
+          operation: FilterOperation.NotContains,
+          lowValue: Priority.High,
+          enumValues: Priority,
+        },
+      ]).map((b) => b.title)
+    ).toEqual(['E2']);
+    // the bound value must be a member too
+    expect(
+      FilterUtility.FilterList(boards, [
+        {
+          property: 'priorities',
+          operation: FilterOperation.Contains,
+          lowValue: 7,
+          enumValues: Priority,
+        },
+      ]).length
+    ).toEqual(0);
+    // string enum arrays work the same way
+    expect(
+      FilterUtility.FilterList(boards, [
+        {
+          property: 'statuses',
+          operation: FilterOperation.Contains,
+          lowValue: TaskStatus.Done,
+          enumValues: TaskStatus,
+        },
+      ]).map((b) => b.title)
+    ).toEqual(['E1']);
+    // without enumValues the array filters by its underlying kind: 7 is just a number
+    expect(
+      FilterUtility.FilterList(boards, [
+        { property: 'priorities', operation: FilterOperation.Contains, lowValue: 7 },
+      ]).map((b) => b.title)
+    ).toEqual(['Bad']);
   });
 });
