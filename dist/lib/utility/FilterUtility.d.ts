@@ -22,8 +22,9 @@ export declare enum FilterJoinType {
  * - For number properties: LessThan, LessOrEqual, Equal, GreaterOrEqual, GreaterThan, Between
  * - For date properties: same as number
  * - For string properties: all of the above plus BeginsWith, EndsWith, Contains (substring)
- * - For array properties (number[], string[], Date[]): Contains (element
- *   membership) and NotContains only
+ * - For array properties (number[], string[], Date[]): Contains (strict
+ *   element membership) and NotContains; string[] additionally supports
+ *   AnyContains / AnyNotContains (substring match against any element)
  *
  * Only Between examines both `lowValue` and `highValue`; every other
  * operation compares against `lowValue` alone.
@@ -38,12 +39,15 @@ export declare enum FilterOperation {
     BeginsWith = "BeginsWith",
     EndsWith = "EndsWith",
     Contains = "Contains",
-    NotContains = "NotContains"
+    NotContains = "NotContains",
+    AnyContains = "AnyContains",
+    AnyNotContains = "AnyNotContains"
 }
 /**
  * Value types supported by a filter condition. A condition value is always
  * a scalar; an array property holds elements of one of these types and is
- * searched with Contains / NotContains.
+ * searched with Contains / NotContains (plus AnyContains / AnyNotContains
+ * for string[]).
  */
 export type FilterValue = number | string | Date;
 /**
@@ -61,7 +65,8 @@ export interface IFilterCondition {
     /**
      * The value to compare against, or the low bound of a Between range.
      * For an array property, the element to look for (a single number,
-     * string or Date — never an array).
+     * string or Date — never an array); for AnyContains / AnyNotContains,
+     * the substring pattern to look for inside the string elements.
      */
     lowValue?: FilterValue;
     /** High bound of a Between range; ignored by all other operations */
@@ -74,7 +79,9 @@ export interface IFilterCondition {
      * member values — except for BeginsWith/EndsWith/Contains on a string
      * property, whose `lowValue` is a pattern and is not bound-checked. For
      * an array property every element must be a member, and `lowValue` must
-     * be one too (array Contains/NotContains compare values, not patterns).
+     * be one too (array Contains/NotContains compare values, not patterns) —
+     * except for AnyContains/AnyNotContains, whose `lowValue` is a substring
+     * pattern and is not bound-checked.
      * A missing (null/undefined) property never matches an enum-validated
      * condition.
      */
@@ -146,13 +153,19 @@ export type FilterRoot = IFilterCondition | IFilterDefinition;
  * - Number / date properties support <, <=, =, >=, >, Between; string
  *   properties additionally support BeginsWith, EndsWith, Contains.
  * - Array properties (number[], string[] or Date[]) support Contains and
- *   NotContains only: lowValue is the element to look for, and every
+ *   NotContains: lowValue is the element to look for, and every
  *   element must be of the same kind as lowValue (a mixed-kind or
  *   different-kind non-empty array never matches). An empty array — or a
  *   missing property under NotContains — contains nothing: Contains is
  *   false and NotContains true for any target kind. Dates compare by
  *   time, strings case-sensitively. Contains on a missing property keeps
  *   the missing-value rule above.
+ * - string[] properties additionally support AnyContains / AnyNotContains:
+ *   lowValue is a substring pattern, and AnyContains matches when ANY
+ *   element contains it (AnyNotContains when NO element does). The array
+ *   must be all-string and lowValue a string; an empty array — or a missing
+ *   property under AnyNotContains — matches AnyNotContains only. These two
+ *   are array-only: on a scalar property they never match.
  * - Only Between uses highValue (inclusive on both bounds); the other
  *   operations only look at lowValue.
  * - String comparisons are case-sensitive.

@@ -476,5 +476,123 @@ describe('Unit test for FilterUtility in Model', () => {
             { property: 'priorities', operation: FilterOperation.Contains, lowValue: 7 },
         ]).map((b) => b.title)).toEqual(['Bad']);
     });
+    it('#21. String array: AnyContains / AnyNotContains (substring per element)', () => {
+        const words = [
+            { name: 'W1', tags: ['apple', 'application', 'beef'] },
+            { name: 'W2', tags: ['banana'] },
+            { name: 'W3', tags: [] },
+            { name: 'W4' }, // tags undefined
+        ];
+        // 'app' is a substring of 'apple' and 'application' — W1 matches
+        expect(FilterUtility.FilterList(words, [
+            { property: 'tags', operation: FilterOperation.AnyContains, lowValue: 'app' },
+        ]).map((w) => w.name)).toEqual(['W1']);
+        // a full element value is also a substring of itself
+        expect(FilterUtility.FilterList(words, [
+            { property: 'tags', operation: FilterOperation.AnyContains, lowValue: 'beef' },
+        ]).map((w) => w.name)).toEqual(['W1']);
+        // AnyNotContains: no element holds the substring; empty/missing act empty
+        expect(FilterUtility.FilterList(words, [
+            { property: 'tags', operation: FilterOperation.AnyNotContains, lowValue: 'app' },
+        ]).map((w) => w.name)).toEqual(['W2', 'W3', 'W4']);
+        // case-sensitive, like every string comparison
+        expect(FilterUtility.FilterList(words, [
+            { property: 'tags', operation: FilterOperation.AnyContains, lowValue: 'App' },
+        ]).length).toEqual(0);
+        // strict Contains is unchanged: 'app' is not an element
+        expect(FilterUtility.FilterList(words, [
+            { property: 'tags', operation: FilterOperation.Contains, lowValue: 'app' },
+        ]).length).toEqual(0);
+        // the empty pattern is a substring of every element
+        expect(FilterUtility.FilterList(words, [
+            { property: 'tags', operation: FilterOperation.AnyContains, lowValue: '' },
+        ]).map((w) => w.name)).toEqual(['W1', 'W2']);
+        expect(FilterUtility.FilterList(words, [
+            { property: 'tags', operation: FilterOperation.AnyNotContains, lowValue: '' },
+        ]).map((w) => w.name)).toEqual(['W3', 'W4']);
+        // highValue is ignored; conditions compose in group trees like any other
+        const nested = {
+            join: FilterJoinType.AND,
+            conditions: [
+                {
+                    property: 'tags',
+                    operation: FilterOperation.AnyContains,
+                    lowValue: 'app',
+                    highValue: 'zzz',
+                },
+                { property: 'name', operation: FilterOperation.Equal, lowValue: 'W1' },
+            ],
+        };
+        expect(FilterUtility.FilterList(words, nested).map((w) => w.name)).toEqual(['W1']);
+        // a bare-condition root works too
+        expect(FilterUtility.MatchFilter(words[0], {
+            property: 'tags',
+            operation: FilterOperation.AnyContains,
+            lowValue: 'app',
+        })).toBeTrue();
+    });
+    it('#22. AnyContains / AnyNotContains: kind rules and enum validation', () => {
+        const anyOps = [FilterOperation.AnyContains, FilterOperation.AnyNotContains];
+        // a non-string lowValue never matches, even on a string array
+        for (const op of anyOps) {
+            expect(FilterUtility.FilterList(projects, [{ property: 'tags', operation: op, lowValue: 5 }])
+                .length).toEqual(0);
+        }
+        // a string pattern against a non-empty number array never matches...
+        expect(FilterUtility.FilterList(projects, [
+            { property: 'scores', operation: FilterOperation.AnyContains, lowValue: '5' },
+        ]).length).toEqual(0);
+        // ...but empty/missing arrays contain nothing, so AnyNotContains still holds
+        expect(FilterUtility.FilterList(projects, [
+            { property: 'scores', operation: FilterOperation.AnyNotContains, lowValue: '5' },
+        ]).map((p) => p.name)).toEqual(['P3', 'P4']);
+        // a mixed-kind array never matches
+        const mixed = [
+            { name: 'M', tags: ['ok', 7] },
+        ];
+        for (const op of anyOps) {
+            expect(FilterUtility.FilterList(mixed, [{ property: 'tags', operation: op, lowValue: 'ok' }])
+                .length).toEqual(0);
+        }
+        // array-only: on a scalar string property they never match
+        for (const op of anyOps) {
+            expect(FilterUtility.FilterList(projects, [{ property: 'name', operation: op, lowValue: 'P' }])
+                .length).toEqual(0);
+        }
+        // without a usable lowValue they never match, even on a missing property
+        expect(FilterUtility.MatchCondition({ name: 'Z' }, { property: 'tags', operation: FilterOperation.AnyNotContains })).toBeFalse();
+        // enum validation: the pattern need not be a member, but every element must
+        const boards = [
+            { title: 'E1', statuses: [TaskStatus.Open, TaskStatus.Done] },
+            { title: 'E2', statuses: [TaskStatus.InProgress] },
+            { title: 'Bad', statuses: ['NOPE'] },
+            { title: 'None' },
+        ];
+        expect(FilterUtility.FilterList(boards, [
+            {
+                property: 'statuses',
+                operation: FilterOperation.AnyContains,
+                lowValue: 'IN_',
+                enumValues: TaskStatus,
+            },
+        ]).map((b) => b.title)).toEqual(['E2']);
+        expect(FilterUtility.FilterList(boards, [
+            {
+                property: 'statuses',
+                operation: FilterOperation.AnyNotContains,
+                lowValue: 'IN_',
+                enumValues: TaskStatus,
+            },
+        ]).map((b) => b.title)).toEqual(['E1']);
+        // number arrays are out of scope for the substring operations
+        expect(FilterUtility.FilterList([{ title: 'N', priorities: [Priority.Low, Priority.High] }], [
+            {
+                property: 'priorities',
+                operation: FilterOperation.AnyContains,
+                lowValue: '1',
+                enumValues: Priority,
+            },
+        ]).length).toEqual(0);
+    });
 });
 //# sourceMappingURL=FilterUtility.spec.js.map

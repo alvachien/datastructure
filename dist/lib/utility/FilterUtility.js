@@ -23,8 +23,9 @@ export var FilterJoinType;
  * - For number properties: LessThan, LessOrEqual, Equal, GreaterOrEqual, GreaterThan, Between
  * - For date properties: same as number
  * - For string properties: all of the above plus BeginsWith, EndsWith, Contains (substring)
- * - For array properties (number[], string[], Date[]): Contains (element
- *   membership) and NotContains only
+ * - For array properties (number[], string[], Date[]): Contains (strict
+ *   element membership) and NotContains; string[] additionally supports
+ *   AnyContains / AnyNotContains (substring match against any element)
  *
  * Only Between examines both `lowValue` and `highValue`; every other
  * operation compares against `lowValue` alone.
@@ -41,6 +42,8 @@ export var FilterOperation;
     FilterOperation["EndsWith"] = "EndsWith";
     FilterOperation["Contains"] = "Contains";
     FilterOperation["NotContains"] = "NotContains";
+    FilterOperation["AnyContains"] = "AnyContains";
+    FilterOperation["AnyNotContains"] = "AnyNotContains";
 })(FilterOperation || (FilterOperation = {}));
 /**
  * Utility for filtering over a list of items.
@@ -73,13 +76,19 @@ export var FilterOperation;
  * - Number / date properties support <, <=, =, >=, >, Between; string
  *   properties additionally support BeginsWith, EndsWith, Contains.
  * - Array properties (number[], string[] or Date[]) support Contains and
- *   NotContains only: lowValue is the element to look for, and every
+ *   NotContains: lowValue is the element to look for, and every
  *   element must be of the same kind as lowValue (a mixed-kind or
  *   different-kind non-empty array never matches). An empty array — or a
  *   missing property under NotContains — contains nothing: Contains is
  *   false and NotContains true for any target kind. Dates compare by
  *   time, strings case-sensitively. Contains on a missing property keeps
  *   the missing-value rule above.
+ * - string[] properties additionally support AnyContains / AnyNotContains:
+ *   lowValue is a substring pattern, and AnyContains matches when ANY
+ *   element contains it (AnyNotContains when NO element does). The array
+ *   must be all-string and lowValue a string; an empty array — or a missing
+ *   property under AnyNotContains — matches AnyNotContains only. These two
+ *   are array-only: on a scalar property they never match.
  * - Only Between uses highValue (inclusive on both bounds); the other
  *   operations only look at lowValue.
  * - String comparisons are case-sensitive.
@@ -172,11 +181,15 @@ export class FilterUtility {
             }
             if (Array.isArray(rawValue)) {
                 // Array property: every element must be a member, and so must
-                // lowValue — array Contains/NotContains compare values, not patterns
+                // lowValue — array Contains/NotContains compare values, not patterns.
+                // AnyContains/AnyNotContains take a substring pattern, so only the
+                // elements are bound-checked.
                 if (!rawValue.every((element) => EnumUtility.IsEnumMember(element, enumValues))) {
                     return false;
                 }
-                if (!EnumUtility.IsEnumMember(condition.lowValue, enumValues)) {
+                if (condition.operation !== FilterOperation.AnyContains &&
+                    condition.operation !== FilterOperation.AnyNotContains &&
+                    !EnumUtility.IsEnumMember(condition.lowValue, enumValues)) {
                     return false;
                 }
             }
@@ -202,8 +215,10 @@ export class FilterUtility {
         if (kind === 'other') {
             // A missing value is typed by the condition value; anything else never matches
             if (rawValue === null || rawValue === undefined) {
-                // NotContains is array-only: a missing property acts as an empty array
-                if (condition.operation === FilterOperation.NotContains) {
+                // NotContains / AnyNotContains are array-only: a missing property
+                // acts as an empty array
+                if (condition.operation === FilterOperation.NotContains ||
+                    condition.operation === FilterOperation.AnyNotContains) {
                     return FilterUtility.MatchArrayCondition([], condition);
                 }
                 kind = FilterUtility.DetectKind(condition.lowValue);
@@ -337,15 +352,23 @@ export class FilterUtility {
         }
     }
     static MatchArrayCondition(rawValue, condition) {
-        // Arrays support only Contains / NotContains (element membership)
-        if (condition.operation !== FilterOperation.Contains &&
-            condition.operation !== FilterOperation.NotContains) {
+        // Arrays support Contains / NotContains (strict element membership) and,
+        // for string[] only, AnyContains / AnyNotContains (substring per element)
+        const operation = condition.operation;
+        const isAny = operation === FilterOperation.AnyContains || operation === FilterOperation.AnyNotContains;
+        if (operation !== FilterOperation.Contains &&
+            operation !== FilterOperation.NotContains &&
+            !isAny) {
             return false;
         }
-        // lowValue is the element to look for: a single number, string or Date
+        // lowValue is the element to look for: a single number, string or Date;
+        // for AnyContains / AnyNotContains it is a substring pattern (string only)
         const target = condition.lowValue;
         const targetKind = FilterUtility.DetectKind(target);
         if (targetKind !== 'number' && targetKind !== 'string' && targetKind !== 'date') {
+            return false;
+        }
+        if (isAny && targetKind !== 'string') {
             return false;
         }
         if (targetKind === 'date' && isNaN(target.getTime())) {
@@ -353,13 +376,17 @@ export class FilterUtility {
         }
         // A non-empty array must be of the target's kind: number[], string[] or
         // Date[]; a mixed-kind or different-kind array never matches. An empty
-        // array qualifies for any kind — it contains nothing, so Contains is
-        // false and NotContains true.
+        // array qualifies for any kind — it contains nothing, so Contains /
+        // AnyContains are false and NotContains / AnyNotContains true.
         if (!rawValue.every((element) => FilterUtility.DetectKind(element) === targetKind)) {
             return false;
         }
         let contains;
-        if (targetKind === 'date') {
+        if (isAny) {
+            const pattern = target;
+            contains = rawValue.some((element) => element.includes(pattern));
+        }
+        else if (targetKind === 'date') {
             const targetTime = target.getTime();
             contains = rawValue.some((element) => {
                 const elementTime = element.getTime();
@@ -369,7 +396,9 @@ export class FilterUtility {
         else {
             contains = rawValue.some((element) => element === target);
         }
-        return condition.operation === FilterOperation.Contains ? contains : !contains;
+        return operation === FilterOperation.Contains || operation === FilterOperation.AnyContains
+            ? contains
+            : !contains;
     }
 }
 //# sourceMappingURL=FilterUtility.js.map
